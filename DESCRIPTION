@@ -1,0 +1,11 @@
+Package: shinyDash
+Title: Shiny Dashboard
+Version: 0.1
+Authors@R: "Winston Chang <winston@rstudio.com> [aut, cre]"
+Description: A package for making dashboards in Shiny.
+Depends:
+    R (>= 3.0)
+License: GPL-2
+Imports:
+    shiny (>= 0.10.2.9003),
+    htmltools (>= 0.2.6)
