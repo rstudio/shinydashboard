@@ -114,6 +114,9 @@ dropdownMenu <- function(...,
   badgeType <- match.arg(badgeType)
   items <- list(...)
 
+  # Make sure the items are li tags
+  lapply(items, tagAssert, type = "li")
+
   if (type == "user")
     dropdownClass <- "dropdown user user-menu"
   else

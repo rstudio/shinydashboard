@@ -8,3 +8,30 @@ addDependencies <- function(x, value) {
   htmlDependencies(x) <- c(old, value)
   x
 }
+
+
+#' @param tag A tag object.
+#' @param type The type of a tag, like "div", "a", "span".
+#' @param class An HTML class.
+#' @keywords internal
+tagAssert <- function(tag, type = NULL, class = NULL) {
+  if (!inherits(tag, "shiny.tag")) {
+    stop("Expected an object with class 'shiny.tag'.")
+  }
+
+  if (!missing(type) && tag$name != type) {
+    stop("Expected tag to be of type ", name)
+  }
+
+  if (!missing(class)) {
+    if (is.null(tag$attribs$class)) {
+      stop("Expected tag to have class '", class, "'")
+
+    } else {
+      tagClasses <- strsplit(tag$attribs$class, " ")[[1]]
+      if (!(class %in% tagClasses)) {
+        stop("Expected tag to have class '", class, "'")
+      }
+    }
+  }
+}
