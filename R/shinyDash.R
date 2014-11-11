@@ -1,5 +1,13 @@
-
-
+#' Dashboard page
+#'
+#' @examples
+#' library(shiny)
+#' shinyApp(
+#'   options = list(port = 9000),
+#'   ui = dashPage(),
+#'   server = function(input, output) {
+#'   }
+#' )
 #' @export
 dashPage <- function(...) {
   deps <- list(
