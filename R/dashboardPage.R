@@ -8,7 +8,7 @@
 #'   }
 #' )
 #' @export
-dashboardPage <- function(header, ...) {
+dashboardPage <- function(header, sidebar, ...) {
   deps <- list(
     htmlDependency("font-awesome", "4.1.0",
       src = c(href = "//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.1.0/css/"),
@@ -25,6 +25,7 @@ dashboardPage <- function(header, ...) {
   )
 
   tagAssert(header, type = "header", class = "header")
+  tagAssert(sidebar, type = "section", class = "sidebar")
 
   page <- tagList(
     # Need to add classes to <body>. Shiny doesn't have a way of doing that
@@ -34,6 +35,11 @@ dashboardPage <- function(header, ...) {
        $('body').css('min-height', '611px');"
     ),
     header,
+    div(class = "wrapper row-offcanvas row-offcanvas-left",
+      tags$aside(class = "left-side sidebar-offcanvas",
+        sidebar
+      )
+    ),
     ...
   )
 

@@ -2,8 +2,11 @@
 
 export(dashboardHeader)
 export(dashboardPage)
+export(dashboardSidebar)
 export(dropdownMenu)
 export(messageItem)
 export(notificationItem)
 export(progressItem)
+export(sidebarSearchForm)
+export(sidebarUserPanel)
 import(htmltools)
