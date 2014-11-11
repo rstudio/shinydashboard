@@ -1,6 +1,6 @@
-#' shinyDash.
+#' shinydashboard
 #'
-#' @name shinyDash
+#' @name shinydashboard
 #' @import htmltools
 #' @docType package
 NULL

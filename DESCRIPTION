@@ -1,4 +1,4 @@
-Package: shinyDash
+Package: shinydashboard
 Title: Shiny Dashboard
 Version: 0.1
 Authors@R: "Winston Chang <winston@rstudio.com> [aut, cre]"

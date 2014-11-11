@@ -4,12 +4,12 @@
 #' library(shiny)
 #' shinyApp(
 #'   options = list(port = 9000),
-#'   ui = dashPage(),
+#'   ui = dashboardPage(),
 #'   server = function(input, output) {
 #'   }
 #' )
 #' @export
-dashPage <- function(...) {
+dashboardPage <- function(...) {
   deps <- list(
     htmlDependency("font-awesome", "4.1.0",
       src = c(href = "//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.1.0/css/"),
@@ -20,7 +20,7 @@ dashPage <- function(...) {
       stylesheet = "ionicons.min.css"
     ),
     htmlDependency("AdminLTE", "1.2",
-      c(file = system.file("AdminLTE", package = "shinyDash")),
+      c(file = system.file("AdminLTE", package = "shinydashboard")),
       stylesheet = c("AdminLTE.css")
     )
   )
