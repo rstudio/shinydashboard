@@ -27,10 +27,10 @@ dashboardHeader <- function(...) {
 #' @export
 dropdownMenu <- function(...,
   type = c("messages", "notifications", "tasks", "user"),
-  badgeType = c("none", "success", "info", "warning", "danger"))
+  badgeStatus = "none")
 {
   type <- match.arg(type)
-  badgeType <- match.arg(badgeType)
+  if (badgeStatus != "none") validateStatus(badgeStatus)
   items <- list(...)
 
   # Make sure the items are li tags
@@ -49,10 +49,10 @@ dropdownMenu <- function(...,
   )
 
   numItems <- length(items)
-  if (badgeType == "none") {
+  if (badgeStatus == "none") {
     badge <- NULL
   } else {
-    badge <- span(class = paste0("label label-", badgeType), numItems)
+    badge <- span(class = paste0("label label-", badgeStatus), numItems)
   }
 
   tags$li(class = dropdownClass,
@@ -95,16 +95,13 @@ messageItem <- function(from, message, time, image = "foo.png")
 
 
 #' @export
-notificationItem <- function(text, item,
-    icon = c("ion-ios7-people", "fa-users", "fa-warning", "ion-ios7-cart", "ion-ios7-person"),
-    type = c("success", "info", "warning", "danger"))
+notificationItem <- function(text, item, icon = "fa-warning",
+    status = "success")
 {
-  icon <- match.arg(icon)
-  type <- match.arg(type)
-
   validateIcon(icon)
+  validateStatus(status)
 
-  iconClass <- paste(getIconClass(icon), type)
+  iconClass <- paste(getIconClass(icon), status)
 
   tags$li(
     a(href = "#",tags$i(class = iconClass), text)
@@ -113,9 +110,9 @@ notificationItem <- function(text, item,
 
 
 #' @export
-progressItem <- function(text, value = 0,
-    color = c("aqua", "green", "yellow", "red"))
-{
+progressItem <- function(text, value = 0, color = "aqua") {
+  validateColor(color)
+
   tags$li(
     a(href = "#",
       h3(text,
