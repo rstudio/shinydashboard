@@ -8,22 +8,7 @@
 #'   }
 #' )
 #' @export
-dashboardPage <- function(header, sidebar, ...) {
-  deps <- list(
-    htmlDependency("font-awesome", "4.1.0",
-      src = c(href = "//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.1.0/css/"),
-      stylesheet = "font-awesome.min.css"
-    ),
-    htmlDependency("ionicons", "1.5.2",
-      src = c(href = "http://code.ionicframework.com/ionicons/1.5.2/css/"),
-      stylesheet = "ionicons.min.css"
-    ),
-    htmlDependency("AdminLTE", "1.2",
-      c(file = system.file("AdminLTE", package = "shinydashboard")),
-      script = c("app.js"),
-      stylesheet = c("AdminLTE.css")
-    )
-  )
+dashboardPage <- function(header, sidebar, body) {
 
   tagAssert(header, type = "header", class = "header")
   tagAssert(sidebar, type = "section", class = "sidebar")
@@ -44,5 +29,5 @@ dashboardPage <- function(header, sidebar, ...) {
     ...
   )
 
-  addDependencies(shiny::bootstrapPage(page), deps)
+  addDeps(shiny::bootstrapPage(page))
 }
