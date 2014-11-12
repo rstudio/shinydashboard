@@ -65,10 +65,10 @@ writeValidIconsFile <- function(abbrev, depname, regex = NULL) {
   cmd <- paste(capture.output(dput(icons)), collapse = "\n")
   cmd <- paste0("validIcons[['", abbrev, "']] <- ", cmd)
 
-  destfile <- normalizePath(file.path(
+  destfile <- normalizePath(mustWork = FALSE, file.path(
     dirname(thisFile()),
     "../R",
-    paste0("valid-", abbrev, ".R")
+    paste0("valid-icons-", abbrev, ".R")
   ))
   cat("Writing file", destfile)
 
