@@ -1,3 +1,4 @@
+#' Create a small box for the main body of a dashboard.
 #' @examples
 #' smallBox("150", "New Orders", icon = "fa-credit-card")
 #'
@@ -24,6 +25,7 @@ smallBox <- function(value, subtitle, icon, color = "aqua", width = 3) {
   )
 }
 
+#' Create a box for the main body of a dashboard
 #' @examples
 #' box("Title here", p("Text in the box"))
 #' @export

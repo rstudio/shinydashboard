@@ -47,6 +47,8 @@ sidebarMenu <- function(...) {
   )
 }
 
+#' Create a dashboard sidebar menu item.
+#'
 #' @param badgeLabel A label for an optional badge. Usually a number or a short
 #'   word like "new".
 #' @param items A character vector or list of names for subitems.

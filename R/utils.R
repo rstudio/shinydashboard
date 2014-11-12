@@ -1,3 +1,4 @@
+#' Assert that a tag has specified properties
 #' @param tag A tag object.
 #' @param type The type of a tag, like "div", "a", "span".
 #' @param class An HTML class.
