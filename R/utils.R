@@ -48,12 +48,14 @@ getIconClass <- function(icon) {
 # Returns TRUE if a color is a valid color defined in AdminLTE, throws error
 # otherwise.
 validateColor <- function(color) {
-  if (color %in% c("red", "yellow", "aqua", "blue", "light-blue", "green",
+  validColors <- c("red", "yellow", "aqua", "blue", "light-blue", "green",
                    "navy", "teal", "olive", "lime", "orange", "fuchsia",
-                   "purple", "maroon", "black"))
-  {
+                   "purple", "maroon", "black")
+
+  if (color %in% validColors) {
     return(TRUE)
   }
 
-  stop("Invalid color: ", color)
+  stop("Invalid color: ", color, ". Valid colors are: ",
+       paste(validColors, collapse = ", "), ".")
 }
