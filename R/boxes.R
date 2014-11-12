@@ -6,12 +6,12 @@
 #'          "Approval Rating", icon = "fa-line-chart", color = "green")
 #'
 #' @export
-smallBox <- function(value, subtitle, icon, color = "aqua") {
+smallBox <- function(value, subtitle, icon, color = "aqua", width = 3) {
   validateColor(color)
   validateIcon(icon)
   iconClass <- getIconClass(icon)
 
-  div(class = "col-lg-3 col-xs-6",
+  div(class = paste0("col-lg-", width, " col-xs-6"),
     div(class = paste0("small-box bg-", color),
       div(class = "inner",
         h3(value, p(subtitle))
