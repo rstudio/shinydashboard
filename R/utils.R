@@ -64,7 +64,7 @@ validateColor <- function(color) {
 
 # Returns TRUE if a status is valid; throws error otherwise.
 validateStatus <- function(status) {
-  validStatuses <- c("success", "info", "warning", "danger")
+  validStatuses <- c("primary", "success", "info", "warning", "danger")
 
   if (status %in% validStatuses) {
     return(TRUE)
