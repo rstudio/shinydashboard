@@ -23,3 +23,34 @@ smallBox <- function(value, subtitle, icon, color = "aqua", width = 3) {
     )
   )
 }
+
+#' @examples
+#' box("Title here", p("Text in the box"))
+#' @export
+box <- function(title, ..., footer = NULL, status = "none", solid = FALSE,
+                width = 4) {
+
+  boxClass <- "box"
+  if (solid) boxClass <- paste(boxClass, "box-solid")
+  if (status != "none") {
+    validateStatus(status)
+    boxClass <- paste0(boxClass, " box-", status)
+  }
+
+  div(class = paste0("col-md-", width),
+    div(class = boxClass,
+      div(class = "box-header",
+        h3(class = "box-title", title),
+        div(class = "box-tools pull-right",
+          tags$button(class = "btn btn-default btn-sm",
+            `data-widget` = "collapse", `data-toggle` = "tooltip",
+            title = "Collapse",
+            tags$i(class = "fa fa-minus")
+          )
+        )
+      ),
+      div(class = "box-body", ...),
+      if (!is.null(footer)) div(class = "box-footer", footer)
+    )
+  )
+}
