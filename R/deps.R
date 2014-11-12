@@ -1,6 +1,6 @@
 dashboardDeps <- list(
   htmlDependency("font-awesome", "4.1.0",
-    src = c(href = "//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.1.0/css/"),
+    src = c(href = "http://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.1.0/css/"),
     stylesheet = "font-awesome.min.css"
   ),
   htmlDependency("ionicons", "1.5.2",
