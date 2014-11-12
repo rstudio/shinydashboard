@@ -43,3 +43,17 @@ getIconClass <- function(icon) {
   iconGroup <- sub("^((glyphicon)|(fa)|(ion))-.*", "\\1", icon)
   paste(iconGroup, icon)
 }
+
+
+# Returns TRUE if a color is a valid color defined in AdminLTE, throws error
+# otherwise.
+validateColor <- function(color) {
+  if (color %in% c("red", "yellow", "aqua", "blue", "light-blue", "green",
+                   "navy", "teal", "olive", "lime", "orange", "fuchsia",
+                   "purple", "maroon", "black"))
+  {
+    return(TRUE)
+  }
+
+  stop("Invalid color: ", color)
+}

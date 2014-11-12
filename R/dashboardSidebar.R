@@ -47,13 +47,58 @@ sidebarMenu <- function(...) {
   )
 }
 
+#' @param badgeLabel A label for an optional badge. Usually a number or a short
+#'   word like "new".
+#' @param items A character vector or list of names for subitems.
 #' @export
-menuItem <- function(text, icon, ...) {
-  tags$li(
+menuItem <- function(text, icon, badgeLabel = NULL, badgeColor = "green",
+                     items = NULL) {
+  if (!is.null(badgeLabel) && !is.null(items)) {
+    stop("Can't have both badge and items")
+  }
+  validateColor(badgeColor)
+
+  # Generate badge if needed
+  if (!is.null(badgeLabel)) {
+    badgeTag <- tags$small(
+      class = paste0("badge pull-right bg-", badgeColor),
+      badgeLabel
+    )
+  } else {
+    badgeTag <- NULL
+  }
+
+  # If no subitems, return a pretty simple tag object
+  if (is.null(items)) {
+    return(
+      tags$li(
+        a(href = "#",
+          tags$i(class = getIconClass(icon)),
+          span(text),
+          badgeTag
+        )
+      )
+    )
+  }
+
+  # Generate subitems
+  itemTags <- lapply(items, function(item) {
+    tags$li(
+      a(href = "#",
+        tags$i(class = "fa fa-angle-double-right"),
+        item
+      )
+    )
+  })
+
+  tags$li(class = "treeview",
     a(href = "#",
       tags$i(class = getIconClass(icon)),
       span(text),
-      ...
+      tags$i(class = "fa fa-angle-left pull-right")
+    ),
+    tags$ul(class = "treeview-menu",
+      itemTags
     )
   )
 }
