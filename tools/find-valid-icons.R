@@ -2,7 +2,20 @@
 
 # This script downloads the appropriate CSS resource files and writes out R
 # files in the R/ subdir, which list the valid CSS icons.
-# It should be run from the top level of the package directory (shinydashboard/)
+
+# Returns the file currently being sourced or run with Rscript
+thisFile <- function() {
+  cmdArgs <- commandArgs(trailingOnly = FALSE)
+  needle <- "--file="
+  match <- grep(needle, cmdArgs)
+  if (length(match) > 0) {
+    # Rscript
+    return(normalizePath(sub(needle, "", cmdArgs[match])))
+  } else {
+    # 'source'd via R console
+    return(normalizePath(sys.frames()[[1]]$ofile))
+  }
+}
 
 # @param depname The name of a dependency.
 # @param regex An optional regex for filtering icon names.
@@ -51,7 +64,15 @@ writeValidIconsFile <- function(abbrev, depname, regex = NULL) {
   # Write an R file that puts all the valid names into a variable
   cmd <- paste(capture.output(dput(icons)), collapse = "\n")
   cmd <- paste0("validIcons[['", abbrev, "']] <- ", cmd)
-  writeLines(cmd, paste0("R/valid-", abbrev, ".R"))
+
+  destfile <- normalizePath(file.path(
+    dirname(thisFile()),
+    "../R",
+    paste0("valid-", abbrev, ".R")
+  ))
+  cat("Writing file", destfile)
+
+  writeLines(cmd, destfile)
 }
 
 writeValidIconsFile("glyphicon", "bootstrap", "^glyphicon-")
