@@ -35,3 +35,11 @@ tagAssert <- function(tag, type = NULL, class = NULL) {
     }
   }
 }
+
+# Given the name of an icon, like "fa-dashboard", "glyphicon-user", or
+# "ion-checkmark", return CSS classnames, like "fa fa-dashboard" or
+# "glyphicon glyphicon-user".
+getIconClass <- function(icon) {
+  iconGroup <- sub("^((glyphicon)|(fa)|(ion))-.*", "\\1", icon)
+  paste(iconGroup, icon)
+}

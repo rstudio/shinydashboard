@@ -102,8 +102,7 @@ notificationItem <- function(text, item,
   icon <- match.arg(icon)
   type <- match.arg(type)
 
-  iconClass <- sub("^((fa)|(ion))-.*", "\\1", icon)
-  iconClass <- paste(iconClass, icon, type)
+  iconClass <- paste(getIconClass(icon), type)
 
   tags$li(
     a(href = "#",tags$i(class = iconClass), text)
