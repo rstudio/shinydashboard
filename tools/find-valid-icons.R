@@ -77,4 +77,3 @@ writeValidIconsFile <- function(abbrev, depname, regex = NULL) {
 
 writeValidIconsFile("glyphicon", "bootstrap", "^glyphicon-")
 writeValidIconsFile("fa", "font-awesome", "fa-")
-writeValidIconsFile("ion", "ionicons", "^ion-")

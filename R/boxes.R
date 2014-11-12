@@ -1,9 +1,9 @@
 #' @examples
-#' smallBox("150", "New Orders", icon = "ion-bag")
+#' smallBox("150", "New Orders", icon = "fa-credit-card")
 #'
 #' # Can use tag objects for value
 #' smallBox(tagList("60", tags$sup(style="font-size: 20px", "%")),
-#'          "Approval Rating", icon = "ion-bag", color = "green")
+#'          "Approval Rating", icon = "fa-line-chart", color = "green")
 #'
 #' @export
 smallBox <- function(value, subtitle, icon, color = "aqua") {

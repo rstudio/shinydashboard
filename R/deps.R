@@ -3,10 +3,6 @@ dashboardDeps <- list(
     src = c(href = "http://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.2.0/css/"),
     stylesheet = "font-awesome.min.css"
   ),
-  htmlDependency("ionicons", "1.5.2",
-    src = c(href = "http://code.ionicframework.com/ionicons/1.5.2/css/"),
-    stylesheet = "ionicons.min.css"
-  ),
   htmlDependency("AdminLTE", "1.2",
     c(file = system.file("AdminLTE", package = "shinydashboard")),
     script = c("app.js"),
