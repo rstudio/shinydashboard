@@ -20,6 +20,7 @@ dashboardPage <- function(header, sidebar, ...) {
     ),
     htmlDependency("AdminLTE", "1.2",
       c(file = system.file("AdminLTE", package = "shinydashboard")),
+      script = c("app.js"),
       stylesheet = c("AdminLTE.css")
     )
   )
