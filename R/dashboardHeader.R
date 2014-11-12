@@ -102,6 +102,8 @@ notificationItem <- function(text, item,
   icon <- match.arg(icon)
   type <- match.arg(type)
 
+  validateIcon(icon)
+
   iconClass <- paste(getIconClass(icon), type)
 
   tags$li(

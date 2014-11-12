@@ -57,6 +57,7 @@ menuItem <- function(text, icon, badgeLabel = NULL, badgeColor = "green",
     stop("Can't have both badge and items")
   }
   validateColor(badgeColor)
+  validateIcon(icon)
 
   # Generate badge if needed
   if (!is.null(badgeLabel)) {

@@ -8,6 +8,7 @@
 #' @export
 smallBox <- function(value, subtitle, icon, color = "aqua") {
   validateColor(color)
+  validateIcon(icon)
   iconClass <- getIconClass(icon)
 
   div(class = "col-lg-3 col-xs-6",
