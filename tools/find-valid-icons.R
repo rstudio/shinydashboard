@@ -49,7 +49,7 @@ findValidIcons <- function(depname, regex = NULL) {
   # Remove the stuff in curly braces
   lines <- sub("(.*)\\{.*$", "\\1", lines)
   icons <- unlist(strsplit(lines, ",", fixed = TRUE))
-  icons <- sub("^\\.(.*):before$", "\\1", lines)
+  icons <- sub("^\\.(.*):before$", "\\1", icons)
 
   # Apply optional filter
   if (!is.null(regex)) {

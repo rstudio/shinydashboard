@@ -1,4 +1,4 @@
-validIcons[['glyphicon']] <- c("glyphicon-asterisk", "glyphicon-plus", "glyphicon-euro:before,.glyphicon-eur", 
+validIcons[['glyphicon']] <- c("glyphicon-asterisk", "glyphicon-plus", "glyphicon-euro", "glyphicon-eur", 
 "glyphicon-minus", "glyphicon-cloud", "glyphicon-envelope", "glyphicon-pencil", 
 "glyphicon-glass", "glyphicon-music", "glyphicon-search", "glyphicon-heart", 
 "glyphicon-star", "glyphicon-star-empty", "glyphicon-user", "glyphicon-film", 
