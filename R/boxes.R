@@ -12,10 +12,11 @@ smallBox <- function(value, subtitle, icon, color = "aqua", width = 3) {
   validateIcon(icon)
   iconClass <- getIconClass(icon)
 
-  div(class = paste0("col-lg-", width, " col-xs-6"),
+  div(class = paste0("col-sm-", width),
     div(class = paste0("small-box bg-", color),
       div(class = "inner",
-        h3(value, p(subtitle))
+        h3(value),
+        p(subtitle)
       ),
       div(class = "icon", tags$i(class = iconClass)),
       a(href = "#", class = "small-box-footer",
