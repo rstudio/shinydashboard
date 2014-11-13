@@ -3,6 +3,10 @@
 # This script downloads the appropriate CSS resource files and writes out R
 # files in the R/ subdir, which list the valid CSS icons.
 
+library(htmltools)
+library(shiny)
+library(shinydashboard)
+
 # Returns the file currently being sourced or run with Rscript
 thisFile <- function() {
   cmdArgs <- commandArgs(trailingOnly = FALSE)
@@ -22,7 +26,11 @@ thisFile <- function() {
 findValidIcons <- function(depname, regex = NULL) {
   # Get all the dependencies from a dashboardPage
   allDeps <-findDependencies(
-    dashboardPage(dashboardHeader(), dashboardSidebar(), dashboardBody())
+    dashboardPage(
+      dashboardHeader(),
+      dashboardSidebar(),
+      dashboardBody(icon("bar-chart-o"))
+    )
   )
 
   # Grab the specified html dependency
@@ -31,11 +39,20 @@ findValidIcons <- function(depname, regex = NULL) {
     # We have a local copy of the file
     cssfile <- file.path(dep$src$file, dep$stylesheet)
   } else {
-    # Need to download remote file
-    url <- paste0(dep$src$href, dep$stylesheet)
-    # Download CSS file
-    cssfile <- tempfile(pattern = depname, fileext = ".css")
-    download.file(url, cssfile)
+    # Use href instead of file.
+    if (grepl("^https?", dep$src$href)){
+      # This is an absolute URL. Need to download remote file.
+      url <- paste0(dep$src$href, dep$stylesheet)
+      cssfile <- tempfile(pattern = depname, fileext = ".css")
+      download.file(url, cssfile)
+    } else {
+      # href is a relative path. We probably have to get this from
+      # the shiny www/ directory.
+      cssfile <- file.path(
+        system.file("www", package="shiny"),
+        dep$src$href, dep$stylesheet
+      )
+    }
   }
 
   # Parse contents
