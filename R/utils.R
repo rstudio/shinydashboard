@@ -41,7 +41,6 @@ validateIcon <- function(icon) {
          "Run `shinydashboard:::validIcons` for a full list of valid icons.\n",
          "Icons are also listed at:\n",
          "  http://fortawesome.github.io/Font-Awesome/icons/\n",
-         "  http://ionicons.com/\n",
          "  http://getbootstrap.com/components/#glyphicons\n"
     )
   }
