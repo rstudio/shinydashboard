@@ -29,8 +29,9 @@ valueBox <- function(value, subtitle, icon = NULL, color = "aqua", width = 3) {
 #' @examples
 #' box("Title here", p("Text in the box"))
 #' @export
-box <- function(title, ..., footer = NULL, status = "none", solidHeader = FALSE,
-                background = NULL, width = 4, collapsible = FALSE) {
+box <- function(..., title = NULL, footer = NULL, status = "none",
+                solidHeader = FALSE, background = NULL, width = 4,
+                collapsible = FALSE) {
 
   boxClass <- "box"
   if (solidHeader || !is.null(background)) {
@@ -43,6 +44,11 @@ box <- function(title, ..., footer = NULL, status = "none", solidHeader = FALSE,
   if (!is.null(background)) {
     validateColor(background)
     boxClass <- paste0(boxClass, " bg-", background)
+  }
+
+  titleTag <- NULL
+  if (!is.null(title)) {
+    titleTag <- h3(class = "box-title", title)
   }
 
   collapseTag <- NULL
@@ -59,7 +65,7 @@ box <- function(title, ..., footer = NULL, status = "none", solidHeader = FALSE,
   div(class = paste0("col-md-", width),
     div(class = boxClass,
       div(class = "box-header",
-        h3(class = "box-title", title),
+        titleTag,
         collapseTag
       ),
       div(class = "box-body", ...),
