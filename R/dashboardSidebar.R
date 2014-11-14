@@ -49,7 +49,7 @@ sidebarMenu <- function(...) {
 
 #' Create a dashboard sidebar menu item.
 #'
-#' @icon An icon tag, created by \code{\link[shiny]{icon}}.
+#' @param icon An icon tag, created by \code{\link[shiny]{icon}}.
 #' @param badgeLabel A label for an optional badge. Usually a number or a short
 #'   word like "new".
 #' @param items A character vector or list of names for subitems.
