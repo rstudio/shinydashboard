@@ -1,16 +1,15 @@
 #' Create a small box for the main body of a dashboard.
 #' @examples
-#' smallBox("150", "New Orders", icon = "fa-credit-card")
+#' smallBox("150", "New Orders", icon = icon("credit-card"))
 #'
 #' # Can use tag objects for value
 #' smallBox(tagList("60", tags$sup(style="font-size: 20px", "%")),
-#'          "Approval Rating", icon = "fa-line-chart", color = "green")
+#'          "Approval Rating", icon = icon("line-chart"), color = "green")
 #'
 #' @export
-smallBox <- function(value, subtitle, icon, color = "aqua", width = 3) {
+smallBox <- function(value, subtitle, icon = NULL, color = "aqua", width = 3) {
   validateColor(color)
-  validateIcon(icon)
-  iconClass <- getIconClass(icon)
+  if (!is.null(icon)) tagAssert(icon, type = "i")
 
   div(class = paste0("col-sm-", width),
     div(class = paste0("small-box bg-", color),
@@ -18,7 +17,7 @@ smallBox <- function(value, subtitle, icon, color = "aqua", width = 3) {
         h3(value),
         p(subtitle)
       ),
-      div(class = "icon", tags$i(class = iconClass)),
+      if (!is.null(icon)) div(class = "icon", icon),
       a(href = "#", class = "small-box-footer",
         "More info", tags$i(class = "fa fa-arrow-circle-right")
       )

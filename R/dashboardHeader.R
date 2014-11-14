@@ -41,11 +41,11 @@ dropdownMenu <- function(...,
   else
     dropdownClass <- paste0("dropdown ", type, "-menu")
 
-  iconClass <- switch(type,
-    messages = "fa fa-envelope",
-    notifications = "fa fa-warning",
-    tasks = "fa fa-tasks",
-    user = "glyphicon glyphicon-user"
+  icon <- switch(type,
+    messages = icon("envelope"),
+    notifications = icon("warning"),
+    tasks = icon("tasks"),
+    user = icon("user", lib = "glyphicon")
   )
 
   numItems <- length(items)
@@ -57,7 +57,7 @@ dropdownMenu <- function(...,
 
   tags$li(class = dropdownClass,
     a(href = "#", class = "dropdown-toggle", `data-toggle` = "dropdown",
-      tags$i(class = iconClass),
+      icon,
       badge
     ),
     tags$ul(class = "dropdown-menu",
@@ -86,7 +86,7 @@ messageItem <- function(from, message, time, image = "foo.png")
       ),
       h4(
         from,
-        tags$small(tags$i(class = "fa fa-clock-o"), time)
+        tags$small(icon("clock-o"), time)
       ),
       p(message)
     )
@@ -95,16 +95,17 @@ messageItem <- function(from, message, time, image = "foo.png")
 
 
 #' @export
-notificationItem <- function(text, item, icon = "fa-warning",
+notificationItem <- function(text, item, icon = icon("warning"),
     status = "success")
 {
-  validateIcon(icon)
+  tagAssert(icon, type = "i")
   validateStatus(status)
 
-  iconClass <- paste(getIconClass(icon), status)
+  # Add the status as another HTML class to the icon
+  icon <- tagAppendAttributes(icon, class = status)
 
   tags$li(
-    a(href = "#",tags$i(class = iconClass), text)
+    a(href = "#", icon, text)
   )
 }
 

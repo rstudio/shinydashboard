@@ -32,20 +32,6 @@ getIconClass <- function(icon) {
   paste(iconGroup, icon)
 }
 
-# Validate an icon name
-validateIcon <- function(icon) {
-  res <- vapply(validIcons, function(x) icon %in% x, logical(1))
-
-  if (!any(res)) {
-    stop("Icon named ", icon, " not found in list of valid icons.\n",
-         "Run `shinydashboard:::validIcons` for a full list of valid icons.\n",
-         "Icons are also listed at:\n",
-         "  http://fortawesome.github.io/Font-Awesome/icons/\n",
-         "  http://getbootstrap.com/components/#glyphicons\n"
-    )
-  }
-}
-
 
 # Returns TRUE if a color is a valid color defined in AdminLTE, throws error
 # otherwise.
