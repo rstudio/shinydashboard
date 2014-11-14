@@ -1,13 +1,13 @@
-#' Create a small box for the main body of a dashboard.
+#' Create a value box for the main body of a dashboard.
 #' @examples
-#' smallBox("150", "New Orders", icon = icon("credit-card"))
+#' valueBox("150", "New Orders", icon = icon("credit-card"))
 #'
 #' # Can use tag objects for value
-#' smallBox(tagList("60", tags$sup(style="font-size: 20px", "%")),
+#' valueBox(tagList("60", tags$sup(style="font-size: 20px", "%")),
 #'          "Approval Rating", icon = icon("line-chart"), color = "green")
 #'
 #' @export
-smallBox <- function(value, subtitle, icon = NULL, color = "aqua", width = 3) {
+valueBox <- function(value, subtitle, icon = NULL, color = "aqua", width = 3) {
   validateColor(color)
   if (!is.null(icon)) tagAssert(icon, type = "i")
 
