@@ -29,27 +29,38 @@ smallBox <- function(value, subtitle, icon = NULL, color = "aqua", width = 3) {
 #' @examples
 #' box("Title here", p("Text in the box"))
 #' @export
-box <- function(title, ..., footer = NULL, status = "none", solid = FALSE,
-                width = 4) {
+box <- function(title, ..., footer = NULL, status = "none", solidHeader = FALSE,
+                background = NULL, width = 4, collapsible = FALSE) {
 
   boxClass <- "box"
-  if (solid) boxClass <- paste(boxClass, "box-solid")
+  if (solidHeader || !is.null(background)) {
+    boxClass <- paste(boxClass, "box-solid")
+  }
   if (status != "none") {
     validateStatus(status)
     boxClass <- paste0(boxClass, " box-", status)
+  }
+  if (!is.null(background)) {
+    validateColor(background)
+    boxClass <- paste0(boxClass, " bg-", background)
+  }
+
+  collapseTag <- NULL
+  if (collapsible) {
+    collapseTag <- div(class = "box-tools pull-right",
+      tags$button(class = "btn btn-default btn-sm",
+        `data-widget` = "collapse", `data-toggle` = "tooltip",
+        title = "Collapse",
+        tags$i(class = "fa fa-minus")
+      )
+    )
   }
 
   div(class = paste0("col-md-", width),
     div(class = boxClass,
       div(class = "box-header",
         h3(class = "box-title", title),
-        div(class = "box-tools pull-right",
-          tags$button(class = "btn btn-default btn-sm",
-            `data-widget` = "collapse", `data-toggle` = "tooltip",
-            title = "Collapse",
-            tags$i(class = "fa fa-minus")
-          )
-        )
+        collapseTag
       ),
       div(class = "box-body", ...),
       if (!is.null(footer)) div(class = "box-footer", footer)
