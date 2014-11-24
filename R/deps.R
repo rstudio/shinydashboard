@@ -1,8 +1,4 @@
 dashboardDeps <- list(
-  htmlDependency("font-awesome", "4.2.0",
-    src = c(href = "https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.2.0/css/"),
-    stylesheet = "font-awesome.min.css"
-  ),
   htmlDependency("AdminLTE", "1.2",
     c(file = system.file("AdminLTE", package = "shinydashboard")),
     script = c("app.js"),
