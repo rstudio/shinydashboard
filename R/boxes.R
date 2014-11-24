@@ -1,5 +1,6 @@
 #' Create a value box for the main body of a dashboard.
 #' @examples
+#' library(shiny)
 #' valueBox("150", "New Orders", icon = icon("credit-card"))
 #'
 #' # Can use tag objects for value
@@ -27,6 +28,7 @@ valueBox <- function(value, subtitle, icon = NULL, color = "aqua", width = 3) {
 
 #' Create a box for the main body of a dashboard
 #' @examples
+#' library(shiny)
 #' box("Title here", p("Text in the box"))
 #' @export
 box <- function(..., title = NULL, footer = NULL, status = "none",

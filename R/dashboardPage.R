@@ -1,12 +1,14 @@
 #' Dashboard page
 #'
 #' @examples
+#' \donttest{
 #' library(shiny)
 #' shinyApp(
-#'   ui = dashboardPage(),
+#'   ui = bootstrapPage(),
 #'   server = function(input, output) {
 #'   }
 #' )
+#' }
 #' @export
 dashboardPage <- function(header, sidebar, body) {
 
