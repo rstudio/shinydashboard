@@ -55,12 +55,24 @@ sidebarMenu <- function(...) {
 #' @param items A character vector or list of names for subitems.
 #' @export
 menuItem <- function(text, icon = NULL, badgeLabel = NULL, badgeColor = "green",
-                     items = NULL) {
+                     href = NULL, tabName = NULL, subItems = NULL) {
   if (!is.null(icon)) tagAssert(icon, type = "i")
-  if (!is.null(badgeLabel) && !is.null(items)) {
-    stop("Can't have both badge and items")
+  if (!is.null(href) && !is.null(tabName)) {
+    stop("Can't specify both href and tabName")
+  }
+  if (!is.null(badgeLabel) && !is.null(subItems)) {
+    stop("Can't have both badge and subItems")
   }
   validateColor(badgeColor)
+
+  # If there's a tabName, set up the correct href
+  isTabItem <- FALSE
+  if (!is.null(tabName)) {
+    isTabItem <- TRUE
+    href <- paste0("#shiny-tab-", tabName)
+  } else if (is.null(href)) {
+    href <- "#"
+  }
 
   # Generate badge if needed
   if (!is.null(badgeLabel)) {
@@ -73,10 +85,11 @@ menuItem <- function(text, icon = NULL, badgeLabel = NULL, badgeColor = "green",
   }
 
   # If no subitems, return a pretty simple tag object
-  if (is.null(items)) {
+  if (is.null(subItems)) {
     return(
       tags$li(
-        a(href = "#",
+        a(href = href,
+          `data-toggle` = if (isTabItem) "tab",
           icon,
           span(text),
           badgeTag
@@ -85,24 +98,43 @@ menuItem <- function(text, icon = NULL, badgeLabel = NULL, badgeColor = "green",
     )
   }
 
-  # Generate subitems
-  itemTags <- lapply(items, function(item) {
-    tags$li(
-      a(href = "#",
-        icon("angle-double-right"),
-        item
-      )
-    )
-  })
+  # Make sure the subItems are li tags
+  lapply(subItems, tagAssert, type = "li")
 
   tags$li(class = "treeview",
-    a(href = "#",
+    a(href = href,
       tags$i(class = getIconClass(icon)),
       span(text),
       icon("angle-left", class = "pull-right")
     ),
     tags$ul(class = "treeview-menu",
-      itemTags
+      subItems
+    )
+  )
+}
+
+#' @export
+menuSubItem <- function(text, href = NULL, tabName = NULL) {
+
+  if (!is.null(href) && !is.null(tabName)) {
+    stop("Can't specify both href and tabName")
+  }
+
+  # If there's a tabName, set up the correct href
+  isTabItem <- FALSE
+  if (!is.null(tabName)) {
+    isTabItem <- TRUE
+    href <- paste0("#shiny-tab-", tabName)
+  } else if (is.null(href)) {
+    href <- "#"
+  }
+
+
+  tags$li(
+    a(href = href,
+      `data-toggle` = if (isTabItem) "tab",
+      icon("angle-double-right"),
+      text
     )
   )
 }
