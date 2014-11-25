@@ -16,13 +16,7 @@ dashboardPage <- function(header, sidebar, body) {
   tagAssert(sidebar, type = "section", class = "sidebar")
   tagAssert(body, type = "section", class = "content")
 
-  page <- tagList(
-    # Need to add classes to <body>. Shiny doesn't have a way of doing that
-    # directly, so we'll do it with jQuery.
-    tags$script(type="text/javascript",
-      "$('body').addClass('skin-blue');
-       $('body').css('min-height', '611px');"
-    ),
+  content <- tagList(
     header,
     div(class = "wrapper row-offcanvas row-offcanvas-left",
       tags$aside(class = "left-side sidebar-offcanvas",
@@ -37,5 +31,9 @@ dashboardPage <- function(header, sidebar, body) {
     )
   )
 
-  addDeps(shiny::bootstrapPage(page))
+  addDeps(
+    tags$body(class = "skin-blue", style = "min-height: 611px;",
+      shiny::bootstrapPage(content)
+    )
+  )
 }
