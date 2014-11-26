@@ -20,4 +20,18 @@ $(function() {
 
   $(document).on('shown.bs.tab', '.sidebar-menu a[data-toggle="tab"]',
                  deactivateOtherTabs);
+
+
+  // When document is ready, if there is a sidebar menu with no activated tabs,
+  // activate the first one.
+  var ensureActivatedTab = function() {
+    var $tablinks = $("ul.sidebar-menu").find("a[data-toggle='tab']");
+
+    if (! $tablinks.parent("li").hasClass("active") ) {
+      $tablinks.first().tab("show");
+    }
+  };
+
+  $(document).ready(ensureActivatedTab);
+
 });
