@@ -8,11 +8,11 @@ tagAssert <- function(tag, type = NULL, class = NULL) {
     stop("Expected an object with class 'shiny.tag'.")
   }
 
-  if (!missing(type) && tag$name != type) {
+  if (!is.null(type) && tag$name != type) {
     stop("Expected tag to be of type ", name)
   }
 
-  if (!missing(class)) {
+  if (!is.null(class)) {
     if (is.null(tag$attribs$class)) {
       stop("Expected tag to have class '", class, "'")
 
