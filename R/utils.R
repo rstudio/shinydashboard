@@ -36,10 +36,6 @@ getIconClass <- function(icon) {
 # Returns TRUE if a color is a valid color defined in AdminLTE, throws error
 # otherwise.
 validateColor <- function(color) {
-  validColors <- c("red", "yellow", "aqua", "blue", "light-blue", "green",
-                   "navy", "teal", "olive", "lime", "orange", "fuchsia",
-                   "purple", "maroon", "black")
-
   if (color %in% validColors) {
     return(TRUE)
   }
@@ -48,9 +44,13 @@ validateColor <- function(color) {
        paste(validColors, collapse = ", "), ".")
 }
 
+validColors <- c("red", "yellow", "aqua", "blue", "light-blue", "green",
+                 "navy", "teal", "olive", "lime", "orange", "fuchsia",
+                 "purple", "maroon", "black")
+
+
 # Returns TRUE if a status is valid; throws error otherwise.
 validateStatus <- function(status) {
-  validStatuses <- c("primary", "success", "info", "warning", "danger")
 
   if (status %in% validStatuses) {
     return(TRUE)
@@ -59,3 +59,5 @@ validateStatus <- function(status) {
   stop("Invalid status: ", status, ". Valid statuses are: ",
        paste(validStatuses, collapse = ", "), ".")
 }
+
+validStatuses <- c("primary", "success", "info", "warning", "danger")
