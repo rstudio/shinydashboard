@@ -35,6 +35,84 @@ sidebarSearchForm <- function(textId, buttonId, label = "Search...") {
   )
 }
 
+#' Create a dashboard sidebar menu and menu items.
+#'
+#' A \code{dashboardSidebar} can contain a \code{sidebarMenu}. A
+#' \code{sidebarMenu} contains \code{menuItem}s, and they can in turn contain
+#' \code{menuSubItem}s.
+#'
+#' Menu items (and similarly, sub-items) should have a value for either
+#' \code{href} or \code{tabName}; otherwise the item would do nothing. If it has
+#' a value for \code{href}, then the item will simply be a link to that value.
+#'
+#' If a \code{menuItem} has a non-NULL \code{tabName}, then the \code{menuItem}
+#' will behave like a tab -- in other words, clicking on the \code{menuItem}
+#' will bring a corresponding \code{tabItem} to the front, similar to a
+#' \code{\link[shiny]{tabPanel}}. One important difference between a
+#' \code{menuItem} and a \code{tabPanel} is that, for a \code{menuItem}, you
+#' must also supply a corresponding \code{tabItem} with the same value for
+#' \code{tabName}, whereas for a \code{tabPanel}, no \code{tabName} is needed.
+#' (This is because the structure of a \code{tabPanel} is such that the tab name
+#' can be automatically generated.) Sub-items are also able to activate
+#' \code{tabItem}s.
+#'
+#' Menu items (but not sub-items) also may have an optional badge. A badge is a
+#' colored oval containing text.
+#'
+#' @param text Text to show for the menu item.
+#' @param icon An icon tag, created by \code{\link[shiny]{icon}}.
+#' @param badgeLabel A label for an optional badge. Usually a number or a short
+#'   word like "new".
+#' @param badgeColor A color for the badge. Valid colors are listed in
+#'   \code{shinydashboard:::validColors}.
+#' @param href An link address. Not compatible with \code{tabName}.
+#' @param tabName The name of a tab that this menu item will activate. Not
+#'   compatible with \code{href}.
+#' @param ... For menu items, this may consist of \code{\link{menuSubItems}}.
+#'
+#' @seealso \code{\link{sidebarMenu}}
+#'
+#' @examples
+#' \donttest{
+#' header <- dashboardHeader()
+#'
+#' sidebar <- dashboardSidebar(
+#'   sidebarUserPanel("User Name"),
+#'   sidebarSearchForm(label = "Enter a number", "searchText", "searchButton"),
+#'   sidebarMenu(
+#'     menuItem("Dashboard", tabName = "dashboard", icon = icon("dashboard")),
+#'     menuItem("Widgets", icon = icon("th"), tabName = "widgets", badgeLabel = "new",
+#'              badgeColor = "green"),
+#'     menuItem("Charts", icon = icon("bar-chart-o"),
+#'       menuSubItem("Morris", tabName = "morris"),
+#'       menuSubItem("Flot", tabName = "flot"),
+#'       menuSubItem("Inline", tabName = "inline")
+#'     )
+#'   )
+#' )
+#'
+#' body <- dashboardBody(
+#'   tabItems(
+#'     tabItem("dashboard",
+#'       div(p("Dashboard tab content"))
+#'     ),
+#'     tabItem("widgets",
+#'       "Widgets tab content"
+#'     ),
+#'     tabItem("subitem1",
+#'       "Sub-item 1 tab content"
+#'     ),
+#'     tabItem("subitem2",
+#'       "Sub-item 2 tab content"
+#'     )
+#'   )
+#' )
+#'
+#' shinyApp(
+#'   ui = dashboardPage(header, sidebar, body),
+#'   server = function(input, output) { }
+#' )
+#' }
 #' @export
 sidebarMenu <- function(...) {
   items <- list(...)
@@ -47,20 +125,19 @@ sidebarMenu <- function(...) {
   )
 }
 
-#' Create a dashboard sidebar menu item.
-#'
-#' @param icon An icon tag, created by \code{\link[shiny]{icon}}.
-#' @param badgeLabel A label for an optional badge. Usually a number or a short
-#'   word like "new".
-#' @param items A character vector or list of names for subitems.
+#' @rdname dashboardSidebar
 #' @export
-menuItem <- function(text, icon = NULL, badgeLabel = NULL, badgeColor = "green",
-                     href = NULL, tabName = NULL, subItems = NULL) {
+menuItem <- function(text, ..., icon = NULL, badgeLabel = NULL, badgeColor = "green",
+                     href = NULL, tabName = NULL) {
+  subItems <- list(...)
+  lapply(subItems, tagAssert, type = "li")
+
   if (!is.null(icon)) tagAssert(icon, type = "i")
-  if (!is.null(href) && !is.null(tabName)) {
-    stop("Can't specify both href and tabName")
+  if (!is.null(href) + !is.null(tabName) + (length(subItems) > 0) != 1 ) {
+    stop("Must have either href, tabName, or sub-items (contained in ...).")
   }
-  if (!is.null(badgeLabel) && !is.null(subItems)) {
+
+  if (!is.null(badgeLabel) && length(subItems) != 0) {
     stop("Can't have both badge and subItems")
   }
   validateColor(badgeColor)
@@ -85,7 +162,7 @@ menuItem <- function(text, icon = NULL, badgeLabel = NULL, badgeColor = "green",
   }
 
   # If no subitems, return a pretty simple tag object
-  if (is.null(subItems)) {
+  if (length(subItems) == 0) {
     return(
       tags$li(
         a(href = href,
@@ -98,12 +175,9 @@ menuItem <- function(text, icon = NULL, badgeLabel = NULL, badgeColor = "green",
     )
   }
 
-  # Make sure the subItems are li tags
-  lapply(subItems, tagAssert, type = "li")
-
   tags$li(class = "treeview",
     a(href = href,
-      tags$i(class = getIconClass(icon)),
+      icon,
       span(text),
       icon("angle-left", class = "pull-right")
     ),
@@ -113,6 +187,7 @@ menuItem <- function(text, icon = NULL, badgeLabel = NULL, badgeColor = "green",
   )
 }
 
+#' @rdname dashboardSidebar
 #' @export
 menuSubItem <- function(text, href = NULL, tabName = NULL) {
 
