@@ -1,12 +1,20 @@
 #' Dashboard page
 #'
+#' This creates a dashboard page for use in a Shiny app.
+#'
+#' @seealso \code{\link{dashboardHeader}}, \code{\link{dashboardSidebar}},
+#'   \code{\link{dashboardBody}}.
 #' @examples
 #' \donttest{
+#' # Basic dashboard page template
 #' library(shiny)
 #' shinyApp(
-#'   ui = bootstrapPage(),
-#'   server = function(input, output) {
-#'   }
+#'   ui = dashboardPage(
+#'     dashboardHeader(),
+#'     dashboardSidebar(),
+#'     dashboardBody()
+#'   ),
+#'   server = function(input, output) { }
 #' )
 #' }
 #' @export
