@@ -1,3 +1,77 @@
+#' Create a header for a dashboard page
+#'
+#' A dashboard header can be left blank, or it can include dropdown menu items
+#' on the right side.
+#'
+#' @param ... Items to put in the header. Should be \code{\link{dropdownMenu}}s..
+#'
+#' @seealso \code{\link{dropdownMenu}}
+#'
+#' @examples
+#' \donttest{
+#' library(shiny)
+#'
+#' # A dashboard header with 3 dropdown menus
+#' header <- dashboardHeader(
+#'
+#'   # Dropdown menu for messages
+#'   dropdownMenu(type = "messages", badgeStatus = "success",
+#'     messageItem("Support Team",
+#'       "This is the content of a message.",
+#'       time = "5 mins"
+#'     ),
+#'     messageItem("Support Team",
+#'       "This is the content of another message.",
+#'       time = "2 hours"
+#'     ),
+#'     messageItem("New User",
+#'       "Can I get some help?",
+#'       time = "Today"
+#'     )
+#'   ),
+#'
+#'   # Dropdown menu for notifications
+#'   dropdownMenu(type = "notifications", badgeStatus = "warning",
+#'     notificationItem(icon = icon("users"), status = "info",
+#'       "5 new members joined today"
+#'     ),
+#'     notificationItem(icon = icon("warning"), status = "danger",
+#'       "Resource usage near limit."
+#'     ),
+#'     notificationItem(icon = icon("shopping-cart", lib = "glyphicon"),
+#'       status = "success", "25 sales made"
+#'     ),
+#'     notificationItem(icon = icon("user", lib = "glyphicon"),
+#'       status = "danger", "You changed your username"
+#'     )
+#'   ),
+#'
+#'   # Dropdown menu for tasks, with progress bar
+#'   dropdownMenu(type = "tasks", badgeStatus = "danger",
+#'     progressItem(value = 20, color = "aqua",
+#'       "Refactor code"
+#'     ),
+#'     progressItem(value = 40, color = "green",
+#'       "Design new layout"
+#'     ),
+#'     progressItem(value = 60, color = "yellow",
+#'       "Another task"
+#'     ),
+#'     progressItem(value = 80, color = "red",
+#'       "Write documentation"
+#'     )
+#'   )
+#' )
+#'
+#' shinyApp(
+#'   ui = dashboardPage(
+#'     header,
+#'     dashboardSidebar(),
+#'     dashboardBody()
+#'   ),
+#'   server = function(input, output) { }
+#' )
+#' }
 #' @export
 dashboardHeader <- function(...) {
   items <- list(...)
@@ -24,6 +98,19 @@ dashboardHeader <- function(...) {
 }
 
 
+#' Create a dropdown menu to place in a dashboard header
+#'
+#' @param type The type of menu. Should be one of "messages", "notifications",
+#'   "tasks", or "user".
+#' @param badgeStatus The status of the badge. This determines the badge's
+#'   color. Valid statuses are listed in \code{shinydashboard:::validStatuses}.
+#' @param ... Items to put in the menu. Typically, message menus should contain
+#'   \code{\link{messageItems}}s, notification menus should contain
+#'   \code{\link{notificationItem}}s, and task menus should contain
+#'   \code{\link{taskItem}}s.
+#'
+#' @seealso \code{\link{dashboardHeader}} for example usage.
+#'
 #' @export
 dropdownMenu <- function(...,
   type = c("messages", "notifications", "tasks", "user"),
@@ -76,6 +163,17 @@ dropdownMenu <- function(...,
 
 
 
+#' Create a message item to place in a dropdown message menu
+#'
+#' @param from Who the message is from.
+#' @param messgae Text of the message.
+#' @param time String representing the time the message was sent. Any string may
+#'   be used. For example, it could be a relative date/time like "5 minutes",
+#'   "today", or "12:30pm yesterday", or an absolute time, like "2014-12-01 13:45".
+#' @param image the path to an image to use for the message
+#'
+#' @family menu items
+#' @seealso \code{\link{dashboardHeader}} for example usage.
 #' @export
 messageItem <- function(from, message, time, image = "foo.png")
 {
@@ -94,9 +192,18 @@ messageItem <- function(from, message, time, image = "foo.png")
 }
 
 
+#' Create a notification item to place in a dropdown notification menu
+#'
+#' @param text The notification text.
+#' @param icon An icon (created by \code{\link[shiny]{icon}()}.
+#' @param badgeStatus The status of the item This determines the item's
+#'   background color. Valid statuses are listed in
+#'   \code{shinydashboard:::validStatuses}.
+#'
+#' @family menu items
+#' @seealso \code{\link{dashboardHeader}} for example usage.
 #' @export
-notificationItem <- function(text, item, icon = icon("warning"),
-    status = "success")
+notificationItem <- function(text, icon = icon("warning"), status = "success")
 {
   tagAssert(icon, type = "i")
   validateStatus(status)
@@ -110,8 +217,17 @@ notificationItem <- function(text, item, icon = icon("warning"),
 }
 
 
+#' Create a task item to place in a dropdown task menu
+#'
+#' @param text The task text.
+#' @param value A percent value to use for the bar.
+#' @param badgeColor A color for the bar Valid colors are listed in
+#'   \code{shinydashboard:::validColors}.
+#'
+#' @family menu items
+#' @seealso \code{\link{dashboardHeader}} for example usage.
 #' @export
-progressItem <- function(text, value = 0, color = "aqua") {
+taskItem <- function(text, value = 0, color = "aqua") {
   validateColor(color)
 
   tags$li(
