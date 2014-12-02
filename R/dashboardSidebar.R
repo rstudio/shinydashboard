@@ -1,3 +1,53 @@
+#' Create a dashboard sidebar.
+#'
+#' A dashboard sidebar typically contains a \code{\link{sidebarMenu}}, although
+#' it may also contain a \code{\link{sidebarSearchForm}}, or other Shiny inputs.
+#'
+#' @param ... Items to put in the sidebar.
+#'
+#' @seealso \code{\link{sidebarMenu}}
+#'
+#' @examples
+#' \donttest{
+#' header <- dashboardHeader()
+#'
+#' sidebar <- dashboardSidebar(
+#'   sidebarUserPanel("User Name"),
+#'   sidebarSearchForm(label = "Enter a number", "searchText", "searchButton"),
+#'   sidebarMenu(
+#'     menuItem("Dashboard", tabName = "dashboard", icon = icon("dashboard")),
+#'     menuItem("Widgets", icon = icon("th"), tabName = "widgets", badgeLabel = "new",
+#'              badgeColor = "green"),
+#'     menuItem("Charts", icon = icon("bar-chart-o"),
+#'       menuSubItem("Morris", tabName = "morris"),
+#'       menuSubItem("Flot", tabName = "flot"),
+#'       menuSubItem("Inline", tabName = "inline")
+#'     )
+#'   )
+#' )
+#'
+#' body <- dashboardBody(
+#'   tabItems(
+#'     tabItem("dashboard",
+#'       div(p("Dashboard tab content"))
+#'     ),
+#'     tabItem("widgets",
+#'       "Widgets tab content"
+#'     ),
+#'     tabItem("subitem1",
+#'       "Sub-item 1 tab content"
+#'     ),
+#'     tabItem("subitem2",
+#'       "Sub-item 2 tab content"
+#'     )
+#'   )
+#' )
+#'
+#' shinyApp(
+#'   ui = dashboardPage(header, sidebar, body),
+#'   server = function(input, output) { }
+#' )
+#' }
 #' @export
 dashboardSidebar <- function(...) {
   tags$section(class = "sidebar",
@@ -5,6 +55,14 @@ dashboardSidebar <- function(...) {
   )
 }
 
+#' A panel displaying user information in a sidebar
+#'
+#' @param name Name of the user.
+#'
+#' @family sidebar items
+#'
+#' @seealso \code{\link{dashboardSidebar}} for example usage.
+#'
 #' @export
 sidebarUserPanel <- function(name) {
   div(class = "user-panel",
@@ -18,6 +76,19 @@ sidebarUserPanel <- function(name) {
   )
 }
 
+#' Create a search form to place in a sidebar
+#'
+#' A search form consists of a text input field and a search button.
+#'
+#' @param textId Shiny input ID for the text input box.
+#' @param buttonId Shiny input ID for the search button (which functions like an
+#'   \code{\link[shiny]{actionButton}}).
+#' @param label Text label to display inside the search box.
+#'
+#' @family sidebar items
+#'
+#' @seealso \code{\link{dashboardSidebar}} for example usage.
+#'
 #' @export
 sidebarSearchForm <- function(textId, buttonId, label = "Search...") {
   tags$form(class = "sidebar-form",
@@ -68,51 +139,12 @@ sidebarSearchForm <- function(textId, buttonId, label = "Search...") {
 #' @param href An link address. Not compatible with \code{tabName}.
 #' @param tabName The name of a tab that this menu item will activate. Not
 #'   compatible with \code{href}.
-#' @param ... For menu items, this may consist of \code{\link{menuSubItems}}.
+#' @param ... For menu items, this may consist of \code{\link{menuSubItem}}s.
 #'
-#' @seealso \code{\link{sidebarMenu}}
+#' @family sidebar items
 #'
-#' @examples
-#' \donttest{
-#' header <- dashboardHeader()
+#' @seealso \code{\link{dashboardSidebar}} for example usage.
 #'
-#' sidebar <- dashboardSidebar(
-#'   sidebarUserPanel("User Name"),
-#'   sidebarSearchForm(label = "Enter a number", "searchText", "searchButton"),
-#'   sidebarMenu(
-#'     menuItem("Dashboard", tabName = "dashboard", icon = icon("dashboard")),
-#'     menuItem("Widgets", icon = icon("th"), tabName = "widgets", badgeLabel = "new",
-#'              badgeColor = "green"),
-#'     menuItem("Charts", icon = icon("bar-chart-o"),
-#'       menuSubItem("Morris", tabName = "morris"),
-#'       menuSubItem("Flot", tabName = "flot"),
-#'       menuSubItem("Inline", tabName = "inline")
-#'     )
-#'   )
-#' )
-#'
-#' body <- dashboardBody(
-#'   tabItems(
-#'     tabItem("dashboard",
-#'       div(p("Dashboard tab content"))
-#'     ),
-#'     tabItem("widgets",
-#'       "Widgets tab content"
-#'     ),
-#'     tabItem("subitem1",
-#'       "Sub-item 1 tab content"
-#'     ),
-#'     tabItem("subitem2",
-#'       "Sub-item 2 tab content"
-#'     )
-#'   )
-#' )
-#'
-#' shinyApp(
-#'   ui = dashboardPage(header, sidebar, body),
-#'   server = function(input, output) { }
-#' )
-#' }
 #' @export
 sidebarMenu <- function(...) {
   items <- list(...)
@@ -125,7 +157,7 @@ sidebarMenu <- function(...) {
   )
 }
 
-#' @rdname dashboardSidebar
+#' @rdname sidebarMenu
 #' @export
 menuItem <- function(text, ..., icon = NULL, badgeLabel = NULL, badgeColor = "green",
                      href = NULL, tabName = NULL) {
@@ -187,7 +219,7 @@ menuItem <- function(text, ..., icon = NULL, badgeLabel = NULL, badgeColor = "gr
   )
 }
 
-#' @rdname dashboardSidebar
+#' @rdname sidebarMenu
 #' @export
 menuSubItem <- function(text, href = NULL, tabName = NULL) {
 

@@ -2,6 +2,10 @@
 #'
 #' This creates a dashboard page for use in a Shiny app.
 #'
+#' @param header A header created by \code{dashboardHeader}.
+#' @param sidebar A sidebar created by \code{dashboardSidebar}.
+#' @param body A body created by \code{dashboardBody}.
+#'
 #' @seealso \code{\link{dashboardHeader}}, \code{\link{dashboardSidebar}},
 #'   \code{\link{dashboardBody}}.
 #' @examples
