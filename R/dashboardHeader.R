@@ -3,6 +3,7 @@
 #' A dashboard header can be left blank, or it can include dropdown menu items
 #' on the right side.
 #'
+#' @param title An optional title for the dashboard.
 #' @param ... Items to put in the header. Should be \code{\link{dropdownMenu}}s..
 #'
 #' @seealso \code{\link{dropdownMenu}}
@@ -13,6 +14,7 @@
 #'
 #' # A dashboard header with 3 dropdown menus
 #' header <- dashboardHeader(
+#'   title = "Dashboard Demo",
 #'
 #'   # Dropdown menu for messages
 #'   dropdownMenu(type = "messages", badgeStatus = "success",
@@ -48,16 +50,16 @@
 #'
 #'   # Dropdown menu for tasks, with progress bar
 #'   dropdownMenu(type = "tasks", badgeStatus = "danger",
-#'     progressItem(value = 20, color = "aqua",
+#'     taskItem(value = 20, color = "aqua",
 #'       "Refactor code"
 #'     ),
-#'     progressItem(value = 40, color = "green",
+#'     taskItem(value = 40, color = "green",
 #'       "Design new layout"
 #'     ),
-#'     progressItem(value = 60, color = "yellow",
+#'     taskItem(value = 60, color = "yellow",
 #'       "Another task"
 #'     ),
-#'     progressItem(value = 80, color = "red",
+#'     taskItem(value = 80, color = "red",
 #'       "Write documentation"
 #'     )
 #'   )
@@ -73,12 +75,12 @@
 #' )
 #' }
 #' @export
-dashboardHeader <- function(...) {
+dashboardHeader <- function(..., title = NULL) {
   items <- list(...)
   lapply(items, tagAssert, type = "li", class = "dropdown")
 
   tags$header(class = "header",
-    a(href = "#", class = "logo", "Shiny Dashboard"),
+    a(href = "#", class = "logo", title),
     tags$nav(class = "navbar navbar-static-top", role = "navigation",
       # Sidebar toggle button
       a(href="#", class="navbar-btn sidebar-toggle", `data-toggle`="offcanvas",
