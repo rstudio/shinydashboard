@@ -195,7 +195,7 @@ messageItem <- function(from, message, time, image = "foo.png")
 #' Create a notification item to place in a dropdown notification menu
 #'
 #' @param text The notification text.
-#' @param icon An icon (created by \code{\link[shiny]{icon}()}.
+#' @param icon An icon tag, created by \code{\link[shiny]{icon}}.
 #' @param status The status of the item This determines the item's background
 #'   color. Valid statuses are listed in \code{shinydashboard:::validStatuses}.
 #'
@@ -220,7 +220,7 @@ notificationItem <- function(text, icon = icon("warning"), status = "success")
 #'
 #' @param text The task text.
 #' @param value A percent value to use for the bar.
-#' @param color A color for the bar Valid colors are listed in
+#' @param color A color for the bar. Valid colors are listed in
 #'   \code{shinydashboard:::validColors}.
 #'
 #' @family menu items
