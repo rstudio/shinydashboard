@@ -71,7 +71,7 @@ sidebarUserPanel <- function(name) {
     ),
     div(class = "pull-left info",
       p(paste("Hello,", name)),
-      a(href = "#", icon("circle", class = "text-success"), "Online")
+      a(href = "#", shiny::icon("circle", class = "text-success"), "Online")
     )
   )
 }
@@ -99,7 +99,7 @@ sidebarSearchForm <- function(textId, buttonId, label = "Search...") {
       span(class = "input-group-btn",
         tags$button(id = buttonId, type = "button",
           class = "btn btn-flat action-button",
-          icon("search")
+          shiny::icon("search")
         )
       )
     )
@@ -211,7 +211,7 @@ menuItem <- function(text, ..., icon = NULL, badgeLabel = NULL, badgeColor = "gr
     a(href = href,
       icon,
       span(text),
-      icon("angle-left", class = "pull-right")
+      shiny::icon("angle-left", class = "pull-right")
     ),
     tags$ul(class = "treeview-menu",
       subItems
@@ -240,7 +240,7 @@ menuSubItem <- function(text, href = NULL, tabName = NULL) {
   tags$li(
     a(href = href,
       `data-toggle` = if (isTabItem) "tab",
-      icon("angle-double-right"),
+      shiny::icon("angle-double-right"),
       text
     )
   )

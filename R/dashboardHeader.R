@@ -129,10 +129,10 @@ dropdownMenu <- function(...,
     dropdownClass <- paste0("dropdown ", type, "-menu")
 
   icon <- switch(type,
-    messages = icon("envelope"),
-    notifications = icon("warning"),
-    tasks = icon("tasks"),
-    user = icon("user", lib = "glyphicon")
+    messages = shiny::icon("envelope"),
+    notifications = shiny::icon("warning"),
+    tasks = shiny::icon("tasks"),
+    user = shiny::icon("user", lib = "glyphicon")
   )
 
   numItems <- length(items)
@@ -184,7 +184,7 @@ messageItem <- function(from, message, time, image = "foo.png")
       ),
       h4(
         from,
-        tags$small(icon("clock-o"), time)
+        tags$small(shiny::icon("clock-o"), time)
       ),
       p(message)
     )
