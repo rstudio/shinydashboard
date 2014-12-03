@@ -35,9 +35,6 @@ dashboardPage <- function(header, sidebar, body) {
         sidebar
       ),
       tags$aside(class = "right-side",
-        tags$section(class = "content-header",
-          h1("Dashboard", tags$small("Control panel"))
-        ),
         body
       )
     )
