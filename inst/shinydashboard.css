@@ -1,0 +1,10 @@
+/* A replacement for .small-box .icon, where the icon is smaller and doesn't
+   change size when moused over. */
+.small-box .icon-large {
+  position: absolute;
+  top: auto;
+  bottom: 5px;
+  right: 5px;
+  font-size: 75px;
+  color: rgba(0, 0, 0, 0.15);
+}

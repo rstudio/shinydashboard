@@ -6,7 +6,8 @@ dashboardDeps <- list(
   ),
   htmlDependency("shinydashboard", "0.1",
     c(file = system.file(package = "shinydashboard")),
-    script = c("shinydashboard.js")
+    script = c("shinydashboard.js"),
+    stylesheet = c("shinydashboard.css")
   )
 )
 

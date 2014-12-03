@@ -5,7 +5,7 @@
 #'
 #' @param ... Items to put in the dashboard body.
 #'
-#' @seealso \code{\link{box}}, \code{\link{tabItems}},
+#' @seealso \code{\link{tabItems}}, \code{\link{box}}, \code{\link{valueBox}}.
 #'
 #' @export
 dashboardBody <- function(...) {
