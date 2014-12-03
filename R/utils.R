@@ -9,7 +9,7 @@ tagAssert <- function(tag, type = NULL, class = NULL) {
   }
 
   if (!is.null(type) && tag$name != type) {
-    stop("Expected tag to be of type ", name)
+    stop("Expected tag to be of type ", type)
   }
 
   if (!is.null(class)) {
