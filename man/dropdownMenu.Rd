@@ -3,7 +3,7 @@
 \alias{dropdownMenu}
 \title{Create a dropdown menu to place in a dashboard header}
 \usage{
-dropdownMenu(..., type = c("messages", "notifications", "tasks", "user"),
+dropdownMenu(..., type = c("messages", "notifications", "tasks"),
   badgeStatus = "none")
 }
 \arguments{
@@ -13,7 +13,7 @@ dropdownMenu(..., type = c("messages", "notifications", "tasks", "user"),
   \code{\link{taskItem}}s.}
 
 \item{type}{The type of menu. Should be one of "messages", "notifications",
-"tasks", or "user".}
+"tasks".}
 
 \item{badgeStatus}{The status of the badge. This determines the badge's
 color. Valid statuses are listed in \link{validStatuses}.}

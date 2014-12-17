@@ -103,7 +103,7 @@ dashboardHeader <- function(..., title = NULL) {
 #' Create a dropdown menu to place in a dashboard header
 #'
 #' @param type The type of menu. Should be one of "messages", "notifications",
-#'   "tasks", or "user".
+#'   "tasks".
 #' @param badgeStatus The status of the badge. This determines the badge's
 #'   color. Valid statuses are listed in \link{validStatuses}.
 #' @param ... Items to put in the menu. Typically, message menus should contain
@@ -115,7 +115,7 @@ dashboardHeader <- function(..., title = NULL) {
 #'
 #' @export
 dropdownMenu <- function(...,
-  type = c("messages", "notifications", "tasks", "user"),
+  type = c("messages", "notifications", "tasks"),
   badgeStatus = "none")
 {
   type <- match.arg(type)
@@ -125,16 +125,12 @@ dropdownMenu <- function(...,
   # Make sure the items are li tags
   lapply(items, tagAssert, type = "li")
 
-  if (type == "user")
-    dropdownClass <- "dropdown user user-menu"
-  else
-    dropdownClass <- paste0("dropdown ", type, "-menu")
+  dropdownClass <- paste0("dropdown ", type, "-menu")
 
   icon <- switch(type,
     messages = shiny::icon("envelope"),
     notifications = shiny::icon("warning"),
-    tasks = shiny::icon("tasks"),
-    user = shiny::icon("user", lib = "glyphicon")
+    tasks = shiny::icon("tasks")
   )
 
   numItems <- length(items)
