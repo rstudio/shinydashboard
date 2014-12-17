@@ -8,7 +8,7 @@
 #' @param subtitle Subtitle text.
 #' @param icon An icon tag, created by \code{\link[shiny]{icon}}.
 #' @param color A color for the box. Valid colors are listed in
-#'   \code{shinydashboard:::validColors}.
+#'   \link{validColors}.
 #' @param width The width of the box, using the Bootstrap grid system. The
 #'   overall width of a region is 12, so the default valueBox width of 4
 #'   occupies 1/3 of that width.
@@ -38,11 +38,11 @@ valueBox <- function(value, subtitle, icon = NULL, color = "aqua", width = 4) {
 #' @param title Optional title.
 #' @param footer Optional footer text.
 #' @param status The status of the item This determines the item's background
-#'   color. Valid statuses are listed in \code{shinydashboard:::validStatuses}.
+#'   color. Valid statuses are listed in \link{validStatuses}.
 #' @param solidHeader Should the header be shown with a solid color background?
 #' @param background If NULL (the default), the background of the box will be
 #'   white. Otherwise, a color string. Valid colors are listed in
-#'   \code{shinydashboard:::validColors}.
+#'   \link{validColors}.
 #' @param width The width of the box, using the Bootstrap grid system. The
 #'   overall width of a region is 12, so the default valueBox width of 4
 #'   occupies 1/3 of that width.

@@ -23,7 +23,7 @@ menuSubItem(text, href = NULL, tabName = NULL)
 word like "new".}
 
 \item{badgeColor}{A color for the badge. Valid colors are listed in
-\code{shinydashboard:::validColors}.}
+\link{validColors}.}
 
 \item{href}{An link address. Not compatible with \code{tabName}.}
 

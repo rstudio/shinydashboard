@@ -134,7 +134,7 @@ sidebarSearchForm <- function(textId, buttonId, label = "Search...") {
 #' @param badgeLabel A label for an optional badge. Usually a number or a short
 #'   word like "new".
 #' @param badgeColor A color for the badge. Valid colors are listed in
-#'   \code{shinydashboard:::validColors}.
+#'   \link{validColors}.
 #' @param href An link address. Not compatible with \code{tabName}.
 #' @param tabName The name of a tab that this menu item will activate. Not
 #'   compatible with \code{href}.

@@ -16,7 +16,7 @@ dropdownMenu(..., type = c("messages", "notifications", "tasks", "user"),
 "tasks", or "user".}
 
 \item{badgeStatus}{The status of the badge. This determines the badge's
-color. Valid statuses are listed in \code{shinydashboard:::validStatuses}.}
+color. Valid statuses are listed in \link{validStatuses}.}
 }
 \description{
 Create a dropdown menu to place in a dashboard header

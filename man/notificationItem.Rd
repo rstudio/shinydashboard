@@ -11,7 +11,7 @@ notificationItem(text, icon = shiny::icon("warning"), status = "success")
 \item{icon}{An icon tag, created by \code{\link[shiny]{icon}}.}
 
 \item{status}{The status of the item This determines the item's background
-  color. Valid statuses are listed in \code{shinydashboard:::validStatuses}.}
+  color. Valid statuses are listed in \link{validStatuses}.}
 }
 \description{
 Create a notification item to place in a dropdown notification menu

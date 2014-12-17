@@ -105,7 +105,7 @@ dashboardHeader <- function(..., title = NULL) {
 #' @param type The type of menu. Should be one of "messages", "notifications",
 #'   "tasks", or "user".
 #' @param badgeStatus The status of the badge. This determines the badge's
-#'   color. Valid statuses are listed in \code{shinydashboard:::validStatuses}.
+#'   color. Valid statuses are listed in \link{validStatuses}.
 #' @param ... Items to put in the menu. Typically, message menus should contain
 #'   \code{\link{messageItem}}s, notification menus should contain
 #'   \code{\link{notificationItem}}s, and task menus should contain
@@ -200,7 +200,7 @@ messageItem <- function(from, message, icon = shiny::icon("user"), time = NULL)
 #' @param text The notification text.
 #' @param icon An icon tag, created by \code{\link[shiny]{icon}}.
 #' @param status The status of the item This determines the item's background
-#'   color. Valid statuses are listed in \code{shinydashboard:::validStatuses}.
+#'   color. Valid statuses are listed in \link{validStatuses}.
 #'
 #' @family menu items
 #' @seealso \code{\link{dashboardHeader}} for example usage.
@@ -224,7 +224,7 @@ notificationItem <- function(text, icon = shiny::icon("warning"), status = "succ
 #' @param text The task text.
 #' @param value A percent value to use for the bar.
 #' @param color A color for the bar. Valid colors are listed in
-#'   \code{shinydashboard:::validColors}.
+#'   \link{validColors}.
 #'
 #' @family menu items
 #' @seealso \code{\link{dashboardHeader}} for example usage.

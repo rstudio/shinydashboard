@@ -11,7 +11,7 @@ taskItem(text, value = 0, color = "aqua")
 \item{value}{A percent value to use for the bar.}
 
 \item{color}{A color for the bar. Valid colors are listed in
-  \code{shinydashboard:::validColors}.}
+  \link{validColors}.}
 }
 \description{
 Create a task item to place in a dropdown task menu

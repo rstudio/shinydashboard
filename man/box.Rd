@@ -15,13 +15,13 @@ box(..., title = NULL, footer = NULL, status = "none",
 \item{footer}{Optional footer text.}
 
 \item{status}{The status of the item This determines the item's background
-color. Valid statuses are listed in \code{shinydashboard:::validStatuses}.}
+color. Valid statuses are listed in \link{validStatuses}.}
 
 \item{solidHeader}{Should the header be shown with a solid color background?}
 
 \item{background}{If NULL (the default), the background of the box will be
 white. Otherwise, a color string. Valid colors are listed in
-\code{shinydashboard:::validColors}.}
+\link{validColors}.}
 
 \item{width}{The width of the box, using the Bootstrap grid system. The
 overall width of a region is 12, so the default valueBox width of 4
