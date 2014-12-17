@@ -8,3 +8,11 @@
   font-size: 75px;
   color: rgba(0, 0, 0, 0.15);
 }
+
+/* Increase margin on right for header dropdown menus */
+.skin-blue .navbar .navbar-right > .nav {
+  margin-right: 20px;
+}
+.skin-black .navbar .navbar-right > .nav {
+  margin-right: 20px;
+}
