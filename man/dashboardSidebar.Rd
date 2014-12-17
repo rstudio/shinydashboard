@@ -24,9 +24,8 @@ sidebar <- dashboardSidebar(
     menuItem("Widgets", icon = icon("th"), tabName = "widgets", badgeLabel = "new",
              badgeColor = "green"),
     menuItem("Charts", icon = icon("bar-chart-o"),
-      menuSubItem("Morris", tabName = "morris"),
-      menuSubItem("Flot", tabName = "flot"),
-      menuSubItem("Inline", tabName = "inline")
+      menuSubItem("Sub-item 1", tabName = "subitem1"),
+      menuSubItem("Sub-item 2", tabName = "subitem2")
     )
   )
 )

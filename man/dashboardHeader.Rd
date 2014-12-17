@@ -3,10 +3,12 @@
 \alias{dashboardHeader}
 \title{Create a header for a dashboard page}
 \usage{
-dashboardHeader(...)
+dashboardHeader(..., title = NULL)
 }
 \arguments{
 \item{...}{Items to put in the header. Should be \code{\link{dropdownMenu}}s..}
+
+\item{title}{An optional title for the dashboard.}
 }
 \description{
 A dashboard header can be left blank, or it can include dropdown menu items
@@ -18,6 +20,7 @@ library(shiny)
 
 # A dashboard header with 3 dropdown menus
 header <- dashboardHeader(
+  title = "Dashboard Demo",
 
   # Dropdown menu for messages
   dropdownMenu(type = "messages", badgeStatus = "success",
@@ -53,16 +56,16 @@ header <- dashboardHeader(
 
   # Dropdown menu for tasks, with progress bar
   dropdownMenu(type = "tasks", badgeStatus = "danger",
-    progressItem(value = 20, color = "aqua",
+    taskItem(value = 20, color = "aqua",
       "Refactor code"
     ),
-    progressItem(value = 40, color = "green",
+    taskItem(value = 40, color = "green",
       "Design new layout"
     ),
-    progressItem(value = 60, color = "yellow",
+    taskItem(value = 60, color = "yellow",
       "Another task"
     ),
-    progressItem(value = 80, color = "red",
+    taskItem(value = 80, color = "red",
       "Write documentation"
     )
   )
