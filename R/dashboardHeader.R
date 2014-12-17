@@ -169,24 +169,25 @@ dropdownMenu <- function(...,
 #'
 #' @param from Who the message is from.
 #' @param message Text of the message.
+#' @param icon An icon tag, created by \code{\link[shiny]{icon}}.
 #' @param time String representing the time the message was sent. Any string may
 #'   be used. For example, it could be a relative date/time like "5 minutes",
 #'   "today", or "12:30pm yesterday", or an absolute time, like "2014-12-01 13:45".
-#' @param image the path to an image to use for the message
+#'   If NULL, no time will be displayed.
 #'
 #' @family menu items
 #' @seealso \code{\link{dashboardHeader}} for example usage.
 #' @export
-messageItem <- function(from, message, time, image = "foo.png")
+messageItem <- function(from, message, icon = shiny::icon("user"), time = NULL)
 {
+  tagAssert(icon, type = "i")
+
   tags$li(
     a(href = "#",
-      div(class = "pull-left",
-        tags$img(src = "image", class = "img-circle", alt = "User Image")
-      ),
+      icon,
       h4(
         from,
-        tags$small(shiny::icon("clock-o"), time)
+        if (!is.null(time)) tags$small(shiny::icon("clock-o"), time)
       ),
       p(message)
     )
@@ -204,7 +205,7 @@ messageItem <- function(from, message, time, image = "foo.png")
 #' @family menu items
 #' @seealso \code{\link{dashboardHeader}} for example usage.
 #' @export
-notificationItem <- function(text, icon = icon("warning"), status = "success")
+notificationItem <- function(text, icon = shiny::icon("warning"), status = "success")
 {
   tagAssert(icon, type = "i")
   validateStatus(status)

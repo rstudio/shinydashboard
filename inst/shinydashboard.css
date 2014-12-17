@@ -16,3 +16,14 @@
 .skin-black .navbar .navbar-right > .nav {
   margin-right: 20px;
 }
+
+.navbar-nav > .messages-menu > .dropdown-menu > li .menu > li > a > .glyphicon,
+.navbar-nav > .messages-menu > .dropdown-menu > li .menu > li > a > .fa,
+.navbar-nav > .messages-menu > .dropdown-menu > li .menu > li > a > .ion {
+  float: left;
+  font-size: 30px;
+  width: 50px;
+  text-align: center;
+  margin-right: 5px;
+  color: #000;
+}

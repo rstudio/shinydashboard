@@ -3,18 +3,19 @@
 \alias{messageItem}
 \title{Create a message item to place in a dropdown message menu}
 \usage{
-messageItem(from, message, time, image = "foo.png")
+messageItem(from, message, icon = shiny::icon("user"), time = NULL)
 }
 \arguments{
 \item{from}{Who the message is from.}
 
 \item{message}{Text of the message.}
 
-\item{time}{String representing the time the message was sent. Any string may
-be used. For example, it could be a relative date/time like "5 minutes",
-"today", or "12:30pm yesterday", or an absolute time, like "2014-12-01 13:45".}
+\item{icon}{An icon tag, created by \code{\link[shiny]{icon}}.}
 
-\item{image}{the path to an image to use for the message}
+\item{time}{String representing the time the message was sent. Any string may
+  be used. For example, it could be a relative date/time like "5 minutes",
+  "today", or "12:30pm yesterday", or an absolute time, like "2014-12-01 13:45".
+  If NULL, no time will be displayed.}
 }
 \description{
 Create a message item to place in a dropdown message menu
