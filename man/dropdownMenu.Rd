@@ -4,7 +4,7 @@
 \title{Create a dropdown menu to place in a dashboard header}
 \usage{
 dropdownMenu(..., type = c("messages", "notifications", "tasks"),
-  badgeStatus = "none")
+  badgeStatus = "primary")
 }
 \arguments{
 \item{...}{Items to put in the menu. Typically, message menus should contain
@@ -15,8 +15,10 @@ dropdownMenu(..., type = c("messages", "notifications", "tasks"),
 \item{type}{The type of menu. Should be one of "messages", "notifications",
 "tasks".}
 
-\item{badgeStatus}{The status of the badge. This determines the badge's
-color. Valid statuses are listed in \link{validStatuses}.}
+\item{badgeStatus}{The status of the badge which displays the number of items
+in the menu. This determines the badge's color. Valid statuses are listed
+in \link{validStatuses}. A value of \code{NULL} means to not display a
+badge.}
 }
 \description{
 Create a dropdown menu to place in a dashboard header

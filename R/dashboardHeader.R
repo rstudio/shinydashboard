@@ -104,8 +104,10 @@ dashboardHeader <- function(..., title = NULL) {
 #'
 #' @param type The type of menu. Should be one of "messages", "notifications",
 #'   "tasks".
-#' @param badgeStatus The status of the badge. This determines the badge's
-#'   color. Valid statuses are listed in \link{validStatuses}.
+#' @param badgeStatus The status of the badge which displays the number of items
+#'   in the menu. This determines the badge's color. Valid statuses are listed
+#'   in \link{validStatuses}. A value of \code{NULL} means to not display a
+#'   badge.
 #' @param ... Items to put in the menu. Typically, message menus should contain
 #'   \code{\link{messageItem}}s, notification menus should contain
 #'   \code{\link{notificationItem}}s, and task menus should contain
@@ -116,10 +118,10 @@ dashboardHeader <- function(..., title = NULL) {
 #' @export
 dropdownMenu <- function(...,
   type = c("messages", "notifications", "tasks"),
-  badgeStatus = "none")
+  badgeStatus = "primary")
 {
   type <- match.arg(type)
-  if (badgeStatus != "none") validateStatus(badgeStatus)
+  if (!is.null(badgeStatus)) validateStatus(badgeStatus)
   items <- list(...)
 
   # Make sure the items are li tags
@@ -134,7 +136,7 @@ dropdownMenu <- function(...,
   )
 
   numItems <- length(items)
-  if (badgeStatus == "none") {
+  if (is.null(badgeStatus)) {
     badge <- NULL
   } else {
     badge <- span(class = paste0("label label-", badgeStatus), numItems)

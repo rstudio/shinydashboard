@@ -3,7 +3,7 @@
 \alias{box}
 \title{Create a box for the main body of a dashboard}
 \usage{
-box(..., title = NULL, footer = NULL, status = "none",
+box(..., title = NULL, footer = NULL, status = NULL,
   solidHeader = FALSE, background = NULL, width = 4,
   collapsible = FALSE)
 }

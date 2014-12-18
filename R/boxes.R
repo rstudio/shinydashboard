@@ -144,7 +144,7 @@ valueBox <- function(value, subtitle, icon = NULL, color = "aqua", width = 4) {
 #' )
 #' }
 #' @export
-box <- function(..., title = NULL, footer = NULL, status = "none",
+box <- function(..., title = NULL, footer = NULL, status = NULL,
                 solidHeader = FALSE, background = NULL, width = 4,
                 collapsible = FALSE) {
 
@@ -152,7 +152,7 @@ box <- function(..., title = NULL, footer = NULL, status = "none",
   if (solidHeader || !is.null(background)) {
     boxClass <- paste(boxClass, "box-solid")
   }
-  if (status != "none") {
+  if (!is.null(status)) {
     validateStatus(status)
     boxClass <- paste0(boxClass, " box-", status)
   }
