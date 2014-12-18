@@ -1,1 +1,272 @@
-My Page
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+
+<meta charset="utf-8">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="generator" content="pandoc" />
+
+
+
+<title>Shiny Dashboard</title>
+
+<script src="libs/jquery-1.11.0/jquery.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href="libs/bootstrap-3.3.1/css/bootstrap.min.css" rel="stylesheet" />
+<script src="libs/bootstrap-3.3.1/js/bootstrap.min.js"></script>
+<script src="libs/bootstrap-3.3.1/shim/html5shiv.min.js"></script>
+<script src="libs/bootstrap-3.3.1/shim/respond.min.js"></script>
+
+<style type="text/css">code{white-space: pre;}</style>
+<link rel="stylesheet"
+      href="libs/highlight/textmate.css"
+      type="text/css" />
+<script src="libs/highlight/highlight.js"></script>
+<style type="text/css">
+  pre:not([class]) {
+    background-color: white;
+  }
+</style>
+<script type="text/javascript">
+if (window.hljs && document.readyState && document.readyState === "complete") {
+   window.setTimeout(function() {
+      hljs.initHighlighting();
+   }, 0);
+}
+</script>
+
+
+<link rel="stylesheet" href="custom.css" type="text/css" />
+
+</head>
+
+<body>
+
+<style type = "text/css">
+.main-container {
+  max-width: 940px;
+  margin-left: auto;
+  margin-right: auto;
+}
+code {
+  color: inherit;
+  background-color: rgba(0, 0, 0, 0.04);
+}
+img { 
+  max-width:100%; 
+  height: auto; 
+}
+</style>
+<div class="container-fluid main-container">
+
+
+<div id="header">
+<h1 class="title">Shiny Dashboard</h1>
+</div>
+
+
+<p>The <strong>shinydashboard</strong> package is used for creating dashboards like the one below.</p>
+<p>[image]</p>
+<div id="basics" class="section level2">
+<h2>Basics</h2>
+<p>A dashboard has three parts: a header, a sidebar, and a body. Here’s the most minimal possible UI for a dashboard page.</p>
+<pre class="r"><code>## ui.R ##
+library(shiny)
+library(shinydashboard)
+
+dashboardPage(
+  dashboardHeader(),
+  dashboardSidebar(),
+  dashboardBody()
+)</code></pre>
+<p>You can quickly view it by embedding it in a single-file app:</p>
+<pre class="r"><code>## app.R ##
+ui &lt;- dashboardPage(
+  dashboardHeader(),
+  dashboardSidebar(),
+  dashboardBody()
+)
+
+server &lt;- function(input, output) { }
+
+shinyApp(ui, server)</code></pre>
+<p><img src="images/blank_dashboard.png" alt="Blank dashboard" /></p>
+</div>
+<div id="background-shiny-and-html" class="section level2">
+<h2>Background: Shiny and HTML</h2>
+<p>To understand how these parts work together, we first need to take a step back and understand how a Shiny UI is built, and how it relates to the HTML of a web page.</p>
+<p>The HTML tag functions in Shiny return objects that can be rendered as HTML. For example:</p>
+<pre class="r"><code># A basic div
+div(class = &quot;my-class&quot;, &quot;Div content&quot;)
+## &lt;div class=&quot;my-class&quot;&gt;Div content&lt;/div&gt;
+
+# Nested HTML tags
+div(class = &quot;my-class&quot;, p(&quot;Paragraph text&quot;))
+## &lt;div class=&quot;my-class&quot;&gt;
+##   &lt;p&gt;Paragraph text&lt;/p&gt;
+## &lt;/div&gt;</code></pre>
+<p>Some functions return more complex HTML, and they insulate you, the user, from having to know all the ins and outs of the HTML required to do things like create a text input or a sidebar:</p>
+<pre class="r"><code>textInput(&quot;Id&quot;, &quot;Label&quot;)
+## &lt;div class=&quot;form-group shiny-input-container&quot;&gt;
+##   &lt;label for=&quot;Id&quot;&gt;Label&lt;/label&gt;
+##   &lt;input id=&quot;Id&quot; type=&quot;text&quot; class=&quot;form-control&quot; value=&quot;&quot;/&gt;
+## &lt;/div&gt;
+
+
+sidebarPanel(
+  div(&quot;First div&quot;),
+  div(&quot;Second div&quot;)
+)
+## &lt;div class=&quot;col-sm-4&quot;&gt;
+##   &lt;form class=&quot;well&quot;&gt;
+##     &lt;div&gt;First div&lt;/div&gt;
+##     &lt;div&gt;Second div&lt;/div&gt;
+##   &lt;/form&gt;
+## &lt;/div&gt;</code></pre>
+<p>The UI for a Shiny app is built out of these pieces of HTML. The <strong>shinydashboard</strong> package provides a set of functions designed to create HTML that will generate a dashboard.</p>
+</div>
+<div id="dashboard-overview" class="section level2">
+<h2>Dashboard overview</h2>
+<p>The <code>dashboardPage()</code> function expects three components: a header, sidebar, and body:</p>
+<pre class="r"><code>dashboardPage(
+  dashboardHeader(),
+  dashboardSidebar(),
+  dashboardBody()
+)</code></pre>
+<p>For more complicated apps, splitting app into pieces can make it more readable:</p>
+<pre class="r"><code>header &lt;- dashboardHeader()
+
+sidebar &lt;- dashboardSidebar()
+
+body &lt;- dashboardBody()
+
+dashboardPage(header, sidebar, body)</code></pre>
+<p>Now we’ll look at each of the three main components of a <strong>shinydashboard</strong>.</p>
+<div id="header" class="section level3">
+<h3>Header</h3>
+<p>A header can have a title and dropdown menus. Here’s an example:</p>
+<p><img src="images/header.png" alt="Header" /></p>
+<p>Setting the title is simple; just use the <code>title</code> argument:</p>
+<pre class="r"><code>dashboardHeader(title = &quot;My Dashboard&quot;)</code></pre>
+<p>The dropdown menus are generated by the <code>dropdownMenu()</code> function. There are three types of menus, and each one must be populated with a corresponding type of item.</p>
+<table>
+<thead>
+<tr class="header">
+<th align="left">Type</th>
+<th align="left">Item function</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left"><code>message</code></td>
+<td align="left"><code>messageItem()</code></td>
+</tr>
+<tr class="even">
+<td align="left"><code>notification</code></td>
+<td align="left"><code>notificationItem()</code></td>
+</tr>
+<tr class="odd">
+<td align="left"><code>task</code></td>
+<td align="left"><code>taskItem()</code></td>
+</tr>
+</tbody>
+</table>
+<div id="message-menus" class="section level4">
+<h4>Message menus</h4>
+<p>A <code>messageItem</code> contained in a message menu needs values for <code>from</code> and <code>message</code>. You can also control the icon and a notification time string. By default, the icon is a silhouette of a person. (<a href="icons.html">Read more about icons</a>) The time string can be any text. For example, it could be a relative date/time like <code>&quot;5 minutes&quot;</code>, <code>&quot;today&quot;</code>, or <code>&quot;12:30pm yesterday&quot;</code>, or an absolute time, like <code>&quot;2014-12-01 13:45&quot;</code>.</p>
+<pre class="r"><code>dropdownMenu(type = &quot;messages&quot;,
+  messageItem(
+    from = &quot;Sales Dept&quot;,
+    message = &quot;Sales are steady this month.&quot;
+  ),
+  messageItem(
+    from = &quot;New User&quot;,
+    message = &quot;How do I register?&quot;,
+    icon = icon(&quot;question&quot;),
+    time = &quot;13:45&quot;
+  ),
+  messageItem(
+    from = &quot;Support&quot;,
+    message = &quot;The new server is ready.&quot;,
+    icon = icon(&quot;life-ring&quot;),
+    time = &quot;2014-12-01&quot;
+  )
+)</code></pre>
+<p><img src="images/menu-messages.png" alt="Messages menu" /></p>
+</div>
+<div id="notification-menus" class="section level4">
+<h4>Notification menus</h4>
+<p>A <code>notificationItem</code> contained in a notification contains a text notification. You can also control the icon and the status color. The possible statuses are listed in <code>?validStatuses</code>.</p>
+<pre class="r"><code>dropdownMenu(type = &quot;notifications&quot;,
+  notificationItem(
+    text = &quot;5 new users today&quot;,
+    icon(&quot;users&quot;)
+  ),
+  notificationItem(
+    text = &quot;12 items delivered&quot;,
+    icon(&quot;truck&quot;),
+    status = &quot;success&quot;
+  ),
+  notificationItem(
+    text = &quot;Server load at 86%&quot;,
+    icon = icon(&quot;exclamation-triangle&quot;),
+    status = &quot;warning&quot;
+  )
+)</code></pre>
+<p><img src="images/menu-notifications.png" alt="Notifications menu" /></p>
+</div>
+<div id="task-menus" class="section level4">
+<h4>Task menus</h4>
+<p>Task items have a progress bar and a text label. You can also specify the color of the bar. Valid colors are listed in <code>?validColors</code>.</p>
+<pre class="r"><code>dropdownMenu(type = &quot;tasks&quot;, badgeStatus = &quot;success&quot;,
+  taskItem(value = 90, color = &quot;green&quot;,
+    &quot;Documentation&quot;
+  ),
+  taskItem(value = 17, color = &quot;aqua&quot;,
+    &quot;Project X&quot;
+  ),
+  taskItem(value = 75, color = &quot;yellow&quot;,
+    &quot;Server deployment&quot;
+  ),
+  taskItem(value = 80, color = &quot;red&quot;,
+    &quot;Overall project&quot;
+  )
+)</code></pre>
+<p><img src="images/menu-tasks.png" alt="Tasks menu" /></p>
+</div>
+</div>
+<div id="sidebar" class="section level3">
+<h3>Sidebar</h3>
+</div>
+<div id="body" class="section level3">
+<h3>Body</h3>
+</div>
+</div>
+<div id="customizing-appearance" class="section level1">
+<h1>Customizing appearance</h1>
+<div id="css-file" class="section level2">
+<h2>CSS file</h2>
+<p>Title font</p>
+</div>
+<div id="icons" class="section level2">
+<h2>Icons</h2>
+</div>
+</div>
+
+
+</div>
+
+<script>
+
+// add bootstrap table styles to pandoc tables
+$(document).ready(function () {
+  $('tr.header').parent('thead').parent('table').addClass('table table-condensed');
+});
+
+</script>
+
+
+</body>
+</html>

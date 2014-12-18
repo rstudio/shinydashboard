@@ -1,0 +1,8 @@
+html_document:
+  fig_width: 6.0
+  fig_height: 3.5
+  self_contained: false
+  highlight: kate
+  mathjax: null
+  lib_dir: libs
+  css: custom.css

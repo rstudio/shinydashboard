@@ -1,0 +1,31 @@
+img {
+  max-width: 100%;
+  box-shadow: 5px 5px 20px 0px rgba(0,0,0,0.3);
+  border: 1px solid #ccc;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  margin-bottom: 30px;
+}
+
+.image-frame {
+  padding: 30px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+code {
+  font-family: Consolas, Monaco, 'Courier New', monospace;
+  font-size: 85%;
+}
+
+p > code, li > code {
+  background-color: rgba(0, 0, 0, 0.04);
+  padding: 0.2em 0.2em;
+  border-radius: 3px;
+  color: #000;
+}
+
+.table {
+  width: auto;
+}
