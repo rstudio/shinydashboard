@@ -59,14 +59,14 @@ body <- dashboardBody(
 
   # Boxes
   fluidRow(
-    box(status = "primary", width = 6,
+    box(status = "primary",
       sliderInput("orders", "Orders", min = 1, max = 500, value = 120),
       selectInput("progress", "Progress",
         choices = c("0\%" = 0, "20\%" = 20, "40\%" = 40, "60\%" = 60, "80\%" = 80,
                     "100\%" = 100)
       )
     ),
-    box(title = "Histogram box title", width = 6,
+    box(title = "Histogram box title",
       status = "warning", solidHeader = TRUE, collapsible = TRUE,
       plotOutput("plot", height = 250)
     )
@@ -75,18 +75,25 @@ body <- dashboardBody(
   # Boxes with solid color, using `background`
   fluidRow(
     # Box with textOutput
-    box(title = "Status summary", background = "green", textOutput("status")),
+    box(
+      title = "Status summary",
+      background = "green",
+      width = 4,
+      textOutput("status")
+    ),
 
     # Box with HTML output, when finer control over appearance is needed
     box(
       title = "Status summary 2",
-      uiOutput("status2"),
-      background = "red"
+      width = 4,
+      background = "red",
+      uiOutput("status2")
     ),
 
     box(
-      p("This is content. The background color is set to light-blue"),
-      background = "light-blue"
+      width = 4,
+      background = "light-blue",
+      p("This is content. The background color is set to light-blue")
     )
   )
 )
