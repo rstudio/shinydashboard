@@ -9,7 +9,7 @@
   color: rgba(0, 0, 0, 0.15);
 }
 
-/* Increase margin on right for header dropdown menus */
+/* Increase margin on right for header dropdown menus. */
 .skin-blue .navbar .navbar-right > .nav {
   margin-right: 20px;
 }
@@ -28,7 +28,12 @@
   color: #000;
 }
 
-/* Proper spacing for inputs in sidebar.*/
+/* Proper spacing for inputs in sidebar. */
 section.sidebar > .shiny-input-container {
   padding: 12px 15px 0px 12px;
+}
+
+/* Shiny inputs in boxes should span full width. */
+div.box-body .shiny-input-container {
+  width: auto;
 }
