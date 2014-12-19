@@ -3,7 +3,7 @@
 \alias{dashboardPage}
 \title{Dashboard page}
 \usage{
-dashboardPage(header, sidebar, body)
+dashboardPage(header, sidebar, body, skin = c("blue", "black"))
 }
 \arguments{
 \item{header}{A header created by \code{dashboardHeader}.}
@@ -11,6 +11,8 @@ dashboardPage(header, sidebar, body)
 \item{sidebar}{A sidebar created by \code{dashboardSidebar}.}
 
 \item{body}{A body created by \code{dashboardBody}.}
+
+\item{skin}{A color theme; either \code{"blue"} or \code{"black"}.}
 }
 \description{
 This creates a dashboard page for use in a Shiny app.
