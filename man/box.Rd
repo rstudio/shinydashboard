@@ -4,7 +4,7 @@
 \title{Create a box for the main body of a dashboard}
 \usage{
 box(..., title = NULL, footer = NULL, status = NULL,
-  solidHeader = FALSE, background = NULL, width = 4, height = NULL,
+  solidHeader = FALSE, background = NULL, width = 6, height = NULL,
   collapsible = FALSE)
 }
 \arguments{
@@ -24,8 +24,8 @@ white. Otherwise, a color string. Valid colors are listed in
 \link{validColors}.}
 
 \item{width}{The width of the box, using the Bootstrap grid system. The
-overall width of a region is 12, so the default valueBox width of 4
-occupies 1/3 of that width.}
+overall width of a region is 12, so the default width of 6 occupies half of
+that width.}
 
 \item{height}{The height of a box, in pixels. By default the height scales
 automatically with the content.}
