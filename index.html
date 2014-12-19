@@ -175,6 +175,8 @@ dashboardPage(header, sidebar, body)</code></pre>
 </table>
 <div id="message-menus" class="section level4">
 <h4>Message menus</h4>
+<p>A messages menu looks like this:</p>
+<p><img src="images/menu-messages.png" alt="Messages menu" /></p>
 <p>A <code>messageItem</code> contained in a message menu needs values for <code>from</code> and <code>message</code>. You can also control the icon and a notification time string. By default, the icon is a silhouette of a person. (<a href="icons.html">Read more about icons</a>) The time string can be any text. For example, it could be a relative date/time like <code>&quot;5 minutes&quot;</code>, <code>&quot;today&quot;</code>, or <code>&quot;12:30pm yesterday&quot;</code>, or an absolute time, like <code>&quot;2014-12-01 13:45&quot;</code>.</p>
 <pre class="r"><code>dropdownMenu(type = &quot;messages&quot;,
   messageItem(
@@ -194,10 +196,11 @@ dashboardPage(header, sidebar, body)</code></pre>
     time = &quot;2014-12-01&quot;
   )
 )</code></pre>
-<p><img src="images/menu-messages.png" alt="Messages menu" /></p>
 </div>
 <div id="notification-menus" class="section level4">
 <h4>Notification menus</h4>
+<p>This is what a notification menu looks like:</p>
+<p><img src="images/menu-notifications.png" alt="Notifications menu" /></p>
 <p>A <code>notificationItem</code> contained in a notification contains a text notification. You can also control the icon and the status color. The possible statuses are listed in <code>?validStatuses</code>.</p>
 <pre class="r"><code>dropdownMenu(type = &quot;notifications&quot;,
   notificationItem(
@@ -215,10 +218,11 @@ dashboardPage(header, sidebar, body)</code></pre>
     status = &quot;warning&quot;
   )
 )</code></pre>
-<p><img src="images/menu-notifications.png" alt="Notifications menu" /></p>
 </div>
 <div id="task-menus" class="section level4">
 <h4>Task menus</h4>
+<p>This is a task menu:</p>
+<p><img src="images/menu-tasks.png" alt="Tasks menu" /></p>
 <p>Task items have a progress bar and a text label. You can also specify the color of the bar. Valid colors are listed in <code>?validColors</code>.</p>
 <pre class="r"><code>dropdownMenu(type = &quot;tasks&quot;, badgeStatus = &quot;success&quot;,
   taskItem(value = 90, color = &quot;green&quot;,
@@ -234,11 +238,17 @@ dashboardPage(header, sidebar, body)</code></pre>
     &quot;Overall project&quot;
   )
 )</code></pre>
-<p><img src="images/menu-tasks.png" alt="Tasks menu" /></p>
 </div>
 </div>
 <div id="sidebar" class="section level3">
 <h3>Sidebar</h3>
+<p>A sidebar can contain Shiny inputs, like sliders and text inputs. It can also contain menu items that that behave like tabs in a <code>tabPanel</code>.</p>
+<p><img src="images/sidebar.png" alt="Sidebar" /></p>
+<p>The primary component of a sidebar are <code>menuItem</code>s. In the image above, these are the items named</p>
+<div id="tab-links" class="section level4">
+<h4>Tab links</h4>
+<p>Links in the sidebar can be used like <code>tabPanel</code>s from Shiny. That is, when you click on a link, it will display different content in the body of the dashboard.</p>
+</div>
 </div>
 <div id="body" class="section level3">
 <h3>Body</h3>
