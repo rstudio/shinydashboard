@@ -27,3 +27,8 @@
   margin-right: 5px;
   color: #000;
 }
+
+/* Proper spacing for inputs in sidebar.*/
+section.sidebar > .shiny-input-container {
+  padding: 12px 15px 0px 12px;
+}
