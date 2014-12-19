@@ -138,6 +138,7 @@ sidebarSearchForm <- function(textId, buttonId, label = "Search...") {
 #' @param href An link address. Not compatible with \code{tabName}.
 #' @param tabName The name of a tab that this menu item will activate. Not
 #'   compatible with \code{href}.
+#' @param newtab If \code{href} is supplied, should the link open in a new tab?
 #' @param ... For menu items, this may consist of \code{\link{menuSubItem}}s.
 #'
 #' @family sidebar items
@@ -159,7 +160,7 @@ sidebarMenu <- function(...) {
 #' @rdname sidebarMenu
 #' @export
 menuItem <- function(text, ..., icon = NULL, badgeLabel = NULL, badgeColor = "green",
-                     href = NULL, tabName = NULL) {
+                     tabName = NULL, href = NULL, newtab = TRUE) {
   subItems <- list(...)
   lapply(subItems, tagAssert, type = "li")
 
@@ -173,13 +174,18 @@ menuItem <- function(text, ..., icon = NULL, badgeLabel = NULL, badgeColor = "gr
   }
   validateColor(badgeColor)
 
-  # If there's a tabName, set up the correct href
+  # If there's a tabName, set up the correct href and <a> target
   isTabItem <- FALSE
+  target <- NULL
   if (!is.null(tabName)) {
     isTabItem <- TRUE
     href <- paste0("#shiny-tab-", tabName)
   } else if (is.null(href)) {
     href <- "#"
+  } else {
+    # If supplied href, set up <a> tag's target
+    if (newtab)
+      target <- "_blank"
   }
 
   # Generate badge if needed
@@ -198,6 +204,7 @@ menuItem <- function(text, ..., icon = NULL, badgeLabel = NULL, badgeColor = "gr
       tags$li(
         a(href = href,
           `data-toggle` = if (isTabItem) "tab",
+          target = target,
           icon,
           span(text),
           badgeTag
@@ -220,7 +227,7 @@ menuItem <- function(text, ..., icon = NULL, badgeLabel = NULL, badgeColor = "gr
 
 #' @rdname sidebarMenu
 #' @export
-menuSubItem <- function(text, href = NULL, tabName = NULL) {
+menuSubItem <- function(text, tabName = NULL, href = NULL, newtab = TRUE) {
 
   if (!is.null(href) && !is.null(tabName)) {
     stop("Can't specify both href and tabName")
@@ -228,17 +235,23 @@ menuSubItem <- function(text, href = NULL, tabName = NULL) {
 
   # If there's a tabName, set up the correct href
   isTabItem <- FALSE
+  target <- NULL
   if (!is.null(tabName)) {
     isTabItem <- TRUE
     href <- paste0("#shiny-tab-", tabName)
   } else if (is.null(href)) {
     href <- "#"
+  } else {
+    # If supplied href, set up <a> tag's target
+    if (newtab)
+      target <- "_blank"
   }
 
 
   tags$li(
     a(href = href,
       `data-toggle` = if (isTabItem) "tab",
+      target = target,
       shiny::icon("angle-double-right"),
       text
     )

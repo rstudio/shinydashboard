@@ -8,9 +8,9 @@
 sidebarMenu(...)
 
 menuItem(text, ..., icon = NULL, badgeLabel = NULL, badgeColor = "green",
-  href = NULL, tabName = NULL)
+  tabName = NULL, href = NULL, newtab = TRUE)
 
-menuSubItem(text, href = NULL, tabName = NULL)
+menuSubItem(text, tabName = NULL, href = NULL, newtab = TRUE)
 }
 \arguments{
 \item{...}{For menu items, this may consist of \code{\link{menuSubItem}}s.}
@@ -25,10 +25,12 @@ word like "new".}
 \item{badgeColor}{A color for the badge. Valid colors are listed in
 \link{validColors}.}
 
-\item{href}{An link address. Not compatible with \code{tabName}.}
-
 \item{tabName}{The name of a tab that this menu item will activate. Not
 compatible with \code{href}.}
+
+\item{href}{An link address. Not compatible with \code{tabName}.}
+
+\item{newtab}{If \code{href} is supplied, should the link open in a new tab?}
 }
 \description{
 A \code{dashboardSidebar} can contain a \code{sidebarMenu}. A
