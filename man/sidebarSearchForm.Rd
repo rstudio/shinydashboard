@@ -3,7 +3,8 @@
 \alias{sidebarSearchForm}
 \title{Create a search form to place in a sidebar}
 \usage{
-sidebarSearchForm(textId, buttonId, label = "Search...")
+sidebarSearchForm(textId, buttonId, label = "Search...",
+  icon = shiny::icon("search"))
 }
 \arguments{
 \item{textId}{Shiny input ID for the text input box.}
@@ -12,6 +13,8 @@ sidebarSearchForm(textId, buttonId, label = "Search...")
 \code{\link[shiny]{actionButton}}).}
 
 \item{label}{Text label to display inside the search box.}
+
+\item{icon}{An icon tag, created by \code{\link[shiny]{icon}}.}
 }
 \description{
 A search form consists of a text input field and a search button.

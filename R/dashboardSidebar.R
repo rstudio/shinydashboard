@@ -83,13 +83,15 @@ sidebarUserPanel <- function(name) {
 #' @param buttonId Shiny input ID for the search button (which functions like an
 #'   \code{\link[shiny]{actionButton}}).
 #' @param label Text label to display inside the search box.
+#' @param icon An icon tag, created by \code{\link[shiny]{icon}}.
 #'
 #' @family sidebar items
 #'
 #' @seealso \code{\link{dashboardSidebar}} for example usage.
 #'
 #' @export
-sidebarSearchForm <- function(textId, buttonId, label = "Search...") {
+sidebarSearchForm <- function(textId, buttonId, label = "Search...",
+                              icon = shiny::icon("search")) {
   tags$form(class = "sidebar-form",
     div(class = "input-group",
       tags$input(id = textId, type = "text", class = "form-control",
@@ -98,7 +100,7 @@ sidebarSearchForm <- function(textId, buttonId, label = "Search...") {
       span(class = "input-group-btn",
         tags$button(id = buttonId, type = "button",
           class = "btn btn-flat action-button",
-          shiny::icon("search")
+          icon
         )
       )
     )
