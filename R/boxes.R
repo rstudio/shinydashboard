@@ -46,6 +46,8 @@ valueBox <- function(value, subtitle, icon = NULL, color = "aqua", width = 4) {
 #' @param width The width of the box, using the Bootstrap grid system. The
 #'   overall width of a region is 12, so the default valueBox width of 4
 #'   occupies 1/3 of that width.
+#' @param height The height of a box, in pixels. By default the height scales
+#'   automatically with the content.
 #' @param collapsible If TRUE, display a button in the upper right that allows
 #'   the user to collapse the box.
 #' @param ... Contents of the box.
@@ -146,7 +148,7 @@ valueBox <- function(value, subtitle, icon = NULL, color = "aqua", width = 4) {
 #' @export
 box <- function(..., title = NULL, footer = NULL, status = NULL,
                 solidHeader = FALSE, background = NULL, width = 4,
-                collapsible = FALSE) {
+                height = NULL, collapsible = FALSE) {
 
   boxClass <- "box"
   if (solidHeader || !is.null(background)) {
@@ -159,6 +161,11 @@ box <- function(..., title = NULL, footer = NULL, status = NULL,
   if (!is.null(background)) {
     validateColor(background)
     boxClass <- paste0(boxClass, " bg-", background)
+  }
+
+  style <- NULL
+  if (!is.null(height)) {
+    style <- paste0("height: ", height, "px;")
   }
 
   titleTag <- NULL
@@ -179,6 +186,7 @@ box <- function(..., title = NULL, footer = NULL, status = NULL,
 
   div(class = paste0("col-md-", width),
     div(class = boxClass,
+      style = if (!is.null(style)) style,
       div(class = "box-header",
         titleTag,
         collapseTag
