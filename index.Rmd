@@ -383,14 +383,3 @@ webshot::appshot('_apps/sidebar-inputs/', 'images/sidebar-inputs.png',
 For this search form, the corresponding values in the server-side code would be `input$searchText` and `input$searchBotton`.
 
 ### Body
-
-
-# Customizing appearance
-
-## CSS file
-
-Title font
-
-
-## Icons
-

@@ -242,26 +242,59 @@ dashboardPage(header, sidebar, body)</code></pre>
 </div>
 <div id="sidebar" class="section level3">
 <h3>Sidebar</h3>
-<p>A sidebar can contain Shiny inputs, like sliders and text inputs. It can also contain menu items that that behave like tabs in a <code>tabPanel</code>.</p>
+<p>A sidebar is typically used for quick navigation. It can contain menu items that behave like tabs in a <code>tabPanel</code>, as well as Shiny inputs, like sliders and text inputs.</p>
 <p><img src="images/sidebar.png" alt="Sidebar" /></p>
-<p>The primary component of a sidebar are <code>menuItem</code>s. In the image above, these are the items named</p>
-<div id="tab-links" class="section level4">
-<h4>Tab links</h4>
-<p>Links in the sidebar can be used like <code>tabPanel</code>s from Shiny. That is, when you click on a link, it will display different content in the body of the dashboard.</p>
+<div id="sidebar-menu-items" class="section level4">
+<h4>Sidebar menu items</h4>
+<p>Links in the sidebar can be used like <code>tabPanel</code>s from Shiny. That is, when you click on a link, it will display different content in the body of the dashboard. Here is an example of a simple tabPanel:</p>
+<p><img src="images/sidebar-tabs.png" alt="Tabs" /></p>
+<p>When the user clicks on one of the menu items, it switches content in the main body:</p>
+<p><img src="images/sidebar-tabs-2.png" alt="Tabs" /></p>
+<p>The menu items are put in <code>sidebarMenu()</code> as follows. To match up a <code>menuItem</code> with a <code>tabItem</code>, make sure that they have matching values for <code>tabName</code>.</p>
+<pre class="r"><code>## ui.R ##
+sidebar &lt;- dashboardSidebar(
+  sidebarMenu(
+    menuItem(&quot;Dashboard&quot;, tabName = &quot;dashboard&quot;, icon = icon(&quot;dashboard&quot;)),
+    menuItem(&quot;Widgets&quot;, icon = icon(&quot;th&quot;), tabName = &quot;widgets&quot;,
+             badgeLabel = &quot;new&quot;, badgeColor = &quot;green&quot;)
+  )
+)
+
+body &lt;- dashboardBody(
+  tabItems(
+    tabItem(tabName = &quot;dashboard&quot;,
+      h2(&quot;Dashboard tab content&quot;)
+    ),
+
+    tabItem(tabName = &quot;widgets&quot;,
+      h2(&quot;Widgets tab content&quot;)
+    )
+  )
+)
+
+# Put them together into a dashboardPage
+dashboardPage(
+  dashboardHeader(title = &quot;Simple tabs&quot;),
+  sidebar,
+  body
+)</code></pre>
+<p><code>menuItem</code>s have an option icon, which is created by the <code>icon()</code> function from Shiny. (<a href="icons.html">More information</a> about using icons.) They also have an optional badge, with <code>badgeLabel</code> and <code>badgeColor</code>.</p>
+<p>A <code>menuItem</code> can do other things besides control tabs; it can also contain a link to external content, if you supply a value for <code>href</code>. By default, these external links open in a new browser tab or window; this can be controlled with the <code>newtab</code> option.</p>
+<pre class="r"><code>  menuItem(&quot;Source code&quot;, icon = icon(&quot;file-code-o&quot;), 
+           href = &quot;https://github.com/rstudio/shinydashboard/&quot;)</code></pre>
+</div>
+<div id="inputs-in-the-sidebar" class="section level4">
+<h4>Inputs in the sidebar</h4>
+<p>A sidebar can also contain ordinary inputs, like <code>sliderInput</code>s and <code>textInput</code>s.</p>
+<p><img src="images/sidebar-inputs.png" alt="Sidebar inputs" /></p>
+<p><strong>shinydashboard</strong> also includes a special type of input, a <code>sidebarSearchForm</code>, which is on top in the screenshot above. This is essentially a specially formatted text input and and actionButton which appears as a magnifying glass icon.</p>
+<pre class="r"><code>  sidebarSearchForm(textId = &quot;searchText&quot;, buttonId = &quot;searchButton&quot;,
+                    label = &quot;Search...&quot;)</code></pre>
+<p>For this search form, the corresponding values in the server-side code would be <code>input$searchText</code> and <code>input$searchBotton</code>.</p>
 </div>
 </div>
 <div id="body" class="section level3">
 <h3>Body</h3>
-</div>
-</div>
-<div id="customizing-appearance" class="section level1">
-<h1>Customizing appearance</h1>
-<div id="css-file" class="section level2">
-<h2>CSS file</h2>
-<p>Title font</p>
-</div>
-<div id="icons" class="section level2">
-<h2>Icons</h2>
 </div>
 </div>
 
