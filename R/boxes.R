@@ -191,7 +191,7 @@ box <- function(..., title = NULL, footer = NULL, status = NULL,
     )
   }
 
-  div(class = paste0("col-md-", width),
+  div(class = paste0("col-sm-", width),
     div(class = boxClass,
       style = if (!is.null(style)) style,
       div(class = "box-header",
