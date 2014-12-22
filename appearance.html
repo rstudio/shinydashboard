@@ -77,6 +77,25 @@ img {
 </div>
 <div id="css" class="section level2">
 <h2>CSS</h2>
+<p>You can add custom CSS to your app by creating a <code>www/</code> subdirectory to your app and adding a CSS file there. Suppose, for example, you want to change the title font of your dashboard to one with serifs, so that it looks like this:</p>
+<p><img src="images/css-logo-font.png" alt="Custom font" /></p>
+<p>To do this, first create a file named <code>www/custom.css</code> with the following:</p>
+<pre class="r"><code>.header a.logo {
+  font-family: Georgia, &quot;Times New Roman&quot;, Times, serif;
+  font-weight: bold;
+}</code></pre>
+<p>Then refer to that CSS file from the UI of your app:</p>
+<pre class="r"><code>## ui.R ##
+dashboardPage(
+  dashboardHeader(title = &quot;Custom font&quot;),
+  dashboardSidebar(),
+  dashboardBody(
+    tags$head(
+      tags$link(rel = &quot;stylesheet&quot;, type = &quot;text/css&quot;, href = &quot;custom.css&quot;)
+    )
+  )
+)</code></pre>
+<p>There other ways to add custom CSS to a Shiny application. See Shiny’s <a href="http://shiny.rstudio.com/articles/css.html">CSS article</a> for more information.</p>
 </div>
 <div id="icons" class="section level2">
 <h2>Icons</h2>
