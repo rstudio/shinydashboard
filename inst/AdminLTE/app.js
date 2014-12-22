@@ -19,7 +19,7 @@ $(function() {
         e.preventDefault();
 
         //If window is small enough, enable sidebar push menu
-        if ($(window).width() <= 992) {
+        if ($(window).width() <= 768) {
             $('.row-offcanvas').toggleClass('active');
             $('.left-side').removeClass("collapse-left");
             $(".right-side").removeClass("strech");
