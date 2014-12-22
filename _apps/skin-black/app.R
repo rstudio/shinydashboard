@@ -142,7 +142,7 @@ header <- dashboardHeader(
   tasks
 )
 
-ui <- dashboardPage(header, sidebar, body)
+ui <- dashboardPage(skin  ="black", header, sidebar, body)
 
 server <- function(input, output) {
 
