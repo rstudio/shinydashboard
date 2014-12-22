@@ -27,7 +27,15 @@ shrink <- function(filename, scale = NULL) {
 
 The **shinydashboard** package is used for creating dashboards like the one below.
 
-[image]
+```{r eval=FALSE, echo=FALSE}
+webshot::appshot('_apps/dashboard/', 'images/dashboard.png',
+  delay=1, vheight=800, cliprect = "viewport"
+)
+shrink('images/dashboard.png', scale = "50%")
+#"
+```
+
+![Dashboard](images/dashboard.png)
 
 
 ## Basics
