@@ -96,5 +96,43 @@ dashboardPage(
 
 There other ways to add custom CSS to a Shiny application. See Shiny's [CSS article](http://shiny.rstudio.com/articles/css.html) for more information.
 
+
 ## Icons
+
+Icons are used liberally in shinydashboard. The icons used in Shiny and shinydashboard are really just characters from special font sets, and they're created with Shiny's `icon()` function.
+
+To create a calendar icon, you'd call:
+
+```{r eval=FALSE}
+icon("calendar")
+```
+
+This simply generates HTML like this, which the browser knows what to do with:
+
+```HTML
+<i class="fa fa-calendar"></i>
+```
+
+The icons are from Font-Awesome and Glyphicons. You can see lists of all available icons here:
+
+* http://fontawesome.io/icons/
+* http://getbootstrap.com/components/#glyphicons
+
+
+By default, the `icon()` function uses icons from Font-Awesome. To use Glyphicons, use `lib="glyphicon"`)
+
+```{r eval=FALSE}
+"Calendar from Font-Awesome:", icon("calendar"),
+"Cog from Glyphicons:", icon("cog", lib = "glyphicon")
+```
+
+```{r eval=FALSE, echo=FALSE}
+webshot::appshot('_apps/icons/', 'images/icons.png',
+  delay=1, vwidth=780, selector="#content", expand = 10
+)
+shrink('images/icons.png')
+#"
+```
+
+![Icons](images/icons.png)
 
