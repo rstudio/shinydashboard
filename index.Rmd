@@ -169,7 +169,7 @@ A messages menu looks like this:
 ```{r eval=FALSE, echo=FALSE}
 webshot::appshot('_apps/menus/', 'images/menu-messages.png',
   delay=0.5, vwidth=780,
-  selector = c(".messages-menu", ".messages-menu .dropdown-menu"),
+  selector = c("header", ".messages-menu .dropdown-menu"),
   eval = "casper.then(function() {
     this.click('.messages-menu a.dropdown-toggle');
     this.wait(500);
@@ -213,7 +213,7 @@ This is what a notification menu looks like:
 ```{r eval=FALSE, echo=FALSE}
 webshot::appshot('_apps/menus/', 'images/menu-notifications.png',
   delay=0.5, vwidth=780,
-  selector = c(".notifications-menu", ".notifications-menu .dropdown-menu"),
+  selector = c("header", ".notifications-menu .dropdown-menu"),
   eval = "casper.then(function() {
     this.click('.notifications-menu a.dropdown-toggle');
     this.wait(500);
@@ -254,7 +254,7 @@ This is a task menu:
 ```{r eval=FALSE, echo=FALSE}
 webshot::appshot('_apps/menus/', 'images/menu-tasks.png',
   delay=0.5, vwidth=780,
-  selector = c(".tasks-menu", ".tasks-menu .dropdown-menu"),
+  selector = c("header", ".tasks-menu .dropdown-menu"),
   eval = "casper.then(function() {
     this.click('.tasks-menu a.dropdown-toggle');
     this.wait(500);
