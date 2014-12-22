@@ -21,7 +21,7 @@ shrink <- function(filename, scale = NULL) {
   if (!is.null(scale)) {
     system2('convert', args = c(filename, '-scale', scale, filename))
   }
-  system2('optipng', filename)  
+  system2('optipng', filename)
 }
 ```
 
@@ -64,7 +64,7 @@ You can add custom CSS to your app by creating a `www/` subdirectory to your app
 webshot::appshot('_apps/css-logo-font/', 'images/css-logo-font.png',
   delay=1, vwidth=780, selector="header"
 )
-shrink('images/css-logo-font.png')
+shrink('images/css-logo-font.png', scale = "75%")
 #"
 ```
 

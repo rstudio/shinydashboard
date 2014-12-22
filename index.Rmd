@@ -15,6 +15,14 @@ knitr::opts_chunk$set(collapse = TRUE, comment = "##")
 knit_print.shiny.tag <- function(x, ...) {
   as.character(x)
 }
+
+# Shrink .png file, and optionally rescale it
+shrink <- function(filename, scale = NULL) {
+  if (!is.null(scale)) {
+    system2('convert', args = c(filename, '-scale', scale, filename))
+  }
+  system2('optipng', filename)
+}
 ```
 
 The **shinydashboard** package is used for creating dashboards like the one below.
@@ -58,7 +66,8 @@ shinyApp(ui, server)
 
 ```{r eval=FALSE, echo=FALSE}
 webshot::appshot('_apps/blank_dashboard/', 'images/blank_dashboard.png',
-  delay=1, vwidth=1000, vheight=300)
+  delay=1, vheight=300)
+shrink('images/blank_dashboard.png', scale = "75%")
 ```
 
 ![Blank dashboard](images/blank_dashboard.png)
@@ -125,6 +134,7 @@ A header can have a title and dropdown menus. Here's an example:
 ```{r eval=FALSE, echo=FALSE}
 webshot::appshot('_apps/menus/', 'images/header.png',
   delay=1, vwidth=780, selector="header")
+shrink('images/header.png', scale = "75%")
 ```
 
 ![Header](images/header.png)
@@ -157,6 +167,7 @@ webshot::appshot('_apps/menus/', 'images/menu-messages.png',
     this.wait(500);
   });"
 )
+shrink('images/menu-messages.png', scale = "75%")
 #"
 ```
 
@@ -200,6 +211,7 @@ webshot::appshot('_apps/menus/', 'images/menu-notifications.png',
     this.wait(500);
   });"
 )
+shrink('images/menu-notifications.png', scale = "75%")
 #"
 ```
 
@@ -240,6 +252,7 @@ webshot::appshot('_apps/menus/', 'images/menu-tasks.png',
     this.wait(500);
   });"
 )
+shrink('images/menu-tasks.png', scale = "75%")
 #"
 ```
 
@@ -279,6 +292,7 @@ webshot::appshot('_apps/sidebar/', 'images/sidebar.png',
     this.wait(500);
   });"
 )
+shrink('images/sidebar.png', scale = "75%")
 #"
 ```
 
@@ -294,6 +308,7 @@ webshot::appshot('_apps/sidebar-tabs/', 'images/sidebar-tabs.png',
   delay=1, vwidth=1000,
   cliprect = c(0, 0, 800, 300)
 )
+shrink('images/sidebar-tabs.png', scale = "75%")
 #"
 ```
 
@@ -310,6 +325,7 @@ webshot::appshot('_apps/sidebar-tabs/', 'images/sidebar-tabs-2.png',
     this.wait(500);
   });"
 )
+shrink('images/sidebar-tabs-2.png', scale = "75%")
 #"
 ```
 
@@ -368,6 +384,7 @@ webshot::appshot('_apps/sidebar-inputs/', 'images/sidebar-inputs.png',
   selector = c(".header > a.logo", ".sidebar"),
   expand = c(0, 10, 10, 0)
 )
+shrink('images/sidebar-inputs.png', scale = "75%")
 #"
 ```
 

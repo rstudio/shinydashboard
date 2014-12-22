@@ -14,7 +14,7 @@ body <- dashboardBody(
       h2("Dashboard tab content")
     ),
 
-    tabItem(tabName = "widgets",.menuItem
+    tabItem(tabName = "widgets",
       h2("Widgets tab content")
     )
   )
