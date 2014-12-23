@@ -23,9 +23,11 @@ color. Valid statuses are listed in \link{validStatuses}.}
 white. Otherwise, a color string. Valid colors are listed in
 \link{validColors}.}
 
-\item{width}{The width of the box, using the Bootstrap grid system. The
-overall width of a region is 12, so the default width of 6 occupies half of
-that width.}
+\item{width}{The width of the box, using the Bootstrap grid system. This is
+used for row-based layouts. The overall width of a region is 12, so the
+default valueBox width of 4 occupies 1/3 of that width. For column-based
+layouts, use \code{NULL} for the width; the width is set by the column that
+contains the box.}
 
 \item{height}{The height of a box, in pixels. By default the height scales
 automatically with the content.}

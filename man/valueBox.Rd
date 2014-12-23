@@ -6,18 +6,18 @@
 valueBox(value, subtitle, icon = NULL, color = "aqua", width = 4)
 }
 \arguments{
-\item{value}{Value text.}
-
 \item{subtitle}{Subtitle text.}
 
 \item{icon}{An icon tag, created by \code{\link[shiny]{icon}}.}
 
 \item{color}{A color for the box. Valid colors are listed in
-\link{validColors}.}
+  \link{validColors}.}
 
-\item{width}{The width of the box, using the Bootstrap grid system. The
-  overall width of a region is 12, so the default valueBox width of 4
-  occupies 1/3 of that width.}
+\item{width}{The width of the box, using the Bootstrap grid system. This is
+used for row-based layouts. The overall width of a region is 12, so the
+default valueBox width of 4 occupies 1/3 of that width. For column-based
+layouts, use \code{NULL} for the width; the width is set by the column that
+contains the box.}
 }
 \description{
 A value box displays a value (usually a number) in large text, with a smaller

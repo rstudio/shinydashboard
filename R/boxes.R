@@ -4,14 +4,11 @@
 #' subtitle beneath, and a large icon on the right side. Value boxes are meant
 #' to be placed in the main body of a dashboard.
 #'
-#' @param value Value text.
+#' @inheritParams box
 #' @param subtitle Subtitle text.
 #' @param icon An icon tag, created by \code{\link[shiny]{icon}}.
 #' @param color A color for the box. Valid colors are listed in
 #'   \link{validColors}.
-#' @param width The width of the box, using the Bootstrap grid system. The
-#'   overall width of a region is 12, so the default valueBox width of 4
-#'   occupies 1/3 of that width.
 #'
 #' @seealso \code{\link{box}} for usage examples.
 #'
@@ -20,7 +17,7 @@ valueBox <- function(value, subtitle, icon = NULL, color = "aqua", width = 4) {
   validateColor(color)
   if (!is.null(icon)) tagAssert(icon, type = "i")
 
-  div(class = paste0("col-sm-", width),
+  div(class = if (!is.null(width)) paste0("col-sm-", width),
     div(class = paste0("small-box bg-", color),
       div(class = "inner",
         h3(value),
@@ -43,9 +40,11 @@ valueBox <- function(value, subtitle, icon = NULL, color = "aqua", width = 4) {
 #' @param background If NULL (the default), the background of the box will be
 #'   white. Otherwise, a color string. Valid colors are listed in
 #'   \link{validColors}.
-#' @param width The width of the box, using the Bootstrap grid system. The
-#'   overall width of a region is 12, so the default width of 6 occupies half of
-#'   that width.
+#' @param width The width of the box, using the Bootstrap grid system. This is
+#'   used for row-based layouts. The overall width of a region is 12, so the
+#'   default valueBox width of 4 occupies 1/3 of that width. For column-based
+#'   layouts, use \code{NULL} for the width; the width is set by the column that
+#'   contains the box.
 #' @param height The height of a box, in pixels. By default the height scales
 #'   automatically with the content.
 #' @param collapsible If TRUE, display a button in the upper right that allows
@@ -191,7 +190,7 @@ box <- function(..., title = NULL, footer = NULL, status = NULL,
     )
   }
 
-  div(class = paste0("col-sm-", width),
+  div(class = if (!is.null(width)) paste0("col-sm-", width),
     div(class = boxClass,
       style = if (!is.null(style)) style,
       div(class = "box-header",
