@@ -8,20 +8,13 @@ output:
 ```{r echo = FALSE, message=FALSE}
 library(shiny)
 library(shinydashboard)
+library(webshot)
 
 knitr::opts_chunk$set(collapse = TRUE, comment = "##")
 
 # Print HTML tags as HTML text
 knit_print.shiny.tag <- function(x, ...) {
   as.character(x)
-}
-
-# Shrink .png file, and optionally rescale it
-shrink <- function(filename, scale = NULL) {
-  if (!is.null(scale)) {
-    system2('convert', args = c(filename, '-scale', scale, filename))
-  }
-  system2('optipng', filename)
 }
 ```
 
@@ -398,7 +391,7 @@ shrink('images/sidebar-inputs.png', scale = "75%")
 
 ![Sidebar inputs](images/sidebar-inputs.png)
 
-**shinydashboard** also includes a special type of input, a `sidebarSearchForm`, which is on top in the screenshot above. This is essentially a specially formatted text input and and actionButton which appears as a magnifying glass icon.
+**shinydashboard** also includes a special type of input, a `sidebarSearchForm`, which is on top in the screenshot above. This is essentially a specially formatted text input and and actionButton which appears as a magnifying glass icon (the icon can be changed with the `icon` argument).
 
 ```{r eval=FALSE}
   sidebarSearchForm(textId = "searchText", buttonId = "searchButton",
@@ -407,4 +400,63 @@ shrink('images/sidebar-inputs.png', scale = "75%")
 
 For this search form, the corresponding values in the server-side code would be `input$searchText` and `input$searchBotton`.
 
-### Body
+
+## Body
+
+The body of a dashboard page can contain any regular Shiny content. However, if you're creating a dashboard you'll likely want to make something that's more structured. The basic building block of most dashboards is a `box`. Boxes in turn can contain any content.
+
+Laying out the boxes requires a little knowledge of the Bootstrap grid layout system. The body can be treated as a region divided in to 12 columns of equal width, and any number of rows, of variable height. When you place a box (or other item) in the grid, you can specify how many of the 12 columns you want it to occupy. In this screenshot, the first row of boxes each are 4 columns wide, and the second column of boxes are each 6 columns wide.
+
+Broadly speaking, there are two ways of laying out boxes: with a row-based layout, or with a column-based layout.
+
+### Row-based layout
+
+In a row-based layout, boxes must go in a row created by `fluidRow()`. Rows have a grid width of 12, so a box with `width=4` takes up one-third of the width, and a box with `width=6` (the default) takes up half of the width.
+
+With a row-based layout, the tops of the boxes in each row will be aligned, but the bottoms may not be -- it depends on the content of each box. A row-based layout might look like this:
+
+```{r eval=FALSE, echo=FALSE}
+appshot('_apps/layout-rows/', 'images/layout-rows.png',
+  delay=1, vwidth=1000, selector = 'section.content') %>%
+  resize("50%") %>%
+  shrink()
+```
+
+![Row-based layout](images/layout-rows.png)
+
+But it is possible to force the boxes to all be the same height, by setting `height`. In contrast to `width`, which is set using the 12-wide Bootstrap gride, `height` is specified in pixels. (This difference is because HTML/CSS layout handles width and height differently.)
+
+```{r eval=FALSE, echo=FALSE}
+appshot('_apps/layout-rows/', 'images/layout-rows-height.png',
+  delay=1, vwidth=1000, selector = 'section.content',
+  envvars = c(USE_BOX_HEIGHT='TRUE')) %>%
+  resize("50%") %>%
+  shrink()
+```
+
+![Row-based layout with fixed height](images/layout-rows-height.png)
+
+### Column-based layout
+
+
+### Kinds of boxes
+
+* Standard header
+* Solid header
+* Solid background
+
+#### valueBox
+
+
+# Customizing appearance
+
+## CSS file
+
+Title font
+
+
+## Icons
+
+
+# Misc
+ 

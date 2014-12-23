@@ -287,15 +287,53 @@ dashboardPage(
 <h4>Inputs in the sidebar</h4>
 <p>A sidebar can also contain ordinary inputs, like <code>sliderInput</code>s and <code>textInput</code>s.</p>
 <p><img src="images/sidebar-inputs.png" alt="Sidebar inputs" /></p>
-<p><strong>shinydashboard</strong> also includes a special type of input, a <code>sidebarSearchForm</code>, which is on top in the screenshot above. This is essentially a specially formatted text input and and actionButton which appears as a magnifying glass icon.</p>
+<p><strong>shinydashboard</strong> also includes a special type of input, a <code>sidebarSearchForm</code>, which is on top in the screenshot above. This is essentially a specially formatted text input and and actionButton which appears as a magnifying glass icon (the icon can be changed with the <code>icon</code> argument).</p>
 <pre class="r"><code>  sidebarSearchForm(textId = &quot;searchText&quot;, buttonId = &quot;searchButton&quot;,
                     label = &quot;Search...&quot;)</code></pre>
 <p>For this search form, the corresponding values in the server-side code would be <code>input$searchText</code> and <code>input$searchBotton</code>.</p>
 </div>
 </div>
-<div id="body" class="section level3">
-<h3>Body</h3>
 </div>
+<div id="body" class="section level2">
+<h2>Body</h2>
+<p>The body of a dashboard page can contain any regular Shiny content. However, if you’re creating a dashboard you’ll likely want to make something that’s more structured. The basic building block of most dashboards is a <code>box</code>. Boxes in turn can contain any content.</p>
+<p>Laying out the boxes requires a little knowledge of the Bootstrap grid layout system. The body can be treated as a region divided in to 12 columns of equal width, and any number of rows, of variable height. When you place a box (or other item) in the grid, you can specify how many of the 12 columns you want it to occupy. In this screenshot, the first row of boxes each are 4 columns wide, and the second column of boxes are each 6 columns wide.</p>
+<p>Broadly speaking, there are two ways of laying out boxes: with a row-based layout, or with a column-based layout.</p>
+<div id="row-based-layout" class="section level3">
+<h3>Row-based layout</h3>
+<p>In a row-based layout, boxes must go in a row created by <code>fluidRow()</code>. Rows have a grid width of 12, so a box with <code>width=4</code> takes up one-third of the width, and a box with <code>width=6</code> (the default) takes up half of the width.</p>
+<p>With a row-based layout, the tops of the boxes in each row will be aligned, but the bottoms may not be – it depends on the content of each box. A row-based layout might look like this:</p>
+<p><img src="images/layout-rows.png" alt="Row-based layout" /></p>
+<p>But it is possible to force the boxes to all be the same height, by setting <code>height</code>. In contrast to <code>width</code>, which is set using the 12-wide Bootstrap gride, <code>height</code> is specified in pixels. (This is because HTML/CSS layout handles width and height differently.)</p>
+<p><img src="images/layout-rows-height.png" alt="Row-based layout with fixed height" /></p>
+</div>
+<div id="column-based-layout" class="section level3">
+<h3>Column-based layout</h3>
+</div>
+<div id="kinds-of-boxes" class="section level3">
+<h3>Kinds of boxes</h3>
+<ul>
+<li>Standard header</li>
+<li>Solid header</li>
+<li>Solid background</li>
+</ul>
+<div id="valuebox" class="section level4">
+<h4>valueBox</h4>
+</div>
+</div>
+</div>
+<div id="customizing-appearance" class="section level1">
+<h1>Customizing appearance</h1>
+<div id="css-file" class="section level2">
+<h2>CSS file</h2>
+<p>Title font</p>
+</div>
+<div id="icons" class="section level2">
+<h2>Icons</h2>
+</div>
+</div>
+<div id="misc" class="section level1">
+<h1>Misc</h1>
 </div>
 
 
