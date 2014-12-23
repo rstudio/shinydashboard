@@ -8,20 +8,13 @@ output:
 ```{r echo = FALSE, message=FALSE}
 library(shiny)
 library(shinydashboard)
+library(webshot)
 
 knitr::opts_chunk$set(collapse = TRUE, comment = "##")
 
 # Print HTML tags as HTML text
 knit_print.shiny.tag <- function(x, ...) {
   as.character(x)
-}
-
-# Shrink .png file, and optionally rescale it
-shrink <- function(filename, scale = NULL) {
-  if (!is.null(scale)) {
-    system2('convert', args = c(filename, '-scale', scale, filename))
-  }
-  system2('optipng', filename)
 }
 ```
 
@@ -33,11 +26,11 @@ There are two color themes, or skins: blue and black. The default is blue. You c
 Blue:
 
 ```{r eval=FALSE, echo=FALSE}
-webshot::appshot('_apps/dashboard/', 'images/skin-blue.png',
+appshot('_apps/dashboard/', 'images/skin-blue.png',
   delay=1, vheight=500, cliprect = "viewport"
-)
-shrink('images/skin-blue.png', scale = "75%")
-#"
+) %>%
+  resize('75%') %>%
+  shrink()
 ```
 
 ![Blue skin](images/skin-blue.png)
@@ -45,11 +38,12 @@ shrink('images/skin-blue.png', scale = "75%")
 Black:
 
 ```{r eval=FALSE, echo=FALSE}
-webshot::appshot('_apps/skin-black/', 'images/skin-black.png',
-  delay=1, vheight=500, cliprect = "viewport"
-)
-shrink('images/skin-black.png', scale = "75%")
-#"
+appshot('_apps/dashboard/', 'images/skin-black.png',
+  delay=1, vheight=500, cliprect = "viewport",
+  envvars = c(DASHBOARD_SKIN = 'black')
+) %>%
+  resize('75%') %>%
+  shrink()
 ```
 
 ![Black skin](images/skin-black.png)
@@ -61,11 +55,11 @@ You can add custom CSS to your app by creating a `www/` subdirectory to your app
 
 
 ```{r eval=FALSE, echo=FALSE}
-webshot::appshot('_apps/css-logo-font/', 'images/css-logo-font.png',
+appshot('_apps/css-logo-font/', 'images/css-logo-font.png',
   delay=1, vwidth=780, selector="header"
-)
-shrink('images/css-logo-font.png', scale = "75%")
-#"
+) %>%
+  resize('75%') %>%
+  shrink()
 ```
 
 ![Custom font](images/css-logo-font.png)
@@ -127,11 +121,10 @@ By default, the `icon()` function uses icons from Font-Awesome. To use Glyphicon
 ```
 
 ```{r eval=FALSE, echo=FALSE}
-webshot::appshot('_apps/icons/', 'images/icons.png',
+appshot('_apps/icons/', 'images/icons.png',
   delay=1, vwidth=780, selector="#content", expand = 10
-)
-shrink('images/icons.png')
-#"
+) %>%
+  shrink()
 ```
 
 ![Icons](images/icons.png)

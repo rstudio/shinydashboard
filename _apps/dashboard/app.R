@@ -1,5 +1,11 @@
 library(shinydashboard)
 
+skin <- Sys.getenv("DASHBOARD_SKIN")
+skin <- tolower(skin)
+if (skin == "")
+  skin <- "blue"
+
+
 sidebar <- dashboardSidebar(
   sidebarSearchForm(label = "Search...", "searchText", "searchButton"),
   sidebarMenu(
@@ -142,10 +148,11 @@ header <- dashboardHeader(
   tasks
 )
 
-ui <- dashboardPage(header, sidebar, body)
+ui <- dashboardPage(header, sidebar, body, skin = skin)
 
 server <- function(input, output) {
 
+  set.seed(122)
   histdata <- rnorm(500)
 
   output$plot1 <- renderPlot({
