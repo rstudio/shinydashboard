@@ -66,6 +66,24 @@ img {
 <h1 class="title">Shiny Dashboard Structure</h1>
 </div>
 
+<div id="TOC">
+<ul>
+<li><a href="#header">Header</a><ul>
+<li><a href="#message-menus">Message menus</a></li>
+<li><a href="#notification-menus">Notification menus</a></li>
+<li><a href="#task-menus">Task menus</a></li>
+</ul></li>
+<li><a href="#sidebar">Sidebar</a><ul>
+<li><a href="#sidebar-menu-items">Sidebar menu items</a></li>
+<li><a href="#inputs-in-the-sidebar">Inputs in the sidebar</a></li>
+</ul></li>
+<li><a href="#body">Body</a><ul>
+<li><a href="#row-based-layout">Row-based layout</a></li>
+<li><a href="#column-based-layout">Column-based layout</a></li>
+<li><a href="#mixed-row-and-column-layout">Mixed row and column layout</a></li>
+</ul></li>
+</ul>
+</div>
 
 <p>The <code>dashboardPage()</code> function expects three components: a header, sidebar, and body:</p>
 <pre class="r"><code>dashboardPage(
@@ -82,8 +100,8 @@ body &lt;- dashboardBody()
 
 dashboardPage(header, sidebar, body)</code></pre>
 <p>Now we’ll look at each of the three main components of a <strong>shinydashboard</strong>.</p>
-<div id="header" class="section level3">
-<h3>Header</h3>
+<div id="header" class="section level2">
+<h2>Header</h2>
 <p>A header can have a title and dropdown menus. Here’s an example:</p>
 <p><img src="images/header.png" alt="Header" /></p>
 <p>Setting the title is simple; just use the <code>title</code> argument:</p>
@@ -111,8 +129,8 @@ dashboardPage(header, sidebar, body)</code></pre>
 </tr>
 </tbody>
 </table>
-<div id="message-menus" class="section level4">
-<h4>Message menus</h4>
+<div id="message-menus" class="section level3">
+<h3>Message menus</h3>
 <p>A messages menu looks like this:</p>
 <p><img src="images/menu-messages.png" alt="Messages menu" /></p>
 <p>A <code>messageItem</code> contained in a message menu needs values for <code>from</code> and <code>message</code>. You can also control the icon and a notification time string. By default, the icon is a silhouette of a person. (<a href="icons.html">Read more about icons</a>) The time string can be any text. For example, it could be a relative date/time like <code>&quot;5 minutes&quot;</code>, <code>&quot;today&quot;</code>, or <code>&quot;12:30pm yesterday&quot;</code>, or an absolute time, like <code>&quot;2014-12-01 13:45&quot;</code>.</p>
@@ -135,8 +153,8 @@ dashboardPage(header, sidebar, body)</code></pre>
   )
 )</code></pre>
 </div>
-<div id="notification-menus" class="section level4">
-<h4>Notification menus</h4>
+<div id="notification-menus" class="section level3">
+<h3>Notification menus</h3>
 <p>This is what a notification menu looks like:</p>
 <p><img src="images/menu-notifications.png" alt="Notifications menu" /></p>
 <p>A <code>notificationItem</code> contained in a notification contains a text notification. You can also control the icon and the status color. The possible statuses are listed in <code>?validStatuses</code>.</p>
@@ -157,8 +175,8 @@ dashboardPage(header, sidebar, body)</code></pre>
   )
 )</code></pre>
 </div>
-<div id="task-menus" class="section level4">
-<h4>Task menus</h4>
+<div id="task-menus" class="section level3">
+<h3>Task menus</h3>
 <p>This is a task menu:</p>
 <p><img src="images/menu-tasks.png" alt="Tasks menu" /></p>
 <p>Task items have a progress bar and a text label. You can also specify the color of the bar. Valid colors are listed in <code>?validColors</code>.</p>
@@ -178,12 +196,12 @@ dashboardPage(header, sidebar, body)</code></pre>
 )</code></pre>
 </div>
 </div>
-<div id="sidebar" class="section level3">
-<h3>Sidebar</h3>
+<div id="sidebar" class="section level2">
+<h2>Sidebar</h2>
 <p>A sidebar is typically used for quick navigation. It can contain menu items that behave like tabs in a <code>tabPanel</code>, as well as Shiny inputs, like sliders and text inputs.</p>
 <p><img src="images/sidebar.png" alt="Sidebar" /></p>
-<div id="sidebar-menu-items" class="section level4">
-<h4>Sidebar menu items</h4>
+<div id="sidebar-menu-items" class="section level3">
+<h3>Sidebar menu items</h3>
 <p>Links in the sidebar can be used like <code>tabPanel</code>s from Shiny. That is, when you click on a link, it will display different content in the body of the dashboard. Here is an example of a simple tabPanel:</p>
 <p><img src="images/sidebar-tabs.png" alt="Tabs" /></p>
 <p>When the user clicks on one of the menu items, it switches content in the main body:</p>
@@ -221,8 +239,8 @@ dashboardPage(
 <pre class="r"><code>  menuItem(&quot;Source code&quot;, icon = icon(&quot;file-code-o&quot;), 
            href = &quot;https://github.com/rstudio/shinydashboard/&quot;)</code></pre>
 </div>
-<div id="inputs-in-the-sidebar" class="section level4">
-<h4>Inputs in the sidebar</h4>
+<div id="inputs-in-the-sidebar" class="section level3">
+<h3>Inputs in the sidebar</h3>
 <p>A sidebar can also contain ordinary inputs, like <code>sliderInput</code>s and <code>textInput</code>s.</p>
 <p><img src="images/sidebar-inputs.png" alt="Sidebar inputs" /></p>
 <p><strong>shinydashboard</strong> also includes a special type of input, a <code>sidebarSearchForm</code>, which is on top in the screenshot above. This is essentially a specially formatted text input and and actionButton which appears as a magnifying glass icon (the icon can be changed with the <code>icon</code> argument).</p>
@@ -231,46 +249,192 @@ dashboardPage(
 <p>For this search form, the corresponding values in the server-side code would be <code>input$searchText</code> and <code>input$searchBotton</code>.</p>
 </div>
 </div>
-<div id="body" class="section level2">
-<h2>Body</h2>
+<div id="body" class="section level1">
+<h1>Body</h1>
 <p>The body of a dashboard page can contain any regular Shiny content. However, if you’re creating a dashboard you’ll likely want to make something that’s more structured. The basic building block of most dashboards is a <code>box</code>. Boxes in turn can contain any content.</p>
 <p>Laying out the boxes requires a little knowledge of the Bootstrap grid layout system. The body can be treated as a region divided in to 12 columns of equal width, and any number of rows, of variable height. When you place a box (or other item) in the grid, you can specify how many of the 12 columns you want it to occupy. In this screenshot, the first row of boxes each are 4 columns wide, and the second column of boxes are each 6 columns wide.</p>
 <p>Broadly speaking, there are two ways of laying out boxes: with a row-based layout, or with a column-based layout.</p>
-<div id="row-based-layout" class="section level3">
-<h3>Row-based layout</h3>
+<div id="row-based-layout" class="section level2">
+<h2>Row-based layout</h2>
 <p>In a row-based layout, boxes must go in a row created by <code>fluidRow()</code>. Rows have a grid width of 12, so a box with <code>width=4</code> takes up one-third of the width, and a box with <code>width=6</code> (the default) takes up half of the width.</p>
 <p>With a row-based layout, the tops of the boxes in each row will be aligned, but the bottoms may not be – it depends on the content of each box. A row-based layout might look like this:</p>
 <p><img src="images/layout-rows.png" alt="Row-based layout" /></p>
-<p>But it is possible to force the boxes to all be the same height, by setting <code>height</code>. In contrast to <code>width</code>, which is set using the 12-wide Bootstrap gride, <code>height</code> is specified in pixels. (This difference is because HTML/CSS layout handles width and height differently.)</p>
+<p>This code is the basic scaffolding for these three rows of boxes:</p>
+<pre class="r"><code>body &lt;- dashboardBody(
+  fluidRow(
+    box(title = &quot;Box title&quot;, &quot;Box content&quot;),
+    box(status = &quot;warning&quot;, &quot;Box content&quot;)
+  ),
+
+  fluidRow(
+    box(
+      title = &quot;Title 1&quot;, width = 4, solidHeader = TRUE, status = &quot;primary&quot;,
+      &quot;Box content&quot;
+    ),
+    box(
+      title = &quot;Title 2&quot;, width = 4, solidHeader = TRUE,
+      &quot;Box content&quot;
+    ),
+    box(
+      title = &quot;Title 1&quot;, width = 4, solidHeader = TRUE, status = &quot;warning&quot;,
+      &quot;Box content&quot;
+    )
+  ),
+
+  fluidRow(
+    box(
+      width = 4, background = &quot;black&quot;,
+      &quot;A box with a solid black background&quot;
+    ),
+    box(
+      title = &quot;Title 5&quot;, width = 4, background = &quot;light-blue&quot;,
+      &quot;A box with a solid light-blue background&quot;
+    ),
+    box(
+      title = &quot;Title 6&quot;,width = 4, background = &quot;maroon&quot;,
+      &quot;A box with a solid maroon background&quot;
+    )
+  )
+)
+
+# We&#39;ll save it in a variable `ui` so that we can preview it in the console
+ui &lt;- dashboardPage(
+  dashboardHeader(title = &quot;Row layout&quot;),
+  dashboardSidebar(),
+  body
+)
+
+# Preview the UI in the console
+shinyApp(ui = ui, server = function(input, output) { })</code></pre>
+<p>It’s possible to force the boxes to all be the same height, by setting <code>height</code>. In contrast to <code>width</code>, which is set using the 12-wide Bootstrap gride, <code>height</code> is specified in pixels. (This difference is because HTML/CSS layout handles width and height differently. Unfortunately, there isn’t a straightforward way to get equal column heights with Bootstrap.)</p>
+<p>For example:</p>
+<pre class="r"><code>box(title = &quot;Box title&quot;, height = 300, &quot;Box content&quot;),</code></pre>
+<p>If we set the height of all the boxes, we can get a dashboard like this:</p>
 <p><img src="images/layout-rows-height.png" alt="Row-based layout with fixed height" /></p>
 </div>
-<div id="column-based-layout" class="section level3">
-<h3>Column-based layout</h3>
+<div id="column-based-layout" class="section level2">
+<h2>Column-based layout</h2>
+<p>With a column-based layout, you first create a column and then place boxes within those columns.</p>
+<p><img src="images/layout-cols.png" alt="Column-based layout" /></p>
+<p>The code below is the basic scaffolding for this column-based layout. Notice that within the <code>fluidRow</code>, there are <code>column</code>s with a specified width, and then each of the boxes in the column have <code>width=NULL</code>.</p>
+<pre class="r"><code>body &lt;- dashboardBody(
+  fluidRow(
+    column(width = 4,
+      box(
+        title = &quot;Box title&quot;, width = NULL, status = &quot;primary&quot;,
+        &quot;Box content&quot;
+      ),
+      box(
+        title = &quot;Title 1&quot;, width = NULL, solidHeader = TRUE, status = &quot;primary&quot;,
+        &quot;Box content&quot;
+      ),
+      box(
+        width = NULL, background = &quot;black&quot;,
+        &quot;A box with a solid black background&quot;
+      )
+    ),
+
+    column(width = 4,
+      box(
+        status = &quot;warning&quot;, width = NULL,
+        &quot;Box content&quot;
+      ),
+      box(
+        title = &quot;Title 3&quot;, width = NULL, solidHeader = TRUE, status = &quot;warning&quot;,
+        &quot;Box content&quot;
+      ),
+      box(
+        title = &quot;Title 5&quot;, width = NULL, background = &quot;light-blue&quot;,
+        &quot;A box with a solid light-blue background&quot;
+      )
+    ),
+
+    column(width = 4,
+      box(
+        title = &quot;Title 2&quot;, width = NULL, solidHeader = TRUE,
+        &quot;Box content&quot;
+      ),
+      box(
+        title = &quot;Title 6&quot;, width = NULL, background = &quot;maroon&quot;,
+        &quot;A box with a solid maroon background&quot;
+      )
+    )
+  )
+)
+
+# We&#39;ll save it in a variable `ui` so that we can preview it in the console
+ui &lt;- dashboardPage(
+  dashboardHeader(title = &quot;Column layout&quot;),
+  dashboardSidebar(),
+  body
+)
+
+# Preview the UI in the console
+shinyApp(ui = ui, server = function(input, output) { })</code></pre>
 </div>
-<div id="kinds-of-boxes" class="section level3">
-<h3>Kinds of boxes</h3>
-<ul>
-<li>Standard header</li>
-<li>Solid header</li>
-<li>Solid background</li>
-</ul>
-<div id="valuebox" class="section level4">
-<h4>valueBox</h4>
+<div id="mixed-row-and-column-layout" class="section level2">
+<h2>Mixed row and column layout</h2>
+<p>It’s also possible to use a mix of rows and columns. In this example, the top two boxes are in a row, and the rest are in columns:</p>
+<p><img src="images/layout-mixed.png" alt="Mixed row and column layout" /></p>
+<p>This is the scaffolding for this mixed layout:</p>
+<pre class="r"><code>body &lt;- dashboardBody(
+  fluidRow(
+    box(
+      title = &quot;Box title&quot;, width = 6, status = &quot;primary&quot;,
+      &quot;Box content&quot;
+    ),
+    box(
+      status = &quot;warning&quot;, width = 6,
+      &quot;Box content&quot;
+    )
+  ),
+    
+  fluidRow(
+    column(width = 4,
+      box(
+        title = &quot;Title 1&quot;, width = NULL, solidHeader = TRUE, status = &quot;primary&quot;,
+        &quot;Box content&quot;
+      ),
+      box(
+        width = NULL, background = &quot;black&quot;,
+        &quot;A box with a solid black background&quot;
+      )
+    ),
+
+    column(width = 4,
+      box(
+        title = &quot;Title 3&quot;, width = NULL, solidHeader = TRUE, status = &quot;warning&quot;,
+        &quot;Box content&quot;
+      ),
+      box(
+        title = &quot;Title 5&quot;, width = NULL, background = &quot;light-blue&quot;,
+        &quot;A box with a solid light-blue background&quot;
+      )
+    ),
+
+    column(width = 4,
+      box(
+        title = &quot;Title 2&quot;, width = NULL, solidHeader = TRUE,
+        &quot;Box content&quot;
+      ),
+      box(
+        title = &quot;Title 6&quot;, width = NULL, background = &quot;maroon&quot;,
+        &quot;A box with a solid maroon background&quot;
+      )
+    )
+  )
+)
+
+# We&#39;ll save it in a variable `ui` so that we can preview it in the console
+ui &lt;- dashboardPage(
+  dashboardHeader(title = &quot;Mixed layout&quot;),
+  dashboardSidebar(),
+  body
+)
+
+# Preview the UI in the console
+shinyApp(ui = ui, server = function(input, output) { })</code></pre>
 </div>
-</div>
-</div>
-<div id="customizing-appearance" class="section level1">
-<h1>Customizing appearance</h1>
-<div id="css-file" class="section level2">
-<h2>CSS file</h2>
-<p>Title font</p>
-</div>
-<div id="icons" class="section level2">
-<h2>Icons</h2>
-</div>
-</div>
-<div id="misc" class="section level1">
-<h1>Misc</h1>
 </div>
 
 

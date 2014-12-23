@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+
+<meta charset="utf-8">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="generator" content="pandoc" />
+
+
+
+<title>Getting started with Shiny Dashboard</title>
+
+<script src="libs/jquery-1.11.0/jquery.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href="libs/bootstrap-3.3.1/css/bootstrap.min.css" rel="stylesheet" />
+<script src="libs/bootstrap-3.3.1/js/bootstrap.min.js"></script>
+<script src="libs/bootstrap-3.3.1/shim/html5shiv.min.js"></script>
+<script src="libs/bootstrap-3.3.1/shim/respond.min.js"></script>
+
+<style type="text/css">code{white-space: pre;}</style>
+<link rel="stylesheet"
+      href="libs/highlight/textmate.css"
+      type="text/css" />
+<script src="libs/highlight/highlight.js"></script>
+<style type="text/css">
+  pre:not([class]) {
+    background-color: white;
+  }
+</style>
+<script type="text/javascript">
+if (window.hljs && document.readyState && document.readyState === "complete") {
+   window.setTimeout(function() {
+      hljs.initHighlighting();
+   }, 0);
+}
+</script>
+
+
+<link rel="stylesheet" href="custom.css" type="text/css" />
+
+</head>
+
+<body>
+
+<style type = "text/css">
+.main-container {
+  max-width: 940px;
+  margin-left: auto;
+  margin-right: auto;
+}
+code {
+  color: inherit;
+  background-color: rgba(0, 0, 0, 0.04);
+}
+img { 
+  max-width:100%; 
+  height: auto; 
+}
+</style>
+<div class="container-fluid main-container">
+
+
+<div id="header">
+<h1 class="title">Getting started with Shiny Dashboard</h1>
+</div>
+
+
+<div id="basics" class="section level2">
+<h2>Basics</h2>
+<p>A dashboard has three parts: a header, a sidebar, and a body. Here’s the most minimal possible UI for a dashboard page.</p>
+<pre class="r"><code>## ui.R ##
+library(shiny)
+library(shinydashboard)
+
+dashboardPage(
+  dashboardHeader(),
+  dashboardSidebar(),
+  dashboardBody()
+)</code></pre>
+<p>You can quickly view it at the R console by using the <code>shinyApp()</code> function:</p>
+<pre class="r"><code>## app.R ##
+ui &lt;- dashboardPage(
+  dashboardHeader(),
+  dashboardSidebar(),
+  dashboardBody()
+)
+
+server &lt;- function(input, output) { }
+
+shinyApp(ui, server)</code></pre>
+<p><img src="images/blank_dashboard.png" alt="Blank dashboard" /></p>
+<p>Obviously, this dashboard isn’t very useful. But before we dive into the parts of a dashboard, we need to take a step back and understand how a Shiny UI works.</p>
+</div>
+<div id="background-shiny-and-html" class="section level2">
+<h2>Background: Shiny and HTML</h2>
+<p>To understand how these parts work together, we first need to know how a Shiny UI is built, and how it relates to the HTML of a web page.</p>
+<p>The HTML tag functions in Shiny, like <code>div()</code> and <code>p()</code> return objects that can be rendered as HTML. For example, when you run these commands at the R console, it will print out HTML:</p>
+<pre class="r"><code># A basic div
+div(class = &quot;my-class&quot;, &quot;Div content&quot;)
+## &lt;div class=&quot;my-class&quot;&gt;Div content&lt;/div&gt;
+
+# Nested HTML tags
+div(class = &quot;my-class&quot;, p(&quot;Paragraph text&quot;))
+## &lt;div class=&quot;my-class&quot;&gt;
+##   &lt;p&gt;Paragraph text&lt;/p&gt;
+## &lt;/div&gt;</code></pre>
+<p>Some functions return more complex HTML fragments, and they insulate you, the user, from having to know all the ins and outs of the HTML required to create things like a text input or a sidebar:</p>
+<pre class="r"><code>textInput(&quot;Id&quot;, &quot;Label&quot;)
+## &lt;div class=&quot;form-group shiny-input-container&quot;&gt;
+##   &lt;label for=&quot;Id&quot;&gt;Label&lt;/label&gt;
+##   &lt;input id=&quot;Id&quot; type=&quot;text&quot; class=&quot;form-control&quot; value=&quot;&quot;/&gt;
+## &lt;/div&gt;
+
+sidebarPanel(
+  div(&quot;First div&quot;),
+  div(&quot;Second div&quot;)
+)
+## &lt;div class=&quot;col-sm-4&quot;&gt;
+##   &lt;form class=&quot;well&quot;&gt;
+##     &lt;div&gt;First div&lt;/div&gt;
+##     &lt;div&gt;Second div&lt;/div&gt;
+##   &lt;/form&gt;
+## &lt;/div&gt;</code></pre>
+<p>The UI for a Shiny app is built out of these pieces of HTML. The <strong>shinydashboard</strong> package provides a set of functions designed to create HTML that will generate a dashboard. If you copy the UI code for a dashboard page (above) and paste into the R console, it will print out HTML for the dashboard.</p>
+<p><strong>Next</strong>: learn about the structure of a dashboard.</p>
+<p><a class="btn btn-success btn-lg" href="structure.html" role="button">Continue <span class="glyphicon glyphicon-arrow-right"></span> </a></p>
+</div>
+
+
+</div>
+
+<script>
+
+// add bootstrap table styles to pandoc tables
+$(document).ready(function () {
+  $('tr.header').parent('thead').parent('table').addClass('table table-condensed');
+});
+
+</script>
+
+
+</body>
+</html>

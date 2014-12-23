@@ -3,6 +3,7 @@ title: "Customizing dashboard appearance"
 output:
   html_document:
     highlight: textmate
+    toc: true
 ---
 
 ```{r echo = FALSE, message=FALSE}

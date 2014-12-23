@@ -69,65 +69,15 @@ img {
 
 <p>The <strong>shinydashboard</strong> package lets you create dashboards like this:</p>
 <p><img src="images/dashboard.png" alt="Dashboard" /></p>
-<div id="basics" class="section level2">
-<h2>Basics</h2>
-<p>A dashboard has three parts: a header, a sidebar, and a body. Here’s the most minimal possible UI for a dashboard page.</p>
-<pre class="r"><code>## ui.R ##
-library(shiny)
-library(shinydashboard)
+<div id="installation" class="section level2">
+<h2>Installation</h2>
+<p><strong>shinydashboard</strong> requires Shiny 0.11 or above. To install, run:</p>
+<pre class="r"><code># First install devtools if you don&#39;t already have it installed, with:
+# install.packages(&quot;devtools&quot;)
 
-dashboardPage(
-  dashboardHeader(),
-  dashboardSidebar(),
-  dashboardBody()
-)</code></pre>
-<p>You can quickly view it by embedding it in a single-file app:</p>
-<pre class="r"><code>## app.R ##
-ui &lt;- dashboardPage(
-  dashboardHeader(),
-  dashboardSidebar(),
-  dashboardBody()
-)
-
-server &lt;- function(input, output) { }
-
-shinyApp(ui, server)</code></pre>
-<p><img src="images/blank_dashboard.png" alt="Blank dashboard" /></p>
-<p>Obviously, this dashboard isn’t very useful. But before we dive into the parts of a dashboard, we need to take a step back and understand how a Shiny UI works.</p>
-</div>
-<div id="background-shiny-and-html" class="section level2">
-<h2>Background: Shiny and HTML</h2>
-<p>To understand how these parts work together, we first need to understand how a Shiny UI is built, and how it relates to the HTML of a web page.</p>
-<p>The HTML tag functions in Shiny, like <code>div()</code>, return objects that can be rendered as HTML. For example:</p>
-<pre class="r"><code># A basic div
-div(class = &quot;my-class&quot;, &quot;Div content&quot;)
-## &lt;div class=&quot;my-class&quot;&gt;Div content&lt;/div&gt;
-
-# Nested HTML tags
-div(class = &quot;my-class&quot;, p(&quot;Paragraph text&quot;))
-## &lt;div class=&quot;my-class&quot;&gt;
-##   &lt;p&gt;Paragraph text&lt;/p&gt;
-## &lt;/div&gt;</code></pre>
-<p>Some functions return more complex HTML, and they insulate you, the user, from having to know all the ins and outs of the HTML required to do things like create a text input or a sidebar:</p>
-<pre class="r"><code>textInput(&quot;Id&quot;, &quot;Label&quot;)
-## &lt;div class=&quot;form-group shiny-input-container&quot;&gt;
-##   &lt;label for=&quot;Id&quot;&gt;Label&lt;/label&gt;
-##   &lt;input id=&quot;Id&quot; type=&quot;text&quot; class=&quot;form-control&quot; value=&quot;&quot;/&gt;
-## &lt;/div&gt;
-
-
-sidebarPanel(
-  div(&quot;First div&quot;),
-  div(&quot;Second div&quot;)
-)
-## &lt;div class=&quot;col-sm-4&quot;&gt;
-##   &lt;form class=&quot;well&quot;&gt;
-##     &lt;div&gt;First div&lt;/div&gt;
-##     &lt;div&gt;Second div&lt;/div&gt;
-##   &lt;/form&gt;
-## &lt;/div&gt;</code></pre>
-<p>The UI for a Shiny app is built out of these pieces of HTML. The <strong>shinydashboard</strong> package provides a set of functions designed to create HTML that will generate a dashboard.</p>
-<p><strong>Next</strong>: learn about the <a href="structure.html">structure</a> of a Dashboard.</p>
+devtools::install_github(&quot;rstudio/shiny&quot;)
+devtools::install_github(&quot;rstudio/shinydashboard&quot;)</code></pre>
+<p><a class="btn btn-success btn-lg" href="get_started.html" role="button">Get started <span class="glyphicon glyphicon-arrow-right"></span> </a></p>
 </div>
 
 
