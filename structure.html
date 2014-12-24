@@ -61,6 +61,24 @@ img {
 </style>
 <div class="container-fluid main-container">
 
+<!--html_preserve-->
+
+<div class="header">
+  <nav class="navbar">
+      <h3 class="navbar-left"><strong>shinydashboard</strong></h3>
+      <ul class="nav nav-pills navbar-right">
+        <li role="presentation" id="nav-home"><a href="index.html">Home</a></li>
+        <li role="presentation" id="nav-get-started"><a href="get_started.html">Get started</a></li>
+        <li role="presentation" id="nav-structure"><a href="structure.html">Structure</a></li>
+        <li role="presentation" id="nav-appearance"><a href="appearance.html">Appearance</a></li>
+        <li role="presentation" id="nav-github"><a href="https://github.com/rstudio/shinydashboard">GitHub</a></li>
+      </ul>
+  </nav>
+</div>
+
+<div id="page-body">
+
+<!--/html_preserve-->
 
 <div id="header">
 <h1 class="title">Shiny Dashboard Structure</h1>
@@ -78,9 +96,16 @@ img {
 <li><a href="#inputs-in-the-sidebar">Inputs in the sidebar</a></li>
 </ul></li>
 <li><a href="#body">Body</a><ul>
+<li><a href="#boxes">Boxes</a><ul>
+<li><a href="#kinds-of-boxes">Kinds of boxes</a></li>
+<li><a href="#valuebox">valueBox</a></li>
+</ul></li>
+<li><a href="#layouts">Layouts</a><ul>
 <li><a href="#row-based-layout">Row-based layout</a></li>
 <li><a href="#column-based-layout">Column-based layout</a></li>
 <li><a href="#mixed-row-and-column-layout">Mixed row and column layout</a></li>
+</ul></li>
+<li><a href="#tabs">Tabs</a></li>
 </ul></li>
 </ul>
 </div>
@@ -252,10 +277,26 @@ dashboardPage(
 <div id="body" class="section level1">
 <h1>Body</h1>
 <p>The body of a dashboard page can contain any regular Shiny content. However, if you’re creating a dashboard you’ll likely want to make something that’s more structured. The basic building block of most dashboards is a <code>box</code>. Boxes in turn can contain any content.</p>
+<div id="boxes" class="section level2">
+<h2>Boxes</h2>
+<div id="kinds-of-boxes" class="section level3">
+<h3>Kinds of boxes</h3>
+<ul>
+<li>Standard header</li>
+<li>Solid header</li>
+<li>Solid background</li>
+</ul>
+</div>
+<div id="valuebox" class="section level3">
+<h3>valueBox</h3>
+</div>
+</div>
+<div id="layouts" class="section level2">
+<h2>Layouts</h2>
 <p>Laying out the boxes requires a little knowledge of the Bootstrap grid layout system. The body can be treated as a region divided in to 12 columns of equal width, and any number of rows, of variable height. When you place a box (or other item) in the grid, you can specify how many of the 12 columns you want it to occupy. In this screenshot, the first row of boxes each are 4 columns wide, and the second column of boxes are each 6 columns wide.</p>
 <p>Broadly speaking, there are two ways of laying out boxes: with a row-based layout, or with a column-based layout.</p>
-<div id="row-based-layout" class="section level2">
-<h2>Row-based layout</h2>
+<div id="row-based-layout" class="section level3">
+<h3>Row-based layout</h3>
 <p>In a row-based layout, boxes must go in a row created by <code>fluidRow()</code>. Rows have a grid width of 12, so a box with <code>width=4</code> takes up one-third of the width, and a box with <code>width=6</code> (the default) takes up half of the width.</p>
 <p>With a row-based layout, the tops of the boxes in each row will be aligned, but the bottoms may not be – it depends on the content of each box. A row-based layout might look like this:</p>
 <p><img src="images/layout-rows.png" alt="Row-based layout" /></p>
@@ -312,8 +353,8 @@ shinyApp(ui = ui, server = function(input, output) { })</code></pre>
 <p>If we set the height of all the boxes, we can get a dashboard like this:</p>
 <p><img src="images/layout-rows-height.png" alt="Row-based layout with fixed height" /></p>
 </div>
-<div id="column-based-layout" class="section level2">
-<h2>Column-based layout</h2>
+<div id="column-based-layout" class="section level3">
+<h3>Column-based layout</h3>
 <p>With a column-based layout, you first create a column and then place boxes within those columns.</p>
 <p><img src="images/layout-cols.png" alt="Column-based layout" /></p>
 <p>The code below is the basic scaffolding for this column-based layout. Notice that within the <code>fluidRow</code>, there are <code>column</code>s with a specified width, and then each of the boxes in the column have <code>width=NULL</code>.</p>
@@ -372,8 +413,8 @@ ui &lt;- dashboardPage(
 # Preview the UI in the console
 shinyApp(ui = ui, server = function(input, output) { })</code></pre>
 </div>
-<div id="mixed-row-and-column-layout" class="section level2">
-<h2>Mixed row and column layout</h2>
+<div id="mixed-row-and-column-layout" class="section level3">
+<h3>Mixed row and column layout</h3>
 <p>It’s also possible to use a mix of rows and columns. In this example, the top two boxes are in a row, and the rest are in columns:</p>
 <p><img src="images/layout-mixed.png" alt="Mixed row and column layout" /></p>
 <p>This is the scaffolding for this mixed layout:</p>
@@ -436,7 +477,44 @@ ui &lt;- dashboardPage(
 shinyApp(ui = ui, server = function(input, output) { })</code></pre>
 </div>
 </div>
+<div id="tabs" class="section level2">
+<h2>Tabs</h2>
+</div>
+</div>
 
+</div> <!-- page-body -->
+
+<footer>
+  <div>&nbsp;</div>
+  <div>&nbsp;</div>
+  <div class="text-muted">
+  Copyright &copy; 2014 RStudio, Inc.
+  </div>
+</footer>
+
+<script>
+// manage active state of headres and navigation based on current page
+$(document).ready(function () {
+  
+  // compute name of page
+  href = window.location.pathname;
+  href = href.substr(href.lastIndexOf('/') + 1);
+  if (href == "")
+    href = "index.html";
+  
+  var pagelinks = {
+    "index.html": "#nav-home",
+    "get_started.html": "#nav-get-started",
+    "structure.html": "#nav-structure",
+    "appearance.html": "#nav-appearance"
+  };
+
+  if (pagelinks[href]) {
+    $(pagelinks[href]).addClass('active');
+  }
+
+});
+</script>
 
 </div>
 

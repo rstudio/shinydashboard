@@ -61,6 +61,24 @@ img {
 </style>
 <div class="container-fluid main-container">
 
+<!--html_preserve-->
+
+<div class="header">
+  <nav class="navbar">
+      <h3 class="navbar-left"><strong>shinydashboard</strong></h3>
+      <ul class="nav nav-pills navbar-right">
+        <li role="presentation" id="nav-home"><a href="index.html">Home</a></li>
+        <li role="presentation" id="nav-get-started"><a href="get_started.html">Get started</a></li>
+        <li role="presentation" id="nav-structure"><a href="structure.html">Structure</a></li>
+        <li role="presentation" id="nav-appearance"><a href="appearance.html">Appearance</a></li>
+        <li role="presentation" id="nav-github"><a href="https://github.com/rstudio/shinydashboard">GitHub</a></li>
+      </ul>
+  </nav>
+</div>
+
+<div id="page-body">
+
+<!--/html_preserve-->
 
 <div id="header">
 <h1 class="title">Customizing dashboard appearance</h1>
@@ -110,11 +128,11 @@ dashboardPage(
 <p>To create a calendar icon, you’d call:</p>
 <pre class="r"><code>icon(&quot;calendar&quot;)</code></pre>
 <p>This simply generates HTML like this, which the browser knows what to do with:</p>
-<pre class="html"><code>&lt;i class=&quot;fa fa-calendar&quot;&gt;&lt;/i&gt;</code></pre>
+<pre class="HTML"><code>&lt;i class=&quot;fa fa-calendar&quot;&gt;&lt;/i&gt;</code></pre>
 <p>The icons are from Font-Awesome and Glyphicons. You can see lists of all available icons here:</p>
 <ul>
-<li><a href="http://fontawesome.io/icons/" class="uri">http://fontawesome.io/icons/</a></li>
-<li><a href="http://getbootstrap.com/components/#glyphicons" class="uri">http://getbootstrap.com/components/#glyphicons</a></li>
+<li><a href="http://fontawesome.io/icons/">http://fontawesome.io/icons/</a></li>
+<li><a href="http://getbootstrap.com/components/#glyphicons">http://getbootstrap.com/components/#glyphicons</a></li>
 </ul>
 <p>By default, the <code>icon()</code> function uses icons from Font-Awesome. To use Glyphicons, use <code>lib=&quot;glyphicon&quot;</code>)</p>
 <pre class="r"><code>&quot;Calendar from Font-Awesome:&quot;, icon(&quot;calendar&quot;),
@@ -122,6 +140,39 @@ dashboardPage(
 <p><img src="images/icons.png" alt="Icons" /></p>
 </div>
 
+</div> <!-- page-body -->
+
+<footer>
+  <div>&nbsp;</div>
+  <div>&nbsp;</div>
+  <div class="text-muted">
+  Copyright &copy; 2014 RStudio, Inc.
+  </div>
+</footer>
+
+<script>
+// manage active state of headres and navigation based on current page
+$(document).ready(function () {
+  
+  // compute name of page
+  href = window.location.pathname;
+  href = href.substr(href.lastIndexOf('/') + 1);
+  if (href == "")
+    href = "index.html";
+  
+  var pagelinks = {
+    "index.html": "#nav-home",
+    "get_started.html": "#nav-get-started",
+    "structure.html": "#nav-structure",
+    "appearance.html": "#nav-appearance"
+  };
+
+  if (pagelinks[href]) {
+    $(pagelinks[href]).addClass('active');
+  }
+
+});
+</script>
 
 </div>
 

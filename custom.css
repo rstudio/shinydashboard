@@ -1,3 +1,16 @@
+.header {
+  margin-top: 18px;
+}
+
+.header h3 {
+  padding-top: 10px;
+  margin-top: 0;
+}
+
+.header nav.navbar {
+  margin-bottom: 12px;
+}
+
 img {
   max-width: 100%;
   box-shadow: 5px 5px 20px 0px rgba(0,0,0,0.3);
@@ -28,4 +41,8 @@ p > code, li > code {
 
 .table {
   width: auto;
+}
+
+pre {
+  margin: 0px 20px 10px 20px
 }

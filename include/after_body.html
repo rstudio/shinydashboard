@@ -1,0 +1,33 @@
+</div> <!-- page-body -->
+
+<footer>
+  <div>&nbsp;</div>
+  <div>&nbsp;</div>
+  <div class="text-muted">
+  Copyright &copy; 2014 RStudio, Inc.
+  </div>
+</footer>
+
+<script>
+// manage active state of headres and navigation based on current page
+$(document).ready(function () {
+  
+  // compute name of page
+  href = window.location.pathname;
+  href = href.substr(href.lastIndexOf('/') + 1);
+  if (href == "")
+    href = "index.html";
+  
+  var pagelinks = {
+    "index.html": "#nav-home",
+    "get_started.html": "#nav-get-started",
+    "structure.html": "#nav-structure",
+    "appearance.html": "#nav-appearance"
+  };
+
+  if (pagelinks[href]) {
+    $(pagelinks[href]).addClass('active');
+  }
+
+});
+</script>

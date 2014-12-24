@@ -6,3 +6,6 @@ html_document:
   mathjax: null
   lib_dir: libs
   css: custom.css
+  includes:
+    before_body: include/before_body.html
+    after_body: include/after_body.html
