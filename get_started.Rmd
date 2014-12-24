@@ -103,8 +103,11 @@ sidebarPanel(
 
 The UI for a Shiny app is built out of these pieces of HTML. The **shinydashboard** package provides a set of functions designed to create HTML that will generate a dashboard. If you copy the UI code for a dashboard page (above) and paste into the R console, it will print out HTML for the dashboard.
 
+
+<div class="text-center">
 **Next**: learn about the structure of a dashboard.
 
 <a class="btn btn-success btn-lg" href="structure.html" role="button">Continue
 <span class="glyphicon glyphicon-arrow-right"></span>
 </a>
+</div>

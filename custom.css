@@ -46,3 +46,9 @@ p > code, li > code {
 pre {
   margin: 0px 20px 10px 20px
 }
+
+footer {
+  text-align: center;
+  font-size: 0.8em;
+  margin-bottom: 100px;
+}
