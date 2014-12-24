@@ -85,6 +85,15 @@ img {
 </div>
 
 
+<div id="installation" class="section level2">
+<h2>Installation</h2>
+<p><strong>shinydashboard</strong> requires Shiny 0.11 or above. To install, run:</p>
+<pre class="r"><code># First install devtools if you don&#39;t already have it installed, with:
+# install.packages(&quot;devtools&quot;)
+
+devtools::install_github(&quot;rstudio/shiny&quot;)
+devtools::install_github(&quot;rstudio/shinydashboard&quot;)</code></pre>
+</div>
 <div id="basics" class="section level2">
 <h2>Basics</h2>
 <p>A dashboard has three parts: a header, a sidebar, and a body. Here’s the most minimal possible UI for a dashboard page.</p>
@@ -176,6 +185,8 @@ $(document).ready(function () {
   if (pagelinks[href]) {
     $(pagelinks[href]).addClass('active');
   }
+
+  $('.title').addClass('hidden');
 
 });
 </script>

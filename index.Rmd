@@ -30,20 +30,6 @@ appshot('_apps/dashboard/', 'images/dashboard.png',
 
 ![Dashboard](images/dashboard.png)
 
-
-## Installation
-
-**shinydashboard** requires Shiny 0.11 or above. To install, run:
-
-```{r eval=FALSE}
-# First install devtools if you don't already have it installed, with:
-# install.packages("devtools")
-
-devtools::install_github("rstudio/shiny")
-devtools::install_github("rstudio/shinydashboard")
-```
-
-
 <a class="btn btn-success btn-lg" href="get_started.html" role="button">Get started
 <span class="glyphicon glyphicon-arrow-right"></span>
 </a>

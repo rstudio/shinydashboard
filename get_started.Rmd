@@ -18,6 +18,19 @@ knit_print.shiny.tag <- function(x, ...) {
 }
 ```
 
+
+## Installation
+
+**shinydashboard** requires Shiny 0.11 or above. To install, run:
+
+```{r eval=FALSE}
+# First install devtools if you don't already have it installed, with:
+# install.packages("devtools")
+
+devtools::install_github("rstudio/shiny")
+devtools::install_github("rstudio/shinydashboard")
+```
+
 ## Basics
 
 A dashboard has three parts: a header, a sidebar, and a body. Here's the most minimal possible UI for a dashboard page.
