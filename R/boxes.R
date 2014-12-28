@@ -181,8 +181,10 @@ box <- function(..., title = NULL, footer = NULL, status = NULL,
 
   collapseTag <- NULL
   if (collapsible) {
+    buttonStatus <- status %OR% "default"
+
     collapseTag <- div(class = "box-tools pull-right",
-      tags$button(class = "btn btn-default btn-sm",
+      tags$button(class = paste0("btn btn-", buttonStatus, " btn-sm"),
         `data-widget` = "collapse", `data-toggle` = "tooltip",
         title = "Collapse",
         shiny::icon("minus")

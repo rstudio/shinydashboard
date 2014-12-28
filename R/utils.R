@@ -117,3 +117,6 @@ validateStatus <- function(status) {
 #'
 #' @keywords internal
 validStatuses <- c("primary", "success", "info", "warning", "danger")
+
+
+"%OR%" <- function(a, b) if (!is.null(a)) a else b
