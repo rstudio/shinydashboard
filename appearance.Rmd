@@ -19,7 +19,6 @@ knit_print.shiny.tag <- function(x, ...) {
 }
 ```
 
-
 ## Skins
 
 There are two color themes, or skins: blue and black. The default is blue. You can choose which theme to use with `shinyDashboard(skin="blue")` or `shinyDashboard(skin="black")`.
@@ -130,3 +129,31 @@ appshot('_apps/icons/', 'images/icons.png',
 
 ![Icons](images/icons.png)
 
+## Statuses and colors
+
+Many **shinydashboard** components have a `status` or `color` argument.
+
+`status` is a property of some Bootstrap classes. It can have values like `status="primary"`, `status="success"`, and others. The image below shows which colors they usually are associated with:
+
+```{r eval=FALSE, echo=FALSE}
+appshot('_apps/color-status', 'images/statuses.png',
+  delay=1, selector="div.row", expand = c(10,0,0,0)
+) %>%
+  shrink()
+```
+
+![Statuses](images/statuses.png)
+
+
+The `color` argument is more straightforward. It can have values like `color="red"`, `color="black"`, and others. Here are the names and appearances of colors:
+
+```{r eval=FALSE, echo=FALSE}
+appshot('_apps/color-status', 'images/colors.png',
+  delay=1, vwidth=1024, selector="div.row:nth-of-type(2)", expand = c(10,0,0,0)
+) %>%
+  shrink()
+```
+
+![Colors](images/colors.png)
+
+The valid statuses and colors are also listed in `?validStatuses` and `?validColors`.

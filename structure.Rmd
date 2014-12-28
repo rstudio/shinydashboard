@@ -127,7 +127,7 @@ appshot('_apps/menus/', 'images/menu-notifications.png',
 
 ![Notifications menu](images/menu-notifications.png)
 
-A `notificationItem` contained in a notification contains a text notification. You can also control the icon and the status color. The possible statuses are listed in `?validStatuses`.
+A `notificationItem` contained in a notification contains a text notification. You can also control the icon and the status color. The different possible statuses are shown [here](appearance.html#statuses-and-colors).
 
 ```{r eval=FALSE}
 dropdownMenu(type = "notifications",
@@ -345,7 +345,7 @@ appshot('_apps/body-boxes/', 'images/body-boxes-basic.png',
 
 ![Basic boxes](images/body-boxes-basic.png)
 
-Boxes can have titles and header bar colors with the `title` and `status` options. **TODO: link to status**
+Boxes can have titles and header bar colors with the `title` and `status` options. The different possible statuses are shown [here](appearance.html#statuses-and-colors).
 
 ```{r eval=FALSE}
 box(title = "Histogram", status = "primary", plotOutput("plot2", height = 250))
@@ -394,7 +394,8 @@ appshot('_apps/body-boxes/', 'images/body-boxes-header-2.png',
 
 ![Solid header and collapse](images/body-boxes-header-2.png)
 
-Finally, it's also possible to have a solid background, with the `background` option. **TODO: link to colors**
+Finally, it's also possible to have a solid background, with the `background` option. The different possible colors are shown [here](appearance.html#statuses-and-colors).
+
 
 ```{r eval=FALSE}
 box(

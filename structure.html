@@ -161,7 +161,7 @@ dashboardPage(header, sidebar, body)</code></pre>
 <h3>Notification menus</h3>
 <p>This is what a notification menu looks like:</p>
 <p><img src="images/menu-notifications.png" alt="Notifications menu" /></p>
-<p>A <code>notificationItem</code> contained in a notification contains a text notification. You can also control the icon and the status color. The possible statuses are listed in <code>?validStatuses</code>.</p>
+<p>A <code>notificationItem</code> contained in a notification contains a text notification. You can also control the icon and the status color. The different possible statuses are shown <a href="appearance.html#statuses-and-colors">here</a>.</p>
 <pre class="r"><code>dropdownMenu(type = &quot;notifications&quot;,
   notificationItem(
     text = &quot;5 new users today&quot;,
@@ -273,7 +273,7 @@ dashboardBody(
   )
 )</code></pre>
 <p><img src="images/body-boxes-basic.png" alt="Basic boxes" /></p>
-<p>Boxes can have titles and header bar colors with the <code>title</code> and <code>status</code> options. <strong>TODO: link to status</strong></p>
+<p>Boxes can have titles and header bar colors with the <code>title</code> and <code>status</code> options. The different possible statuses are shown <a href="appearance.html#statuses-and-colors">here</a>.</p>
 <pre class="r"><code>box(title = &quot;Histogram&quot;, status = &quot;primary&quot;, plotOutput(&quot;plot2&quot;, height = 250))
 
 box(
@@ -281,7 +281,6 @@ box(
   &quot;Box content here&quot;, br(), &quot;More box content&quot;,
   sliderInput(&quot;slider&quot;, &quot;Slider input:&quot;, 1, 100, 50),
   textInput(&quot;text&quot;, &quot;Text input:&quot;)
-)
 )</code></pre>
 <p><img src="images/body-boxes-header.png" alt="Box header color and title" /></p>
 <p>You can have solid headers with <code>solidHeader=TRUE</code>, and display a button in the upper right that will collapse the box with <code>collapsible=TRUE</code>:</p>
@@ -298,7 +297,7 @@ box(
   textInput(&quot;text&quot;, &quot;Text input:&quot;)
 )</code></pre>
 <p><img src="images/body-boxes-header-2.png" alt="Solid header and collapse" /></p>
-<p>Finally, it’s also possible to have a solid background, with the <code>background</code> option. <strong>TODO: link to colors</strong></p>
+<p>Finally, it’s also possible to have a solid background, with the <code>background</code> option. The different possible colors are shown <a href="appearance.html#statuses-and-colors">here</a>.</p>
 <pre class="r"><code>box(
   title = &quot;Histogram&quot;, background = &quot;maroon&quot;, solidHeader = TRUE,
   plotOutput(&quot;plot4&quot;, height = 250)
