@@ -37,7 +37,6 @@ A dashboard has three parts: a header, a sidebar, and a body. Here's the most mi
 
 ```{r eval=FALSE}
 ## ui.R ##
-library(shiny)
 library(shinydashboard)
 
 dashboardPage(
@@ -48,10 +47,13 @@ dashboardPage(
 ```
 
 
-You can quickly view it at the R console by using the `shinyApp()` function:
+You can quickly view it at the R console by using the `shinyApp()` function. (You can also use this code as a [single-file app](http://shiny.rstudio.com/articles/single-file.html).
 
 ```{r eval=FALSE}
 ## app.R ##
+library(shiny)
+library(shinydashboard)
+
 ui <- dashboardPage(
   dashboardHeader(),
   dashboardSidebar(),
@@ -73,7 +75,116 @@ appshot('_apps/blank_dashboard/', 'images/blank_dashboard.png',
 
 ![Blank dashboard](images/blank_dashboard.png)
 
-Obviously, this dashboard isn't very useful. But before we dive into the parts of a dashboard, we need to take a step back and understand how a Shiny UI works.
+Obviously, this dashboard isn't very useful. We'll need to add components that actually do something. In the body we can add boxes that have content.
+
+```{r eval=FALSE}
+## app.R ##
+library(shinydashboard)
+
+ui <- dashboardPage(
+  dashboardHeader(title = "Basic dashboard"),
+  dashboardSidebar(),
+  dashboardBody(
+    # Boxes need to be put in a row (or column)
+    fluidRow(
+      box(plotOutput("plot1", height = 250)),
+
+      box(
+        title = "Controls",
+        sliderInput("slider", "Number of observations:", 1, 100, 50)
+      )
+    )
+  )
+)
+
+server <- function(input, output) {
+  set.seed(122)
+  histdata <- rnorm(500)
+
+  output$plot1 <- renderPlot({
+    data <- histdata[seq_len(input$slider)]
+    hist(data)
+  })
+}
+
+shinyApp(ui, server)
+```
+
+```{r eval=FALSE, echo=FALSE}
+appshot('_apps/basic/', 'images/basic.png',
+  delay=1, vheight=400
+) %>%
+  resize('75%') %>%
+  shrink()
+```
+
+![Basic dashboard](images/basic.png)
+
+
+Next, we can add content to the sidebar. For this example we'll add menu items that behave like tabs. These function similarly to Shiny's `tabPanel`s: when you click on one menu item, it shows a different set of content in the main body.
+
+```{r eval=FALSE}
+## Sidebar content
+  dashboardSidebar(
+    sidebarMenu(
+      menuItem("Dashboard", tabName = "dashboard", icon = icon("dashboard")),
+      menuItem("Widgets", tabName = "widgets", icon = icon("th"))
+    )
+  )
+```
+
+```{r eval=FALSE}
+## Body content
+  dashboardBody(
+    tabItems(
+      # First tab content
+      tabItem(tabName = "dashboard",
+        fluidRow(
+          box(plotOutput("plot1", height = 250)),
+
+          box(
+            title = "Controls",
+            sliderInput("slider", "Number of observations:", 1, 100, 50)
+          )
+        )
+      ),
+
+      # Second tab content
+      tabItem(tabName = "widgets",
+        h2("Widgets tab content")
+      )
+    )
+  )
+```
+
+```{r eval=FALSE, echo=FALSE}
+appshot('_apps/basic-tabs/', 'images/basic-tabs-1.png',
+  delay=1, vheight=400
+) %>%
+  resize('75%') %>%
+  shrink()
+
+appshot('_apps/basic-tabs/', 'images/basic-tabs-2.png',
+  delay=0.5, vheight=400,
+  eval = "casper.then(function() {
+    this.click('ul.sidebar-menu > li > a[href=\"#shiny-tab-widgets\"]');
+    this.wait(500);
+  });"
+) %>%
+  resize('75%') %>%
+  shrink()
+```
+
+The default display, also shown when the "Dashboard" menu item is clicked:
+
+![Basic dashboard with tabs 1](images/basic-tabs-1.png)
+
+And the display when "Widgets" is clicked:
+
+![Basic dashboard with tabs 2](images/basic-tabs-2.png)
+
+
+That covers the very basics of using **shinydashboard**. Before we dive into an in-depth look at the parts of a dashboard, we need to take a step back and understand how a Shiny UI works.
 
 
 ## Background: Shiny and HTML
