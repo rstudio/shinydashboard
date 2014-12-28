@@ -185,7 +185,7 @@ box <- function(..., title = NULL, footer = NULL, status = NULL,
       tags$button(class = "btn btn-default btn-sm",
         `data-widget` = "collapse", `data-toggle` = "tooltip",
         title = "Collapse",
-        tags$i(class = "fa fa-minus")
+        shiny::icon("minus")
       )
     )
   }
