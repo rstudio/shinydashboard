@@ -669,3 +669,10 @@ shinyApp(ui = ui, server = function(input, output) { })
 ## Tabs
 
 
+<div class="text-center">
+**Next**: learn about customizing the appearance of a dashboard.
+
+<a class="btn btn-success btn-lg" href="appearance.html" role="button">Continue
+<span class="glyphicon glyphicon-arrow-right"></span>
+</a>
+</div>
