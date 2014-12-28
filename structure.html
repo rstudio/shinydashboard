@@ -99,7 +99,6 @@ img {
 </ul></li>
 <li><a href="#body">Body</a><ul>
 <li><a href="#boxes">Boxes</a><ul>
-<li><a href="#kinds-of-boxes">Kinds of boxes</a></li>
 <li><a href="#valuebox">valueBox</a></li>
 </ul></li>
 <li><a href="#layouts">Layouts</a><ul>
@@ -259,14 +258,59 @@ dashboardPage(
 <p>The body of a dashboard page can contain any regular Shiny content. However, if you’re creating a dashboard you’ll likely want to make something that’s more structured. The basic building block of most dashboards is a <code>box</code>. Boxes in turn can contain any content.</p>
 <div id="boxes" class="section level2">
 <h2>Boxes</h2>
-<div id="kinds-of-boxes" class="section level3">
-<h3>Kinds of boxes</h3>
-<ul>
-<li>Standard header</li>
-<li>Solid header</li>
-<li>Solid background</li>
-</ul>
-</div>
+<p>Boxes are the main building blocks of dashboard pages. A basic box can be created with the <code>box()</code> function, and the contents of the box can be (most) any Shiny UI content.</p>
+<p>In a typical dashboard, these boxes would be placed inside a <code>fluidRow()</code> (we’ll see more on dashboard layout later):</p>
+<pre class="r"><code># This is just the body component of a dashboard
+dashboardBody(
+  fluidRow(
+    box(plotOutput(&quot;plot1&quot;))
+    
+    box(
+      &quot;Box content here&quot;, br(), &quot;More box content&quot;,
+      sliderInput(&quot;slider&quot;, &quot;Slider input:&quot;, 1, 100, 50),
+      textInput(&quot;text&quot;, &quot;Text input:&quot;)
+    )
+  )
+)</code></pre>
+<p><img src="images/body-boxes-basic.png" alt="Basic boxes" /></p>
+<p>Boxes can have titles and header bar colors with the <code>title</code> and <code>status</code> options. <strong>TODO: link to status</strong></p>
+<pre class="r"><code>box(title = &quot;Histogram&quot;, status = &quot;primary&quot;, plotOutput(&quot;plot2&quot;, height = 250))
+
+box(
+  title = &quot;Inputs&quot;, status = &quot;warning&quot;,
+  &quot;Box content here&quot;, br(), &quot;More box content&quot;,
+  sliderInput(&quot;slider&quot;, &quot;Slider input:&quot;, 1, 100, 50),
+  textInput(&quot;text&quot;, &quot;Text input:&quot;)
+)
+)</code></pre>
+<p><img src="images/body-boxes-header.png" alt="Box header color and title" /></p>
+<p>You can have solid headers with <code>solidHeader=TRUE</code>, and display a button in the upper right that will collapse the box with <code>collapsible=TRUE</code>:</p>
+<pre class="r"><code>box(
+  title = &quot;Histogram&quot;, status = &quot;primary&quot;, solidHeader = TRUE,
+  collapsible = TRUE,
+  plotOutput(&quot;plot3&quot;, height = 250)
+)
+
+box(
+  title = &quot;Inputs&quot;, status = &quot;warning&quot;, solidHeader = TRUE,
+  &quot;Box content here&quot;, br(), &quot;More box content&quot;,
+  sliderInput(&quot;slider&quot;, &quot;Slider input:&quot;, 1, 100, 50),
+  textInput(&quot;text&quot;, &quot;Text input:&quot;)
+)</code></pre>
+<p><img src="images/body-boxes-header-2.png" alt="Solid header and collapse" /></p>
+<p>Finally, it’s also possible to have a solid background, with the <code>background</code> option. <strong>TODO: link to colors</strong></p>
+<pre class="r"><code>box(
+  title = &quot;Histogram&quot;, background = &quot;maroon&quot;, solidHeader = TRUE,
+  plotOutput(&quot;plot4&quot;, height = 250)
+)
+
+box(
+  title = &quot;Inputs&quot;, background = &quot;black&quot;,
+  &quot;Box content here&quot;, br(), &quot;More box content&quot;,
+  sliderInput(&quot;slider&quot;, &quot;Slider input:&quot;, 1, 100, 50),
+  textInput(&quot;text&quot;, &quot;Text input:&quot;)
+)</code></pre>
+<p><img src="images/body-boxes-header-3.png" alt="Solid background" /></p>
 <div id="valuebox" class="section level3">
 <h3>valueBox</h3>
 </div>

@@ -317,11 +317,108 @@ The body of a dashboard page can contain any regular Shiny content. However, if 
 
 ## Boxes
 
-### Kinds of boxes
+Boxes are the main building blocks of dashboard pages. A basic box can be created with the `box()` function, and the contents of the box can be (most) any Shiny UI content.
 
-* Standard header
-* Solid header
-* Solid background
+In a typical dashboard, these boxes would be placed inside a `fluidRow()` (we'll see more on dashboard layout later):
+
+```{r eval=FALSE}
+# This is just the body component of a dashboard
+dashboardBody(
+  fluidRow(
+    box(plotOutput("plot1"))
+    
+    box(
+      "Box content here", br(), "More box content",
+      sliderInput("slider", "Slider input:", 1, 100, 50),
+      textInput("text", "Text input:")
+    )
+  )
+)
+```
+
+```{r eval=FALSE, echo=FALSE}
+appshot('_apps/body-boxes/', 'images/body-boxes-basic.png',
+  delay=1, selector = 'div.row', expand = c(10,0,0,0)) %>%
+  resize("75%") %>%
+  shrink()
+```
+
+![Basic boxes](images/body-boxes-basic.png)
+
+Boxes can have titles and header bar colors with the `title` and `status` options. **TODO: link to status**
+
+```{r eval=FALSE}
+box(title = "Histogram", status = "primary", plotOutput("plot2", height = 250))
+
+box(
+  title = "Inputs", status = "warning",
+  "Box content here", br(), "More box content",
+  sliderInput("slider", "Slider input:", 1, 100, 50),
+  textInput("text", "Text input:")
+)
+```
+
+```{r eval=FALSE, echo=FALSE}
+appshot('_apps/body-boxes/', 'images/body-boxes-header.png',
+  delay=1, selector = 'div.row:nth-of-type(2)', expand = c(10,0,0,0)) %>%
+  resize("75%") %>%
+  shrink()
+```
+
+![Box header color and title](images/body-boxes-header.png)
+
+
+You can have solid headers with `solidHeader=TRUE`, and display a button in the upper right that will collapse the box with `collapsible=TRUE`:
+
+```{r eval=FALSE}
+box(
+  title = "Histogram", status = "primary", solidHeader = TRUE,
+  collapsible = TRUE,
+  plotOutput("plot3", height = 250)
+)
+
+box(
+  title = "Inputs", status = "warning", solidHeader = TRUE,
+  "Box content here", br(), "More box content",
+  sliderInput("slider", "Slider input:", 1, 100, 50),
+  textInput("text", "Text input:")
+)
+```
+
+```{r eval=FALSE, echo=FALSE}
+appshot('_apps/body-boxes/', 'images/body-boxes-header-2.png',
+  delay=1, selector = 'div.row:nth-of-type(3)', expand = c(10,0,0,0)) %>%
+  resize("75%") %>%
+  shrink()
+```
+
+![Solid header and collapse](images/body-boxes-header-2.png)
+
+Finally, it's also possible to have a solid background, with the `background` option. **TODO: link to colors**
+
+```{r eval=FALSE}
+box(
+  title = "Histogram", background = "maroon", solidHeader = TRUE,
+  plotOutput("plot4", height = 250)
+)
+
+box(
+  title = "Inputs", background = "black",
+  "Box content here", br(), "More box content",
+  sliderInput("slider", "Slider input:", 1, 100, 50),
+  textInput("text", "Text input:")
+)
+```
+
+```{r eval=FALSE, echo=FALSE}
+appshot('_apps/body-boxes/', 'images/body-boxes-header-3.png',
+  delay=1, selector = 'div.row:nth-of-type(4)', expand = c(10,0,0,0)) %>%
+  resize("75%") %>%
+  shrink()
+```
+
+![Solid background](images/body-boxes-header-3.png)
+
 
 ### valueBox
 
