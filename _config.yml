@@ -5,8 +5,8 @@ exclude:
   - "Makefile"
   - "*.Rmd"
   - "*.R"
-  - "tools/"
   - "*.Rproj"
   - "*.sublime-*"
+  - "include/"
   - "template-toc.html"
 
