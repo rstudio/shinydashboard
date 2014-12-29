@@ -8,4 +8,5 @@ exclude:
   - "tools/"
   - "*.Rproj"
   - "*.sublime-*"
+  - "template-toc.html"
 

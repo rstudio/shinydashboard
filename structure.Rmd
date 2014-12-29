@@ -2,8 +2,8 @@
 title: "Shiny Dashboard Structure"
 output:
   html_document:
-    highlight: textmate
     toc: true
+    template: ./template-toc.html
 ---
 
 ```{r echo = FALSE, message=FALSE}

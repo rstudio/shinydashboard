@@ -52,3 +52,54 @@ footer {
   font-size: 0.8em;
   margin-bottom: 100px;
 }
+
+#TOC {
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  width: 200px;
+}
+
+#TOC.affix {
+  top: 15px;
+}
+
+#TOC .nav {
+  padding-left: 0;
+  margin-bottom: 0;
+}
+
+#TOC .nav>li>a {
+  padding: 4px 20px;
+  font-size: 16px;
+  font-weight: 700;
+}
+
+#TOC .nav .nav>li>a {
+  padding-top: 1px;
+  padding-bottom: 1px;
+  padding-left: 30px;
+  font-size: 15px;
+  font-weight: 400;
+}
+
+#TOC .nav .nav .nav>li>a {
+  padding-top: 1px;
+  padding-bottom: 1px;
+  padding-left: 40px;
+  font-size: 14px;
+}
+
+/* All links */
+#TOC .nav>li>a {
+    border-left: 2px solid transparent;
+}
+
+/* Active and hover links */
+#TOC .nav>.active>a,
+#TOC .nav>li>a:hover,
+#TOC .nav>li>a:focus {
+  color: #004461;
+  text-decoration: none;
+  background-color: transparent;
+  border-left: 2px solid #004461;
+}

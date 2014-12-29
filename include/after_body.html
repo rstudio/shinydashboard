@@ -33,5 +33,17 @@ $(document).ready(function () {
 
   $('.title').addClass('hidden');
 
+  // Set up the table of contents
+  var $toc = $('#TOC');
+  if ($toc.length > 0) {
+    $('#TOC').find('ul').addClass('nav');
+
+    var TOCoffset = $('#TOC').offset();
+    TOCoffset.top -= 15;
+    $('#TOC').affix({
+        offset: TOCoffset
+    });
+  }
+
 });
 </script>
