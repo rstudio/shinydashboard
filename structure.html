@@ -94,7 +94,7 @@ img {
 <li><a href="#task-menus">Task menus</a></li>
 </ul></li>
 <li><a href="#sidebar">Sidebar</a><ul>
-<li><a href="#sidebar-menu-items">Sidebar menu items</a></li>
+<li><a href="#sidebar-menu-items-and-tabs">Sidebar menu items and tabs</a></li>
 <li><a href="#inputs-in-the-sidebar">Inputs in the sidebar</a></li>
 </ul></li>
 <li><a href="#body">Body</a><ul>
@@ -106,7 +106,6 @@ img {
 <li><a href="#column-based-layout">Column-based layout</a></li>
 <li><a href="#mixed-row-and-column-layout">Mixed row and column layout</a></li>
 </ul></li>
-<li><a href="#tabs">Tabs</a></li>
 </ul></li>
 </ul>
 </div>
@@ -204,8 +203,8 @@ dashboardPage(header, sidebar, body)</code></pre>
 <h2>Sidebar</h2>
 <p>A sidebar is typically used for quick navigation. It can contain menu items that behave like tabs in a <code>tabPanel</code>, as well as Shiny inputs, like sliders and text inputs.</p>
 <p><img src="images/sidebar.png" alt="Sidebar" /></p>
-<div id="sidebar-menu-items" class="section level3">
-<h3>Sidebar menu items</h3>
+<div id="sidebar-menu-items-and-tabs" class="section level3">
+<h3>Sidebar menu items and tabs</h3>
 <p>Links in the sidebar can be used like <code>tabPanel</code>s from Shiny. That is, when you click on a link, it will display different content in the body of the dashboard. Here is an example of a simple tabPanel:</p>
 <p><img src="images/sidebar-tabs.png" alt="Tabs" /></p>
 <p>When the user clicks on one of the menu items, it switches content in the main body:</p>
@@ -312,6 +311,49 @@ box(
 <p><img src="images/body-boxes-header-3.png" alt="Solid background" /></p>
 <div id="valuebox" class="section level3">
 <h3>valueBox</h3>
+<p>There is a special kind of box that is used for displaying simple numeric or text values, with an icon. Here are some examples:</p>
+<p><img src="images/body-valueboxes.png" alt="Value boxes" /></p>
+<p>The code to generate these <code>valueBox</code>es is below. Since the content of a <code>valueBox</code> will usually be dynamic, the examples below show a few different ways to include dynamic values in a <code>valueBox</code>. The different possible colors are shown <a href="appearance.html#statuses-and-colors">here</a>.</p>
+<pre class="r"><code>library(shinydashboard)
+
+ui &lt;- dashboardPage(
+  dashboardHeader(title = &quot;Value boxes&quot;),
+  dashboardSidebar(),
+  dashboardBody(
+    fluidRow(
+      valueBox(
+        # The value comes from the server via uiOutput
+        uiOutput(&quot;orderNum&quot;), &quot;New Orders&quot;, icon = icon(&quot;credit-card&quot;)
+      ),
+
+      valueBox(
+        # The icon can also be a uiOutput
+        uiOutput(&quot;progress&quot;), &quot;Progress&quot;, icon = uiOutput(&quot;progressIcon&quot;),
+        color = &quot;purple&quot;
+      ),
+
+      # An entire box can be in a uiOutput
+      uiOutput(&quot;approvalBox&quot;)
+    )
+  )
+)
+
+server &lt;- function(input, output) {
+  output$orderNum &lt;- renderText({ 10*2 })
+
+  output$progress &lt;- renderText({ &quot;75%&quot; })
+
+  output$progressIcon &lt;- renderUI({ icon(&quot;list&quot;) })
+
+  output$approvalBox &lt;- renderUI({
+    valueBox(
+      &quot;80%&quot;, &quot;Approval&quot;, icon = icon(&quot;thumbs-up&quot;, lib = &quot;glyphicon&quot;),
+      color = &quot;yellow&quot;
+    )
+  })
+}
+
+shinyApp(ui, server)</code></pre>
 </div>
 </div>
 <div id="layouts" class="section level2">
@@ -498,13 +540,10 @@ ui &lt;- dashboardPage(
 
 # Preview the UI in the console
 shinyApp(ui = ui, server = function(input, output) { })</code></pre>
-</div>
-</div>
-<div id="tabs" class="section level2">
-<h2>Tabs</h2>
 <div class="text-center">
 <p><strong>Next</strong>: learn about customizing the appearance of a dashboard.</p>
 <a class="btn btn-success btn-lg" href="appearance.html" role="button">Continue <span class="glyphicon glyphicon-arrow-right"></span> </a>
+</div>
 </div>
 </div>
 </div>
