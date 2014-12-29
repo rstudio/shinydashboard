@@ -19,23 +19,31 @@
 <script src="libs/bootstrap-3.3.1/shim/html5shiv.min.js"></script>
 <script src="libs/bootstrap-3.3.1/shim/respond.min.js"></script>
 
+
 <style type="text/css">code{white-space: pre;}</style>
-<link rel="stylesheet"
-      href="libs/highlight/textmate.css"
-      type="text/css" />
-<script src="libs/highlight/highlight.js"></script>
+<style type="text/css">
+table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
+  margin: 0; padding: 0; vertical-align: baseline; border: none; }
+table.sourceCode { width: 100%; line-height: 100%; }
+td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; background-color: #dddddd; }
+td.sourceCode { padding-left: 5px; }
+code > span.kw { font-weight: bold; }
+code > span.dt { color: #800000; }
+code > span.dv { color: #0000ff; }
+code > span.bn { color: #0000ff; }
+code > span.fl { color: #800080; }
+code > span.ch { color: #ff00ff; }
+code > span.st { color: #dd0000; }
+code > span.co { color: #808080; font-style: italic; }
+code > span.al { color: #00ff00; font-weight: bold; }
+code > span.fu { color: #000080; }
+code > span.er { color: #ff0000; font-weight: bold; }
+</style>
 <style type="text/css">
   pre:not([class]) {
     background-color: white;
   }
 </style>
-<script type="text/javascript">
-if (window.hljs && document.readyState && document.readyState === "complete") {
-   window.setTimeout(function() {
-      hljs.initHighlighting();
-   }, 0);
-}
-</script>
 
 
 <link rel="stylesheet" href="custom.css" type="text/css" />
@@ -53,10 +61,6 @@ if (window.hljs && document.readyState && document.readyState === "complete") {
 code {
   color: inherit;
   background-color: rgba(0, 0, 0, 0.04);
-}
-img { 
-  max-width:100%; 
-  height: auto; 
 }
 </style>
 <div class="container-fluid main-container">
@@ -86,6 +90,8 @@ img {
 <h1 class="title">Customizing dashboard appearance</h1>
 </div>
 
+<div class="row">
+<div class="col-sm-3">
 <div id="TOC">
 <ul>
 <li><a href="#skins">Skins</a></li>
@@ -94,6 +100,8 @@ img {
 <li><a href="#statuses-and-colors">Statuses and colors</a></li>
 </ul>
 </div>
+</div>
+<div class="col-sm-9 pull-right">
 
 <div id="skins" class="section level2">
 <h2>Skins</h2>
@@ -108,18 +116,18 @@ img {
 <p>You can add custom CSS to your app by creating a <code>www/</code> subdirectory to your app and adding a CSS file there. Suppose, for example, you want to change the title font of your dashboard to one with serifs, so that it looks like this:</p>
 <p><img src="images/css-logo-font.png" alt="Custom font" /></p>
 <p>To do this, first create a file named <code>www/custom.css</code> with the following:</p>
-<pre class="r"><code>.header a.logo {
-  font-family: Georgia, &quot;Times New Roman&quot;, Times, serif;
-  font-weight: bold;
+<pre class="sourceCode r"><code class="sourceCode r">.header a.logo {
+  font-family:<span class="st"> </span>Georgia, <span class="st">&quot;Times New Roman&quot;</span>, Times, serif;
+  font-weight:<span class="st"> </span>bold;
 }</code></pre>
 <p>Then refer to that CSS file from the UI of your app:</p>
-<pre class="r"><code>## ui.R ##
-dashboardPage(
-  dashboardHeader(title = &quot;Custom font&quot;),
-  dashboardSidebar(),
-  dashboardBody(
-    tags$head(
-      tags$link(rel = &quot;stylesheet&quot;, type = &quot;text/css&quot;, href = &quot;custom.css&quot;)
+<pre class="sourceCode r"><code class="sourceCode r">## ui.R ##
+<span class="kw">dashboardPage</span>(
+  <span class="kw">dashboardHeader</span>(<span class="dt">title =</span> <span class="st">&quot;Custom font&quot;</span>),
+  <span class="kw">dashboardSidebar</span>(),
+  <span class="kw">dashboardBody</span>(
+    tags$<span class="kw">head</span>(
+      tags$<span class="kw">link</span>(<span class="dt">rel =</span> <span class="st">&quot;stylesheet&quot;</span>, <span class="dt">type =</span> <span class="st">&quot;text/css&quot;</span>, <span class="dt">href =</span> <span class="st">&quot;custom.css&quot;</span>)
     )
   )
 )</code></pre>
@@ -129,17 +137,17 @@ dashboardPage(
 <h2>Icons</h2>
 <p>Icons are used liberally in shinydashboard. The icons used in Shiny and shinydashboard are really just characters from special font sets, and they’re created with Shiny’s <code>icon()</code> function.</p>
 <p>To create a calendar icon, you’d call:</p>
-<pre class="r"><code>icon(&quot;calendar&quot;)</code></pre>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">icon</span>(<span class="st">&quot;calendar&quot;</span>)</code></pre>
 <p>This simply generates HTML like this, which the browser knows what to do with:</p>
-<pre class="HTML"><code>&lt;i class=&quot;fa fa-calendar&quot;&gt;&lt;/i&gt;</code></pre>
+<pre class="sourceCode HTML"><code class="sourceCode html"><span class="kw">&lt;i</span><span class="ot"> class=</span><span class="st">&quot;fa fa-calendar&quot;</span><span class="kw">&gt;&lt;/i&gt;</span></code></pre>
 <p>The icons are from Font-Awesome and Glyphicons. You can see lists of all available icons here:</p>
 <ul>
 <li><a href="http://fontawesome.io/icons/">http://fontawesome.io/icons/</a></li>
 <li><a href="http://getbootstrap.com/components/#glyphicons">http://getbootstrap.com/components/#glyphicons</a></li>
 </ul>
 <p>By default, the <code>icon()</code> function uses icons from Font-Awesome. To use Glyphicons, use <code>lib=&quot;glyphicon&quot;</code>)</p>
-<pre class="r"><code>&quot;Calendar from Font-Awesome:&quot;, icon(&quot;calendar&quot;),
-&quot;Cog from Glyphicons:&quot;, icon(&quot;cog&quot;, lib = &quot;glyphicon&quot;)</code></pre>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="st">&quot;Calendar from Font-Awesome:&quot;</span>, <span class="kw">icon</span>(<span class="st">&quot;calendar&quot;</span>),
+<span class="st">&quot;Cog from Glyphicons:&quot;</span>, <span class="kw">icon</span>(<span class="st">&quot;cog&quot;</span>, <span class="dt">lib =</span> <span class="st">&quot;glyphicon&quot;</span>)</code></pre>
 <p><img src="images/icons.png" alt="Icons" /></p>
 </div>
 <div id="statuses-and-colors" class="section level2">
@@ -150,6 +158,9 @@ dashboardPage(
 <p>The <code>color</code> argument is more straightforward. It can have values like <code>color=&quot;red&quot;</code>, <code>color=&quot;black&quot;</code>, and others. Here are the names and appearances of colors:</p>
 <p><img src="images/colors.png" alt="Colors" /></p>
 <p>The valid statuses and colors are also listed in <code>?validStatuses</code> and <code>?validColors</code>.</p>
+</div>
+
+</div>
 </div>
 
 </div> <!-- page-body -->
@@ -186,6 +197,18 @@ $(document).ready(function () {
   }
 
   $('.title').addClass('hidden');
+
+  // Set up the table of contents
+  var $toc = $('#TOC');
+  if ($toc.length > 0) {
+    $('#TOC').find('ul').addClass('nav');
+
+    var TOCoffset = $('#TOC').offset();
+    TOCoffset.top -= 15;
+    $('#TOC').affix({
+        offset: TOCoffset
+    });
+  }
 
 });
 </script>
