@@ -116,11 +116,11 @@ code {
 <p>You can add custom CSS to your app by creating a <code>www/</code> subdirectory to your app and adding a CSS file there. Suppose, for example, you want to change the title font of your dashboard to the same font as the rest of the dashboard, so that it looks like this:</p>
 <p><img src="images/css-logo-font.png" alt="Custom font" /></p>
 <p>To do this, first create a file named <code>www/custom.css</code> with the following:</p>
-<pre class="sourceCode r"><code class="sourceCode r">.header a.logo {
-  font-family:<span class="st"> &quot;Helvetica Neue&quot;</span>,Helvetica,Arial,sans-serif;
-  font-weight:<span class="st"> </span>bold;
-  font-size:<span class="st"> </span>24px;
-}</code></pre>
+<pre class="sourceCode css"><code class="sourceCode css"><span class="fl">.header</span> a<span class="fl">.logo</span> <span class="kw">{</span>
+  <span class="kw">font-family:</span> <span class="st">&quot;Helvetica Neue&quot;</span>,Helvetica,Arial,<span class="dt">sans-serif</span><span class="kw">;</span>
+  <span class="kw">font-weight:</span> <span class="dt">bold</span><span class="kw">;</span>
+  <span class="kw">font-size:</span> <span class="dt">24px</span><span class="kw">;</span>
+<span class="kw">}</span></code></pre>
 <p>Then refer to that CSS file from the UI of your app:</p>
 <pre class="sourceCode r"><code class="sourceCode r">## ui.R ##
 <span class="kw">dashboardPage</span>(
@@ -130,6 +130,21 @@ code {
     tags$<span class="kw">head</span>(
       tags$<span class="kw">link</span>(<span class="dt">rel =</span> <span class="st">&quot;stylesheet&quot;</span>, <span class="dt">type =</span> <span class="st">&quot;text/css&quot;</span>, <span class="dt">href =</span> <span class="st">&quot;custom.css&quot;</span>)
     )
+  )
+)</code></pre>
+<p>A second way to include CSS is to put it directly in the UI code for your app:</p>
+<pre class="sourceCode r"><code class="sourceCode r">## ui.R ##
+<span class="kw">dashboardPage</span>(
+  <span class="kw">dashboardHeader</span>(<span class="dt">title =</span> <span class="st">&quot;Custom font&quot;</span>),
+  <span class="kw">dashboardSidebar</span>(),
+  <span class="kw">dashboardBody</span>(
+    tags$<span class="kw">head</span>(tags$<span class="kw">style</span>(<span class="kw">HTML</span>(<span class="st">&#39;</span>
+<span class="st">      .header a.logo {</span>
+<span class="st">        font-family: &quot;Helvetica Neue&quot;,Helvetica,Arial,sans-serif;</span>
+<span class="st">        font-weight: bold;</span>
+<span class="st">        font-size: 24px;</span>
+<span class="st">      }</span>
+<span class="st">    &#39;</span>)))
   )
 )</code></pre>
 <p>There other ways to add custom CSS to a Shiny application. See Shiny’s <a href="http://shiny.rstudio.com/articles/css.html">CSS article</a> for more information.</p>

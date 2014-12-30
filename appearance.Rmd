@@ -66,7 +66,7 @@ appshot('_apps/css-logo-font/', 'images/css-logo-font.png',
 
 To do this, first create a file named `www/custom.css` with the following:
 
-```{r eval=FALSE}
+```css
 .header a.logo {
   font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
   font-weight: bold;
@@ -86,6 +86,26 @@ dashboardPage(
     tags$head(
       tags$link(rel = "stylesheet", type = "text/css", href = "custom.css")
     )
+  )
+)
+```
+
+
+A second way to include CSS is to put it directly in the UI code for your app:
+
+```{r eval=FALSE}
+## ui.R ##
+dashboardPage(
+  dashboardHeader(title = "Custom font"),
+  dashboardSidebar(),
+  dashboardBody(
+    tags$head(tags$style(HTML('
+      .header a.logo {
+        font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+        font-weight: bold;
+        font-size: 24px;
+      }
+    ')))
   )
 )
 ```
