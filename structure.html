@@ -106,6 +106,7 @@ code {
 <li><a href="#sidebar">Sidebar</a><ul>
 <li><a href="#sidebar-menu-items-and-tabs">Sidebar menu items and tabs</a></li>
 <li><a href="#inputs-in-the-sidebar">Inputs in the sidebar</a></li>
+<li><a href="#disabling-the-sidebar">Disabling the sidebar</a></li>
 </ul></li>
 <li><a href="#body">Body</a><ul>
 <li><a href="#boxes">Boxes</a><ul>
@@ -315,6 +316,11 @@ body &lt;-<span class="st"> </span><span class="kw">dashboardBody</span>(
 <pre class="sourceCode r"><code class="sourceCode r">  <span class="kw">sidebarSearchForm</span>(<span class="dt">textId =</span> <span class="st">&quot;searchText&quot;</span>, <span class="dt">buttonId =</span> <span class="st">&quot;searchButton&quot;</span>,
                     <span class="dt">label =</span> <span class="st">&quot;Search...&quot;</span>)</code></pre>
 <p>For this search form, the corresponding values in the server-side code would be <code>input$searchText</code> and <code>input$searchBotton</code>.</p>
+</div>
+<div id="disabling-the-sidebar" class="section level2">
+<h2>Disabling the sidebar</h2>
+<p>If you don’t want a sidebar, you can disable it with:</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">dashboardSidebar</span>(<span class="dt">disable =</span> <span class="ot">TRUE</span>)</code></pre>
 </div>
 </div>
 <div id="body" class="section level1">

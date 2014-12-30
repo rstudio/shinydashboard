@@ -367,6 +367,15 @@ appshot('_apps/sidebar-inputs/', 'images/sidebar-inputs.png',
 For this search form, the corresponding values in the server-side code would be `input$searchText` and `input$searchBotton`.
 
 
+## Disabling the sidebar
+
+If you don't want a sidebar, you can disable it with:
+
+```{r eval=FALSE}
+dashboardSidebar(disable = TRUE)
+```
+
+
 # Body
 
 The body of a dashboard page can contain any regular Shiny content. However, if you're creating a dashboard you'll likely want to make something that's more structured. The basic building block of most dashboards is a `box`. Boxes in turn can contain any content.
