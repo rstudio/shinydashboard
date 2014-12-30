@@ -7,3 +7,5 @@ Shiny Dashboard
 ```R
 devtools::install_github("rstudio/shinydashboard")
 ```
+
+See the documentation at http://rstudio.github.io/shinydashboard/
