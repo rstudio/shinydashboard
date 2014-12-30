@@ -3,10 +3,12 @@
 \alias{dashboardSidebar}
 \title{Create a dashboard sidebar.}
 \usage{
-dashboardSidebar(...)
+dashboardSidebar(..., disable = FALSE)
 }
 \arguments{
 \item{...}{Items to put in the sidebar.}
+
+\item{disable}{If \code{TRUE}, the sidebar will be disabled.}
 }
 \description{
 A dashboard sidebar typically contains a \code{\link{sidebarMenu}}, although

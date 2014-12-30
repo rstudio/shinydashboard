@@ -4,6 +4,7 @@
 #' it may also contain a \code{\link{sidebarSearchForm}}, or other Shiny inputs.
 #'
 #' @param ... Items to put in the sidebar.
+#' @param disable If \code{TRUE}, the sidebar will be disabled.
 #'
 #' @seealso \code{\link{sidebarMenu}}
 #'
@@ -48,8 +49,10 @@
 #' )
 #' }
 #' @export
-dashboardSidebar <- function(...) {
-  tags$section(class = "sidebar",
+dashboardSidebar <- function(..., disable = FALSE) {
+  tags$section(
+    class = "sidebar",
+    `data-disable` = if(disable) 1 else NULL,
     list(...)
   )
 }

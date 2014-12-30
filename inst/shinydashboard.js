@@ -32,6 +32,12 @@ $(function() {
     }
   };
 
-  $(document).ready(ensureActivatedTab);
+  ensureActivatedTab();
 
+  // Optionally disable sidebar
+  if ($("section.sidebar").data("disable")) {
+    $(".left-side").addClass("collapse-left");
+    $(".right-side").addClass("strech");
+    $(".navbar > .sidebar-toggle").hide();
+  }
 });
