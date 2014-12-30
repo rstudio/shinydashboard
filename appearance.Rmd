@@ -19,6 +19,8 @@ knit_print.shiny.tag <- function(x, ...) {
 }
 ```
 
+**shinydashboard** is built on top of the [AdminLTE](https://github.com/almasaeed2010/AdminLTE), which in turn uses [Bootstrap 3](http://getbootstrap.com/).
+
 ## Skins
 
 There are two color themes, or skins: blue and black. The default is blue. You can choose which theme to use with `shinyDashboard(skin="blue")` or `shinyDashboard(skin="black")`.
