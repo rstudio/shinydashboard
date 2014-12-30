@@ -3,12 +3,14 @@
 \alias{dashboardHeader}
 \title{Create a header for a dashboard page}
 \usage{
-dashboardHeader(..., title = NULL)
+dashboardHeader(..., title = NULL, disable = FALSE)
 }
 \arguments{
 \item{...}{Items to put in the header. Should be \code{\link{dropdownMenu}}s..}
 
 \item{title}{An optional title for the dashboard.}
+
+\item{disable}{If \code{TRUE}, don't display the header bar.}
 }
 \description{
 A dashboard header can be left blank, or it can include dropdown menu items

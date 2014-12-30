@@ -4,6 +4,7 @@
 #' on the right side.
 #'
 #' @param title An optional title for the dashboard.
+#' @param disable If \code{TRUE}, don't display the header bar.
 #' @param ... Items to put in the header. Should be \code{\link{dropdownMenu}}s..
 #'
 #' @seealso \code{\link{dropdownMenu}}
@@ -75,11 +76,12 @@
 #' )
 #' }
 #' @export
-dashboardHeader <- function(..., title = NULL) {
+dashboardHeader <- function(..., title = NULL, disable = FALSE) {
   items <- list(...)
   lapply(items, tagAssert, type = "li", class = "dropdown")
 
   tags$header(class = "header",
+    style = if (disable) "display: none;",
     a(href = "#", class = "logo", title),
     tags$nav(class = "navbar navbar-static-top", role = "navigation",
       # Sidebar toggle button
