@@ -460,6 +460,33 @@ appshot('_apps/body-boxes/', 'images/body-boxes-header-2.png',
 
 ![Solid header and collapse](images/body-boxes-header-2.png)
 
+If you want the boxes to not have a gray or colored bar on top, use `solidHeader=TRUE` and don't give a value for `status`:
+
+```{r eval=FALSE}
+box(
+  title = "Histogram", solidHeader = TRUE,
+  collapsible = TRUE,
+  plotOutput("plot3", height = 250)
+)
+
+box(
+  title = "Inputs", solidHeader = TRUE,
+  "Box content here", br(), "More box content",
+  sliderInput("slider", "Slider input:", 1, 100, 50),
+  textInput("text", "Text input:")
+)
+```
+
+```{r eval=FALSE, echo=FALSE}
+appshot('_apps/body-boxes/', 'images/body-boxes-header-3.png',
+  delay=1, selector = 'div.row:nth-of-type(4)', expand = c(10,0,0,0)) %>%
+  resize("75%") %>%
+  shrink()
+```
+
+![No colored bar](images/body-boxes-header-3.png)
+
+
 Finally, it's also possible to have a solid background, with the `background` option. The different possible colors are shown [here](appearance.html#statuses-and-colors).
 
 
@@ -478,13 +505,13 @@ box(
 ```
 
 ```{r eval=FALSE, echo=FALSE}
-appshot('_apps/body-boxes/', 'images/body-boxes-header-3.png',
-  delay=1, selector = 'div.row:nth-of-type(4)', expand = c(10,0,0,0)) %>%
+appshot('_apps/body-boxes/', 'images/body-boxes-header-4.png',
+  delay=1, selector = 'div.row:nth-of-type(5)', expand = c(10,0,0,0)) %>%
   resize("75%") %>%
   shrink()
 ```
 
-![Solid background](images/body-boxes-header-3.png)
+![Solid background](images/body-boxes-header-4.png)
 
 
 ### valueBox

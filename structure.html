@@ -367,6 +367,20 @@ body &lt;-<span class="st"> </span><span class="kw">dashboardBody</span>(
   <span class="kw">textInput</span>(<span class="st">&quot;text&quot;</span>, <span class="st">&quot;Text input:&quot;</span>)
 )</code></pre>
 <p><img src="images/body-boxes-header-2.png" alt="Solid header and collapse" /></p>
+<p>If you want the boxes to not have a gray or colored bar on top, use <code>solidHeader=TRUE</code> and don’t give a value for <code>status</code>:</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">box</span>(
+  <span class="dt">title =</span> <span class="st">&quot;Histogram&quot;</span>, <span class="dt">solidHeader =</span> <span class="ot">TRUE</span>,
+  <span class="dt">collapsible =</span> <span class="ot">TRUE</span>,
+  <span class="kw">plotOutput</span>(<span class="st">&quot;plot3&quot;</span>, <span class="dt">height =</span> <span class="dv">250</span>)
+)
+
+<span class="kw">box</span>(
+  <span class="dt">title =</span> <span class="st">&quot;Inputs&quot;</span>, <span class="dt">solidHeader =</span> <span class="ot">TRUE</span>,
+  <span class="st">&quot;Box content here&quot;</span>, <span class="kw">br</span>(), <span class="st">&quot;More box content&quot;</span>,
+  <span class="kw">sliderInput</span>(<span class="st">&quot;slider&quot;</span>, <span class="st">&quot;Slider input:&quot;</span>, <span class="dv">1</span>, <span class="dv">100</span>, <span class="dv">50</span>),
+  <span class="kw">textInput</span>(<span class="st">&quot;text&quot;</span>, <span class="st">&quot;Text input:&quot;</span>)
+)</code></pre>
+<p><img src="images/body-boxes-header-3.png" alt="No colored bar" /></p>
 <p>Finally, it’s also possible to have a solid background, with the <code>background</code> option. The different possible colors are shown <a href="appearance.html#statuses-and-colors">here</a>.</p>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="kw">box</span>(
   <span class="dt">title =</span> <span class="st">&quot;Histogram&quot;</span>, <span class="dt">background =</span> <span class="st">&quot;maroon&quot;</span>, <span class="dt">solidHeader =</span> <span class="ot">TRUE</span>,
@@ -379,7 +393,7 @@ body &lt;-<span class="st"> </span><span class="kw">dashboardBody</span>(
   <span class="kw">sliderInput</span>(<span class="st">&quot;slider&quot;</span>, <span class="st">&quot;Slider input:&quot;</span>, <span class="dv">1</span>, <span class="dv">100</span>, <span class="dv">50</span>),
   <span class="kw">textInput</span>(<span class="st">&quot;text&quot;</span>, <span class="st">&quot;Text input:&quot;</span>)
 )</code></pre>
-<p><img src="images/body-boxes-header-3.png" alt="Solid background" /></p>
+<p><img src="images/body-boxes-header-4.png" alt="Solid background" /></p>
 <div id="valuebox" class="section level3">
 <h3>valueBox</h3>
 <p>There is a special kind of box that is used for displaying simple numeric or text values, with an icon. Here are some examples:</p>

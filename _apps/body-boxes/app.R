@@ -39,11 +39,27 @@ body <- dashboardBody(
     )
   ),
 
+  # Solid header, no color
+  fluidRow(
+    box(
+      title = "Histogram", solidHeader = TRUE,
+      collapsible = TRUE,
+      plotOutput("plot4", height = 250)
+    ),
+
+    box(
+      title = "Inputs", solidHeader = TRUE,
+      "Box content here", br(), "More box content",
+      sliderInput("slider", "Slider input:", 1, 100, 50),
+      textInput("text", "Text input:")
+    )
+  ),
+
   # Solid background, collapsible
   fluidRow(
     box(
       title = "Histogram", background = "maroon", solidHeader = TRUE,
-      plotOutput("plot4", height = 250)
+      plotOutput("plot5", height = 250)
     ),
 
     box(
@@ -79,6 +95,10 @@ server <- function(input, output) {
   })
 
   output$plot4 <- renderPlot({
+    hist(histdata)
+  })
+
+  output$plot5 <- renderPlot({
     hist(histdata)
   })
 }
