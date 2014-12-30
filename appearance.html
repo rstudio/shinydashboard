@@ -113,12 +113,13 @@ code {
 </div>
 <div id="css" class="section level2">
 <h2>CSS</h2>
-<p>You can add custom CSS to your app by creating a <code>www/</code> subdirectory to your app and adding a CSS file there. Suppose, for example, you want to change the title font of your dashboard to one with serifs, so that it looks like this:</p>
+<p>You can add custom CSS to your app by creating a <code>www/</code> subdirectory to your app and adding a CSS file there. Suppose, for example, you want to change the title font of your dashboard to the same font as the rest of the dashboard, so that it looks like this:</p>
 <p><img src="images/css-logo-font.png" alt="Custom font" /></p>
 <p>To do this, first create a file named <code>www/custom.css</code> with the following:</p>
 <pre class="sourceCode r"><code class="sourceCode r">.header a.logo {
-  font-family:<span class="st"> </span>Georgia, <span class="st">&quot;Times New Roman&quot;</span>, Times, serif;
+  font-family:<span class="st"> &quot;Helvetica Neue&quot;</span>,Helvetica,Arial,sans-serif;
   font-weight:<span class="st"> </span>bold;
+  font-size:<span class="st"> </span>24px;
 }</code></pre>
 <p>Then refer to that CSS file from the UI of your app:</p>
 <pre class="sourceCode r"><code class="sourceCode r">## ui.R ##

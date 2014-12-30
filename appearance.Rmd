@@ -51,7 +51,7 @@ appshot('_apps/dashboard/', 'images/skin-black.png',
 
 ## CSS
 
-You can add custom CSS to your app by creating a `www/` subdirectory to your app and adding a CSS file there. Suppose, for example, you want to change the title font of your dashboard to one with serifs, so that it looks like this:
+You can add custom CSS to your app by creating a `www/` subdirectory to your app and adding a CSS file there. Suppose, for example, you want to change the title font of your dashboard to the same font as the rest of the dashboard, so that it looks like this:
 
 
 ```{r eval=FALSE, echo=FALSE}
@@ -68,9 +68,11 @@ To do this, first create a file named `www/custom.css` with the following:
 
 ```{r eval=FALSE}
 .header a.logo {
-  font-family: Georgia, "Times New Roman", Times, serif;
+  font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
   font-weight: bold;
+  font-size: 24px;
 }
+
 ```
 
 Then refer to that CSS file from the UI of your app:
