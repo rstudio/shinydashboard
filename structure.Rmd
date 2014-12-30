@@ -244,6 +244,14 @@ dropdownMenu(type = "tasks", badgeStatus = "success",
 )
 ```
 
+## Disabling the header
+
+If you don't want to show a header bar, you can disable it with:
+
+```{r eval=FALSE}
+dashboardHeader(disable = TRUE)
+```
+
 
 # Sidebar
 
