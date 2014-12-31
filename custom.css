@@ -13,7 +13,7 @@
 
 img {
   max-width: 100%;
-  box-shadow: 5px 5px 20px 0px rgba(0,0,0,0.3);
+  box-shadow: 1px 2px 20px 0px rgba(0,0,0,0.25);
   border: 1px solid #ccc;
   display: block;
   margin-left: auto;
@@ -44,7 +44,9 @@ p > code, li > code {
 }
 
 pre {
-  margin: 0px 20px 10px 20px
+  border: 1px solid #eee;
+  background-color: #fafafa;
+  margin: 1em 0em 1em 0em;
 }
 
 footer {
@@ -53,23 +55,23 @@ footer {
   margin-bottom: 100px;
 }
 
-#TOC {
-  border: 1px solid #ccc;
-  border-radius: 4px;
-  width: 200px;
-}
-
 #TOC.affix {
-  top: 15px;
+  position: static;
 }
 
-#TOC .nav {
-  padding-left: 0;
-  margin-bottom: 0;
+@media screen and (min-width: 768px) {
+  #TOC.affix {
+    width: 200px;
+    position: fixed;
+    top: 15px;
+  }
+  #TOC.affix-bottom {
+    position: absolute;
+  }
 }
 
 #TOC .nav>li>a {
-  padding: 4px 20px;
+  padding: 4px 5px;
   font-size: 16px;
   font-weight: 700;
 }
@@ -77,7 +79,7 @@ footer {
 #TOC .nav .nav>li>a {
   padding-top: 1px;
   padding-bottom: 1px;
-  padding-left: 30px;
+  padding-left: 15px;
   font-size: 15px;
   font-weight: 400;
 }
@@ -85,7 +87,7 @@ footer {
 #TOC .nav .nav .nav>li>a {
   padding-top: 1px;
   padding-bottom: 1px;
-  padding-left: 40px;
+  padding-left: 25px;
   font-size: 14px;
 }
 
