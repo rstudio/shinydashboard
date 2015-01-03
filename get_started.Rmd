@@ -47,7 +47,7 @@ dashboardPage(
 ```
 
 
-You can quickly view it at the R console by using the `shinyApp()` function. (You can also use this code as a [single-file app](http://shiny.rstudio.com/articles/single-file.html).
+You can quickly view it at the R console by using the `shinyApp()` function. (You can also use this code as a [single-file app](http://shiny.rstudio.com/articles/single-file.html)).
 
 ```{r eval=FALSE}
 ## app.R ##
