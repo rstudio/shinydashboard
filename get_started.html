@@ -155,6 +155,7 @@ server &lt;- function(input, output) {
 shinyApp(ui, server)</code></pre>
 <p><img src="images/basic.png" alt="Basic dashboard" /></p>
 <p>Next, we can add content to the sidebar. For this example we’ll add menu items that behave like tabs. These function similarly to Shiny’s <code>tabPanel</code>s: when you click on one menu item, it shows a different set of content in the main body.</p>
+<p>There are two parts that need to be done. First, you need to add <code>menuItem</code>s to the sidebar, with appropriate <code>tabName</code>s.</p>
 <pre class="r"><code>## Sidebar content
   dashboardSidebar(
     sidebarMenu(
@@ -162,6 +163,7 @@ shinyApp(ui, server)</code></pre>
       menuItem(&quot;Widgets&quot;, tabName = &quot;widgets&quot;, icon = icon(&quot;th&quot;))
     )
   )</code></pre>
+<p>In the body, add <code>tabItem</code>s with corrsponding values for <code>tabName</code>.</p>
 <pre class="r"><code>## Body content
   dashboardBody(
     tabItems(

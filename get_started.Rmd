@@ -123,6 +123,8 @@ appshot('_apps/basic/', 'images/basic.png',
 
 Next, we can add content to the sidebar. For this example we'll add menu items that behave like tabs. These function similarly to Shiny's `tabPanel`s: when you click on one menu item, it shows a different set of content in the main body.
 
+There are two parts that need to be done. First, you need to add `menuItem`s to the sidebar, with appropriate `tabName`s.
+
 ```{r eval=FALSE}
 ## Sidebar content
   dashboardSidebar(
@@ -132,6 +134,8 @@ Next, we can add content to the sidebar. For this example we'll add menu items t
     )
   )
 ```
+
+In the body, add `tabItem`s with corrsponding values for `tabName`:
 
 ```{r eval=FALSE}
 ## Body content
