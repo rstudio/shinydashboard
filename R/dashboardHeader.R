@@ -5,7 +5,10 @@
 #'
 #' @param title An optional title for the dashboard.
 #' @param disable If \code{TRUE}, don't display the header bar.
-#' @param ... Items to put in the header. Should be \code{\link{dropdownMenu}}s..
+#' @param ... Items to put in the header. Should be \code{\link{dropdownMenu}}s.
+#' @param .list An optional list containing items to put in the header. Same as
+#'   the \code{...} arguments, but in list format. This can be useful when
+#'   working with programmatically generated items.
 #'
 #' @seealso \code{\link{dropdownMenu}}
 #'
@@ -76,8 +79,8 @@
 #' )
 #' }
 #' @export
-dashboardHeader <- function(..., title = NULL, disable = FALSE) {
-  items <- list(...)
+dashboardHeader <- function(..., title = NULL, disable = FALSE, .list = NULL) {
+  items <- c(list(...), .list)
   lapply(items, tagAssert, type = "li", class = "dropdown")
 
   tags$header(class = "header",
@@ -114,17 +117,20 @@ dashboardHeader <- function(..., title = NULL, disable = FALSE) {
 #'   \code{\link{messageItem}}s, notification menus should contain
 #'   \code{\link{notificationItem}}s, and task menus should contain
 #'   \code{\link{taskItem}}s.
+#' @param .list An optional list containing items to put in the menu Same as
+#'   the \code{...} arguments, but in list format. This can be useful when
+#'   working with programmatically generated items.
 #'
 #' @seealso \code{\link{dashboardHeader}} for example usage.
 #'
 #' @export
 dropdownMenu <- function(...,
   type = c("messages", "notifications", "tasks"),
-  badgeStatus = "primary")
+  badgeStatus = "primary", .list = NULL)
 {
   type <- match.arg(type)
   if (!is.null(badgeStatus)) validateStatus(badgeStatus)
-  items <- list(...)
+  items <- c(list(...), .list)
 
   # Make sure the items are li tags
   lapply(items, tagAssert, type = "li")

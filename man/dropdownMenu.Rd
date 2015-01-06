@@ -4,7 +4,7 @@
 \title{Create a dropdown menu to place in a dashboard header}
 \usage{
 dropdownMenu(..., type = c("messages", "notifications", "tasks"),
-  badgeStatus = "primary")
+  badgeStatus = "primary", .list = NULL)
 }
 \arguments{
 \item{...}{Items to put in the menu. Typically, message menus should contain
@@ -19,6 +19,10 @@ dropdownMenu(..., type = c("messages", "notifications", "tasks"),
 in the menu. This determines the badge's color. Valid statuses are listed
 in \link{validStatuses}. A value of \code{NULL} means to not display a
 badge.}
+
+\item{.list}{An optional list containing items to put in the menu Same as
+  the \code{...} arguments, but in list format. This can be useful when
+  working with programmatically generated items.}
 }
 \description{
 Create a dropdown menu to place in a dashboard header
