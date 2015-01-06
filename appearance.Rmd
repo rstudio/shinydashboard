@@ -69,12 +69,11 @@ appshot('_apps/css-logo-font/', 'images/css-logo-font.png',
 To do this, first create a file named `www/custom.css` with the following:
 
 ```css
-.header a.logo {
-  font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+body > .header .logo {
+  font-family: "Georgia", Times, "Times New Roman", serif;
   font-weight: bold;
   font-size: 24px;
 }
-
 ```
 
 Then refer to that CSS file from the UI of your app:
@@ -102,8 +101,8 @@ dashboardPage(
   dashboardSidebar(),
   dashboardBody(
     tags$head(tags$style(HTML('
-      .header a.logo {
-        font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+      body > .header .logo {
+        font-family: "Georgia", Times, "Times New Roman", serif;
         font-weight: bold;
         font-size: 24px;
       }

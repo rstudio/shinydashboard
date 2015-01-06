@@ -1,5 +1,5 @@
-.header a.logo {
-  font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+body > .header .logo {
+  font-family: "Georgia", Times, "Times New Roman", serif;
   font-weight: bold;
   font-size: 24px;
 }
