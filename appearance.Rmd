@@ -19,7 +19,7 @@ knit_print.shiny.tag <- function(x, ...) {
 }
 ```
 
-**shinydashboard** is built on top of the [AdminLTE](https://github.com/almasaeed2010/AdminLTE), which in turn uses [Bootstrap 3](http://getbootstrap.com/).
+**shinydashboard** is built using [AdminLTE](https://github.com/almasaeed2010/AdminLTE), which in turn uses [Bootstrap 3](http://getbootstrap.com/).
 
 ## Skins
 
