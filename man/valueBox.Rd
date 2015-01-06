@@ -6,6 +6,8 @@
 valueBox(value, subtitle, icon = NULL, color = "aqua", width = 4)
 }
 \arguments{
+\item{value}{The value to display in the box. Usually a number or short text.}
+
 \item{subtitle}{Subtitle text.}
 
 \item{icon}{An icon tag, created by \code{\link[shiny]{icon}}.}

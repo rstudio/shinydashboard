@@ -5,6 +5,7 @@
 #' to be placed in the main body of a dashboard.
 #'
 #' @inheritParams box
+#' @param value The value to display in the box. Usually a number or short text.
 #' @param subtitle Subtitle text.
 #' @param icon An icon tag, created by \code{\link[shiny]{icon}}.
 #' @param color A color for the box. Valid colors are listed in
