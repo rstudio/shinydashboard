@@ -212,13 +212,13 @@ body &lt;-<span class="st"> </span><span class="kw">dashboardBody</span>()
 <pre class="sourceCode r"><code class="sourceCode r">output$messageMenu &lt;-<span class="st"> </span><span class="kw">renderUI</span>({
   <span class="co"># Code to generate each of the messageItems here, in a list. This assumes</span>
   <span class="co"># that messageData is a data frame with two columns, &#39;from&#39; and &#39;message&#39;.</span>
-  <span class="kw">apply</span>(messageData, <span class="dv">1</span>, function(row) {
+  msgs &lt;-<span class="st"> </span><span class="kw">apply</span>(messageData, <span class="dv">1</span>, function(row) {
     <span class="kw">messageItem</span>(<span class="dt">from =</span> row[[<span class="st">&quot;from&quot;</span>]], <span class="dt">message =</span> row[[<span class="st">&quot;message&quot;</span>]])
   })
 
   <span class="co"># This is equivalent to calling:</span>
   <span class="co">#   dropdownMenu(type=&quot;messages&quot;, msgs[[1]], msgs[[2]], ...)</span>
-  <span class="kw">do.call</span>(dropdownMenu, <span class="kw">c</span>(msgs, <span class="dt">type =</span> <span class="st">&quot;messages&quot;</span>))
+  <span class="kw">dropdownMenu</span>(<span class="dt">type =</span> <span class="st">&quot;messages&quot;</span>, <span class="dt">.list =</span> msgs)
 })</code></pre>
 <p>For more about using dynamic UI with Shiny, see <a href="http://shiny.rstudio.com/gallery/dynamic-ui.html">this example</a>.</p>
 </div>

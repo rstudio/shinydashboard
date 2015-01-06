@@ -153,13 +153,13 @@ And on the server side, you'd generate the entire menu in a `renderUI`, like thi
 output$messageMenu <- renderUI({
   # Code to generate each of the messageItems here, in a list. This assumes
   # that messageData is a data frame with two columns, 'from' and 'message'.
-  apply(messageData, 1, function(row) {
+  msgs <- apply(messageData, 1, function(row) {
     messageItem(from = row[["from"]], message = row[["message"]])
   })
 
   # This is equivalent to calling:
   #   dropdownMenu(type="messages", msgs[[1]], msgs[[2]], ...)
-  do.call(dropdownMenu, c(msgs, type = "messages"))
+  dropdownMenu(type = "messages", .list = msgs)
 })
 ```
 
