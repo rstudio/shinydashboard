@@ -1,3 +1,8 @@
+body>.header .logo {
+  font-family: 'Source Sans Pro',sans-serif;
+  font-size: 22px;
+}
+
 /* A replacement for .small-box .icon, where the icon is smaller and doesn't
    change size when moused over. */
 .small-box .icon-large {

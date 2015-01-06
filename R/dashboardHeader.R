@@ -82,7 +82,7 @@ dashboardHeader <- function(..., title = NULL, disable = FALSE) {
 
   tags$header(class = "header",
     style = if (disable) "display: none;",
-    a(href = "#", class = "logo", title),
+    span(class = "logo", title),
     tags$nav(class = "navbar navbar-static-top", role = "navigation",
       # Sidebar toggle button
       a(href="#", class="navbar-btn sidebar-toggle", `data-toggle`="offcanvas",
