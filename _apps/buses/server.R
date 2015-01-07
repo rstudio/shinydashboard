@@ -1,5 +1,6 @@
 library(shinydashboard)
 library(leaflet)
+library(dplyr)
 
 # Download data from the Twin Cities Metro Transit API
 # http://svc.metrotransit.org/NexTrip/help
@@ -8,26 +9,133 @@ getMetroData <- function(path) {
   jsonlite::fromJSON(url)
 }
 
-routes <- getMetroData("Routes")
+# Load static trip and shape data
+trips  <- readRDS("metrotransit-data/rds/trips.rds")
+shapes <- readRDS("metrotransit-data/rds/shapes.rds")
 
-function(input, output) {
 
+# Get the shape for a particular route. This isn't perfect. Each route has a
+# large number of different trips, and each trip can have a different shape.
+# This function simply returns the most commonly-used shape across all trips for
+# a particular route.
+get_route_shape <- function(route) {
+  routeid <- paste0(route, "-75")
+
+  # For this route, get all the shape_ids listed in trips, and a count of how
+  # many times each shape is used. We'll just pick the most commonly-used shape.
+  shape_counts <- trips %>%
+    filter(route_id == routeid) %>%
+    group_by(shape_id) %>%
+    summarise(n = n()) %>%
+    arrange(-n)
+
+  shapeid <- shape_counts$shape_id[1]
+
+  # Get the coordinates for the shape_id
+  shapes %>% filter(shape_id == shapeid)
+}
+
+
+function(input, output, session) {
+
+  # Route select input box
   output$routeSelect <- renderUI({
-    routeNums <- sort(as.numeric(routes$Route))
-    selectInput("routeNum", "Route", choices = routeNums)
+    live_vehicles <- getMetroData("VehicleLocations/0")
+
+    routeNums <- sort(unique(as.numeric(live_vehicles$Route)))
+    # Add names, so that we can add all=0
+    names(routeNums) <- routeNums
+    routeNums <- c(All = 0, routeNums)
+    selectInput("routeNum", "Route", choices = routeNums, selected = routeNums[2])
   })
 
+  # Locations of all active vehicles
   vehicleLocations <- reactive({
-    if (is.null(input$routeNum))
-      return(NULL)
+    input$refresh # Refresh if button clicked
 
-    getMetroData(paste0("VehicleLocations/", input$routeNum))
+    # Get interval (minimum 30)
+    interval <- max(as.numeric(input$interval), 30)
+    # Invalidate this reactive after the interval has passed, so that data is
+    # fetched again.
+    invalidateLater(interval * 1000, session)
+
+    getMetroData("VehicleLocations/0")
   })
 
-  output$busmap <- renderLeaflet(quoted = TRUE, quote({
+  # Locations of vehicles for a particular route
+  routeVehicleLocations <- reactive({
+    if (is.null(input$routeNum))
+      return()
+
     locations <- vehicleLocations()
-    if (is.null(locations))
+
+    if (as.numeric(input$routeNum) == 0)
+      return(locations)
+
+    locations[locations$Route == input$routeNum, ]
+  })
+
+  # Get time that vehicles locations were updated
+  lastUpdateTime <- reactive({
+    vehicleLocations() # Trigger this reactive when vehicles locations are updated
+    Sys.time()
+  })
+
+  # Number of seconds since last update
+  output$timeSinceLastUpdate <- renderUI({
+    # Trigger this every 5 seconds
+    invalidateLater(5000, session)
+    p(
+      class = "text-muted",
+      "Data refreshed ",
+      round(difftime(Sys.time(), lastUpdateTime(), units="secs")),
+      " seconds ago."
+    )
+  })
+
+  output$numVehiclesTable <- renderUI({
+    locations <- routeVehicleLocations()
+    if (length(locations) == 0 || nrow(locations) == 0)
       return(NULL)
+
+    # Create a Bootstrap-styled table
+    tags$table(class = "table",
+      tags$thead(tags$tr(
+        tags$th("Direction"),
+        tags$th("Number of vehicles")
+      )),
+      tags$tbody(
+        tags$tr(
+          tags$td("Northbound"),
+          tags$td(nrow(locations[locations$Direction == "4",]))
+        ),
+        tags$tr(
+          tags$td("Southbound"),
+          tags$td(nrow(locations[locations$Direction == "1",]))
+        ),
+        tags$tr(
+          tags$td("Eastbound"),
+          tags$td(nrow(locations[locations$Direction == "2",]))
+        ),
+        tags$tr(
+          tags$td("Westbound"),
+          tags$td(nrow(locations[locations$Direction == "3",]))
+        ),
+        tags$tr(class = "active",
+          tags$td("Total"),
+          tags$td(nrow(locations))
+        )
+      )
+    )
+  })
+
+  output$busmap <- renderLeaflet({
+    locations <- routeVehicleLocations()
+    if (length(locations) == 0)
+      return(NULL)
+
+    # Show only selected directions
+    locations <- filter(locations, Direction %in% as.numeric(input$directions))
 
     # Four possible directions for bus routes
     dirPal <- colorFactor(
@@ -35,13 +143,24 @@ function(input, output) {
       c("1", "2", "3", "4")
     )
 
-    leaflet(locations) %>%
+    map <- leaflet(locations) %>%
       addTiles() %>%
       addCircleMarkers(
         ~VehicleLongitude,
         ~VehicleLatitude,
         color = ~dirPal(Direction)
       )
-  }))
 
+    if (as.numeric(input$routeNum) != 0) {
+      route_shape <- get_route_shape(input$routeNum)
+
+      map <- addPolylines(map,
+        route_shape$shape_pt_lon,
+        route_shape$shape_pt_lat,
+        fill = FALSE
+      )
+    }
+
+    map
+  })
 }
