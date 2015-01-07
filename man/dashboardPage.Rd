@@ -4,7 +4,7 @@
 \alias{dashboardPage}
 \title{Dashboard page}
 \usage{
-dashboardPage(header, sidebar, body, skin = c("blue", "black"))
+dashboardPage(header, sidebar, body, title = "", skin = c("blue", "black"))
 }
 \arguments{
 \item{header}{A header created by \code{dashboardHeader}.}
@@ -12,6 +12,8 @@ dashboardPage(header, sidebar, body, skin = c("blue", "black"))
 \item{sidebar}{A sidebar created by \code{dashboardSidebar}.}
 
 \item{body}{A body created by \code{dashboardBody}.}
+
+\item{title}{A title to display in the browser's title bar.}
 
 \item{skin}{A color theme; either \code{"blue"} or \code{"black"}.}
 }
