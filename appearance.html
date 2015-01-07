@@ -75,6 +75,7 @@ code {
         <li role="presentation" id="nav-get-started"><a href="get_started.html">Get started</a></li>
         <li role="presentation" id="nav-structure"><a href="structure.html">Structure</a></li>
         <li role="presentation" id="nav-appearance"><a href="appearance.html">Appearance</a></li>
+        <li role="presentation" id="nav-examples"><a href="examples.html">Examples</a></li>
         <li role="presentation" id="nav-github"><a href="https://github.com/rstudio/shinydashboard">GitHub</a></li>
       </ul>
   </nav>
@@ -156,11 +157,11 @@ code {
 <p>To create a calendar icon, you’d call:</p>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="kw">icon</span>(<span class="st">&quot;calendar&quot;</span>)</code></pre>
 <p>This simply generates HTML like this, which the browser knows what to do with:</p>
-<pre class="sourceCode html"><code class="sourceCode html"><span class="kw">&lt;i</span><span class="ot"> class=</span><span class="st">&quot;fa fa-calendar&quot;</span><span class="kw">&gt;&lt;/i&gt;</span></code></pre>
+<pre class="sourceCode HTML"><code class="sourceCode html"><span class="kw">&lt;i</span><span class="ot"> class=</span><span class="st">&quot;fa fa-calendar&quot;</span><span class="kw">&gt;&lt;/i&gt;</span></code></pre>
 <p>The icons are from Font-Awesome and Glyphicons. You can see lists of all available icons here:</p>
 <ul>
-<li><a href="http://fontawesome.io/icons/" class="uri">http://fontawesome.io/icons/</a></li>
-<li><a href="http://getbootstrap.com/components/#glyphicons" class="uri">http://getbootstrap.com/components/#glyphicons</a></li>
+<li><a href="http://fontawesome.io/icons/">http://fontawesome.io/icons/</a></li>
+<li><a href="http://getbootstrap.com/components/#glyphicons">http://getbootstrap.com/components/#glyphicons</a></li>
 </ul>
 <p>By default, the <code>icon()</code> function uses icons from Font-Awesome. To use Glyphicons, use <code>lib=&quot;glyphicon&quot;</code>)</p>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="st">&quot;Calendar from Font-Awesome:&quot;</span>, <span class="kw">icon</span>(<span class="st">&quot;calendar&quot;</span>),
