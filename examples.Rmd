@@ -21,12 +21,13 @@ knit_print.shiny.tag <- function(x, ...) {
 
 ## Examples in this site
 
-All of the screenshots in this site are taken from demo apps. Source code for these apps is available [here](https://github.com/rstudio/shinydashboard/tree/gh-pages/_apps).
+[Source code](https://github.com/rstudio/shinydashboard/tree/gh-pages/_apps) for all the example screenshots used in this site.
+
 
 
 ## Twin Cities Buses
 
-This app displays live locations of buses in the Minneapolis--Saint Paul Metro Transit system. The app fetches data from a [live feed](http://svc.metrotransit.org/).
+This app displays live locations of buses in the Minneapolis--Saint Paul Metro Transit system. It fetches data from a [live feed](http://svc.metrotransit.org/), and uses the [leaflet](http://rstudio.github.io/leaflet/) package to generate the map.
 
 [Source code](https://github.com/rstudio/shinydashboard/tree/gh-pages/_apps/buses/)
 

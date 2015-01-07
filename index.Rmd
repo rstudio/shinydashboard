@@ -20,7 +20,7 @@ knit_print.shiny.tag <- function(x, ...) {
 
 <div class="text-center">
 <p class="lead">
-**shinydashboard** makes it easy to use [Shiny](http://shiny.rstudio.com/) to create dashboards like this:
+**shinydashboard** makes it easy to use [Shiny](http://shiny.rstudio.com/) to create dashboards like these:
 </p>
 </div>
 
@@ -28,11 +28,13 @@ knit_print.shiny.tag <- function(x, ...) {
 appshot('_apps/dashboard/', 'images/dashboard.png',
   delay=1, vheight=800, cliprect = "viewport"
 ) %>%
-  resize('75%') %>%
+  resize('50%') %>%
   shrink()
 ```
 
 ![Dashboard](images/dashboard.png)
+
+![Bus dashboard](images/buses.png)
 
 <div class="text-center">
 <a class="btn btn-success btn-lg" href="get_started.html" role="button">Get started
