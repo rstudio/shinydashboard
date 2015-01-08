@@ -4,7 +4,8 @@
 \alias{dashboardPage}
 \title{Dashboard page}
 \usage{
-dashboardPage(header, sidebar, body, title = "", skin = c("blue", "black"))
+dashboardPage(header, sidebar, body, title = NULL, skin = c("blue",
+  "black"))
 }
 \arguments{
 \item{header}{A header created by \code{dashboardHeader}.}
@@ -13,7 +14,8 @@ dashboardPage(header, sidebar, body, title = "", skin = c("blue", "black"))
 
 \item{body}{A body created by \code{dashboardBody}.}
 
-\item{title}{A title to display in the browser's title bar.}
+\item{title}{A title to display in the browser's title bar. If no value is
+provided, it will try to extract the title from the \code{dashboardHeader}.}
 
 \item{skin}{A color theme; either \code{"blue"} or \code{"black"}.}
 }
@@ -28,7 +30,8 @@ shinyApp(
   ui = dashboardPage(
     dashboardHeader(),
     dashboardSidebar(),
-    dashboardBody()
+    dashboardBody(),
+    title = "Dashboard example"
   ),
   server = function(input, output) { }
 )

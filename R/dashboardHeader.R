@@ -3,7 +3,10 @@
 #' A dashboard header can be left blank, or it can include dropdown menu items
 #' on the right side.
 #'
-#' @param title An optional title for the dashboard.
+#' @param title An optional title to show in the header bar.. By default, this
+#'   will also be used as the title shown in the browser's title bar. If you
+#'   want that to be different from the text in the dashboard header bar, set
+#'   the \code{title} in \code{\link{dashboardPage}}.
 #' @param disable If \code{TRUE}, don't display the header bar.
 #' @param ... Items to put in the header. Should be \code{\link{dropdownMenu}}s.
 #' @param .list An optional list containing items to put in the header. Same as
