@@ -144,7 +144,7 @@ function(input, output, session) {
     )
 
     map <- leaflet(locations) %>%
-      addTiles() %>%
+      addTiles('http://{s}.tile.thunderforest.com/transport/{z}/{x}/{y}.png') %>%
       addCircleMarkers(
         ~VehicleLongitude,
         ~VehicleLatitude,
