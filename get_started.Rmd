@@ -27,7 +27,6 @@ knit_print.shiny.tag <- function(x, ...) {
 # First install devtools if you don't already have it installed, with:
 # install.packages("devtools")
 
-devtools::install_github("rstudio/shiny")
 devtools::install_github("rstudio/shinydashboard")
 ```
 
