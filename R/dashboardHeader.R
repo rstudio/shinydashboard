@@ -100,7 +100,7 @@ dashboardHeader <- function(..., title = NULL, disable = FALSE, .list = NULL) {
       ),
       div(class = "navbar-right",
         tags$ul(class = "nav navbar-nav",
-          ...
+          items
         )
       )
     )
@@ -162,7 +162,7 @@ dropdownMenu <- function(...,
       tags$li(class = "header", paste("You have", numItems, type)),
       tags$li(
         tags$ul(class = "menu",
-          ...
+          items
         )
       )
       # TODO: This would need to be added to the outer ul
