@@ -11,5 +11,5 @@ Depends:
     R (>= 3.0)
 License: GPL-2 | file LICENSE
 Imports:
-    shiny (>= 0.10.2.9005),
+    shiny (>= 0.11),
     htmltools (>= 0.2.6)
