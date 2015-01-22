@@ -20,7 +20,7 @@ body <- dashboardBody(
         uiOutput("routeSelect"),
         checkboxGroupInput("directions", "Show",
           choices = c(
-            "Northbound <span>asdf</span>" = 4,
+            Northbound = 4,
             Southbound = 1,
             Eastbound = 2,
             Westbound = 3
