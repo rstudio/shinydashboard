@@ -39,5 +39,22 @@ appshot('_apps/buses/', 'images/buses.png',
   shrink()
 ```
 
-[![Twin Citis Bus app](images/buses.png)](https://winston.shinyapps.io/buses/)
+[![Twin Cities Bus app](images/buses.png)](https://winston.shinyapps.io/buses/)
 
+
+## Streaming CRAN data
+
+This is a dashboard that displays streaming data from the RStudio CRAN mirror logs. The streaming data is a 1-week-delayed live stream of download logs from cran.rstudio.com.
+
+[Source code](https://github.com/jcheng5/crandash)
+
+
+```{r eval=FALSE, echo=FALSE}
+webshot('https://jcheng.shinyapps.io/crandash/', 'images/crandash.png',
+  delay=20
+) %>%
+  resize('50%') %>%
+  shrink()
+```
+
+[![CRAN dashboard](images/crandash.png)](https://jcheng.shinyapps.io/crandash/)

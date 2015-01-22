@@ -2,6 +2,9 @@ library(shinydashboard)
 library(leaflet)
 library(dplyr)
 
+# 1=South, 2=East, 3=West, 4=North
+dirColors <-c("1"="#595490", "2"="#527525", "3"="#A93F35", "4"="#BA48AA")
+
 # Download data from the Twin Cities Metro Transit API
 # http://svc.metrotransit.org/NexTrip/help
 getMetroData <- function(path) {
@@ -101,33 +104,54 @@ function(input, output, session) {
     # Create a Bootstrap-styled table
     tags$table(class = "table",
       tags$thead(tags$tr(
+        tags$th("Color"),
         tags$th("Direction"),
         tags$th("Number of vehicles")
       )),
       tags$tbody(
         tags$tr(
+          tags$td(span(style = sprintf(
+            "width:1.1em; height:1.1em; background-color:%s; display:inline-block;",
+            dirColors[4]
+          ))),
           tags$td("Northbound"),
           tags$td(nrow(locations[locations$Direction == "4",]))
         ),
         tags$tr(
+          tags$td(span(style = sprintf(
+            "width:1.1em; height:1.1em; background-color:%s; display:inline-block;",
+            dirColors[1]
+          ))),
           tags$td("Southbound"),
           tags$td(nrow(locations[locations$Direction == "1",]))
         ),
         tags$tr(
+          tags$td(span(style = sprintf(
+            "width:1.1em; height:1.1em; background-color:%s; display:inline-block;",
+            dirColors[2]
+          ))),
           tags$td("Eastbound"),
           tags$td(nrow(locations[locations$Direction == "2",]))
         ),
         tags$tr(
+          tags$td(span(style = sprintf(
+            "width:1.1em; height:1.1em; background-color:%s; display:inline-block;",
+            dirColors[3]
+          ))),
           tags$td("Westbound"),
           tags$td(nrow(locations[locations$Direction == "3",]))
         ),
         tags$tr(class = "active",
+          tags$td(),
           tags$td("Total"),
           tags$td(nrow(locations))
         )
       )
     )
   })
+
+  # Store last zoom button value so we can detect when it's clicked
+  lastZoomButtonValue <- NULL
 
   output$busmap <- renderLeaflet({
     locations <- routeVehicleLocations()
@@ -138,17 +162,16 @@ function(input, output, session) {
     locations <- filter(locations, Direction %in% as.numeric(input$directions))
 
     # Four possible directions for bus routes
-    dirPal <- colorFactor(
-      c("#595490", "#527525", "#A93F35", "#BA48AA"),
-      c("1", "2", "3", "4")
-    )
+    dirPal <- colorFactor(dirColors, names(dirColors))
 
     map <- leaflet(locations) %>%
       addTiles('http://{s}.tile.thunderforest.com/transport/{z}/{x}/{y}.png') %>%
       addCircleMarkers(
         ~VehicleLongitude,
         ~VehicleLatitude,
-        color = ~dirPal(Direction)
+        color = ~dirPal(Direction),
+        opacity = 0.8,
+        radius = 8
       )
 
     if (as.numeric(input$routeNum) != 0) {
@@ -160,6 +183,15 @@ function(input, output, session) {
         fill = FALSE
       )
     }
+
+    rezoom <- "first"
+    # If zoom button was clicked this time, and store the value, and rezoom
+    if (!identical(lastZoomButtonValue, input$zoomButton)) {
+      lastZoomButtonValue <<- input$zoomButton
+      rezoom <- "always"
+    }
+
+    map <- map %>% mapOptions(zoomToLimits = rezoom)
 
     map
   })

@@ -20,7 +20,7 @@ body <- dashboardBody(
         uiOutput("routeSelect"),
         checkboxGroupInput("directions", "Show",
           choices = c(
-            Northbound = 4,
+            "Northbound <span>asdf</span>" = 4,
             Southbound = 1,
             Eastbound = 2,
             Westbound = 3
@@ -33,7 +33,8 @@ body <- dashboardBody(
                 "with a different path. Only the most commonly-used path will",
                 "be displayed on the map."
           )
-        )
+        ),
+        actionButton("zoomButton", "Zoom to fit buses")
       ),
       box(width = NULL, status = "warning",
         selectInput("interval", "Refresh interval",
