@@ -14,7 +14,7 @@ tagAssert <- function(tag, type = NULL, class = NULL, allowUI = TRUE) {
   }
 
   # Skip dynamic output elements
-  if (allowUI && identical(tag$attribs$class, "shiny-html-output")) {
+  if (allowUI && hasCssClass(tag, "shiny-html-output")) {
     return()
   }
 
@@ -120,3 +120,12 @@ validStatuses <- c("primary", "success", "info", "warning", "danger")
 
 
 "%OR%" <- function(a, b) if (!is.null(a)) a else b
+
+# Return TRUE if a shiny.tag object has a CSS class, FALSE otherwise.
+hasCssClass <- function(tag, class) {
+  if (is.null(tag$attribs) || is.null(tag$attribs$class))
+    return(FALSE)
+
+  classes <- strsplit(tag$attribs$class, " +")[[1]]
+  return(class %in% classes)
+}
