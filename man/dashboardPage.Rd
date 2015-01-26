@@ -23,7 +23,8 @@ provided, it will try to extract the title from the \code{dashboardHeader}.}
 This creates a dashboard page for use in a Shiny app.
 }
 \examples{
-\donttest{
+## Only run this example in interactive R sessions
+if (interactive()) {
 # Basic dashboard page template
 library(shiny)
 shinyApp(

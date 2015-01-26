@@ -16,7 +16,8 @@
 #' @seealso \code{\link{dropdownMenu}}
 #'
 #' @examples
-#' \donttest{
+#' ## Only run this example in interactive R sessions
+#' if (interactive()) {
 #' library(shiny)
 #'
 #' # A dashboard header with 3 dropdown menus

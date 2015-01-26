@@ -40,7 +40,8 @@ the user to collapse the box.}
 Boxes can be used to hold content in the main body of a dashboard.
 }
 \examples{
-\donttest{
+## Only run this example in interactive R sessions
+if (interactive()) {
 library(shiny)
 
 # A dashboard body with a row of valueBoxes and two rows of boxes

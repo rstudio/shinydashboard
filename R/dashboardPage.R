@@ -12,7 +12,8 @@
 #' @seealso \code{\link{dashboardHeader}}, \code{\link{dashboardSidebar}},
 #'   \code{\link{dashboardBody}}.
 #' @examples
-#' \donttest{
+#' ## Only run this example in interactive R sessions
+#' if (interactive()) {
 #' # Basic dashboard page template
 #' library(shiny)
 #' shinyApp(

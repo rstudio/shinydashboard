@@ -9,7 +9,8 @@
 #' @seealso \code{\link{sidebarMenu}}
 #'
 #' @examples
-#' \donttest{
+#' ## Only run this example in interactive R sessions
+#' if (interactive()) {
 #' header <- dashboardHeader()
 #'
 #' sidebar <- dashboardSidebar(

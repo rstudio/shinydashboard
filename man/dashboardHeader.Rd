@@ -25,7 +25,8 @@ A dashboard header can be left blank, or it can include dropdown menu items
 on the right side.
 }
 \examples{
-\donttest{
+## Only run this example in interactive R sessions
+if (interactive()) {
 library(shiny)
 
 # A dashboard header with 3 dropdown menus

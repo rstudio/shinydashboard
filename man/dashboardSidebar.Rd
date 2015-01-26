@@ -16,7 +16,8 @@ A dashboard sidebar typically contains a \code{\link{sidebarMenu}}, although
 it may also contain a \code{\link{sidebarSearchForm}}, or other Shiny inputs.
 }
 \examples{
-\donttest{
+## Only run this example in interactive R sessions
+if (interactive()) {
 header <- dashboardHeader()
 
 sidebar <- dashboardSidebar(

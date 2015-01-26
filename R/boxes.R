@@ -63,7 +63,8 @@ valueBox <- function(value, subtitle, icon = NULL, color = "aqua", width = 4,
 #' @seealso \code{\link{valueBox}}
 #'
 #' @examples
-#' \donttest{
+#' ## Only run this example in interactive R sessions
+#' if (interactive()) {
 #' library(shiny)
 #'
 #' # A dashboard body with a row of valueBoxes and two rows of boxes
