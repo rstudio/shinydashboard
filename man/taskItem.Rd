@@ -4,7 +4,7 @@
 \alias{taskItem}
 \title{Create a task item to place in a dropdown task menu}
 \usage{
-taskItem(text, value = 0, color = "aqua")
+taskItem(text, value = 0, color = "aqua", href = NULL)
 }
 \arguments{
 \item{text}{The task text.}
@@ -12,7 +12,9 @@ taskItem(text, value = 0, color = "aqua")
 \item{value}{A percent value to use for the bar.}
 
 \item{color}{A color for the bar. Valid colors are listed in
-  \link{validColors}.}
+\link{validColors}.}
+
+\item{href}{An optional URL to link to.}
 }
 \description{
 Create a task item to place in a dropdown task menu

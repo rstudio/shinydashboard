@@ -10,22 +10,30 @@
 #' @param icon An icon tag, created by \code{\link[shiny]{icon}}.
 #' @param color A color for the box. Valid colors are listed in
 #'   \link{validColors}.
+#' @param href An optional URL to link to.
 #'
 #' @seealso \code{\link{box}} for usage examples.
 #'
 #' @export
-valueBox <- function(value, subtitle, icon = NULL, color = "aqua", width = 4) {
+valueBox <- function(value, subtitle, icon = NULL, color = "aqua", width = 4,
+  href = NULL)
+{
   validateColor(color)
   if (!is.null(icon)) tagAssert(icon, type = "i")
 
+  boxContent <- div(class = paste0("small-box bg-", color),
+    div(class = "inner",
+      h3(value),
+      p(subtitle)
+    ),
+    if (!is.null(icon)) div(class = "icon-large", icon)
+  )
+
+  if (!is.null(href))
+    boxContent <- a(href = href, boxContent)
+
   div(class = if (!is.null(width)) paste0("col-sm-", width),
-    div(class = paste0("small-box bg-", color),
-      div(class = "inner",
-        h3(value),
-        p(subtitle)
-      ),
-      if (!is.null(icon)) div(class = "icon-large", icon)
-    )
+    boxContent
   )
 }
 
@@ -64,7 +72,8 @@ valueBox <- function(value, subtitle, icon = NULL, color = "aqua", width = 4) {
 #'   # valueBoxes
 #'   fluidRow(
 #'     valueBox(
-#'       uiOutput("orderNum"), "New Orders", icon = icon("credit-card")
+#'       uiOutput("orderNum"), "New Orders", icon = icon("credit-card"),
+#'       href = "http://google.com"
 #'     ),
 #'     valueBox(
 #'       tagList("60", tags$sup(style="font-size: 20px", "%")),

@@ -4,7 +4,8 @@
 \alias{valueBox}
 \title{Create a value box for the main body of a dashboard.}
 \usage{
-valueBox(value, subtitle, icon = NULL, color = "aqua", width = 4)
+valueBox(value, subtitle, icon = NULL, color = "aqua", width = 4,
+  href = NULL)
 }
 \arguments{
 \item{value}{The value to display in the box. Usually a number or short text.}
@@ -14,13 +15,15 @@ valueBox(value, subtitle, icon = NULL, color = "aqua", width = 4)
 \item{icon}{An icon tag, created by \code{\link[shiny]{icon}}.}
 
 \item{color}{A color for the box. Valid colors are listed in
-  \link{validColors}.}
+\link{validColors}.}
 
 \item{width}{The width of the box, using the Bootstrap grid system. This is
 used for row-based layouts. The overall width of a region is 12, so the
 default valueBox width of 4 occupies 1/3 of that width. For column-based
 layouts, use \code{NULL} for the width; the width is set by the column that
 contains the box.}
+
+\item{href}{An optional URL to link to.}
 }
 \description{
 A value box displays a value (usually a number) in large text, with a smaller

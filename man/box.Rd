@@ -49,7 +49,8 @@ body <- dashboardBody(
   # valueBoxes
   fluidRow(
     valueBox(
-      uiOutput("orderNum"), "New Orders", icon = icon("credit-card")
+      uiOutput("orderNum"), "New Orders", icon = icon("credit-card"),
+      href = "http://google.com"
     ),
     valueBox(
       tagList("60", tags$sup(style="font-size: 20px", "\%")),

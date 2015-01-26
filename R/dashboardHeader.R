@@ -183,16 +183,19 @@ dropdownMenu <- function(...,
 #'   be used. For example, it could be a relative date/time like "5 minutes",
 #'   "today", or "12:30pm yesterday", or an absolute time, like "2014-12-01 13:45".
 #'   If NULL, no time will be displayed.
+#' @param href An optional URL to link to.
 #'
 #' @family menu items
 #' @seealso \code{\link{dashboardHeader}} for example usage.
 #' @export
-messageItem <- function(from, message, icon = shiny::icon("user"), time = NULL)
+messageItem <- function(from, message, icon = shiny::icon("user"), time = NULL,
+  href = NULL)
 {
   tagAssert(icon, type = "i")
+  if (is.null(href)) href <- "#"
 
   tags$li(
-    a(href = "#",
+    a(href = href,
       icon,
       h4(
         from,
@@ -210,20 +213,23 @@ messageItem <- function(from, message, icon = shiny::icon("user"), time = NULL)
 #' @param icon An icon tag, created by \code{\link[shiny]{icon}}.
 #' @param status The status of the item This determines the item's background
 #'   color. Valid statuses are listed in \link{validStatuses}.
+#' @param href An optional URL to link to.
 #'
 #' @family menu items
 #' @seealso \code{\link{dashboardHeader}} for example usage.
 #' @export
-notificationItem <- function(text, icon = shiny::icon("warning"), status = "success")
+notificationItem <- function(text, icon = shiny::icon("warning"),
+  status = "success", href = NULL)
 {
   tagAssert(icon, type = "i")
   validateStatus(status)
+  if (is.null(href)) href <- "#"
 
   # Add the status as another HTML class to the icon
   icon <- tagAppendAttributes(icon, class = status)
 
   tags$li(
-    a(href = "#", icon, text)
+    a(href = href, icon, text)
   )
 }
 
@@ -234,15 +240,17 @@ notificationItem <- function(text, icon = shiny::icon("warning"), status = "succ
 #' @param value A percent value to use for the bar.
 #' @param color A color for the bar. Valid colors are listed in
 #'   \link{validColors}.
+#' @param href An optional URL to link to.
 #'
 #' @family menu items
 #' @seealso \code{\link{dashboardHeader}} for example usage.
 #' @export
-taskItem <- function(text, value = 0, color = "aqua") {
+taskItem <- function(text, value = 0, color = "aqua", href = NULL) {
   validateColor(color)
+  if (is.null(href)) href <- "#"
 
   tags$li(
-    a(href = "#",
+    a(href = href,
       h3(text,
         tags$small(class = "pull-right", paste0(value, "%"))
       ),

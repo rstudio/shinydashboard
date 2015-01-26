@@ -4,7 +4,8 @@
 \alias{messageItem}
 \title{Create a message item to place in a dropdown message menu}
 \usage{
-messageItem(from, message, icon = shiny::icon("user"), time = NULL)
+messageItem(from, message, icon = shiny::icon("user"), time = NULL,
+  href = NULL)
 }
 \arguments{
 \item{from}{Who the message is from.}
@@ -14,9 +15,11 @@ messageItem(from, message, icon = shiny::icon("user"), time = NULL)
 \item{icon}{An icon tag, created by \code{\link[shiny]{icon}}.}
 
 \item{time}{String representing the time the message was sent. Any string may
-  be used. For example, it could be a relative date/time like "5 minutes",
-  "today", or "12:30pm yesterday", or an absolute time, like "2014-12-01 13:45".
-  If NULL, no time will be displayed.}
+be used. For example, it could be a relative date/time like "5 minutes",
+"today", or "12:30pm yesterday", or an absolute time, like "2014-12-01 13:45".
+If NULL, no time will be displayed.}
+
+\item{href}{An optional URL to link to.}
 }
 \description{
 Create a message item to place in a dropdown message menu

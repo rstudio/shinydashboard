@@ -4,7 +4,8 @@
 \alias{notificationItem}
 \title{Create a notification item to place in a dropdown notification menu}
 \usage{
-notificationItem(text, icon = shiny::icon("warning"), status = "success")
+notificationItem(text, icon = shiny::icon("warning"), status = "success",
+  href = NULL)
 }
 \arguments{
 \item{text}{The notification text.}
@@ -12,7 +13,9 @@ notificationItem(text, icon = shiny::icon("warning"), status = "success")
 \item{icon}{An icon tag, created by \code{\link[shiny]{icon}}.}
 
 \item{status}{The status of the item This determines the item's background
-  color. Valid statuses are listed in \link{validStatuses}.}
+color. Valid statuses are listed in \link{validStatuses}.}
+
+\item{href}{An optional URL to link to.}
 }
 \description{
 Create a notification item to place in a dropdown notification menu
