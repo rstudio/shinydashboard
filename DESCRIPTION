@@ -1,6 +1,6 @@
 Package: shinydashboard
 Title: Shiny Dashboard
-Version: 0.2
+Version: 0.2.1
 Authors@R: as.person(c(
     "Winston Chang <winston@rstudio.com> [aut, cre]",
     "Almasaeed Studio [ctb, cph]",
