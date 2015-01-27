@@ -14,7 +14,9 @@ tagAssert <- function(tag, type = NULL, class = NULL, allowUI = TRUE) {
   }
 
   # Skip dynamic output elements
-  if (allowUI && hasCssClass(tag, "shiny-html-output")) {
+  if (allowUI &&
+      (hasCssClass(tag, "shiny-html-output") ||
+       hasCssClass(tag, "shinydashboard-menu-output"))) {
     return()
   }
 
