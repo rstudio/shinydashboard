@@ -25,6 +25,7 @@ This is the server-side function for creating a dynamic dropdown menu.
 \examples{
 ## Only run this example in interactive R sessions
 if (interactive()) {
+library(shiny)
 
 # Example message data in a data frame
 messageData <- data.frame(
