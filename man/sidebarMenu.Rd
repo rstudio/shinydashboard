@@ -19,7 +19,8 @@ menuSubItem(text, tabName = NULL, href = NULL, newtab = TRUE,
 
 \item{text}{Text to show for the menu item.}
 
-\item{icon}{An icon tag, created by \code{\link[shiny]{icon}}.}
+\item{icon}{An icon tag, created by \code{\link[shiny]{icon}}. If
+\code{NULL}, don't display an icon.}
 
 \item{badgeLabel}{A label for an optional badge. Usually a number or a short
 word like "new".}
@@ -33,9 +34,6 @@ compatible with \code{href}.}
 \item{href}{An link address. Not compatible with \code{tabName}.}
 
 \item{newtab}{If \code{href} is supplied, should the link open in a new tab?}
-
-\item{icon}{An icon to place to the left of the item. If \code{NULL}, don't
-display an icon.}
 }
 \description{
 A \code{dashboardSidebar} can contain a \code{sidebarMenu}. A

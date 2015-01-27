@@ -136,7 +136,8 @@ sidebarSearchForm <- function(textId, buttonId, label = "Search...",
 #' colored oval containing text.
 #'
 #' @param text Text to show for the menu item.
-#' @param icon An icon tag, created by \code{\link[shiny]{icon}}.
+#' @param icon An icon tag, created by \code{\link[shiny]{icon}}. If
+#'   \code{NULL}, don't display an icon.
 #' @param badgeLabel A label for an optional badge. Usually a number or a short
 #'   word like "new".
 #' @param badgeColor A color for the badge. Valid colors are listed in
@@ -232,8 +233,6 @@ menuItem <- function(text, ..., icon = NULL, badgeLabel = NULL, badgeColor = "gr
 }
 
 #' @rdname sidebarMenu
-#' @param icon An icon to place to the left of the item. If \code{NULL}, don't
-#'   display an icon.
 #' @export
 menuSubItem <- function(text, tabName = NULL, href = NULL, newtab = TRUE,
   icon = shiny::icon("angle-double-right"))
