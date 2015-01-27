@@ -232,10 +232,11 @@ menuItem <- function(text, ..., icon = NULL, badgeLabel = NULL, badgeColor = "gr
 }
 
 #' @rdname sidebarMenu
-#' @param arrow Should a double-arrow icon be shown on the left of the item?
+#' @param icon An icon to place to the left of the item. If \code{NULL}, don't
+#'   display an icon.
 #' @export
 menuSubItem <- function(text, tabName = NULL, href = NULL, newtab = TRUE,
-  arrow = TRUE)
+  icon = shiny::icon("angle-double-right"))
 {
 
   if (!is.null(href) && !is.null(tabName)) {
@@ -261,7 +262,7 @@ menuSubItem <- function(text, tabName = NULL, href = NULL, newtab = TRUE,
     a(href = href,
       `data-toggle` = if (isTabItem) "tab",
       target = target,
-      if (arrow) shiny::icon("angle-double-right"),
+      icon,
       text
     )
   )

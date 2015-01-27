@@ -12,7 +12,7 @@ menuItem(text, ..., icon = NULL, badgeLabel = NULL, badgeColor = "green",
   tabName = NULL, href = NULL, newtab = TRUE)
 
 menuSubItem(text, tabName = NULL, href = NULL, newtab = TRUE,
-  arrow = TRUE)
+  icon = shiny::icon("angle-double-right"))
 }
 \arguments{
 \item{...}{For menu items, this may consist of \code{\link{menuSubItem}}s.}
@@ -34,7 +34,8 @@ compatible with \code{href}.}
 
 \item{newtab}{If \code{href} is supplied, should the link open in a new tab?}
 
-\item{arrow}{Should a double-arrow icon be shown on the left of the item?}
+\item{icon}{An icon to place to the left of the item. If \code{NULL}, don't
+display an icon.}
 }
 \description{
 A \code{dashboardSidebar} can contain a \code{sidebarMenu}. A
