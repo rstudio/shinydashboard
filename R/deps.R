@@ -4,7 +4,7 @@ dashboardDeps <- list(
     script = c("app.min.js"),
     stylesheet = c("AdminLTE.min.css")
   ),
-  htmlDependency("shinydashboard", "0.1",
+  htmlDependency("shinydashboard", "0.2",
     c(file = system.file(package = "shinydashboard")),
     script = c("shinydashboard.js"),
     stylesheet = c("shinydashboard.css")
