@@ -11,7 +11,8 @@ sidebarMenu(...)
 menuItem(text, ..., icon = NULL, badgeLabel = NULL, badgeColor = "green",
   tabName = NULL, href = NULL, newtab = TRUE)
 
-menuSubItem(text, tabName = NULL, href = NULL, newtab = TRUE)
+menuSubItem(text, tabName = NULL, href = NULL, newtab = TRUE,
+  arrow = TRUE)
 }
 \arguments{
 \item{...}{For menu items, this may consist of \code{\link{menuSubItem}}s.}
@@ -32,6 +33,8 @@ compatible with \code{href}.}
 \item{href}{An link address. Not compatible with \code{tabName}.}
 
 \item{newtab}{If \code{href} is supplied, should the link open in a new tab?}
+
+\item{arrow}{Should a double-arrow icon be shown on the left of the item?}
 }
 \description{
 A \code{dashboardSidebar} can contain a \code{sidebarMenu}. A
