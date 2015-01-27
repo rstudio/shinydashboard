@@ -207,10 +207,10 @@ body &lt;-<span class="st"> </span><span class="kw">dashboardBody</span>()
 )</code></pre>
 <div id="dynamic-content" class="section level3">
 <h3>Dynamic content</h3>
-<p>In most cases, you’ll want to make the content dynamic. That means that the HTML content is generated on the server side and sent to the client for rendering. In the UI code, you’d use <code>uiOutput</code> like this:</p>
-<pre class="sourceCode r"><code class="sourceCode r">  <span class="kw">dashboardHeader</span>(<span class="kw">uiOutput</span>(<span class="st">&quot;messageMenu&quot;</span>))</code></pre>
-<p>And on the server side, you’d generate the entire menu in a <code>renderUI</code>, like this:</p>
-<pre class="sourceCode r"><code class="sourceCode r">output$messageMenu &lt;-<span class="st"> </span><span class="kw">renderUI</span>({
+<p>In most cases, you’ll want to make the content dynamic. That means that the HTML content is generated on the server side and sent to the client for rendering. In the UI code, you’d use <code>dropdownMenuOutput</code> like this:</p>
+<pre class="sourceCode r"><code class="sourceCode r">  <span class="kw">dashboardHeader</span>(<span class="kw">dropdownMenuOutput</span>(<span class="st">&quot;messageMenu&quot;</span>))</code></pre>
+<p>And on the server side, you’d generate the entire menu in a <code>renderDropdownMenu</code>, like this:</p>
+<pre class="sourceCode r"><code class="sourceCode r">output$messageMenu &lt;-<span class="st"> </span><span class="kw">renderDropdownMenu</span>({
   <span class="co"># Code to generate each of the messageItems here, in a list. This assumes</span>
   <span class="co"># that messageData is a data frame with two columns, &#39;from&#39; and &#39;message&#39;.</span>
   msgs &lt;-<span class="st"> </span><span class="kw">apply</span>(messageData, <span class="dv">1</span>, function(row) {
@@ -221,7 +221,8 @@ body &lt;-<span class="st"> </span><span class="kw">dashboardBody</span>()
   <span class="co">#   dropdownMenu(type=&quot;messages&quot;, msgs[[1]], msgs[[2]], ...)</span>
   <span class="kw">dropdownMenu</span>(<span class="dt">type =</span> <span class="st">&quot;messages&quot;</span>, <span class="dt">.list =</span> msgs)
 })</code></pre>
-<p>For more about using dynamic UI with Shiny, see <a href="http://shiny.rstudio.com/gallery/dynamic-ui.html">this example</a>.</p>
+<p>For an interactive example, see the help page for <code>?renderDropdownMenu</code>.</p>
+<p>This is a customized version of dynamic UI in Shiny. For more about using dynamic UI, see <a href="http://shiny.rstudio.com/gallery/dynamic-ui.html">this example</a>.</p>
 </div>
 </div>
 <div id="notification-menus" class="section level2">

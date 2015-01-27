@@ -141,16 +141,16 @@ dropdownMenu(type = "messages",
 
 ### Dynamic content
 
-In most cases, you'll want to make the content dynamic. That means that the HTML content is generated on the server side and sent to the client for rendering. In the UI code, you'd use `uiOutput` like this:
+In most cases, you'll want to make the content dynamic. That means that the HTML content is generated on the server side and sent to the client for rendering. In the UI code, you'd use `dropdownMenuOutput` like this:
 
 ```{r eval=FALSE}
-  dashboardHeader(uiOutput("messageMenu"))
+  dashboardHeader(dropdownMenuOutput("messageMenu"))
 ```
 
-And on the server side, you'd generate the entire menu in a `renderUI`, like this:
+And on the server side, you'd generate the entire menu in a `renderDropdownMenu`, like this:
 
 ```{r eval=FALSE}
-output$messageMenu <- renderUI({
+output$messageMenu <- renderDropdownMenu({
   # Code to generate each of the messageItems here, in a list. This assumes
   # that messageData is a data frame with two columns, 'from' and 'message'.
   msgs <- apply(messageData, 1, function(row) {
@@ -163,7 +163,9 @@ output$messageMenu <- renderUI({
 })
 ```
 
-For more about using dynamic UI with Shiny, see [this example](http://shiny.rstudio.com/gallery/dynamic-ui.html).
+For an interactive example, see the help page for `?renderDropdownMenu`.
+
+This is a customized version of dynamic UI in Shiny. For more about using dynamic UI, see [this example](http://shiny.rstudio.com/gallery/dynamic-ui.html).
 
 ## Notification menus
 
