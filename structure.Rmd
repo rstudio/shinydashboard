@@ -374,7 +374,7 @@ appshot('_apps/sidebar-inputs/', 'images/sidebar-inputs.png',
                     label = "Search...")
 ```
 
-For this search form, the corresponding values in the server-side code would be `input$searchText` and `input$searchBotton`.
+For this search form, the corresponding values in the server-side code would be `input$searchText` and `input$searchButton`.
 
 
 ## Disabling the sidebar
@@ -401,7 +401,7 @@ In a typical dashboard, these boxes would be placed inside a `fluidRow()` (we'll
 # This is just the body component of a dashboard
 dashboardBody(
   fluidRow(
-    box(plotOutput("plot1"))
+    box(plotOutput("plot1")),
     
     box(
       "Box content here", br(), "More box content",
@@ -424,7 +424,7 @@ appshot('_apps/body-boxes/', 'images/body-boxes-basic.png',
 Boxes can have titles and header bar colors with the `title` and `status` options. The different possible statuses are shown [here](appearance.html#statuses-and-colors).
 
 ```{r eval=FALSE}
-box(title = "Histogram", status = "primary", plotOutput("plot2", height = 250))
+box(title = "Histogram", status = "primary", plotOutput("plot2", height = 250)),
 
 box(
   title = "Inputs", status = "warning",
@@ -451,7 +451,7 @@ box(
   title = "Histogram", status = "primary", solidHeader = TRUE,
   collapsible = TRUE,
   plotOutput("plot3", height = 250)
-)
+),
 
 box(
   title = "Inputs", status = "warning", solidHeader = TRUE,
@@ -477,7 +477,7 @@ box(
   title = "Histogram", solidHeader = TRUE,
   collapsible = TRUE,
   plotOutput("plot3", height = 250)
-)
+),
 
 box(
   title = "Inputs", solidHeader = TRUE,
@@ -504,7 +504,7 @@ Finally, it's also possible to have a solid background, with the `background` op
 box(
   title = "Histogram", background = "maroon", solidHeader = TRUE,
   plotOutput("plot4", height = 250)
-)
+),
 
 box(
   title = "Inputs", background = "black",

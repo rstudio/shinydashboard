@@ -23,7 +23,7 @@ knit_print.shiny.tag <- function(x, ...) {
 
 ## Skins
 
-There are two color themes, or skins: blue and black. The default is blue. You can choose which theme to use with `shinyDashboard(skin="blue")` or `shinyDashboard(skin="black")`.
+There are two color themes, or skins: blue and black. The default is blue. You can choose which theme to use with `dashboardPage(skin = "blue")` or `dashboardPage(skin = "black")`.
 
 Blue:
 
