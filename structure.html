@@ -323,7 +323,7 @@ body &lt;-<span class="st"> </span><span class="kw">dashboardBody</span>(
 <p><strong>shinydashboard</strong> also includes a special type of input, a <code>sidebarSearchForm</code>, which is on top in the screenshot above. This is essentially a specially formatted text input and and actionButton which appears as a magnifying glass icon (the icon can be changed with the <code>icon</code> argument).</p>
 <pre class="sourceCode r"><code class="sourceCode r">  <span class="kw">sidebarSearchForm</span>(<span class="dt">textId =</span> <span class="st">&quot;searchText&quot;</span>, <span class="dt">buttonId =</span> <span class="st">&quot;searchButton&quot;</span>,
                     <span class="dt">label =</span> <span class="st">&quot;Search...&quot;</span>)</code></pre>
-<p>For this search form, the corresponding values in the server-side code would be <code>input$searchText</code> and <code>input$searchBotton</code>.</p>
+<p>For this search form, the corresponding values in the server-side code would be <code>input$searchText</code> and <code>input$searchButton</code>.</p>
 </div>
 <div id="disabling-the-sidebar" class="section level2">
 <h2>Disabling the sidebar</h2>
@@ -341,7 +341,7 @@ body &lt;-<span class="st"> </span><span class="kw">dashboardBody</span>(
 <pre class="sourceCode r"><code class="sourceCode r"><span class="co"># This is just the body component of a dashboard</span>
 <span class="kw">dashboardBody</span>(
   <span class="kw">fluidRow</span>(
-    <span class="kw">box</span>(<span class="kw">plotOutput</span>(<span class="st">&quot;plot1&quot;</span>))
+    <span class="kw">box</span>(<span class="kw">plotOutput</span>(<span class="st">&quot;plot1&quot;</span>)),
     
     <span class="kw">box</span>(
       <span class="st">&quot;Box content here&quot;</span>, <span class="kw">br</span>(), <span class="st">&quot;More box content&quot;</span>,
@@ -352,7 +352,7 @@ body &lt;-<span class="st"> </span><span class="kw">dashboardBody</span>(
 )</code></pre>
 <p><img src="images/body-boxes-basic.png" alt="Basic boxes" /></p>
 <p>Boxes can have titles and header bar colors with the <code>title</code> and <code>status</code> options. The different possible statuses are shown <a href="appearance.html#statuses-and-colors">here</a>.</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">box</span>(<span class="dt">title =</span> <span class="st">&quot;Histogram&quot;</span>, <span class="dt">status =</span> <span class="st">&quot;primary&quot;</span>, <span class="kw">plotOutput</span>(<span class="st">&quot;plot2&quot;</span>, <span class="dt">height =</span> <span class="dv">250</span>))
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">box</span>(<span class="dt">title =</span> <span class="st">&quot;Histogram&quot;</span>, <span class="dt">status =</span> <span class="st">&quot;primary&quot;</span>, <span class="kw">plotOutput</span>(<span class="st">&quot;plot2&quot;</span>, <span class="dt">height =</span> <span class="dv">250</span>)),
 
 <span class="kw">box</span>(
   <span class="dt">title =</span> <span class="st">&quot;Inputs&quot;</span>, <span class="dt">status =</span> <span class="st">&quot;warning&quot;</span>,
@@ -366,7 +366,7 @@ body &lt;-<span class="st"> </span><span class="kw">dashboardBody</span>(
   <span class="dt">title =</span> <span class="st">&quot;Histogram&quot;</span>, <span class="dt">status =</span> <span class="st">&quot;primary&quot;</span>, <span class="dt">solidHeader =</span> <span class="ot">TRUE</span>,
   <span class="dt">collapsible =</span> <span class="ot">TRUE</span>,
   <span class="kw">plotOutput</span>(<span class="st">&quot;plot3&quot;</span>, <span class="dt">height =</span> <span class="dv">250</span>)
-)
+),
 
 <span class="kw">box</span>(
   <span class="dt">title =</span> <span class="st">&quot;Inputs&quot;</span>, <span class="dt">status =</span> <span class="st">&quot;warning&quot;</span>, <span class="dt">solidHeader =</span> <span class="ot">TRUE</span>,
@@ -380,7 +380,7 @@ body &lt;-<span class="st"> </span><span class="kw">dashboardBody</span>(
   <span class="dt">title =</span> <span class="st">&quot;Histogram&quot;</span>, <span class="dt">solidHeader =</span> <span class="ot">TRUE</span>,
   <span class="dt">collapsible =</span> <span class="ot">TRUE</span>,
   <span class="kw">plotOutput</span>(<span class="st">&quot;plot3&quot;</span>, <span class="dt">height =</span> <span class="dv">250</span>)
-)
+),
 
 <span class="kw">box</span>(
   <span class="dt">title =</span> <span class="st">&quot;Inputs&quot;</span>, <span class="dt">solidHeader =</span> <span class="ot">TRUE</span>,
@@ -393,7 +393,7 @@ body &lt;-<span class="st"> </span><span class="kw">dashboardBody</span>(
 <pre class="sourceCode r"><code class="sourceCode r"><span class="kw">box</span>(
   <span class="dt">title =</span> <span class="st">&quot;Histogram&quot;</span>, <span class="dt">background =</span> <span class="st">&quot;maroon&quot;</span>, <span class="dt">solidHeader =</span> <span class="ot">TRUE</span>,
   <span class="kw">plotOutput</span>(<span class="st">&quot;plot4&quot;</span>, <span class="dt">height =</span> <span class="dv">250</span>)
-)
+),
 
 <span class="kw">box</span>(
   <span class="dt">title =</span> <span class="st">&quot;Inputs&quot;</span>, <span class="dt">background =</span> <span class="st">&quot;black&quot;</span>,
