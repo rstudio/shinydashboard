@@ -29,7 +29,7 @@ knit_print.shiny.tag <- function(x, ...) {
 
 This app displays live locations of buses in the Minneapolis--Saint Paul Metro Transit system. It fetches data from a [live feed](http://svc.metrotransit.org/), and uses the [leaflet](http://rstudio.github.io/leaflet/) package to generate the map.
 
-[Source code](https://github.com/rstudio/shinydashboard/tree/gh-pages/_apps/buses/)
+[Source code](https://github.com/rstudio/shiny-examples/tree/master/086-bus-dashboard)
 
 ```{r eval=FALSE, echo=FALSE}
 appshot('_apps/buses/', 'images/buses.png',
@@ -39,7 +39,7 @@ appshot('_apps/buses/', 'images/buses.png',
   shrink()
 ```
 
-[![Twin Cities Bus app](images/buses.png)](https://winston.shinyapps.io/buses/)
+[![Twin Cities Bus app](images/buses.png)](https://gallery.shinyapps.io/086-bus-dashboard/)
 
 
 ## Streaming CRAN data
