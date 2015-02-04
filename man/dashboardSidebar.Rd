@@ -21,7 +21,11 @@ if (interactive()) {
 header <- dashboardHeader()
 
 sidebar <- dashboardSidebar(
-  sidebarUserPanel("User Name"),
+  sidebarUserPanel("User Name",
+    subtitle = a(href = "#", icon("circle", class = "text-success"), "Online"),
+    # Image file should be in www/ subdir
+    image = "userimage.png"
+  ),
   sidebarSearchForm(label = "Enter a number", "searchText", "searchButton"),
   sidebarMenu(
     menuItem("Dashboard", tabName = "dashboard", icon = icon("dashboard")),

@@ -14,7 +14,11 @@
 #' header <- dashboardHeader()
 #'
 #' sidebar <- dashboardSidebar(
-#'   sidebarUserPanel("User Name"),
+#'   sidebarUserPanel("User Name",
+#'     subtitle = a(href = "#", icon("circle", class = "text-success"), "Online"),
+#'     # Image file should be in www/ subdir
+#'     image = "userimage.png"
+#'   ),
 #'   sidebarSearchForm(label = "Enter a number", "searchText", "searchButton"),
 #'   sidebarMenu(
 #'     menuItem("Dashboard", tabName = "dashboard", icon = icon("dashboard")),
@@ -61,20 +65,27 @@ dashboardSidebar <- function(..., disable = FALSE) {
 #' A panel displaying user information in a sidebar
 #'
 #' @param name Name of the user.
+#' @param subtitle Text or HTML to be shown below the name.
+#' @param image A filename or URL to use for an image of the person. If it is a
+#'   local file, the image should be contained under the www/ subdirectory of
+#'   the application.
 #'
 #' @family sidebar items
 #'
 #' @seealso \code{\link{dashboardSidebar}} for example usage.
 #'
 #' @export
-sidebarUserPanel <- function(name) {
+sidebarUserPanel <- function(name, subtitle = NULL, image = NULL) {
   div(class = "user-panel",
-    div(class = "pull-left image",
-      img(src = "foo.png", class = "img-circle", alt = "User Image")
-    ),
+    if (!is.null(image)) {
+      div(class = "pull-left image",
+        img(src = "foo.png", class = "img-circle", alt = "User Image")
+      )
+    },
     div(class = "pull-left info",
-      p(paste("Hello,", name)),
-      a(href = "#", shiny::icon("circle", class = "text-success"), "Online")
+      p(name),
+      subtitle
+      # a(href = "#", shiny::icon("circle", class = "text-success"), "Online")
     )
   )
 }

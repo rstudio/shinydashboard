@@ -4,10 +4,16 @@
 \alias{sidebarUserPanel}
 \title{A panel displaying user information in a sidebar}
 \usage{
-sidebarUserPanel(name)
+sidebarUserPanel(name, subtitle = NULL, image = NULL)
 }
 \arguments{
 \item{name}{Name of the user.}
+
+\item{subtitle}{Text or HTML to be shown below the name.}
+
+\item{image}{A filename or URL to use for an image of the person. If it is a
+  local file, the image should be contained under the www/ subdirectory of
+  the application.}
 }
 \description{
 A panel displaying user information in a sidebar
