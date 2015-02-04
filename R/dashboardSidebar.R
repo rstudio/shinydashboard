@@ -85,7 +85,6 @@ sidebarUserPanel <- function(name, subtitle = NULL, image = NULL) {
     div(class = "pull-left info",
       p(name),
       subtitle
-      # a(href = "#", shiny::icon("circle", class = "text-success"), "Online")
     )
   )
 }
