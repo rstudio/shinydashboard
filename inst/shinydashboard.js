@@ -130,7 +130,7 @@ $(function() {
       $(el).off('.tabItemInputBinding');
     },
     _getTabName: function(anchor) {
-      return anchor.attr('data-value') || anchor.text();
+      return anchor.attr('data-value');
     }
   });
   Shiny.inputBindings.register(tabItemInputBinding, 'shinydashboard.tabItemInput');
