@@ -11,12 +11,16 @@ $(function() {
   // code ensures that only one item will have the "active" class.
   var deactivateOtherTabs = function() {
     var $this = $(this);
+    var $sidebarMenu = $this.closest("ul.sidebar-menu");
 
     // Find all tab links under sidebar-menu
-    var $tablinks = $this.closest("ul.sidebar-menu").find("a[data-toggle='tab']");
+    var $tablinks = $sidebarMenu.find("a[data-toggle='tab']");
 
     // If any other items are active, deactivate them
     $tablinks.not($this).parent("li").removeClass("active");
+
+    // Trigger event for the tabItemInputBinding
+    $sidebarMenu.trigger('change.tabItemInputBinding');
   };
 
   $(document).on('shown.bs.tab', '.sidebar-menu a[data-toggle="tab"]',
@@ -86,5 +90,50 @@ $(function() {
   });
   Shiny.outputBindings.register(menuOutputBinding,
                                 "shinydashboard.menuOutputBinding");
+
+
+  // tabItemInputBinding
+  // ------------------------------------------------------------------
+  // Based on Shiny.tabItemInputBinding, but customized for tabItems in
+  // shinydashboard, which have a slightly different structure.
+  var tabItemInputBinding = new Shiny.InputBinding();
+  $.extend(tabItemInputBinding, {
+    find: function(scope) {
+      return $(scope).find('ul.sidebar-menu');
+    },
+    getValue: function(el) {
+      var anchor = $(el).find('li:not(.treeview).active').children('a');
+      if (anchor.length === 1)
+        return this._getTabName(anchor);
+
+      return null;
+    },
+    setValue: function(el, value) {
+      var self = this;
+      var anchors = $(el).find('li:not(.treeview)').children('a');
+      anchors.each(function() {
+        if (self._getTabName($(this)) === value) {
+          $(this).tab('show');
+          return false;
+        }
+      });
+    },
+    subscribe: function(el, callback) {
+      // This event is triggered by deactivateOtherTabs, which is triggered by
+      // shown. The deactivation of other tabs must occur before Shiny gets the
+      // input value.
+      $(el).on('change.tabItemInputBinding', function() {
+        callback();
+      });
+    },
+    unsubscribe: function(el) {
+      $(el).off('.tabItemInputBinding');
+    },
+    _getTabName: function(anchor) {
+      return anchor.attr('data-value') || anchor.text();
+    }
+  });
+  Shiny.inputBindings.register(tabItemInputBinding, 'shinydashboard.tabItemInput');
+
 
 });

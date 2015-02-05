@@ -146,6 +146,10 @@ sidebarSearchForm <- function(textId, buttonId, label = "Search...",
 #' colored oval containing text.
 #'
 #' @param text Text to show for the menu item.
+#' @param id For \code{sidebarMenu}, if \code{id} is present, this id will be
+#'   used for a Shiny input value, and it will report which tab is selected. For
+#'   example, if \code{id="tabs"}, then \code{input$tabs} will be the
+#'   \code{tabName} of the currently-selected tab.
 #' @param icon An icon tag, created by \code{\link[shiny]{icon}}. If
 #'   \code{NULL}, don't display an icon.
 #' @param badgeLabel A label for an optional badge. Usually a number or a short
@@ -163,13 +167,13 @@ sidebarSearchForm <- function(textId, buttonId, label = "Search...",
 #' @seealso \code{\link{dashboardSidebar}} for example usage.
 #'
 #' @export
-sidebarMenu <- function(...) {
+sidebarMenu <- function(..., id = NULL) {
   items <- list(...)
 
   # Make sure the items are li tags
   lapply(items, tagAssert, type = "li")
 
-  tags$ul(class = "sidebar-menu",
+  tags$ul(id = id, class = "sidebar-menu",
     ...
   )
 }
@@ -221,6 +225,7 @@ menuItem <- function(text, ..., icon = NULL, badgeLabel = NULL, badgeColor = "gr
       tags$li(
         a(href = href,
           `data-toggle` = if (isTabItem) "tab",
+          `data-value` = if (!is.null(tabName)) tabName,
           target = target,
           icon,
           span(text),
@@ -270,6 +275,7 @@ menuSubItem <- function(text, tabName = NULL, href = NULL, newtab = TRUE,
   tags$li(
     a(href = href,
       `data-toggle` = if (isTabItem) "tab",
+      `data-value` = if (!is.null(tabName)) tabName,
       target = target,
       icon,
       text
