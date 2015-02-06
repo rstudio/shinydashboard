@@ -121,16 +121,19 @@ dashboardHeader <- function(..., title = NULL, disable = FALSE, .list = NULL) {
 #'   \code{\link{messageItem}}s, notification menus should contain
 #'   \code{\link{notificationItem}}s, and task menus should contain
 #'   \code{\link{taskItem}}s.
-#' @param .list An optional list containing items to put in the menu Same as
-#'   the \code{...} arguments, but in list format. This can be useful when
-#'   working with programmatically generated items.
+#' @param icon An icon to display in the header. By default, the icon is
+#'   automatically selected depending on \code{type}, but it can be overriden
+#'   with this argument.
+#' @param .list An optional list containing items to put in the menu Same as the
+#'   \code{...} arguments, but in list format. This can be useful when working
+#'   with programmatically generated items.
 #'
 #' @seealso \code{\link{dashboardHeader}} for example usage.
 #'
 #' @export
 dropdownMenu <- function(...,
   type = c("messages", "notifications", "tasks"),
-  badgeStatus = "primary", .list = NULL)
+  badgeStatus = "primary", icon = NULL, .list = NULL)
 {
   type <- match.arg(type)
   if (!is.null(badgeStatus)) validateStatus(badgeStatus)
@@ -141,11 +144,13 @@ dropdownMenu <- function(...,
 
   dropdownClass <- paste0("dropdown ", type, "-menu")
 
-  icon <- switch(type,
-    messages = shiny::icon("envelope"),
-    notifications = shiny::icon("warning"),
-    tasks = shiny::icon("tasks")
-  )
+  if (is.null(icon)) {
+    icon <- switch(type,
+      messages = shiny::icon("envelope"),
+      notifications = shiny::icon("warning"),
+      tasks = shiny::icon("tasks")
+    )
+  }
 
   numItems <- length(items)
   if (is.null(badgeStatus)) {
