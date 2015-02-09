@@ -32,5 +32,7 @@ to be placed in the main body of a dashboard.
 }
 \seealso{
 \code{\link{box}} for usage examples.
+
+Other boxes: \code{\link{box}}; \code{\link{tabBox}}
 }
 

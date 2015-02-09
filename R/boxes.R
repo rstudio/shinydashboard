@@ -12,6 +12,7 @@
 #'   \link{validColors}.
 #' @param href An optional URL to link to.
 #'
+#' @family boxes
 #' @seealso \code{\link{box}} for usage examples.
 #'
 #' @export
@@ -60,7 +61,7 @@ valueBox <- function(value, subtitle, icon = NULL, color = "aqua", width = 4,
 #'   the user to collapse the box.
 #' @param ... Contents of the box.
 #'
-#' @seealso \code{\link{valueBox}}
+#' @family boxes
 #'
 #' @examples
 #' ## Only run this example in interactive R sessions
@@ -214,4 +215,93 @@ box <- function(..., title = NULL, footer = NULL, status = NULL,
       if (!is.null(footer)) div(class = "box-footer", footer)
     )
   )
+}
+
+#' Create a tabbed box
+#' @inheritParams shiny::tabsetPanel
+#' @inheritParams box
+#' @param title Title for the tabBox.
+#' @param side Which side of the box the tabs should be on (\code{"left"} or
+#'   \code{"right"}).
+#'
+#' @family boxes
+#'
+#' @examples
+#' ## Only run this example in interactive R sessions
+#' if (interactive()) {
+#' library(shiny)
+#'
+#' body <- dashboardBody(
+#'   tabBox(
+#'     title = "First tabBox",
+#'     # The id lets us use input$tabset1 on the server to find the current tab
+#'     id = "tabset1", height = "250px",
+#'     tabPanel("Tab1", "First tab content"),
+#'     tabPanel("Tab2", "Tab content 2")
+#'   ),
+#'   tabBox(
+#'     side = "right", height = "250px",
+#'     selected = "Tab3",
+#'     tabPanel("Tab1", "Tab content 1"),
+#'     tabPanel("Tab2", "Tab content 2"),
+#'     tabPanel("Tab3", "Note that when side=right, the tab order is reversed.")
+#'   ),
+#'   tabBox(
+#'     # Title can include an icon
+#'     title = tagList(shiny::icon("gear"), "tabBox status"),
+#'     tabPanel("Tab1",
+#'       "Currently selected tab from first tabBox:",
+#'       verbatimTextOutput("tabset1Selected")
+#'     ),
+#'     tabPanel("Tab2", "Tab content 2")
+#'   )
+#' )
+#'
+#' shinyApp(
+#'   ui = dashboardPage(dashboardHeader(title = "tabBoxes"), dashboardSidebar(), body),
+#'   server = function(input, output) {
+#'     # The currently selected tab from the first box
+#'     output$tabset1Selected <- renderText({
+#'       input$tabset1
+#'     })
+#'   }
+#' )
+#' }
+#' @export
+tabBox <- function(..., id = NULL, selected = NULL, title = NULL,
+                   width = 6, height = NULL, side = c("left", "right"))
+{
+  side <- match.arg(side)
+
+  # The content is basically a tabsetPanel with some custom modifications
+  content <- shiny::tabsetPanel(..., id = id, selected = selected)
+  content$attribs$class <- "nav-tabs-custom"
+
+  # Set height
+  if (!is.null(height)) {
+    content <- tagAppendAttributes(content,
+      style = paste0("height: ", validateCssUnit(height))
+    )
+  }
+
+  # Move tabs to right side if needed
+  if (side == "right") {
+    content$children[[1]] <- tagAppendAttributes(content$children[[1]],
+      class = "pull-right"
+    )
+  }
+
+  # Add title
+  if (!is.null(title)) {
+    if (side == "left")
+      titleClass <- "pull-right"
+    else
+      titleClass <- "pull-left"
+
+    content$children[[1]] <- htmltools::tagAppendChild(content$children[[1]],
+      tags$li(class = paste("header", titleClass), title)
+    )
+  }
+
+  div(class = paste0("col-sm-", width), content)
 }

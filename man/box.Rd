@@ -141,6 +141,6 @@ shinyApp(
 }
 }
 \seealso{
-\code{\link{valueBox}}
+Other boxes: \code{\link{tabBox}}; \code{\link{valueBox}}
 }
 
