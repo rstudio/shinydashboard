@@ -28,34 +28,37 @@ body <- dashboardBody(
     tabItem("dashboard",
       fluidRow(
         box(
-          title = "Box title",
+          title = "Distribution",
           status = "primary",
           plotOutput("plot1", height = 240),
           height = 300
         ),
-        box(
-          status = "warning",
-          plotOutput("plot2", height = 280),
-          height = 300
+        tabBox(
+          height = 300,
+          tabPanel("View 1",
+            plotOutput("scatter1", height = 230)
+          ),
+          tabPanel("View 2",
+            plotOutput("scatter2", height = 230)
+          )
         )
       ),
 
       # Boxes with solid headers
       fluidRow(
         box(
-          title = "Title 1", width = 4, solidHeader = TRUE, status = "primary",
-          sliderInput("orders", "Orders", min = 1, max = 500, value = 120),
+          title = "Histogram control", width = 4, solidHeader = TRUE, status = "primary",
+          sliderInput("count", "Count", min = 1, max = 500, value = 120)
+        ),
+        box(
+          title = "Appearance",
+          width = 4, solidHeader = TRUE,
           radioButtons("fill", "Fill", # inline = TRUE,
             c(None = "none", Blue = "blue", Black = "black", red = "red")
           )
         ),
         box(
-          title = "Title 2",
-          width = 4, solidHeader = TRUE,
-          p("Box content here")
-        ),
-        box(
-          title = "Title 3",
+          title = "Scatterplot control",
           width = 4, solidHeader = TRUE, status = "warning",
           selectInput("spread", "Spread",
             choices = c("0%" = 0, "20%" = 20, "40%" = 40, "60%" = 60, "80%" = 80, "100%" = 100),
@@ -156,21 +159,28 @@ server <- function(input, output) {
   histdata <- rnorm(500)
 
   output$plot1 <- renderPlot({
-    if (is.null(input$orders) || is.null(input$fill))
+    if (is.null(input$count) || is.null(input$fill))
       return()
 
-    data <- histdata[seq(1, input$orders)]
+    data <- histdata[seq(1, input$count)]
     color <- input$fill
     if (color == "none")
       color <- NULL
-    hist(data, col = color)
+    hist(data, col = color, main = NULL)
   })
 
-  output$plot2 <- renderPlot({
+  output$scatter1 <- renderPlot({
     spread <- as.numeric(input$spread) / 100
     x <- rnorm(1000)
     y <- x + rnorm(1000) * spread
     plot(x, y, pch = ".", col = "blue")
+  })
+
+  output$scatter2 <- renderPlot({
+    spread <- as.numeric(input$spread) / 100
+    x <- rnorm(1000)
+    y <- x + rnorm(1000) * spread
+    plot(x, y, pch = ".", col = "red")
   })
 }
 

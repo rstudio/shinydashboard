@@ -26,7 +26,7 @@ knit_print.shiny.tag <- function(x, ...) {
 
 ```{r eval=FALSE, echo=FALSE}
 appshot('_apps/dashboard/', 'images/dashboard.png',
-  delay=1, vheight=800, cliprect = "viewport"
+  delay=1, vheight=600, cliprect = "viewport"
 ) %>%
   resize('50%') %>%
   shrink()
