@@ -218,11 +218,13 @@ box <- function(..., title = NULL, footer = NULL, status = NULL,
 }
 
 #' Create a tabbed box
+#'
 #' @inheritParams shiny::tabsetPanel
 #' @inheritParams box
 #' @param title Title for the tabBox.
 #' @param side Which side of the box the tabs should be on (\code{"left"} or
-#'   \code{"right"}).
+#'   \code{"right"}). When \code{side="right"}, the order of tabs will be
+#'   reversed.
 #'
 #' @family boxes
 #'
@@ -232,28 +234,32 @@ box <- function(..., title = NULL, footer = NULL, status = NULL,
 #' library(shiny)
 #'
 #' body <- dashboardBody(
-#'   tabBox(
-#'     title = "First tabBox",
-#'     # The id lets us use input$tabset1 on the server to find the current tab
-#'     id = "tabset1", height = "250px",
-#'     tabPanel("Tab1", "First tab content"),
-#'     tabPanel("Tab2", "Tab content 2")
-#'   ),
-#'   tabBox(
-#'     side = "right", height = "250px",
-#'     selected = "Tab3",
-#'     tabPanel("Tab1", "Tab content 1"),
-#'     tabPanel("Tab2", "Tab content 2"),
-#'     tabPanel("Tab3", "Note that when side=right, the tab order is reversed.")
-#'   ),
-#'   tabBox(
-#'     # Title can include an icon
-#'     title = tagList(shiny::icon("gear"), "tabBox status"),
-#'     tabPanel("Tab1",
-#'       "Currently selected tab from first tabBox:",
-#'       verbatimTextOutput("tabset1Selected")
+#'   fluidRow(
+#'     tabBox(
+#'       title = "First tabBox",
+#'       # The id lets us use input$tabset1 on the server to find the current tab
+#'       id = "tabset1", height = "250px",
+#'       tabPanel("Tab1", "First tab content"),
+#'       tabPanel("Tab2", "Tab content 2")
 #'     ),
-#'     tabPanel("Tab2", "Tab content 2")
+#'     tabBox(
+#'       side = "right", height = "250px",
+#'       selected = "Tab3",
+#'       tabPanel("Tab1", "Tab content 1"),
+#'       tabPanel("Tab2", "Tab content 2"),
+#'       tabPanel("Tab3", "Note that when side=right, the tab order is reversed.")
+#'     )
+#'   ),
+#'   fluidRow(
+#'     tabBox(
+#'       # Title can include an icon
+#'       title = tagList(shiny::icon("gear"), "tabBox status"),
+#'       tabPanel("Tab1",
+#'         "Currently selected tab from first box:",
+#'         verbatimTextOutput("tabset1Selected")
+#'       ),
+#'       tabPanel("Tab2", "Tab content 2")
+#'     )
 #'   )
 #' )
 #'
