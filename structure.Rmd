@@ -524,6 +524,72 @@ appshot('_apps/body-boxes/', 'images/body-boxes-header-4.png',
 ![Solid background](images/body-boxes-header-4.png)
 
 
+### tabBox
+
+If you want a box to have tabs for displaying different sets of content, you can use a `tabBox`.
+
+```{r eval=FALSE, echo=FALSE}
+appshot('_apps/body-tabboxes/', 'images/body-tabboxes.png',
+  delay=1, selector = 'section.content', expand = c(10,0,0,0)) %>%
+  resize("75%") %>%
+  shrink()
+```
+
+![Tabbed boxes](images/body-tabboxes.png)
+
+
+The code to generate this app is below. A `tabBox` is similar to a `tabsetPanel` from Shiny in that it takes `tabPanels` as inputs, allows you to choose which tab is selected, and can be assigned an `id`. If `id` is present, you can access which tab is selected from the server; in the example below, it's accessed with `input$tabset1`.
+
+A `tabBox` also has similarities to a regular `box` from shinydashboard, in that you can control the `height`, `width`, and `title`. You can also choose which side the tabs appear on, with the `side` argument. Note that if `side="right"`, the tabs will be displayed in reverse order.
+
+
+```{r eval=FALSE}
+body <- dashboardBody(
+  fluidRow(
+    tabBox(
+      title = "First tabBox",
+      # The id lets us use input$tabset1 on the server to find the current tab
+      id = "tabset1", height = "250px",
+      tabPanel("Tab1", "First tab content"),
+      tabPanel("Tab2", "Tab content 2")
+    ),
+    tabBox(
+      side = "right", height = "250px",
+      selected = "Tab3",
+      tabPanel("Tab1", "Tab content 1"),
+      tabPanel("Tab2", "Tab content 2"),
+      tabPanel("Tab3", "Note that when side=right, the tab order is reversed.")
+    )
+  ),
+  fluidRow(
+    tabBox(
+      # Title can include an icon
+      title = tagList(shiny::icon("gear"), "tabBox status"),
+      tabPanel("Tab1",
+        "Currently selected tab from first box:",
+        verbatimTextOutput("tabset1Selected")
+      ),
+      tabPanel("Tab2", "Tab content 2")
+    )
+  )
+)
+
+shinyApp(
+  ui = dashboardPage(
+    dashboardHeader(title = "tabBoxes"),
+    dashboardSidebar(),
+    body
+  ),
+  server = function(input, output) {
+    # The currently selected tab from the first box
+    output$tabset1Selected <- renderText({
+      input$tabset1
+    })
+  }
+)
+```
+
+
 ### valueBox
 
 There is a special kind of box that is used for displaying simple numeric or text values, with an icon. Here are some examples:

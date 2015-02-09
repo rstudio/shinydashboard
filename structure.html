@@ -112,6 +112,7 @@ code {
 </ul></li>
 <li><a href="#body">Body</a><ul>
 <li><a href="#boxes">Boxes</a><ul>
+<li><a href="#tabbox">tabBox</a></li>
 <li><a href="#valuebox">valueBox</a></li>
 </ul></li>
 <li><a href="#layouts">Layouts</a><ul>
@@ -402,6 +403,56 @@ body &lt;-<span class="st"> </span><span class="kw">dashboardBody</span>(
   <span class="kw">textInput</span>(<span class="st">&quot;text&quot;</span>, <span class="st">&quot;Text input:&quot;</span>)
 )</code></pre>
 <p><img src="images/body-boxes-header-4.png" alt="Solid background" /></p>
+<div id="tabbox" class="section level3">
+<h3>tabBox</h3>
+<p>If you want a box to have tabs for displaying different sets of content, you can use a <code>tabBox</code>.</p>
+<p><img src="images/body-tabboxes.png" alt="Tabbed boxes" /></p>
+<p>The code to generate this app is below. A <code>tabBox</code> is similar to a <code>tabsetPanel</code> from Shiny in that it takes <code>tabPanels</code> as inputs, allows you to choose which tab is selected, and can be assigned an <code>id</code>. If <code>id</code> is present, you can access which tab is selected from the server; in the example below, it’s accessed with <code>input$tabset1</code>.</p>
+<p>A <code>tabBox</code> also has similarities to a regular <code>box</code> from shinydashboard, in that you can control the <code>height</code>, <code>width</code>, and <code>title</code>. You can also choose which side the tabs appear on, with the <code>side</code> argument. Note that if <code>side=&quot;right&quot;</code>, the tabs will be displayed in reverse order.</p>
+<pre class="sourceCode r"><code class="sourceCode r">body &lt;-<span class="st"> </span><span class="kw">dashboardBody</span>(
+  <span class="kw">fluidRow</span>(
+    <span class="kw">tabBox</span>(
+      <span class="dt">title =</span> <span class="st">&quot;First tabBox&quot;</span>,
+      <span class="co"># The id lets us use input$tabset1 on the server to find the current tab</span>
+      <span class="dt">id =</span> <span class="st">&quot;tabset1&quot;</span>, <span class="dt">height =</span> <span class="st">&quot;250px&quot;</span>,
+      <span class="kw">tabPanel</span>(<span class="st">&quot;Tab1&quot;</span>, <span class="st">&quot;First tab content&quot;</span>),
+      <span class="kw">tabPanel</span>(<span class="st">&quot;Tab2&quot;</span>, <span class="st">&quot;Tab content 2&quot;</span>)
+    ),
+    <span class="kw">tabBox</span>(
+      <span class="dt">side =</span> <span class="st">&quot;right&quot;</span>, <span class="dt">height =</span> <span class="st">&quot;250px&quot;</span>,
+      <span class="dt">selected =</span> <span class="st">&quot;Tab3&quot;</span>,
+      <span class="kw">tabPanel</span>(<span class="st">&quot;Tab1&quot;</span>, <span class="st">&quot;Tab content 1&quot;</span>),
+      <span class="kw">tabPanel</span>(<span class="st">&quot;Tab2&quot;</span>, <span class="st">&quot;Tab content 2&quot;</span>),
+      <span class="kw">tabPanel</span>(<span class="st">&quot;Tab3&quot;</span>, <span class="st">&quot;Note that when side=right, the tab order is reversed.&quot;</span>)
+    )
+  ),
+  <span class="kw">fluidRow</span>(
+    <span class="kw">tabBox</span>(
+      <span class="co"># Title can include an icon</span>
+      <span class="dt">title =</span> <span class="kw">tagList</span>(shiny::<span class="kw">icon</span>(<span class="st">&quot;gear&quot;</span>), <span class="st">&quot;tabBox status&quot;</span>),
+      <span class="kw">tabPanel</span>(<span class="st">&quot;Tab1&quot;</span>,
+        <span class="st">&quot;Currently selected tab from first box:&quot;</span>,
+        <span class="kw">verbatimTextOutput</span>(<span class="st">&quot;tabset1Selected&quot;</span>)
+      ),
+      <span class="kw">tabPanel</span>(<span class="st">&quot;Tab2&quot;</span>, <span class="st">&quot;Tab content 2&quot;</span>)
+    )
+  )
+)
+
+<span class="kw">shinyApp</span>(
+  <span class="dt">ui =</span> <span class="kw">dashboardPage</span>(
+    <span class="kw">dashboardHeader</span>(<span class="dt">title =</span> <span class="st">&quot;tabBoxes&quot;</span>),
+    <span class="kw">dashboardSidebar</span>(),
+    body
+  ),
+  <span class="dt">server =</span> function(input, output) {
+    <span class="co"># The currently selected tab from the first box</span>
+    output$tabset1Selected &lt;-<span class="st"> </span><span class="kw">renderText</span>({
+      input$tabset1
+    })
+  }
+)</code></pre>
+</div>
 <div id="valuebox" class="section level3">
 <h3>valueBox</h3>
 <p>There is a special kind of box that is used for displaying simple numeric or text values, with an icon. Here are some examples:</p>
