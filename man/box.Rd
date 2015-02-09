@@ -30,8 +30,8 @@ default valueBox width of 4 occupies 1/3 of that width. For column-based
 layouts, use \code{NULL} for the width; the width is set by the column that
 contains the box.}
 
-\item{height}{The height of a box, in pixels. By default the height scales
-automatically with the content.}
+\item{height}{The height of a box, in pixels or other CSS unit. By default
+the height scales automatically with the content.}
 
 \item{collapsible}{If TRUE, display a button in the upper right that allows
 the user to collapse the box.}

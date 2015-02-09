@@ -54,8 +54,8 @@ valueBox <- function(value, subtitle, icon = NULL, color = "aqua", width = 4,
 #'   default valueBox width of 4 occupies 1/3 of that width. For column-based
 #'   layouts, use \code{NULL} for the width; the width is set by the column that
 #'   contains the box.
-#' @param height The height of a box, in pixels. By default the height scales
-#'   automatically with the content.
+#' @param height The height of a box, in pixels or other CSS unit. By default
+#'   the height scales automatically with the content.
 #' @param collapsible If TRUE, display a button in the upper right that allows
 #'   the user to collapse the box.
 #' @param ... Contents of the box.
@@ -182,7 +182,7 @@ box <- function(..., title = NULL, footer = NULL, status = NULL,
 
   style <- NULL
   if (!is.null(height)) {
-    style <- paste0("height: ", height, "px;")
+    style <- paste0("height: ", validateCssUnit(height))
   }
 
   titleTag <- NULL
