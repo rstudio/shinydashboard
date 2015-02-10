@@ -2,7 +2,7 @@
 % Please edit documentation in R/menuOutput.R
 \name{renderDropdownMenu}
 \alias{renderDropdownMenu}
-\title{Dropdown menu output}
+\title{Create a dropdown menu output (server side)}
 \usage{
 renderDropdownMenu(expr, env = parent.frame(), quoted = FALSE,
   func = NULL)

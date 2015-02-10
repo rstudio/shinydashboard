@@ -2,7 +2,7 @@
 % Please edit documentation in R/menuOutput.R
 \name{dropdownMenuOutput}
 \alias{dropdownMenuOutput}
-\title{Create a dropdown menu output}
+\title{Create a dropdown menu output (client side)}
 \usage{
 dropdownMenuOutput(outputId)
 }

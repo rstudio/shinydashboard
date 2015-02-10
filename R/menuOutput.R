@@ -1,4 +1,4 @@
-#' Create a dropdown menu output
+#' Create a dropdown menu output (client side)
 #'
 #' This is the UI-side function for creating a dynamic dropdown menu.
 #'
@@ -11,7 +11,7 @@ dropdownMenuOutput <- function(outputId) {
   tags$li(id = outputId, class = "shinydashboard-menu-output")
 }
 
-#' Dropdown menu output
+#' Create a dropdown menu output (server side)
 #'
 #' This is the server-side function for creating a dynamic dropdown menu.
 #'
