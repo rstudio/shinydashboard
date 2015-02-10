@@ -75,6 +75,7 @@ shinyApp(ui, server)
 }
 \seealso{
 \code{\link{dropdownMenuOutput}} for the corresponding UI-side
-  function.
+  function, and \code{\link{dropdownMenu}} for the corresponding function for
+  generating static menus.
 }
 

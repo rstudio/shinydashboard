@@ -4,7 +4,8 @@
 #'
 #' @param outputId Output variable name.
 #' @seealso \code{\link{renderDropdownMenu}} for the corresponding server-side
-#'   function and examples.
+#'   function and examples, and \code{\link{dropdownMenu}} for the corresponding
+#'   function for generating static menus.
 #' @export
 dropdownMenuOutput <- function(outputId) {
   tags$li(id = outputId, class = "shinydashboard-menu-output")
@@ -16,7 +17,8 @@ dropdownMenuOutput <- function(outputId) {
 #'
 #' @inheritParams shiny::renderUI
 #' @seealso \code{\link{dropdownMenuOutput}} for the corresponding UI-side
-#'   function.
+#'   function, and \code{\link{dropdownMenu}} for the corresponding function for
+#'   generating static menus.
 #'
 #' @examples
 #' ## Only run this example in interactive R sessions
