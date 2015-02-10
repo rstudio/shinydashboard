@@ -46,15 +46,15 @@ appshot('_apps/buses/', 'images/buses.png',
 
 This is a dashboard that displays streaming data from the RStudio CRAN mirror logs. The streaming data is a 1-week-delayed live stream of download logs from cran.rstudio.com.
 
-[Source code](https://github.com/jcheng5/crandash)
+[Source code](https://github.com/rstudio/shiny-examples/tree/master/087-crandash)
 
 
 ```{r eval=FALSE, echo=FALSE}
-webshot('https://jcheng.shinyapps.io/crandash/', 'images/crandash.png',
+webshot('https://gallery.shinyapps.io/087-crandash/', 'images/crandash.png',
   delay=20
 ) %>%
   resize('50%') %>%
   shrink()
 ```
 
-[![CRAN dashboard](images/crandash.png)](https://jcheng.shinyapps.io/crandash/)
+[![CRAN dashboard](images/crandash.png)](https://gallery.shinyapps.io/087-crandash/)
