@@ -5,37 +5,35 @@ ui <- dashboardPage(
   dashboardSidebar(),
   dashboardBody(
     fluidRow(
-      valueBox(
-        # The value comes from the server via uiOutput
-        uiOutput("orderNum"), "New Orders", icon = icon("credit-card")
-      ),
+      # A static valueBox
+      valueBox(10 * 2, "New Orders", icon = icon("credit-card")),
 
-      valueBox(
-        # The icon can also be a uiOutput
-        uiOutput("progress"), "Progress", icon = uiOutput("progressIcon"),
-        color = "purple"
-      ),
+      # Dynamic valueBoxes
+      valueBoxOutput("progressBox"),
 
-      # An entire box can be in a uiOutput
-      uiOutput("approvalBox")
+      valueBoxOutput("approvalBox")
+    ),
+    fluidRow(
+      # Clicking this will increment the progress amount
+      box(width = 4, actionButton("count", "Increment progress"))
     )
   )
 )
 
 server <- function(input, output) {
-  output$orderNum <- renderText({ 10*2 })
+  output$progressBox <- renderValueBox({
+    valueBox(
+      paste0(25 + input$count, "%"), "Progress", icon = icon("list"),
+      color = "purple"
+    )
+  })
 
-  output$progress <- renderText({ "75%" })
-
-  output$progressIcon <- renderUI({ icon("list") })
-
-  output$approvalBox <- renderUI({
+  output$approvalBox <- renderValueBox({
     valueBox(
       "80%", "Approval", icon = icon("thumbs-up", lib = "glyphicon"),
       color = "yellow"
     )
   })
-
 }
 
 shinyApp(ui, server)

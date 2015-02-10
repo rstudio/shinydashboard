@@ -457,7 +457,7 @@ body &lt;-<span class="st"> </span><span class="kw">dashboardBody</span>(
 <h3>valueBox</h3>
 <p>There is a special kind of box that is used for displaying simple numeric or text values, with an icon. Here are some examples:</p>
 <p><img src="images/body-valueboxes.png" alt="Value boxes" /></p>
-<p>The code to generate these <code>valueBox</code>es is below. Since the content of a <code>valueBox</code> will usually be dynamic, the examples below show a few different ways to include dynamic values in a <code>valueBox</code>. The different possible colors are shown <a href="appearance.html#statuses-and-colors">here</a>.</p>
+<p>The code to generate these <code>valueBox</code>es is below. Since the content of a <code>valueBox</code> will usually be dynamic, <strong>shinydashboard</strong> contains the helper functions <code>valueBoxOutput</code> and <code>renderValueBox</code> for dynamic content. The different possible colors are shown <a href="appearance.html#statuses-and-colors">here</a>.</p>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(shinydashboard)
 
 ui &lt;-<span class="st"> </span><span class="kw">dashboardPage</span>(
@@ -465,31 +465,30 @@ ui &lt;-<span class="st"> </span><span class="kw">dashboardPage</span>(
   <span class="kw">dashboardSidebar</span>(),
   <span class="kw">dashboardBody</span>(
     <span class="kw">fluidRow</span>(
-      <span class="kw">valueBox</span>(
-        <span class="co"># The value comes from the server via uiOutput</span>
-        <span class="kw">uiOutput</span>(<span class="st">&quot;orderNum&quot;</span>), <span class="st">&quot;New Orders&quot;</span>, <span class="dt">icon =</span> <span class="kw">icon</span>(<span class="st">&quot;credit-card&quot;</span>)
-      ),
+      <span class="co"># A static valueBox</span>
+      <span class="kw">valueBox</span>(<span class="dv">10</span> *<span class="st"> </span><span class="dv">2</span>, <span class="st">&quot;New Orders&quot;</span>, <span class="dt">icon =</span> <span class="kw">icon</span>(<span class="st">&quot;credit-card&quot;</span>)),
 
-      <span class="kw">valueBox</span>(
-        <span class="co"># The icon can also be a uiOutput</span>
-        <span class="kw">uiOutput</span>(<span class="st">&quot;progress&quot;</span>), <span class="st">&quot;Progress&quot;</span>, <span class="dt">icon =</span> <span class="kw">uiOutput</span>(<span class="st">&quot;progressIcon&quot;</span>),
-        <span class="dt">color =</span> <span class="st">&quot;purple&quot;</span>
-      ),
+      <span class="co"># Dynamic valueBoxes</span>
+      <span class="kw">valueBoxOutput</span>(<span class="st">&quot;progressBox&quot;</span>),
 
-      <span class="co"># An entire box can be in a uiOutput</span>
-      <span class="kw">uiOutput</span>(<span class="st">&quot;approvalBox&quot;</span>)
+      <span class="kw">valueBoxOutput</span>(<span class="st">&quot;approvalBox&quot;</span>)
+    ),
+    <span class="kw">fluidRow</span>(
+      <span class="co"># Clicking this will increment the progress amount</span>
+      <span class="kw">box</span>(<span class="dt">width =</span> <span class="dv">4</span>, <span class="kw">actionButton</span>(<span class="st">&quot;count&quot;</span>, <span class="st">&quot;Increment progress&quot;</span>))
     )
   )
 )
 
 server &lt;-<span class="st"> </span>function(input, output) {
-  output$orderNum &lt;-<span class="st"> </span><span class="kw">renderText</span>({ <span class="dv">10</span>*<span class="dv">2</span> })
+  output$progressBox &lt;-<span class="st"> </span><span class="kw">renderValueBox</span>({
+    <span class="kw">valueBox</span>(
+      <span class="kw">paste0</span>(<span class="dv">25</span> +<span class="st"> </span>input$count, <span class="st">&quot;%&quot;</span>), <span class="st">&quot;Progress&quot;</span>, <span class="dt">icon =</span> <span class="kw">icon</span>(<span class="st">&quot;list&quot;</span>),
+      <span class="dt">color =</span> <span class="st">&quot;purple&quot;</span>
+    )
+  })
 
-  output$progress &lt;-<span class="st"> </span><span class="kw">renderText</span>({ <span class="st">&quot;75%&quot;</span> })
-
-  output$progressIcon &lt;-<span class="st"> </span><span class="kw">renderUI</span>({ <span class="kw">icon</span>(<span class="st">&quot;list&quot;</span>) })
-
-  output$approvalBox &lt;-<span class="st"> </span><span class="kw">renderUI</span>({
+  output$approvalBox &lt;-<span class="st"> </span><span class="kw">renderValueBox</span>({
     <span class="kw">valueBox</span>(
       <span class="st">&quot;80%&quot;</span>, <span class="st">&quot;Approval&quot;</span>, <span class="dt">icon =</span> <span class="kw">icon</span>(<span class="st">&quot;thumbs-up&quot;</span>, <span class="dt">lib =</span> <span class="st">&quot;glyphicon&quot;</span>),
       <span class="dt">color =</span> <span class="st">&quot;yellow&quot;</span>
