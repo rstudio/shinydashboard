@@ -14,13 +14,14 @@ addDeps <- function(x) {
   dashboardDeps <- list(
     htmlDependency("AdminLTE", "1.2",
       c(file = system.file("AdminLTE", package = "shinydashboard")),
-      script = c("app.min.js"),
-      stylesheet = c("AdminLTE.min.css")
+      script = "app.min.js",
+      stylesheet = "AdminLTE.min.css"
     ),
-    htmlDependency("shinydashboard", "0.2.1",
+    htmlDependency("shinydashboard",
+      as.character(packageVersion("shinydashboard")),
       c(file = system.file(package = "shinydashboard")),
-      script = c("shinydashboard.js"),
-      stylesheet = c("shinydashboard.css")
+      script = "shinydashboard.js",
+      stylesheet = "shinydashboard.css"
     )
   )
 
