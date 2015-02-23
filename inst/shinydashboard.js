@@ -118,6 +118,10 @@ $(function() {
         }
       });
     },
+    receiveMessage: function(el, data) {
+      if (data.hasOwnProperty('value'))
+        this.setValue(el, data.value);
+    },
     subscribe: function(el, callback) {
       // This event is triggered by deactivateOtherTabs, which is triggered by
       // shown. The deactivation of other tabs must occur before Shiny gets the
