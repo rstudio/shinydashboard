@@ -54,7 +54,7 @@ renderValueBox <- function(expr, env = parent.frame(), quoted = FALSE) {
 
   # Wrap that function in another function which strips off the outer div and
   # send it to renderUI.
-  renderUI({
+  shiny::renderUI({
     vbox <- vbox_fun()
     tagAssert(vbox, type = "div")
 
