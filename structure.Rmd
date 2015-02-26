@@ -350,6 +350,54 @@ A `menuItem` can do other things besides control tabs; it can also contain a lin
            href = "https://github.com/rstudio/shinydashboard/")
 ```
 
+### Dynamic content
+
+A sidebar menu can be generated dynamically, with `renderMenu` and `sidebarMenuOutput`. Here is an example app with a sidebar that is generated on the server side.
+
+
+```{r eval=FALSE}
+ui <- dashboardPage(
+  dashboardHeader(title = "Dynamic sidebar"),
+  dashboardSidebar(
+    sidebarMenuOutput("menu")
+  ),
+  dashboardBody()
+)
+
+server <- function(input, output) {
+  output$menu <- renderMenu({
+    sidebarMenu(
+      menuItem("Menu item", icon = icon("calendar"))
+    )
+  })
+}
+
+shinyApp(ui, server)
+```
+
+
+It's also possible to dynamically generate individual items:
+
+```{r eval=FALSE}
+ui <- dashboardPage(
+  dashboardHeader(title = "Dynamic sidebar"),
+  dashboardSidebar(
+    sidebarMenu(
+      menuItemOutput("menuitem")
+    )
+  ),
+  dashboardBody()
+)
+
+server <- function(input, output) {
+  output$menuitem <- renderMenu({
+    menuItem("Menu item", icon = icon("calendar"))
+  })
+}
+
+shinyApp(ui, server)
+```
+
 
 ## Inputs in the sidebar
 

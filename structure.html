@@ -106,7 +106,9 @@ code {
 <li><a href="#disabling-the-header">Disabling the header</a></li>
 </ul></li>
 <li><a href="#sidebar">Sidebar</a><ul>
-<li><a href="#sidebar-menu-items-and-tabs">Sidebar menu items and tabs</a></li>
+<li><a href="#sidebar-menu-items-and-tabs">Sidebar menu items and tabs</a><ul>
+<li><a href="#dynamic-content-1">Dynamic content</a></li>
+</ul></li>
 <li><a href="#inputs-in-the-sidebar">Inputs in the sidebar</a></li>
 <li><a href="#disabling-the-sidebar">Disabling the sidebar</a></li>
 </ul></li>
@@ -316,6 +318,45 @@ body &lt;-<span class="st"> </span><span class="kw">dashboardBody</span>(
 <p>A <code>menuItem</code> can do other things besides control tabs; it can also contain a link to external content, if you supply a value for <code>href</code>. By default, these external links open in a new browser tab or window; this can be controlled with the <code>newtab</code> option.</p>
 <pre class="sourceCode r"><code class="sourceCode r">  <span class="kw">menuItem</span>(<span class="st">&quot;Source code&quot;</span>, <span class="dt">icon =</span> <span class="kw">icon</span>(<span class="st">&quot;file-code-o&quot;</span>), 
            <span class="dt">href =</span> <span class="st">&quot;https://github.com/rstudio/shinydashboard/&quot;</span>)</code></pre>
+<div id="dynamic-content-1" class="section level3">
+<h3>Dynamic content</h3>
+<p>A sidebar menu can be generated dynamically, with <code>renderMenu</code> and <code>sidebarMenuOutput</code>. Here is an example app with a sidebar that is generated on the server side.</p>
+<pre class="sourceCode r"><code class="sourceCode r">ui &lt;-<span class="st"> </span><span class="kw">dashboardPage</span>(
+  <span class="kw">dashboardHeader</span>(<span class="dt">title =</span> <span class="st">&quot;Dynamic sidebar&quot;</span>),
+  <span class="kw">dashboardSidebar</span>(
+    <span class="kw">sidebarMenuOutput</span>(<span class="st">&quot;menu&quot;</span>)
+  ),
+  <span class="kw">dashboardBody</span>()
+)
+
+server &lt;-<span class="st"> </span>function(input, output) {
+  output$menu &lt;-<span class="st"> </span><span class="kw">renderMenu</span>({
+    <span class="kw">sidebarMenu</span>(
+      <span class="kw">menuItem</span>(<span class="st">&quot;Menu item&quot;</span>, <span class="dt">icon =</span> <span class="kw">icon</span>(<span class="st">&quot;calendar&quot;</span>))
+    )
+  })
+}
+
+<span class="kw">shinyApp</span>(ui, server)</code></pre>
+<p>It’s also possible to dynamically generate individual items:</p>
+<pre class="sourceCode r"><code class="sourceCode r">ui &lt;-<span class="st"> </span><span class="kw">dashboardPage</span>(
+  <span class="kw">dashboardHeader</span>(<span class="dt">title =</span> <span class="st">&quot;Dynamic sidebar&quot;</span>),
+  <span class="kw">dashboardSidebar</span>(
+    <span class="kw">sidebarMenu</span>(
+      <span class="kw">menuItemOutput</span>(<span class="st">&quot;menuitem&quot;</span>)
+    )
+  ),
+  <span class="kw">dashboardBody</span>()
+)
+
+server &lt;-<span class="st"> </span>function(input, output) {
+  output$menuitem &lt;-<span class="st"> </span><span class="kw">renderMenu</span>({
+    <span class="kw">menuItem</span>(<span class="st">&quot;Menu item&quot;</span>, <span class="dt">icon =</span> <span class="kw">icon</span>(<span class="st">&quot;calendar&quot;</span>))
+  })
+}
+
+<span class="kw">shinyApp</span>(ui, server)</code></pre>
+</div>
 </div>
 <div id="inputs-in-the-sidebar" class="section level2">
 <h2>Inputs in the sidebar</h2>
