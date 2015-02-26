@@ -166,7 +166,9 @@ sidebarSearchForm <- function(textId, buttonId, label = "Search...",
 #'
 #' @family sidebar items
 #'
-#' @seealso \code{\link{dashboardSidebar}} for example usage.
+#' @seealso \code{\link{dashboardSidebar}} for example usage. For
+#'   dynamically-generated sidebar menus, see \code{\link{renderMenu}} and
+#'   \code{\link{sidebarMenuOutput}}.
 #'
 #' @export
 sidebarMenu <- function(..., id = NULL) {

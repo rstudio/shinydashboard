@@ -47,7 +47,7 @@ $(function() {
   }
 
 
-  // htmlReplaceOutputBinding
+  // menuOutputBinding
   // ------------------------------------------------------------------
   // Based on Shiny.htmlOutputBinding, but instead of putting the result in a
   // wrapper div, it replaces the origin DOM element with the new DOM elements,

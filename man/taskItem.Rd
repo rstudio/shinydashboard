@@ -22,7 +22,7 @@ Create a task item to place in a dropdown task menu
 \seealso{
 \code{\link{dashboardHeader}} for example usage.
 
-Other menu.items: \code{\link{messageItem}};
+Other menu items: \code{\link{messageItem}};
   \code{\link{notificationItem}}
 }
 

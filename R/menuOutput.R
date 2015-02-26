@@ -1,30 +1,86 @@
+#' Create a dynamic menu output for shinydashboard (client side)
+#'
+#' This can be used as a placeholder for dynamically-generated
+#' \code{\link{dropdownMenu}}, \code{\link{notificationItem}},
+#' \code{\link{messageItem}}, \code{\link{taskItem}} \code{\link{sidebarMenu}},
+#' or \code{\link{menuItem}}. If called directly, you must make sure to supply
+#' the correct type of tag. It is simpler to use the wrapper functions if
+#' present; for example, \code{\link{dropdownMenuOutput}} and
+#' \code{\link{sidebarMenuOutput}}.
+#'
+#' @param outputId Output variable name.
+#' @param tag A tag function, like \code{tags$li} or \code{tags$ul}.
+#'
+#' @family menu outputs
+#' @seealso \code{\link{renderMenu}} for the corresponding server side function
+#'   and examples.
+menuOutput <- function(outputId, tag = tags$li) {
+  tag(id = outputId, class = "shinydashboard-menu-output")
+}
+
+
 #' Create a dropdown menu output (client side)
 #'
 #' This is the UI-side function for creating a dynamic dropdown menu.
 #'
-#' @param outputId Output variable name.
-#' @seealso \code{\link{renderDropdownMenu}} for the corresponding server-side
-#'   function and examples, and \code{\link{dropdownMenu}} for the corresponding
-#'   function for generating static menus.
+#' @inheritParams menuOutput
+#' @family menu outputs
+#' @seealso \code{\link{renderMenu}} for the corresponding server-side function
+#'   and examples, and \code{\link{dropdownMenu}} for the corresponding function
+#'   for generating static menus.
 #' @export
 dropdownMenuOutput <- function(outputId) {
-  tags$li(id = outputId, class = "shinydashboard-menu-output")
+  menuOutput(outputId = outputId, tag = tags$li)
 }
 
-#' Create a dropdown menu output (server side)
+
+#' Create a sidebar menu output (client side)
 #'
-#' This is the server-side function for creating a dynamic dropdown menu.
+#' This is the UI-side function for creating a dynamic sidebar menu.
+#'
+#' @inheritParams menuOutput
+#' @family menu outputs
+#' @seealso \code{\link{renderMenu}} for the corresponding server-side function
+#'   and examples, and \code{\link{sidebarMenu}} for the corresponding function
+#'   for generating static sidebar menus.
+#' @export
+sidebarMenuOutput <- function(outputId) {
+  menuOutput(outputId = outputId, tag = tags$ul)
+}
+
+#' Create dynamic menu output (server side)
 #'
 #' @inheritParams shiny::renderUI
-#' @seealso \code{\link{dropdownMenuOutput}} for the corresponding UI-side
-#'   function, and \code{\link{dropdownMenu}} for the corresponding function for
-#'   generating static menus.
 #'
+#' @seealso \code{\link{menuOutput}} for the corresponding client side function
+#'   and examples.
+#' @family menu outputs
+#' @export
 #' @examples
-#' ## Only run this example in interactive R sessions
+#' ## Only run these examples in interactive R sessions
+#'
 #' if (interactive()) {
 #' library(shiny)
+#' # ========== Dynamic sidebarMenu ==========
+#' ui <- dashboardPage(
+#'   dashboardHeader(title = "Dynamic sidebar"),
+#'   dashboardSidebar(
+#'     sidebarMenuOutput("menu")
+#'   ),
+#'   dashboardBody()
+#' )
 #'
+#' server <- function(input, output) {
+#'   output$menu <- renderMenu({
+#'     sidebarMenu(
+#'       menuItem("Menu item", icon = icon("calendar"))
+#'     )
+#'   })
+#' }
+#'
+#' shinyApp(ui, server)
+#'
+#' # ========== Dynamic dropdownMenu ==========
 #' # Example message data in a data frame
 #' messageData <- data.frame(
 #'   from = c("Admininstrator", "New User", "Support"),
@@ -53,7 +109,7 @@ dropdownMenuOutput <- function(outputId) {
 #' )
 #'
 #' server <- function(input, output) {
-#'   output$messageMenu <- renderUI({
+#'   output$messageMenu <- renderMenu({
 #'     # Code to generate each of the messageItems here, in a list. messageData
 #'     # is a data frame with two columns, 'from' and 'message'.
 #'     # Also add on slider value to the message content, so that messages update.
@@ -70,5 +126,16 @@ dropdownMenuOutput <- function(outputId) {
 #'
 #' shinyApp(ui, server)
 #' }
+renderMenu <- shiny::renderUI
+
+
+#' Create a dropdown menu output (server side; deprecated)
+#'
+#' This is the server-side function for creating a dynamic dropdown menu.
+#'
+#' @inheritParams shiny::renderUI
 #' @export
-renderDropdownMenu <- shiny::renderUI
+renderDropdownMenu <- function(expr, env = parent.frame(), quoted = FALSE) {
+  .Deprecated("renderMenu")
+   shiny::renderUI(expr, env, quoted, func = FALSE)
+}

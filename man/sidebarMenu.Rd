@@ -65,9 +65,11 @@ Menu items (but not sub-items) also may have an optional badge. A badge is a
 colored oval containing text.
 }
 \seealso{
-\code{\link{dashboardSidebar}} for example usage.
+\code{\link{dashboardSidebar}} for example usage. For
+  dynamically-generated sidebar menus, see \code{\link{renderMenu}} and
+  \code{\link{sidebarMenuOutput}}.
 
-Other sidebar.items: \code{\link{sidebarSearchForm}};
+Other sidebar items: \code{\link{sidebarSearchForm}};
   \code{\link{sidebarUserPanel}}
 }
 

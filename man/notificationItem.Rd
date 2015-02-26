@@ -23,7 +23,7 @@ Create a notification item to place in a dropdown notification menu
 \seealso{
 \code{\link{dashboardHeader}} for example usage.
 
-Other menu.items: \code{\link{messageItem}};
+Other menu items: \code{\link{messageItem}};
   \code{\link{taskItem}}
 }
 
