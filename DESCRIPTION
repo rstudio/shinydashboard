@@ -1,6 +1,6 @@
 Package: shinydashboard
 Title: Shiny Dashboard
-Version: 0.2.2
+Version: 0.2.3
 Authors@R: c(
     person("Winston", "Chang", role = c("aut", "cre"), email = "winston@rstudio.com"),
     person(family = "RStudio", role = "cph"),
