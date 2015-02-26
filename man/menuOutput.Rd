@@ -25,6 +25,7 @@ present; for example, \code{\link{dropdownMenuOutput}} and
   and examples.
 
 Other menu outputs: \code{\link{dropdownMenuOutput}};
-  \code{\link{renderMenu}}; \code{\link{sidebarMenuOutput}}
+  \code{\link{menuItemOutput}}; \code{\link{renderMenu}};
+  \code{\link{sidebarMenuOutput}}
 }
 

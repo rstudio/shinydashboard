@@ -17,7 +17,8 @@ This is the UI-side function for creating a dynamic dropdown menu.
   and examples, and \code{\link{dropdownMenu}} for the corresponding function
   for generating static menus.
 
-Other menu outputs: \code{\link{menuOutput}};
-  \code{\link{renderMenu}}; \code{\link{sidebarMenuOutput}}
+Other menu outputs: \code{\link{menuItemOutput}};
+  \code{\link{menuOutput}}; \code{\link{renderMenu}};
+  \code{\link{sidebarMenuOutput}}
 }
 

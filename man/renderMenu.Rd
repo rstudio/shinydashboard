@@ -97,6 +97,7 @@ shinyApp(ui, server)
   and examples.
 
 Other menu outputs: \code{\link{dropdownMenuOutput}};
-  \code{\link{menuOutput}}; \code{\link{sidebarMenuOutput}}
+  \code{\link{menuItemOutput}}; \code{\link{menuOutput}};
+  \code{\link{sidebarMenuOutput}}
 }
 

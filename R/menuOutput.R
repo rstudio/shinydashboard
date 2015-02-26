@@ -48,6 +48,21 @@ sidebarMenuOutput <- function(outputId) {
   menuOutput(outputId = outputId, tag = tags$ul)
 }
 
+#' Create a sidebar menu item output (client side)
+#'
+#' This is the UI-side function for creating a dynamic sidebar menu item.
+#'
+#' @inheritParams menuOutput
+#' @family menu outputs
+#' @seealso \code{\link{renderMenu}} for the corresponding server-side function
+#'   and examples, and \code{\link{menuItem}} for the corresponding function
+#'   for generating static sidebar menus.
+#' @export
+menuItemOutput <- function(outputId) {
+  menuOutput(outputId = outputId, tag = tags$li)
+}
+
+
 #' Create dynamic menu output (server side)
 #'
 #' @inheritParams shiny::renderUI

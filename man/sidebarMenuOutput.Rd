@@ -18,6 +18,7 @@ This is the UI-side function for creating a dynamic sidebar menu.
   for generating static sidebar menus.
 
 Other menu outputs: \code{\link{dropdownMenuOutput}};
-  \code{\link{menuOutput}}; \code{\link{renderMenu}}
+  \code{\link{menuItemOutput}}; \code{\link{menuOutput}};
+  \code{\link{renderMenu}}
 }
 
