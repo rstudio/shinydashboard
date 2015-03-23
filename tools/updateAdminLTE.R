@@ -19,10 +19,10 @@ thisFile <- function() {
   }
 }
 
-srcdir <- file.path(dirname(thisFile()), "../../AdminLTE")
+srcdir <- file.path(dirname(thisFile()), "../../AdminLTE/dist")
 destdir <- file.path(dirname(thisFile()), "../inst/AdminLTE")
 
 
-file.copy(file.path(srcdir, "/js/AdminLTE/app.js"), destdir, overwrite = TRUE)
+file.copy(file.path(srcdir, "/js/app.js"), destdir, overwrite = TRUE)
 file.copy(file.path(srcdir, "/css/AdminLTE.css"), destdir, overwrite = TRUE)
-file.copy(file.path(srcdir, "/README-shiny-mods.md"), destdir, overwrite = TRUE)
+file.copy(file.path(srcdir, "/css/skins/_all-skins.css"), destdir, overwrite = TRUE)
