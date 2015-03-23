@@ -18,6 +18,10 @@ module.exports = function(grunt) {
       adminlte: {
         src: srcdir + '/AdminLTE/AdminLTE.css',
         dest: srcdir + '/AdminLTE/AdminLTE.min.css'
+      },
+      adminlte_themes: {
+        src: srcdir + '/AdminLTE/_all-skins.css',
+        dest: srcdir + '/AdminLTE/_all-skins.min.css'
       }
     },
 
