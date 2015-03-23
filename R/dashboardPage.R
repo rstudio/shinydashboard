@@ -30,7 +30,7 @@
 dashboardPage <- function(header, sidebar, body, title = NULL,
                           skin = c("blue", "black")) {
 
-  tagAssert(header, type = "header", class = "header")
+  tagAssert(header, type = "header", class = "main-header")
   tagAssert(sidebar, type = "section", class = "sidebar")
   tagAssert(body, type = "section", class = "content")
   skin <- match.arg(skin)
@@ -53,10 +53,10 @@ dashboardPage <- function(header, sidebar, body, title = NULL,
   content <- tagList(
     header,
     div(class = "wrapper row-offcanvas row-offcanvas-left",
-      tags$aside(class = "left-side sidebar-offcanvas",
+      tags$aside(class = "main-sidebar sidebar-offcanvas",
         sidebar
       ),
-      tags$aside(class = "right-side",
+      tags$aside(class = "content-wrapper",
         body
       )
     )

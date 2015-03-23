@@ -87,19 +87,19 @@ dashboardHeader <- function(..., title = NULL, disable = FALSE, .list = NULL) {
   items <- c(list(...), .list)
   lapply(items, tagAssert, type = "li", class = "dropdown")
 
-  tags$header(class = "header",
+  tags$header(class = "main-header",
     style = if (disable) "display: none;",
     span(class = "logo", title),
     tags$nav(class = "navbar navbar-static-top", role = "navigation",
       # Sidebar toggle button
-      a(href="#", class="navbar-btn sidebar-toggle", `data-toggle`="offcanvas",
+      a(href="#", class="sidebar-toggle", `data-toggle`="offcanvas",
         role="button",
         span(class="sr-only", "Toggle navigation"),
         span(class="icon-bar"),
         span(class="icon-bar"),
         span(class="icon-bar")
       ),
-      div(class = "navbar-right",
+      div(class = "navbar-custom-menu",
         tags$ul(class = "nav navbar-nav",
           items
         )
