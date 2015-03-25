@@ -47,3 +47,20 @@ div.box-body .shiny-input-container {
 a > .info-box {
   color: #333;
 }
+
+/* Disable bouncy transition for sidebar toggle. */
+.content-wrapper,
+.right-side,
+.main-footer {
+  -moz-transition: none;
+  -webkit-transition: none;
+  -o-transition: all 0 none;
+  transition: none;
+}
+.main-sidebar,
+.left-side {
+  -moz-transition: none;
+  -webkit-transition: none;
+  -o-transition: all 0 none;
+  transition: none;
+}

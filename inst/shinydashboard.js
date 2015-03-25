@@ -41,8 +41,7 @@ $(function() {
 
   // Optionally disable sidebar
   if ($("section.sidebar").data("disable")) {
-    $(".left-side").addClass("collapse-left");
-    $(".right-side").addClass("strech");
+    $("body").addClass("sidebar-collapse");
     $(".navbar > .sidebar-toggle").hide();
   }
 
