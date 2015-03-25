@@ -84,6 +84,7 @@ shinyApp(
 }
 }
 \seealso{
-Other boxes: \code{\link{box}}; \code{\link{valueBox}}
+Other boxes: \code{\link{box}}; \code{\link{infoBox}};
+  \code{\link{valueBox}}
 }
 

@@ -47,3 +47,8 @@ section.sidebar > .shiny-input-container {
 div.box-body .shiny-input-container {
   width: auto;
 }
+
+/* Don't highlight text when info box is in <a> tag */
+a > .info-box {
+  color: #333;
+}
