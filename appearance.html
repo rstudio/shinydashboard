@@ -107,11 +107,19 @@ code {
 <p><strong>shinydashboard</strong> is built using <a href="https://github.com/almasaeed2010/AdminLTE">AdminLTE</a>, which in turn uses <a href="http://getbootstrap.com/">Bootstrap 3</a>.</p>
 <div id="skins" class="section level2">
 <h2>Skins</h2>
-<p>There are two color themes, or skins: blue and black. The default is blue. You can choose which theme to use with <code>dashboardPage(skin = &quot;blue&quot;)</code> or <code>dashboardPage(skin = &quot;black&quot;)</code>.</p>
+<p>There are a number of color themes, or skins. The default is blue, but there are also black, purple, green, red, and yellow. You can choose which theme to use with <code>dashboardPage(skin = &quot;blue&quot;)</code>, <code>dashboardPage(skin = &quot;black&quot;)</code>, and so on.</p>
 <p>Blue:</p>
 <p><img src="images/skin-blue.png" alt="Blue skin" /></p>
 <p>Black:</p>
 <p><img src="images/skin-black.png" alt="Black skin" /></p>
+<p>Purple:</p>
+<p><img src="images/skin-purple.png" alt="Purple skin" /></p>
+<p>Green:</p>
+<p><img src="images/skin-green.png" alt="Green skin" /></p>
+<p>Red:</p>
+<p><img src="images/skin-red.png" alt="Red skin" /></p>
+<p>Yellow:</p>
+<p><img src="images/skin-yellow.png" alt="Yellow skin" /></p>
 </div>
 <div id="css" class="section level2">
 <h2>CSS</h2>
@@ -157,11 +165,11 @@ code {
 <p>To create a calendar icon, you’d call:</p>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="kw">icon</span>(<span class="st">&quot;calendar&quot;</span>)</code></pre>
 <p>This simply generates HTML like this, which the browser knows what to do with:</p>
-<pre class="sourceCode HTML"><code class="sourceCode html"><span class="kw">&lt;i</span><span class="ot"> class=</span><span class="st">&quot;fa fa-calendar&quot;</span><span class="kw">&gt;&lt;/i&gt;</span></code></pre>
+<pre class="sourceCode html"><code class="sourceCode html"><span class="kw">&lt;i</span><span class="ot"> class=</span><span class="st">&quot;fa fa-calendar&quot;</span><span class="kw">&gt;&lt;/i&gt;</span></code></pre>
 <p>The icons are from Font-Awesome and Glyphicons. You can see lists of all available icons here:</p>
 <ul>
-<li><a href="http://fontawesome.io/icons/">http://fontawesome.io/icons/</a></li>
-<li><a href="http://getbootstrap.com/components/#glyphicons">http://getbootstrap.com/components/#glyphicons</a></li>
+<li><a href="http://fontawesome.io/icons/" class="uri">http://fontawesome.io/icons/</a></li>
+<li><a href="http://getbootstrap.com/components/#glyphicons" class="uri">http://getbootstrap.com/components/#glyphicons</a></li>
 </ul>
 <p>By default, the <code>icon()</code> function uses icons from Font-Awesome. To use Glyphicons, use <code>lib=&quot;glyphicon&quot;</code>)</p>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="st">&quot;Calendar from Font-Awesome:&quot;</span>, <span class="kw">icon</span>(<span class="st">&quot;calendar&quot;</span>),

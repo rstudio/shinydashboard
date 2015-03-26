@@ -23,32 +23,51 @@ knit_print.shiny.tag <- function(x, ...) {
 
 ## Skins
 
-There are two color themes, or skins: blue and black. The default is blue. You can choose which theme to use with `dashboardPage(skin = "blue")` or `dashboardPage(skin = "black")`.
+There are a number of color themes, or skins. The default is blue, but there are also black, purple, green, red, and yellow. You can choose which theme to use with `dashboardPage(skin = "blue")`, `dashboardPage(skin = "black")`, and so on.
+
+```{r eval=FALSE, echo=FALSE}
+skin_colors <- c("blue", "black", "purple", "green", "red", "yellow")
+
+lapply(skin_colors, function(color) {
+  pngfile <- paste0('images/skin-', color, '.png')
+
+    appshot('_apps/dashboard/', pngfile,
+    delay=1, vheight=500, cliprect = "viewport",
+    envvars = c(DASHBOARD_SKIN = color)
+  ) %>%
+    resize('50%') %>%
+    shrink()
+})
+```
 
 Blue:
 
-```{r eval=FALSE, echo=FALSE}
-appshot('_apps/dashboard/', 'images/skin-blue.png',
-  delay=1, vheight=500, cliprect = "viewport"
-) %>%
-  resize('75%') %>%
-  shrink()
-```
-
 ![Blue skin](images/skin-blue.png)
+
 
 Black:
 
-```{r eval=FALSE, echo=FALSE}
-appshot('_apps/dashboard/', 'images/skin-black.png',
-  delay=1, vheight=500, cliprect = "viewport",
-  envvars = c(DASHBOARD_SKIN = 'black')
-) %>%
-  resize('75%') %>%
-  shrink()
-```
-
 ![Black skin](images/skin-black.png)
+
+
+Purple:
+
+![Purple skin](images/skin-purple.png)
+
+
+Green:
+
+![Green skin](images/skin-green.png)
+
+
+Red:
+
+![Red skin](images/skin-red.png)
+
+
+Yellow:
+
+![Yellow skin](images/skin-yellow.png)
 
 
 ## CSS
@@ -69,7 +88,7 @@ appshot('_apps/css-logo-font/', 'images/css-logo-font.png',
 To do this, first create a file named `www/custom.css` with the following:
 
 ```css
-body > .header .logo {
+body > .main-header .logo {
   font-family: "Georgia", Times, "Times New Roman", serif;
   font-weight: bold;
   font-size: 24px;
@@ -172,7 +191,7 @@ The `color` argument is more straightforward. It can have values like `color="re
 
 ```{r eval=FALSE, echo=FALSE}
 appshot('_apps/color-status', 'images/colors.png',
-  delay=1, vwidth=1024, selector="div.row:nth-of-type(2)", expand = c(10,0,0,0)
+  delay=1, vwidth=1100, selector="div.row:nth-of-type(2)", expand = c(10,0,0,0)
 ) %>%
   shrink()
 ```

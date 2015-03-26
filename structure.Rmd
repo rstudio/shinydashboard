@@ -101,14 +101,14 @@ A message menu looks like this:
 
 ```{r eval=FALSE, echo=FALSE}
 appshot('_apps/menus/', 'images/menu-messages.png',
-  delay=0.5, vwidth=780,
+  delay=0.5, vwidth=992,
   selector = c("header", ".messages-menu .dropdown-menu"),
   eval = "casper.then(function() {
     this.click('.messages-menu a.dropdown-toggle');
     this.wait(500);
   });"
 ) %>%
-  resize('75%') %>%
+  resize('65%') %>%
   shrink()
 ```
 
@@ -173,14 +173,14 @@ This is what a notification menu looks like:
 
 ```{r eval=FALSE, echo=FALSE}
 appshot('_apps/menus/', 'images/menu-notifications.png',
-  delay=0.5, vwidth=780,
+  delay=0.5, vwidth=992,
   selector = c("header", ".notifications-menu .dropdown-menu"),
   eval = "casper.then(function() {
     this.click('.notifications-menu a.dropdown-toggle');
     this.wait(500);
   });"
 ) %>%
-  resize('75%') %>%
+  resize('65%') %>%
   shrink()
 ```
 
@@ -214,14 +214,14 @@ This is a task menu:
 
 ```{r eval=FALSE, echo=FALSE}
 appshot('_apps/menus/', 'images/menu-tasks.png',
-  delay=0.5, vwidth=780,
+  delay=0.5, vwidth=992,
   selector = c("header", ".tasks-menu .dropdown-menu"),
   eval = "casper.then(function() {
     this.click('.tasks-menu a.dropdown-toggle');
     this.wait(500);
   });"
 ) %>%
-  resize('75%') %>%
+  resize('65%') %>%
   shrink()
 ```
 
@@ -262,7 +262,7 @@ A sidebar is typically used for quick navigation. It can contain menu items that
 ```{r eval=FALSE, echo=FALSE}
 appshot('_apps/sidebar/', 'images/sidebar.png',
   delay=0.5, vwidth=1000,
-  selector = c(".header > .logo", ".sidebar"),
+  selector = c(".main-header > .logo", ".sidebar"),
   expand = c(0, 10, 10, 0),
   eval = "casper.then(function() {
     this.click('ul.sidebar-menu > li.treeview > a');
@@ -406,7 +406,7 @@ A sidebar can also contain ordinary inputs, like `sliderInput`s and `textInput`s
 ```{r eval=FALSE, echo=FALSE}
 appshot('_apps/sidebar-inputs/', 'images/sidebar-inputs.png',
   delay=1, vwidth=1000,
-  selector = c(".header > .logo", ".sidebar"),
+  selector = c(".main-header > .logo", ".sidebar"),
   expand = c(0, 10, 10, 0)
 ) %>%
   resize('75%') %>%
