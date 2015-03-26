@@ -32,9 +32,8 @@ This app displays live locations of buses in the Minneapolis--Saint Paul Metro T
 [Source code](https://github.com/rstudio/shiny-examples/tree/master/086-bus-dashboard)
 
 ```{r eval=FALSE, echo=FALSE}
-appshot('_apps/buses/', 'images/buses.png',
-  delay=3
-) %>%
+appshot('../shiny-examples/086-bus-dashboard/', 'images/buses.png',
+    delay=3) %>%
   resize('50%') %>%
   shrink()
 ```

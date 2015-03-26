@@ -644,8 +644,8 @@ There is a special kind of box that is used for displaying simple numeric or tex
 
 ```{r eval=FALSE, echo=FALSE}
 appshot('_apps/body-infoboxes/', 'images/body-infoboxes.png',
-  delay=1, selector = c('div.row', 'div.row:nth-child(2)',
-  expand = c(10,0,0,0)) %>%
+    delay=1, selector = c('div.row', 'div.row:nth-child(2)'),
+    expand = c(10,0,0,0)) %>%
   resize("75%") %>%
   shrink()
 ```
