@@ -7,7 +7,8 @@
 #' @param body A body created by \code{dashboardBody}.
 #' @param title A title to display in the browser's title bar. If no value is
 #'   provided, it will try to extract the title from the \code{dashboardHeader}.
-#' @param skin A color theme; either \code{"blue"} or \code{"black"}.
+#' @param skin A color theme. One of \code{"blue"}, \code{"black"},
+#'   \code{"purple"}, \code{"green"}, \code{"red"}, or \code{"yellow"}.
 #'
 #' @seealso \code{\link{dashboardHeader}}, \code{\link{dashboardSidebar}},
 #'   \code{\link{dashboardBody}}.
@@ -28,9 +29,9 @@
 #' }
 #' @export
 dashboardPage <- function(header, sidebar, body, title = NULL,
-                          skin = c("blue", "black")) {
+  skin = c("blue", "black", "purple", "green", "red", "yellow")) {
 
-  tagAssert(header, type = "header", class = "header")
+  tagAssert(header, type = "header", class = "main-header")
   tagAssert(sidebar, type = "section", class = "sidebar")
   tagAssert(body, type = "section", class = "content")
   skin <- match.arg(skin)
@@ -53,10 +54,10 @@ dashboardPage <- function(header, sidebar, body, title = NULL,
   content <- tagList(
     header,
     div(class = "wrapper row-offcanvas row-offcanvas-left",
-      tags$aside(class = "left-side sidebar-offcanvas",
+      tags$aside(class = "main-sidebar sidebar-offcanvas",
         sidebar
       ),
-      tags$aside(class = "right-side",
+      tags$aside(class = "content-wrapper",
         body
       )
     )

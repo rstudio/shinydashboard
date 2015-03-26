@@ -1,8 +1,3 @@
-body > .header .logo {
-  font-family: 'Source Sans Pro',sans-serif;
-  font-size: 22px;
-}
-
 /* A replacement for .small-box .icon, where the icon is smaller and doesn't
    change size when moused over. */
 .small-box .icon-large {
@@ -46,4 +41,36 @@ section.sidebar > .shiny-input-container {
 /* Shiny inputs in boxes should span full width. */
 div.box-body .shiny-input-container {
   width: auto;
+}
+
+/* Sidebar is dark, so make text light by default. */
+.sidebar {
+  color: #fff;
+}
+/* Slider min and max in sidebar. */
+.sidebar .irs-min, .sidebar .irs-max {
+  color: #aaa;
+}
+
+
+/* Don't highlight text when info box is in <a> tag */
+a > .info-box {
+  color: #333;
+}
+
+/* Disable bouncy transition for sidebar toggle. */
+.content-wrapper,
+.right-side,
+.main-footer {
+  -moz-transition: none;
+  -webkit-transition: none;
+  -o-transition: all 0 none;
+  transition: none;
+}
+.main-sidebar,
+.left-side {
+  -moz-transition: none;
+  -webkit-transition: none;
+  -o-transition: all 0 none;
+  transition: none;
 }

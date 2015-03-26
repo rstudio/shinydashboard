@@ -38,6 +38,64 @@ valueBox <- function(value, subtitle, icon = NULL, color = "aqua", width = 4,
   )
 }
 
+
+#' Create an info box for the main body of a dashboard.
+#'
+#' An info box displays a large icon on the left side, and a title, value
+#' (usually a number), and an optional smaller subtitle on the right side. Info
+#' boxes are meant to be placed in the main body of a dashboard.
+#'
+#' @inheritParams box
+#' @param title Title text.
+#' @param value The value to display in the box. Usually a number or short text.
+#' @param subtitle Subtitle text (optional).
+#' @param icon An icon tag, created by \code{\link[shiny]{icon}}.
+#' @param color A color for the box. Valid colors are listed in
+#'   \link{validColors}.
+#' @param fill If \code{FALSE} (the default), use a white background for the
+#'   content, and the \code{color} argument for the background of the icon. If
+#'   \code{TRUE}, use the \code{color} argument for the background of the
+#'   content; the icon will use the same color with a slightly darkened
+#'   background.
+#' @param href An optional URL to link to.
+#'
+#' @family boxes
+#' @seealso \code{\link{box}} for usage examples.
+#'
+#' @export
+infoBox <- function(title, value = NULL, subtitle = NULL,
+  icon = shiny::icon("bar-chart"), color = "aqua", width = 4, href = NULL,
+  fill = FALSE) {
+
+  validateColor(color)
+  tagAssert(icon, type = "i")
+
+  colorClass <- paste0("bg-", color)
+
+  boxContent <- div(
+    class = "info-box",
+    class = if (fill) colorClass,
+    span(
+      class = "info-box-icon",
+      class = if (!fill) colorClass,
+      icon
+    ),
+    div(class = "info-box-content",
+      span(class = "info-box-text", title),
+      if (!is.null(value)) span(class = "info-box-number", value),
+      if (!is.null(subtitle)) p(subtitle)
+    )
+  )
+
+  if (!is.null(href))
+    boxContent <- a(href = href, boxContent)
+
+  div(class = if (!is.null(width)) paste0("col-sm-", width),
+    boxContent
+  )
+}
+
+
 #' Create a box for the main body of a dashboard
 #'
 #' Boxes can be used to hold content in the main body of a dashboard.
@@ -68,8 +126,22 @@ valueBox <- function(value, subtitle, icon = NULL, color = "aqua", width = 4,
 #' if (interactive()) {
 #' library(shiny)
 #'
-#' # A dashboard body with a row of valueBoxes and two rows of boxes
+#' # A dashboard body with a row of infoBoxes and valueBoxes, and two rows of boxes
 #' body <- dashboardBody(
+#'
+#'   # infoBoxes
+#'   fluidRow(
+#'     infoBox(
+#'       "Orders", uiOutput("orderNum2"), "Subtitle", icon = icon("credit-card")
+#'     ),
+#'     infoBox(
+#'       "Approval Rating", "60%", icon = icon("line-chart"), color = "green",
+#'       fill = TRUE
+#'     ),
+#'     infoBox(
+#'       "Progress", uiOutput("progress2"), icon = icon("users"), color = "purple"
+#'     )
+#'   ),
 #'
 #'   # valueBoxes
 #'   fluidRow(
@@ -89,7 +161,7 @@ valueBox <- function(value, subtitle, icon = NULL, color = "aqua", width = 4,
 #'   # Boxes
 #'   fluidRow(
 #'     box(status = "primary",
-#'       sliderInput("orders", "Orders", min = 1, max = 500, value = 120),
+#'       sliderInput("orders", "Orders", min = 1, max = 2000, value = 650),
 #'       selectInput("progress", "Progress",
 #'         choices = c("0%" = 0, "20%" = 20, "40%" = 40, "60%" = 60, "80%" = 80,
 #'                     "100%" = 100)
@@ -128,10 +200,20 @@ valueBox <- function(value, subtitle, icon = NULL, color = "aqua", width = 4,
 #' )
 #'
 #' server <- function(input, output) {
-#'   output$orderNum <- renderText(input$orders)
+#'   output$orderNum <- renderText({
+#'     prettyNum(input$orders, big.mark=",")
+#'   })
+#'
+#'   output$orderNum2 <- renderText({
+#'     prettyNum(input$orders, big.mark=",")
+#'   })
 #'
 #'   output$progress <- renderUI({
 #'     tagList(input$progress, tags$sup(style="font-size: 20px", "%"))
+#'   })
+#'
+#'   output$progress2 <- renderUI({
+#'     paste0(input$progress, "%")
 #'   })
 #'
 #'   output$status <- renderText({

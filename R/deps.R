@@ -12,10 +12,10 @@ appendDependencies <- function(x, value) {
 # Add dashboard dependencies to a tag object
 addDeps <- function(x) {
   dashboardDeps <- list(
-    htmlDependency("AdminLTE", "1.2",
+    htmlDependency("AdminLTE", "2.0.6",
       c(file = system.file("AdminLTE", package = "shinydashboard")),
       script = "app.min.js",
-      stylesheet = "AdminLTE.min.css"
+      stylesheet = c("AdminLTE.min.css", "_all-skins.min.css")
     ),
     htmlDependency("shinydashboard",
       as.character(packageVersion("shinydashboard")),

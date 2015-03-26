@@ -44,8 +44,22 @@ Boxes can be used to hold content in the main body of a dashboard.
 if (interactive()) {
 library(shiny)
 
-# A dashboard body with a row of valueBoxes and two rows of boxes
+# A dashboard body with a row of infoBoxes and valueBoxes, and two rows of boxes
 body <- dashboardBody(
+
+  # infoBoxes
+  fluidRow(
+    infoBox(
+      "Orders", uiOutput("orderNum2"), "Subtitle", icon = icon("credit-card")
+    ),
+    infoBox(
+      "Approval Rating", "60\%", icon = icon("line-chart"), color = "green",
+      fill = TRUE
+    ),
+    infoBox(
+      "Progress", uiOutput("progress2"), icon = icon("users"), color = "purple"
+    )
+  ),
 
   # valueBoxes
   fluidRow(
@@ -65,7 +79,7 @@ body <- dashboardBody(
   # Boxes
   fluidRow(
     box(status = "primary",
-      sliderInput("orders", "Orders", min = 1, max = 500, value = 120),
+      sliderInput("orders", "Orders", min = 1, max = 2000, value = 650),
       selectInput("progress", "Progress",
         choices = c("0\%" = 0, "20\%" = 20, "40\%" = 40, "60\%" = 60, "80\%" = 80,
                     "100\%" = 100)
@@ -104,10 +118,20 @@ body <- dashboardBody(
 )
 
 server <- function(input, output) {
-  output$orderNum <- renderText(input$orders)
+  output$orderNum <- renderText({
+    prettyNum(input$orders, big.mark=",")
+  })
+
+  output$orderNum2 <- renderText({
+    prettyNum(input$orders, big.mark=",")
+  })
 
   output$progress <- renderUI({
     tagList(input$progress, tags$sup(style="font-size: 20px", "\%"))
+  })
+
+  output$progress2 <- renderUI({
+    paste0(input$progress, "\%")
   })
 
   output$status <- renderText({
@@ -141,6 +165,7 @@ shinyApp(
 }
 }
 \seealso{
-Other boxes: \code{\link{tabBox}}; \code{\link{valueBox}}
+Other boxes: \code{\link{infoBox}}; \code{\link{tabBox}};
+  \code{\link{valueBox}}
 }
 

@@ -1,12 +1,12 @@
 Package: shinydashboard
-Title: Shiny Dashboard
-Version: 0.2.3
+Title: Make dashboards with Shiny
+Version: 0.3.0
 Authors@R: c(
     person("Winston", "Chang", role = c("aut", "cre"), email = "winston@rstudio.com"),
     person(family = "RStudio", role = "cph"),
     person(family = "Almasaeed Studio", role = c("ctb", "cph"))
     )
-Description: A package for making dashboards with Shiny.
+Description: Make dashboards with Shiny.
 Depends:
     R (>= 3.0)
 License: GPL-2 | file LICENSE
