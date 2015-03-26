@@ -1,6 +1,7 @@
-#' Create a value box output (client side)
+#' Create an info or value box output (client side)
 #'
-#' This is the UI-side function for creating a dynamic dropdown menu.
+#' This is the UI-side function for creating a dynamic \code{\link{valueBox}} or
+#' \code{\link{infoBox}}.
 #'
 #' @inheritParams valueBox
 #' @param outputId Output variable name.
@@ -11,13 +12,18 @@ valueBoxOutput <- function(outputId, width = 4) {
   shiny::uiOutput(outputId, class = paste0("col-sm-", width))
 }
 
-#' Create a value box output (server side)
+#' @rdname valueBoxOutput
+#' @export
+infoBoxOutput <- valueBoxOutput
+
+
+#' Create an info or value box output (server side)
 #'
-#' This is the server-side function for creating a dynamic \code{\link{valueBox}}.
+#' This is the server-side function for creating a dynamic
+#' \code{\link{valueBox}} or \code{\link{infoBox}}.
 #'
 #' @inheritParams shiny::renderUI
-#' @seealso \code{\link{valueBoxOutput}} for the corresponding UI-side
-#'   function.
+#' @seealso \code{\link{valueBoxOutput}} for the corresponding UI-side function.
 #'
 #' @examples
 #' ## Only run this example in interactive R sessions
@@ -25,21 +31,29 @@ valueBoxOutput <- function(outputId, width = 4) {
 #' library(shiny)
 #'
 #' ui <- dashboardPage(
-#'   dashboardHeader(title = "valueBoxes"),
+#'   dashboardHeader(title = "Dynamic boxes"),
 #'   dashboardSidebar(),
 #'   dashboardBody(
 #'     fluidRow(
 #'       box(width = 2, actionButton("count", "Count")),
-#'       valueBoxOutput("vbox1")
+#'       infoBoxOutput("ibox"),
+#'       valueBoxOutput("vbox")
 #'     )
 #'   )
 #' )
 #'
 #' server <- function(input, output) {
-#'   output$vbox1 <- renderValueBox({
+#'   output$ibox <- renderInfoBox({
+#'     infoBox(
+#'       "Title",
+#'       input$count,
+#'       icon = icon("credit-card")
+#'     )
+#'   })
+#'   output$vbox <- renderValueBox({
 #'     valueBox(
-#'       paste("Title", input$count),
-#'       paste("subtitle", input$count),
+#'       "Title",
+#'       input$count,
 #'       icon = icon("credit-card")
 #'     )
 #'   })
@@ -62,3 +76,7 @@ renderValueBox <- function(expr, env = parent.frame(), quoted = FALSE) {
     vbox$children[[1]]
   })
 }
+
+#' @rdname renderValueBox
+#' @export
+renderInfoBox <- renderValueBox
