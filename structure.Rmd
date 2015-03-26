@@ -638,9 +638,91 @@ shinyApp(
 ```
 
 
-### valueBox
+### infoBox
 
 There is a special kind of box that is used for displaying simple numeric or text values, with an icon. Here are some examples:
+
+```{r eval=FALSE, echo=FALSE}
+appshot('_apps/body-infoboxes/', 'images/body-infoboxes.png',
+  delay=1, selector = c('div.row', 'div.row:nth-child(2)',
+  expand = c(10,0,0,0)) %>%
+  resize("75%") %>%
+  shrink()
+```
+
+![Info boxes](images/body-infoboxes.png)
+
+The code to generate these `infoBox`es is below. The first row of infoBoxes uses the default setting of `fill=FALSE`, while the second row uses `fill=TRUE`.
+
+Since the content of an `infoBox` will usually be dynamic, **shinydashboard** contains the helper functions `infoBoxOutput` and `renderInfoBox` for dynamic content. The different possible colors are shown [here](appearance.html#statuses-and-colors).
+
+
+```{r eval=FALSE}
+library(shinydashboard)
+
+ui <- dashboardPage(
+  dashboardHeader(title = "Info boxes"),
+  dashboardSidebar(),
+  dashboardBody(
+    # infoBoxes with fill=FALSE
+    fluidRow(
+      # A static infoBox
+      infoBox("New Orders", 10 * 2, icon = icon("credit-card")),
+      # Dynamic infoBoxes
+      infoBoxOutput("progressBox"),
+      infoBoxOutput("approvalBox")
+    ),
+
+    # infoBoxes with fill=TRUE
+    fluidRow(
+      infoBox("New Orders", 10 * 2, icon = icon("credit-card"), fill = TRUE),
+      infoBoxOutput("progressBox2"),
+      infoBoxOutput("approvalBox2")
+    ),
+
+    fluidRow(
+      # Clicking this will increment the progress amount
+      box(width = 4, actionButton("count", "Increment progress"))
+    )
+  )
+)
+
+server <- function(input, output) {
+  output$progressBox <- renderInfoBox({
+    infoBox(
+      "Progress", paste0(25 + input$count, "%"), icon = icon("list"),
+      color = "purple"
+    )
+  })
+  output$approvalBox <- renderInfoBox({
+    infoBox(
+      "Approval", "80%", icon = icon("thumbs-up", lib = "glyphicon"),
+      color = "yellow"
+    )
+  })
+
+  # Same as above, but with fill=TRUE
+  output$progressBox2 <- renderInfoBox({
+    infoBox(
+      "Progress", paste0(25 + input$count, "%"), icon = icon("list"),
+      color = "purple", fill = TRUE
+    )
+  })
+  output$approvalBox2 <- renderInfoBox({
+    infoBox(
+      "Approval", "80%", icon = icon("thumbs-up", lib = "glyphicon"),
+      color = "yellow", fill = TRUE
+    )
+  })
+}
+
+shinyApp(ui, server)
+```
+
+
+### valueBox
+
+`valueBox`es are similar to `infoBox`es, but have a somewhat different appearance.
 
 ```{r eval=FALSE, echo=FALSE}
 appshot('_apps/body-valueboxes/', 'images/body-valueboxes.png',
@@ -651,8 +733,7 @@ appshot('_apps/body-valueboxes/', 'images/body-valueboxes.png',
 
 ![Value boxes](images/body-valueboxes.png)
 
-The code to generate these `valueBox`es is below. Since the content of a `valueBox` will usually be dynamic, **shinydashboard** contains the helper functions `valueBoxOutput` and `renderValueBox` for dynamic content. The different possible colors are shown [here](appearance.html#statuses-and-colors).
-
+The code to generate these `valueBox`es is below. As with the `infoBox`es above, some of these `valueBox`es are static and some are dynamic.
 
 ```{r eval=FALSE}
 library(shinydashboard)

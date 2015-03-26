@@ -115,6 +115,7 @@ code {
 <li><a href="#body">Body</a><ul>
 <li><a href="#boxes">Boxes</a><ul>
 <li><a href="#tabbox">tabBox</a></li>
+<li><a href="#infobox">infoBox</a></li>
 <li><a href="#valuebox">valueBox</a></li>
 </ul></li>
 <li><a href="#layouts">Layouts</a><ul>
@@ -494,11 +495,77 @@ server &lt;-<span class="st"> </span>function(input, output) {
   }
 )</code></pre>
 </div>
+<div id="infobox" class="section level3">
+<h3>infoBox</h3>
+<p>There is a special kind of box that is used for displaying simple numeric or text values, with an icon. Here are some examples:</p>
+<p><img src="images/body-infoboxes.png" alt="Info boxes" /></p>
+<p>The code to generate these <code>infoBox</code>es is below. The first row of infoBoxes uses the default setting of <code>fill=FALSE</code>, while the second row uses <code>fill=TRUE</code>.</p>
+<p>Since the content of an <code>infoBox</code> will usually be dynamic, <strong>shinydashboard</strong> contains the helper functions <code>infoBoxOutput</code> and <code>renderInfoBox</code> for dynamic content. The different possible colors are shown <a href="appearance.html#statuses-and-colors">here</a>.</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(shinydashboard)
+
+ui &lt;-<span class="st"> </span><span class="kw">dashboardPage</span>(
+  <span class="kw">dashboardHeader</span>(<span class="dt">title =</span> <span class="st">&quot;Info boxes&quot;</span>),
+  <span class="kw">dashboardSidebar</span>(),
+  <span class="kw">dashboardBody</span>(
+    <span class="co"># infoBoxes with fill=FALSE</span>
+    <span class="kw">fluidRow</span>(
+      <span class="co"># A static infoBox</span>
+      <span class="kw">infoBox</span>(<span class="st">&quot;New Orders&quot;</span>, <span class="dv">10</span> *<span class="st"> </span><span class="dv">2</span>, <span class="dt">icon =</span> <span class="kw">icon</span>(<span class="st">&quot;credit-card&quot;</span>)),
+      <span class="co"># Dynamic infoBoxes</span>
+      <span class="kw">infoBoxOutput</span>(<span class="st">&quot;progressBox&quot;</span>),
+      <span class="kw">infoBoxOutput</span>(<span class="st">&quot;approvalBox&quot;</span>)
+    ),
+
+    <span class="co"># infoBoxes with fill=TRUE</span>
+    <span class="kw">fluidRow</span>(
+      <span class="kw">infoBox</span>(<span class="st">&quot;New Orders&quot;</span>, <span class="dv">10</span> *<span class="st"> </span><span class="dv">2</span>, <span class="dt">icon =</span> <span class="kw">icon</span>(<span class="st">&quot;credit-card&quot;</span>), <span class="dt">fill =</span> <span class="ot">TRUE</span>),
+      <span class="kw">infoBoxOutput</span>(<span class="st">&quot;progressBox2&quot;</span>),
+      <span class="kw">infoBoxOutput</span>(<span class="st">&quot;approvalBox2&quot;</span>)
+    ),
+
+    <span class="kw">fluidRow</span>(
+      <span class="co"># Clicking this will increment the progress amount</span>
+      <span class="kw">box</span>(<span class="dt">width =</span> <span class="dv">4</span>, <span class="kw">actionButton</span>(<span class="st">&quot;count&quot;</span>, <span class="st">&quot;Increment progress&quot;</span>))
+    )
+  )
+)
+
+server &lt;-<span class="st"> </span>function(input, output) {
+  output$progressBox &lt;-<span class="st"> </span><span class="kw">renderInfoBox</span>({
+    <span class="kw">infoBox</span>(
+      <span class="st">&quot;Progress&quot;</span>, <span class="kw">paste0</span>(<span class="dv">25</span> +<span class="st"> </span>input$count, <span class="st">&quot;%&quot;</span>), <span class="dt">icon =</span> <span class="kw">icon</span>(<span class="st">&quot;list&quot;</span>),
+      <span class="dt">color =</span> <span class="st">&quot;purple&quot;</span>
+    )
+  })
+  output$approvalBox &lt;-<span class="st"> </span><span class="kw">renderInfoBox</span>({
+    <span class="kw">infoBox</span>(
+      <span class="st">&quot;Approval&quot;</span>, <span class="st">&quot;80%&quot;</span>, <span class="dt">icon =</span> <span class="kw">icon</span>(<span class="st">&quot;thumbs-up&quot;</span>, <span class="dt">lib =</span> <span class="st">&quot;glyphicon&quot;</span>),
+      <span class="dt">color =</span> <span class="st">&quot;yellow&quot;</span>
+    )
+  })
+
+  <span class="co"># Same as above, but with fill=TRUE</span>
+  output$progressBox2 &lt;-<span class="st"> </span><span class="kw">renderInfoBox</span>({
+    <span class="kw">infoBox</span>(
+      <span class="st">&quot;Progress&quot;</span>, <span class="kw">paste0</span>(<span class="dv">25</span> +<span class="st"> </span>input$count, <span class="st">&quot;%&quot;</span>), <span class="dt">icon =</span> <span class="kw">icon</span>(<span class="st">&quot;list&quot;</span>),
+      <span class="dt">color =</span> <span class="st">&quot;purple&quot;</span>, <span class="dt">fill =</span> <span class="ot">TRUE</span>
+    )
+  })
+  output$approvalBox2 &lt;-<span class="st"> </span><span class="kw">renderInfoBox</span>({
+    <span class="kw">infoBox</span>(
+      <span class="st">&quot;Approval&quot;</span>, <span class="st">&quot;80%&quot;</span>, <span class="dt">icon =</span> <span class="kw">icon</span>(<span class="st">&quot;thumbs-up&quot;</span>, <span class="dt">lib =</span> <span class="st">&quot;glyphicon&quot;</span>),
+      <span class="dt">color =</span> <span class="st">&quot;yellow&quot;</span>, <span class="dt">fill =</span> <span class="ot">TRUE</span>
+    )
+  })
+}
+
+<span class="kw">shinyApp</span>(ui, server)</code></pre>
+</div>
 <div id="valuebox" class="section level3">
 <h3>valueBox</h3>
-<p>There is a special kind of box that is used for displaying simple numeric or text values, with an icon. Here are some examples:</p>
+<p><code>valueBox</code>es are similar to <code>infoBox</code>es, but have a somewhat different appearance.</p>
 <p><img src="images/body-valueboxes.png" alt="Value boxes" /></p>
-<p>The code to generate these <code>valueBox</code>es is below. Since the content of a <code>valueBox</code> will usually be dynamic, <strong>shinydashboard</strong> contains the helper functions <code>valueBoxOutput</code> and <code>renderValueBox</code> for dynamic content. The different possible colors are shown <a href="appearance.html#statuses-and-colors">here</a>.</p>
+<p>The code to generate these <code>valueBox</code>es is below. As with the <code>infoBox</code>es above, some of these <code>valueBox</code>es are static and some are dynamic.</p>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(shinydashboard)
 
 ui &lt;-<span class="st"> </span><span class="kw">dashboardPage</span>(
