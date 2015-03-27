@@ -6,7 +6,7 @@
 \alias{sidebarMenu}
 \title{Create a dashboard sidebar menu and menu items.}
 \usage{
-sidebarMenu(..., id = NULL)
+sidebarMenu(..., id = NULL, .list = NULL)
 
 menuItem(text, ..., icon = NULL, badgeLabel = NULL, badgeColor = "green",
   tabName = NULL, href = NULL, newtab = TRUE)
@@ -21,6 +21,10 @@ menuSubItem(text, tabName = NULL, href = NULL, newtab = TRUE,
 used for a Shiny input value, and it will report which tab is selected. For
 example, if \code{id="tabs"}, then \code{input$tabs} will be the
 \code{tabName} of the currently-selected tab.}
+
+\item{.list}{An optional list containing items to put in the menu Same as the
+  \code{...} arguments, but in list format. This can be useful when working
+  with programmatically generated items.}
 
 \item{text}{Text to show for the menu item.}
 

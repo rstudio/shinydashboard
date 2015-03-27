@@ -163,6 +163,9 @@ sidebarSearchForm <- function(textId, buttonId, label = "Search...",
 #'   compatible with \code{href}.
 #' @param newtab If \code{href} is supplied, should the link open in a new tab?
 #' @param ... For menu items, this may consist of \code{\link{menuSubItem}}s.
+#' @param .list An optional list containing items to put in the menu Same as the
+#'   \code{...} arguments, but in list format. This can be useful when working
+#'   with programmatically generated items.
 #'
 #' @family sidebar items
 #'
@@ -171,14 +174,14 @@ sidebarSearchForm <- function(textId, buttonId, label = "Search...",
 #'   \code{\link{sidebarMenuOutput}}.
 #'
 #' @export
-sidebarMenu <- function(..., id = NULL) {
-  items <- list(...)
+sidebarMenu <- function(..., id = NULL, .list = NULL) {
+  items <- c(list(...), .list)
 
   # Make sure the items are li tags
   lapply(items, tagAssert, type = "li")
 
   tags$ul(id = id, class = "sidebar-menu",
-    ...
+    items
   )
 }
 
