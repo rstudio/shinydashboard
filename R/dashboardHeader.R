@@ -232,7 +232,7 @@ notificationItem <- function(text, icon = shiny::icon("warning"),
   if (is.null(href)) href <- "#"
 
   # Add the status as another HTML class to the icon
-  icon <- tagAppendAttributes(icon, class = status)
+  icon <- tagAppendAttributes(icon, class = paste0("text-", status))
 
   tags$li(
     a(href = href, icon, text)
