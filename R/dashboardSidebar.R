@@ -190,7 +190,6 @@ sidebarMenu <- function(..., id = NULL, .list = NULL) {
 menuItem <- function(text, ..., icon = NULL, badgeLabel = NULL, badgeColor = "green",
                      tabName = NULL, href = NULL, newtab = TRUE) {
   subItems <- list(...)
-  lapply(subItems, tagAssert, type = "li")
 
   if (!is.null(icon)) tagAssert(icon, type = "i")
   if (!is.null(href) + !is.null(tabName) + (length(subItems) > 0) != 1 ) {
