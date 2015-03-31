@@ -91,13 +91,12 @@ dashboardHeader <- function(..., title = NULL, disable = FALSE, .list = NULL) {
     style = if (disable) "display: none;",
     span(class = "logo", title),
     tags$nav(class = "navbar navbar-static-top", role = "navigation",
+      # Embed hidden icon so that we get the font-awesome dependency
+      span(shiny::icon("bars"), style = "display:none;"),
       # Sidebar toggle button
       a(href="#", class="sidebar-toggle", `data-toggle`="offcanvas",
         role="button",
-        span(class="sr-only", "Toggle navigation"),
-        span(class="icon-bar"),
-        span(class="icon-bar"),
-        span(class="icon-bar")
+        span(class="sr-only", "Toggle navigation")
       ),
       div(class = "navbar-custom-menu",
         tags$ul(class = "nav navbar-nav",
