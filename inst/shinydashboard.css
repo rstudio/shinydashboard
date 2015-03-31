@@ -76,6 +76,6 @@ a > .info-box {
 }
 
 /* Move sidebar down when RStudio branding bar is present */
-body.rstudio-branded .sidebar-menu {
+body.rstudio-branded .main-sidebar {
   padding-top: 100px;
 }
