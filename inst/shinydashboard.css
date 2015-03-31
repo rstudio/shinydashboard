@@ -74,3 +74,8 @@ a > .info-box {
   -o-transition: all 0 none;
   transition: none;
 }
+
+/* Move sidebar down when RStudio branding bar is present */
+body.rstudio-branded .sidebar-menu {
+  padding-top: 100px;
+}
