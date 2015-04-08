@@ -81,7 +81,7 @@ sidebarUserPanel <- function(name, subtitle = NULL, image = NULL) {
   div(class = "user-panel",
     if (!is.null(image)) {
       div(class = "pull-left image",
-        img(src = "foo.png", class = "img-circle", alt = "User Image")
+        img(src = image, class = "img-circle", alt = "User Image")
       )
     },
     div(class = "pull-left info",
