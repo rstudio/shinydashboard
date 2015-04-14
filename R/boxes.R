@@ -285,13 +285,18 @@ box <- function(..., title = NULL, footer = NULL, status = NULL,
     )
   }
 
+  headerTag <- NULL
+  if (!is.null(titleTag) || !is.null(collapseTag)) {
+    headerTag <- div(class = "box-header",
+      titleTag,
+      collapseTag
+    )
+  }
+
   div(class = if (!is.null(width)) paste0("col-sm-", width),
     div(class = boxClass,
       style = if (!is.null(style)) style,
-      div(class = "box-header",
-        titleTag,
-        collapseTag
-      ),
+      headerTag,
       div(class = "box-body", ...),
       if (!is.null(footer)) div(class = "box-footer", footer)
     )
