@@ -9,10 +9,11 @@
 sidebarMenu(..., id = NULL, .list = NULL)
 
 menuItem(text, ..., icon = NULL, badgeLabel = NULL, badgeColor = "green",
-  tabName = NULL, href = NULL, newtab = TRUE)
+  tabName = NULL, href = NULL, newtab = TRUE, selected = NULL,
+  expanded = NULL)
 
 menuSubItem(text, tabName = NULL, href = NULL, newtab = TRUE,
-  icon = shiny::icon("angle-double-right"))
+  icon = shiny::icon("angle-double-right"), selected = NULL)
 }
 \arguments{
 \item{...}{For menu items, this may consist of \code{\link{menuSubItem}}s.}
@@ -44,6 +45,10 @@ compatible with \code{href}.}
 
 \item{newtab}{If \code{href} is supplied, should the link open in a new
 browser tab?}
+
+\item{selected}{If \code{TRUE}, this \code{menuItem} or \code{menuSubItem}
+will start selected. If no item have \code{selected=TRUE}, then the first
+\code{menuItem} will start selected.}
 }
 \description{
 A \code{dashboardSidebar} can contain a \code{sidebarMenu}. A

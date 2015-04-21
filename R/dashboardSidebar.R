@@ -163,6 +163,9 @@ sidebarSearchForm <- function(textId, buttonId, label = "Search...",
 #'   compatible with \code{href}.
 #' @param newtab If \code{href} is supplied, should the link open in a new
 #'   browser tab?
+#' @param selected If \code{TRUE}, this \code{menuItem} or \code{menuSubItem}
+#'   will start selected. If no item have \code{selected=TRUE}, then the first
+#'   \code{menuItem} will start selected.
 #' @param ... For menu items, this may consist of \code{\link{menuSubItem}}s.
 #' @param .list An optional list containing items to put in the menu Same as the
 #'   \code{...} arguments, but in list format. This can be useful when working
@@ -189,7 +192,7 @@ sidebarMenu <- function(..., id = NULL, .list = NULL) {
 #' @rdname sidebarMenu
 #' @export
 menuItem <- function(text, ..., icon = NULL, badgeLabel = NULL, badgeColor = "green",
-                     tabName = NULL, href = NULL, newtab = TRUE) {
+                     tabName = NULL, href = NULL, newtab = TRUE, selected = NULL) {
   subItems <- list(...)
 
   if (!is.null(icon)) tagAssert(icon, type = "i")
@@ -233,6 +236,7 @@ menuItem <- function(text, ..., icon = NULL, badgeLabel = NULL, badgeColor = "gr
         a(href = href,
           `data-toggle` = if (isTabItem) "tab",
           `data-value` = if (!is.null(tabName)) tabName,
+          `data-start-selected` = if (isTRUE(selected)) 1 else NULL,
           target = target,
           icon,
           span(text),
@@ -257,7 +261,7 @@ menuItem <- function(text, ..., icon = NULL, badgeLabel = NULL, badgeColor = "gr
 #' @rdname sidebarMenu
 #' @export
 menuSubItem <- function(text, tabName = NULL, href = NULL, newtab = TRUE,
-  icon = shiny::icon("angle-double-right"))
+  icon = shiny::icon("angle-double-right"), selected = NULL)
 {
 
   if (!is.null(href) && !is.null(tabName)) {
@@ -283,6 +287,7 @@ menuSubItem <- function(text, tabName = NULL, href = NULL, newtab = TRUE,
     a(href = href,
       `data-toggle` = if (isTabItem) "tab",
       `data-value` = if (!is.null(tabName)) tabName,
+      `data-start-selected` = if (isTRUE(selected)) 1 else NULL,
       target = target,
       icon,
       text

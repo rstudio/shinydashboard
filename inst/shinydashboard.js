@@ -28,10 +28,20 @@ $(function() {
 
 
   // When document is ready, if there is a sidebar menu with no activated tabs,
-  // activate the first one.
+  // activate the one specified by `data-start-selected`, or if that's not
+  // present, the first one.
   var ensureActivatedTab = function() {
-    var $tablinks = $("ul.sidebar-menu").find("a[data-toggle='tab']");
+    var $tablinks = $("ul.sidebar-menu").find("a").filter("[data-toggle='tab']");
 
+    // If there's a `data-start-selected` attribute and we can find a tab with
+    // that name, activate it.
+    var $startTab = $tablinks.filter("[data-start-selected='1']");
+    if ($startTab.length !== 0) {
+      $startTab.tab("show");
+      return;
+    }
+
+    // If we got this far, just activate the first tab.
     if (! $tablinks.parent("li").hasClass("active") ) {
       $tablinks.first().tab("show");
     }
