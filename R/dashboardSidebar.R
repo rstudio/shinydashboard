@@ -161,7 +161,8 @@ sidebarSearchForm <- function(textId, buttonId, label = "Search...",
 #' @param href An link address. Not compatible with \code{tabName}.
 #' @param tabName The name of a tab that this menu item will activate. Not
 #'   compatible with \code{href}.
-#' @param newtab If \code{href} is supplied, should the link open in a new tab?
+#' @param newtab If \code{href} is supplied, should the link open in a new
+#'   browser tab?
 #' @param ... For menu items, this may consist of \code{\link{menuSubItem}}s.
 #' @param .list An optional list containing items to put in the menu Same as the
 #'   \code{...} arguments, but in list format. This can be useful when working

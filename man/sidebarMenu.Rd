@@ -42,7 +42,8 @@ compatible with \code{href}.}
 
 \item{href}{An link address. Not compatible with \code{tabName}.}
 
-\item{newtab}{If \code{href} is supplied, should the link open in a new tab?}
+\item{newtab}{If \code{href} is supplied, should the link open in a new
+browser tab?}
 }
 \description{
 A \code{dashboardSidebar} can contain a \code{sidebarMenu}. A
