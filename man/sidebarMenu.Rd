@@ -9,8 +9,7 @@
 sidebarMenu(..., id = NULL, .list = NULL)
 
 menuItem(text, ..., icon = NULL, badgeLabel = NULL, badgeColor = "green",
-  tabName = NULL, href = NULL, newtab = TRUE, selected = NULL,
-  expanded = NULL)
+  tabName = NULL, href = NULL, newtab = TRUE, selected = NULL)
 
 menuSubItem(text, tabName = NULL, href = NULL, newtab = TRUE,
   icon = shiny::icon("angle-double-right"), selected = NULL)
