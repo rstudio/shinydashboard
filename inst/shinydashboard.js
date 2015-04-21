@@ -56,21 +56,6 @@ $(function() {
   }
 
 
-  // If RStudio branding bar is present, shift sidebar down by that amount,
-  // because it is absolutely positioned.
-  // https://github.com/rstudio/shinydashboard/issues/20
-  setTimeout(function() {
-    var $branding = $('#rstudio_branding_bar');
-    var $sidebar = $('.main-sidebar');
-    if ($branding.length === 0 || $sidebar.length === 0) return;
-
-    var padTop = parseInt($sidebar.css('padding-top'));
-    padTop += $branding.height();
-
-    $sidebar.css('padding-top', padTop + 'px');
-  }, 1);
-
-
   // menuOutputBinding
   // ------------------------------------------------------------------
   // Based on Shiny.htmlOutputBinding, but instead of putting the result in a
