@@ -1,0 +1,4 @@
+*.min.js -merge -diff
+*.min.css -merge -diff
+*.js.map -merge -diff
+
