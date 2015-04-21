@@ -9,6 +9,7 @@ Authors@R: c(
     )
 Description: Create dashboards with 'Shiny'. This package provides
   a theme on top of 'Shiny', making it easy to create attractive dashboards.
+URL: http://rstudio.github.io/shinydashboard/
 Depends:
     R (>= 3.0)
 License: GPL-2 | file LICENSE
