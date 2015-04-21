@@ -117,6 +117,8 @@ infoBox <- function(title, value = NULL, subtitle = NULL,
 #'   the height scales automatically with the content.
 #' @param collapsible If TRUE, display a button in the upper right that allows
 #'   the user to collapse the box.
+#' @param collapsed If TRUE, start collapsed. This must be used with
+#'   \code{collapsible=TRUE}.
 #' @param ... Contents of the box.
 #'
 #' @family boxes
@@ -248,7 +250,7 @@ infoBox <- function(title, value = NULL, subtitle = NULL,
 #' @export
 box <- function(..., title = NULL, footer = NULL, status = NULL,
                 solidHeader = FALSE, background = NULL, width = 6,
-                height = NULL, collapsible = FALSE) {
+                height = NULL, collapsible = FALSE, collapsed = FALSE) {
 
   boxClass <- "box"
   if (solidHeader || !is.null(background)) {
@@ -257,6 +259,9 @@ box <- function(..., title = NULL, footer = NULL, status = NULL,
   if (!is.null(status)) {
     validateStatus(status)
     boxClass <- paste0(boxClass, " box-", status)
+  }
+  if (collapsible && collapsed) {
+    boxClass <- paste(boxClass, "collapsed-box")
   }
   if (!is.null(background)) {
     validateColor(background)
@@ -277,10 +282,12 @@ box <- function(..., title = NULL, footer = NULL, status = NULL,
   if (collapsible) {
     buttonStatus <- status %OR% "default"
 
+    collapseIcon <- if (collapsed) "plus" else "minus"
+
     collapseTag <- div(class = "box-tools pull-right",
       tags$button(class = paste0("btn btn-box-tool"),
         `data-widget` = "collapse",
-        shiny::icon("minus")
+        shiny::icon(collapseIcon)
       )
     )
   }

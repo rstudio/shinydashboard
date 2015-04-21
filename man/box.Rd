@@ -6,7 +6,7 @@
 \usage{
 box(..., title = NULL, footer = NULL, status = NULL,
   solidHeader = FALSE, background = NULL, width = 6, height = NULL,
-  collapsible = FALSE)
+  collapsible = FALSE, collapsed = FALSE)
 }
 \arguments{
 \item{...}{Contents of the box.}
@@ -35,6 +35,9 @@ the height scales automatically with the content.}
 
 \item{collapsible}{If TRUE, display a button in the upper right that allows
 the user to collapse the box.}
+
+\item{collapsed}{If TRUE, start collapsed. This must be used with
+\code{collapsible=TRUE}.}
 }
 \description{
 Boxes can be used to hold content in the main body of a dashboard.
