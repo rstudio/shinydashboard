@@ -1,5 +1,5 @@
 Package: shinydashboard
-Title: Create dashboards with Shiny
+Title: Create Dashboards with 'Shiny'
 Version: 0.4.0
 Authors@R: c(
     person("Winston", "Chang", role = c("aut", "cre"), email = "winston@rstudio.com"),
