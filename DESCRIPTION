@@ -4,7 +4,7 @@ Version: 0.4.0
 Authors@R: c(
     person("Winston", "Chang", role = c("aut", "cre"), email = "winston@rstudio.com"),
     person(family = "RStudio", role = "cph"),
-    person(family = "Almasaeed Studio", role = c("ctb", "cph")),
+    person(family = "Almasaeed Studio", role = c("ctb", "cph"), comment = "AdminLTE theme for Bootstrap"),
     person(family = "Adobe Systems Incorporated", role = c("ctb", "cph"), comment = "Source Sans Pro font")
     )
 Description: Create dashboards with 'Shiny'. This package provides
