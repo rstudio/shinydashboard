@@ -24,10 +24,7 @@ knit_print.shiny.tag <- function(x, ...) {
 **shinydashboard** requires Shiny 0.11 or above. To install, run:
 
 ```{r eval=FALSE}
-# First install devtools if you don't already have it installed, with:
-# install.packages("devtools")
-
-devtools::install_github("rstudio/shinydashboard")
+install.packages("shinydashboard")
 ```
 
 ## Basics
