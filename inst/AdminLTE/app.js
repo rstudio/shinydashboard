@@ -564,12 +564,21 @@ function _init() {
         //Hide the content
         box_content.slideUp(_this.animationSpeed, function () {
           box.addClass("collapsed-box");
+          box.trigger("hidden.bs.collapse");
         });
       } else {
         //Convert plus into minus
         element.children(":first")
                 .removeClass(_this.icons.open)
                 .addClass(_this.icons.collapse);
+
+        // Techinically, it should be 'show' which is triggered here, and
+        // 'shown' which is triggered later. However, this works better because
+        // of the slow expansion transition -- the box would fully expand, and
+        // only then trigger 'shown', which then results in an update of the
+        // content. This would allow users to see the old content during the
+        // expansion.
+        box.trigger("shown.bs.collapse");
         //Show the content
         box_content.slideDown(_this.animationSpeed, function () {
           box.removeClass("collapsed-box");
