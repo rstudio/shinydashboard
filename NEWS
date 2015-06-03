@@ -1,0 +1,10 @@
+shinydashboard 0.4.0.9xxx
+--------------------------------------------------------------------------------
+
+* Updated to AdminLTE 2.1.1 (8ae58fe).
+
+* shinydashboard now respects the `shiny.minified` option.
+
+* Collapse buttons on boxes trigger `shown` and `hidden` events. Previously they
+  did not, which resulted in dynamic content not working for boxes that started
+  collapsed. (#42)
