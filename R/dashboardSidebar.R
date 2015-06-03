@@ -181,9 +181,6 @@ sidebarSearchForm <- function(textId, buttonId, label = "Search...",
 sidebarMenu <- function(..., id = NULL, .list = NULL) {
   items <- c(list(...), .list)
 
-  # Make sure the items are li tags
-  lapply(items, tagAssert, type = "li")
-
   tags$ul(id = id, class = "sidebar-menu",
     items
   )
