@@ -539,13 +539,13 @@ function _init() {
         _box = document; // activate all boxes per default
       }
       //Listen for collapse event triggers
-      $(_box).find(_this.selectors.collapse).on('click', function (e) {
+      $(_box).on('click', _this.selectors.collapse, function (e) {
         e.preventDefault();
         _this.collapse($(this));
       });
 
       //Listen for remove event triggers
-      $(_box).find(_this.selectors.remove).on('click', function (e) {
+      $(_box).on('click', _this.selectors.remove, function (e) {
         e.preventDefault();
         _this.remove($(this));
       });
