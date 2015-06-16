@@ -51,15 +51,13 @@ dashboardPage <- function(header, sidebar, body, title = NULL,
 
   title <- title %OR% extractTitle(header)
 
-  content <- tagList(
+  content <- div(class = "wrapper",
     header,
-    div(class = "wrapper row-offcanvas row-offcanvas-left",
-      tags$aside(class = "main-sidebar sidebar-offcanvas",
-        sidebar
-      ),
-      tags$aside(class = "content-wrapper",
-        body
-      )
+    tags$aside(class = "main-sidebar",
+      sidebar
+    ),
+    div(class = "content-wrapper",
+      body
     )
   )
 
