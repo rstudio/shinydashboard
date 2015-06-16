@@ -5,6 +5,9 @@
 #'
 #' @param ... Items to put in the sidebar.
 #' @param disable If \code{TRUE}, the sidebar will be disabled.
+#' @param width The width of the sidebar. This must either be a number which
+#'   specifies the width in pixels, or a string that specifies the width in CSS
+#'   units.
 #'
 #' @seealso \code{\link{sidebarMenu}}
 #'
@@ -56,11 +59,67 @@
 #' )
 #' }
 #' @export
-dashboardSidebar <- function(..., disable = FALSE) {
-  tags$section(
-    class = "sidebar",
-    `data-disable` = if(disable) 1 else NULL,
-    list(...)
+dashboardSidebar <- function(..., disable = FALSE, width = NULL) {
+  width <- validateCssUnit(width)
+
+  # Set up custom CSS for custom width
+  custom_css <- NULL
+  if (!is.null(width)) {
+    # This CSS is derived from the sidebar-related instances of '230px' (the
+    # default sidebar width) from inst/AdminLTE/AdminLTE.css. One difference is
+    # that instead making changes to the global settings, we've put them in a
+    # media query (min-width: 768px), so that it won't override other media
+    # queries (like max-width: 767px) that work for narrower screens.
+    custom_css <- tags$head(tags$style(HTML(gsub("_WIDTH_", width, fixed = TRUE, '
+      @media (min-width: 768px) {
+        .content-wrapper,
+        .right-side,
+        .main-footer {
+          margin-left: _WIDTH_;
+        }
+        .main-sidebar,
+        .left-side {
+          width: _WIDTH_;
+        }
+      }
+      @media (max-width: 767px) {
+        .sidebar-open .content-wrapper,
+        .sidebar-open .right-side,
+        .sidebar-open .main-footer {
+          -webkit-transform: translate(_WIDTH_, 0);
+          -ms-transform: translate(_WIDTH_, 0);
+          -o-transform: translate(_WIDTH_, 0);
+          transform: translate(_WIDTH_, 0);
+        }
+      }
+      @media (max-width: 767px) {
+        .main-sidebar,
+        .left-side {
+          -webkit-transform: translate(-_WIDTH_, 0);
+          -ms-transform: translate(-_WIDTH_, 0);
+          -o-transform: translate(-_WIDTH_, 0);
+          transform: translate(-_WIDTH_, 0);
+        }
+      }
+      @media (min-width: 768px) {
+        .sidebar-collapse .main-sidebar,
+        .sidebar-collapse .left-side {
+          -webkit-transform: translate(-_WIDTH_, 0);
+          -ms-transform: translate(-_WIDTH_, 0);
+          -o-transform: translate(-_WIDTH_, 0);
+          transform: translate(-_WIDTH_, 0);
+        }
+      }
+    '))))
+  }
+
+  tags$aside(class = "main-sidebar",
+    custom_css,
+    tags$section(
+      class = "sidebar",
+      `data-disable` = if(disable) 1 else NULL,
+      list(...)
+    )
   )
 }
 

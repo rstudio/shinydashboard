@@ -9,7 +9,9 @@
 #'
 #' @export
 dashboardBody <- function(...) {
-  tags$section(class = "content",
-    ...
+  div(class = "content-wrapper",
+    tags$section(class = "content",
+      ...
+    )
   )
 }

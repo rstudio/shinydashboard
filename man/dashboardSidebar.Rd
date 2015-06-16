@@ -4,12 +4,16 @@
 \alias{dashboardSidebar}
 \title{Create a dashboard sidebar.}
 \usage{
-dashboardSidebar(..., disable = FALSE)
+dashboardSidebar(..., disable = FALSE, width = NULL)
 }
 \arguments{
 \item{...}{Items to put in the sidebar.}
 
 \item{disable}{If \code{TRUE}, the sidebar will be disabled.}
+
+\item{width}{The width of the sidebar. This must either be a number which
+  specifies the width in pixels, or a string that specifies the width in CSS
+  units.}
 }
 \description{
 A dashboard sidebar typically contains a \code{\link{sidebarMenu}}, although

@@ -92,14 +92,31 @@ dashboardHeader <- function(..., title = NULL, titleWidth = NULL, disable = FALS
 
   titleWidth <- validateCssUnit(titleWidth)
 
+  # Set up custom CSS for custom width.
+  custom_css <- NULL
+  if (!is.null(titleWidth)) {
+    # This CSS is derived from the header-related instances of '230px' (the
+    # default sidebar width) from inst/AdminLTE/AdminLTE.css. One change is that
+    # instead making changes to the global settings, we've put them in a media
+    # query (min-width: 768px), so that it won't override other media queries
+    # (like max-width: 767px) that work for narrower screens.
+    custom_css <- tags$head(tags$style(HTML(gsub("_WIDTH_", titleWidth, fixed = TRUE, '
+      @media (min-width: 768px) {
+        .main-header > .navbar {
+          margin-left: _WIDTH_;
+        }
+        .main-header .logo {
+          width: _WIDTH_;
+        }
+      }
+    '))))
+  }
+
   tags$header(class = "main-header",
+    custom_css,
     style = if (disable) "display: none;",
-    span(class = "logo",
-      style = if (!is.null(titleWidth)) paste0("width: ", titleWidth, ";"),
-      title
-    ),
+    span(class = "logo", title),
     tags$nav(class = "navbar navbar-static-top", role = "navigation",
-      style = if (!is.null(titleWidth)) paste0("margin-left: ", titleWidth, ";"),
       # Embed hidden icon so that we get the font-awesome dependency
       span(shiny::icon("bars"), style = "display:none;"),
       # Sidebar toggle button
