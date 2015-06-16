@@ -128,7 +128,7 @@ code {
 <p>You can add custom CSS to your app by creating a <code>www/</code> subdirectory to your app and adding a CSS file there. Suppose, for example, you want to change the title font of your dashboard to the same font as the rest of the dashboard, so that it looks like this:</p>
 <p><img src="images/css-logo-font.png" alt="Custom font" /></p>
 <p>To do this, first create a file named <code>www/custom.css</code> with the following:</p>
-<pre class="sourceCode css"><code class="sourceCode css">body &gt; <span class="fl">.main-header</span> <span class="fl">.logo</span> <span class="kw">{</span>
+<pre class="sourceCode css"><code class="sourceCode css"><span class="fl">.main-header</span> <span class="fl">.logo</span> <span class="kw">{</span>
   <span class="kw">font-family:</span> <span class="st">&quot;Georgia&quot;</span>, Times, <span class="st">&quot;Times New Roman&quot;</span>, <span class="dt">serif</span><span class="kw">;</span>
   <span class="kw">font-weight:</span> <span class="dt">bold</span><span class="kw">;</span>
   <span class="kw">font-size:</span> <span class="dt">24px</span><span class="kw">;</span>
@@ -151,7 +151,7 @@ code {
   <span class="kw">dashboardSidebar</span>(),
   <span class="kw">dashboardBody</span>(
     tags$<span class="kw">head</span>(tags$<span class="kw">style</span>(<span class="kw">HTML</span>(<span class="st">&#39;</span>
-<span class="st">      body &gt; .main-header .logo {</span>
+<span class="st">      .main-header .logo {</span>
 <span class="st">        font-family: &quot;Georgia&quot;, Times, &quot;Times New Roman&quot;, serif;</span>
 <span class="st">        font-weight: bold;</span>
 <span class="st">        font-size: 24px;</span>

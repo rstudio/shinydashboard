@@ -88,7 +88,7 @@ appshot('_apps/css-logo-font/', 'images/css-logo-font.png',
 To do this, first create a file named `www/custom.css` with the following:
 
 ```css
-body > .main-header .logo {
+.main-header .logo {
   font-family: "Georgia", Times, "Times New Roman", serif;
   font-weight: bold;
   font-size: 24px;
@@ -120,7 +120,7 @@ dashboardPage(
   dashboardSidebar(),
   dashboardBody(
     tags$head(tags$style(HTML('
-      body > .main-header .logo {
+      .main-header .logo {
         font-family: "Georgia", Times, "Times New Roman", serif;
         font-weight: bold;
         font-size: 24px;
