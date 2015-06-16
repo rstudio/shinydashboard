@@ -162,24 +162,24 @@ code {
 </div>
 <div id="long-titles" class="section level2">
 <h2>Long titles</h2>
-<p>In some cases, the title that you wish to use won’t fit in the default width in the header bar. You can make the space for the title wider with some custom CSS. In this example, we’ve increased the width for the title to 450 pixels, and also set the background color of the title area to be the same as the rest of the header bar.</p>
+<p>In some cases, the title that you wish to use won’t fit in the default width in the header bar. You can make the space for the title wider with the <code>titleWidth</code> option. In this example, we’ve increased the width for the title to 450 pixels, and also set the background color of the title area (using custom CSS) to be the same as the rest of the header bar.</p>
 <p><img src="images/long-title.png" alt="Long title" /></p>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="kw">shinyApp</span>(
   <span class="dt">ui =</span> <span class="kw">dashboardPage</span>(
-    <span class="kw">dashboardHeader</span>(<span class="dt">title =</span> <span class="st">&quot;Example of a long title that needs more space&quot;</span>),
+    <span class="kw">dashboardHeader</span>(
+      <span class="dt">title =</span> <span class="st">&quot;Example of a long title that needs more space&quot;</span>,
+      <span class="dt">titleWidth =</span> <span class="dv">450</span>
+    ),
     <span class="kw">dashboardSidebar</span>(),
     <span class="kw">dashboardBody</span>(
+      <span class="co"># Also add some custom CSS to make the title background area the same</span>
+      <span class="co"># color as the rest of the header.</span>
       tags$<span class="kw">head</span>(tags$<span class="kw">style</span>(<span class="kw">HTML</span>(<span class="st">&#39;</span>
-<span class="st">        body &gt; .main-header .logo {</span>
-<span class="st">          width: 450px;</span>
-<span class="st">        }</span>
-<span class="st">        /* Need this particular CSS selector to override color from skin-blue.</span>
-<span class="st">           For other skins (like skin-black), use the appropriate color name */</span>
 <span class="st">        .skin-blue .main-header .logo {</span>
 <span class="st">          background-color: #3c8dbc;</span>
 <span class="st">        }</span>
-<span class="st">        body &gt; .main-header .navbar {</span>
-<span class="st">          margin-left: 450px;</span>
+<span class="st">        .skin-blue .main-header .logo:hover {</span>
+<span class="st">          background-color: #3c8dbc;</span>
 <span class="st">        }</span>
 <span class="st">      &#39;</span>)))
     )
