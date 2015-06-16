@@ -1,7 +1,10 @@
 shinydashboard 0.4.0.9xxx
 --------------------------------------------------------------------------------
 
-* Updated to AdminLTE 2.1.1 (8ae58fe).
+* Updated to AdminLTE 2.1.2 (406de4e). Please note that some CSS selectors have
+  changed, so if you are using custom CSS, it may require modification. The
+  documentation at http://rstudio.github.io/shinydashboard/appearance.html has
+  some updated examples.
 
 * shinydashboard now respects the `shiny.minified` option.
 
