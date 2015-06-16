@@ -7,4 +7,12 @@ shinydashboard 0.4.0.9xxx
 
 * Collapse buttons on boxes trigger `shown` and `hidden` events. Previously they
   did not, which resulted in dynamic content not working for boxes that started
-  collapsed. (#42)
+  collapsed. (#17, #42)
+
+* Dynamic menuSubItems now work in the sidebar. (#54)
+
+* Arbitrary content may now be used in a `sidebarMenu()`, not just `menuItem`s.
+  (#44)
+
+* Added options to set the width of `dashboardHeader()` and
+  `dashboardSidebar()`. (#43, #45, #54)
