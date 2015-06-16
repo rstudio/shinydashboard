@@ -7,6 +7,9 @@
 #'   will also be used as the title shown in the browser's title bar. If you
 #'   want that to be different from the text in the dashboard header bar, set
 #'   the \code{title} in \code{\link{dashboardPage}}.
+#' @param titleWidth The width of the title area. This must either be a number
+#'   which specifies the width in pixels, or a string that specifies the width
+#'   in CSS units.
 #' @param disable If \code{TRUE}, don't display the header bar.
 #' @param ... Items to put in the header. Should be \code{\link{dropdownMenu}}s.
 #' @param .list An optional list containing items to put in the header. Same as
@@ -83,14 +86,20 @@
 #' )
 #' }
 #' @export
-dashboardHeader <- function(..., title = NULL, disable = FALSE, .list = NULL) {
+dashboardHeader <- function(..., title = NULL, titleWidth = NULL, disable = FALSE, .list = NULL) {
   items <- c(list(...), .list)
   lapply(items, tagAssert, type = "li", class = "dropdown")
 
+  titleWidth <- validateCssUnit(titleWidth)
+
   tags$header(class = "main-header",
     style = if (disable) "display: none;",
-    span(class = "logo", title),
+    span(class = "logo",
+      style = if (!is.null(titleWidth)) paste0("width: ", titleWidth, ";"),
+      title
+    ),
     tags$nav(class = "navbar navbar-static-top", role = "navigation",
+      style = if (!is.null(titleWidth)) paste0("margin-left: ", titleWidth, ";"),
       # Embed hidden icon so that we get the font-awesome dependency
       span(shiny::icon("bars"), style = "display:none;"),
       # Sidebar toggle button
