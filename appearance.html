@@ -98,6 +98,7 @@ code {
 <li><a href="#skins">Skins</a></li>
 <li><a href="#css">CSS</a></li>
 <li><a href="#long-titles">Long titles</a></li>
+<li><a href="#sidebar-width">Sidebar width</a></li>
 <li><a href="#icons">Icons</a></li>
 <li><a href="#statuses-and-colors">Statuses and colors</a></li>
 </ul>
@@ -183,6 +184,27 @@ code {
 <span class="st">        }</span>
 <span class="st">      &#39;</span>)))
     )
+  ),
+  <span class="dt">server =</span> function(input, output) { }
+)</code></pre>
+</div>
+<div id="sidebar-width" class="section level2">
+<h2>Sidebar width</h2>
+<p>To change the width of the sidebar, you can use the <code>width</code> option. This example has a wider title and sidebar:</p>
+<p><img src="images/sidebar-width.png" alt="Sidebar width" /></p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">shinyApp</span>(
+  <span class="dt">ui =</span> <span class="kw">dashboardPage</span>(
+    <span class="kw">dashboardHeader</span>(
+      <span class="dt">title =</span> <span class="st">&quot;Title and sidebar 350 pixels wide&quot;</span>,
+      <span class="dt">titleWidth =</span> <span class="dv">350</span>
+    ),
+    <span class="kw">dashboardSidebar</span>(
+      <span class="dt">width =</span> <span class="dv">350</span>,
+      <span class="kw">sidebarMenu</span>(
+        <span class="kw">menuItem</span>(<span class="st">&quot;Menu Item&quot;</span>)
+      )
+    ),
+    <span class="kw">dashboardBody</span>()
   ),
   <span class="dt">server =</span> function(input, output) { }
 )</code></pre>

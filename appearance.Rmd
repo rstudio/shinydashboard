@@ -174,6 +174,39 @@ shinyApp(
 ```
 
 
+## Sidebar width
+
+To change the width of the sidebar, you can use the `width` option. This example has a wider title and sidebar:
+
+```{r eval=FALSE, echo=FALSE}
+appshot('_apps/sidebar-width/', 'images/sidebar-width.png',
+  delay=0.5, selector=c("header", "section.sidebar")
+) %>%
+  resize('75%') %>%
+  shrink()
+```
+
+![Sidebar width](images/sidebar-width.png)
+
+```{r eval=FALSE}
+shinyApp(
+  ui = dashboardPage(
+    dashboardHeader(
+      title = "Title and sidebar 350 pixels wide",
+      titleWidth = 350
+    ),
+    dashboardSidebar(
+      width = 350,
+      sidebarMenu(
+        menuItem("Menu Item")
+      )
+    ),
+    dashboardBody()
+  ),
+  server = function(input, output) { }
+)
+```
+
 
 ## Icons
 
