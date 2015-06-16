@@ -133,6 +133,48 @@ dashboardPage(
 There other ways to add custom CSS to a Shiny application. See Shiny's [CSS article](http://shiny.rstudio.com/articles/css.html) for more information.
 
 
+## Long titles
+
+In some cases, the title that you wish to use won't fit in the default width in the header bar. You can make the space for the title wider with some custom CSS. In this example, we've increased the width for the title to 450 pixels, and also set the background color of the title area to be the same as the rest of the header bar.
+
+```{r eval=FALSE, echo=FALSE}
+appshot('_apps/long-title/', 'images/long-title.png',
+  delay=0.5, selector="header"
+) %>%
+  resize('75%') %>%
+  shrink()
+```
+
+![Long title](images/long-title.png)
+
+
+```{r eval=FALSE}
+shinyApp(
+  ui = dashboardPage(
+    dashboardHeader(title = "Example of a long title that needs more space"),
+    dashboardSidebar(),
+    dashboardBody(
+      tags$head(tags$style(HTML('
+        body > .main-header .logo {
+          width: 450px;
+        }
+        /* Need this particular CSS selector to override color from skin-blue.
+           For other skins (like skin-black), use the appropriate color name */
+        .skin-blue .main-header .logo {
+          background-color: #3c8dbc;
+        }
+        body > .main-header .navbar {
+          margin-left: 450px;
+        }
+      ')))
+    )
+  ),
+  server = function(input, output) { }
+)
+```
+
+
+
 ## Icons
 
 Icons are used liberally in shinydashboard. The icons used in Shiny and shinydashboard are really just characters from special font sets, and they're created with Shiny's `icon()` function.
