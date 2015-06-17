@@ -9,14 +9,6 @@
   color: rgba(0, 0, 0, 0.15);
 }
 
-/* Increase margin on right for header dropdown menus. */
-.skin-blue .navbar .navbar-right > .nav {
-  margin-right: 20px;
-}
-.skin-black .navbar .navbar-right > .nav {
-  margin-right: 20px;
-}
-
 /* So that selectize dropdowns are visible if they go off the bottom. */
 .content {
   overflow: visible;
@@ -73,9 +65,4 @@ a > .info-box {
   -webkit-transition: none;
   -o-transition: all 0 none;
   transition: none;
-}
-
-/* Move sidebar down when RStudio branding bar is present */
-body.rstudio-branded .main-sidebar {
-  padding-top: 100px;
 }
