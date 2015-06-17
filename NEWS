@@ -1,4 +1,8 @@
-shinydashboard 0.4.0.9xxx
+shinydashboard 0.5.0.9xxx
+--------------------------------------------------------------------------------
+
+
+shinydashboard 0.5.0
 --------------------------------------------------------------------------------
 
 * Updated to AdminLTE 2.1.2 (406de4e). Please note that some CSS selectors have
