@@ -25,9 +25,12 @@
   color: #000;
 }
 
-/* Proper spacing for inputs in sidebar. */
+/* Inputs in the sidebar */
 section.sidebar .shiny-input-container {
+  /* Proper spacing around inputs. */
   padding: 12px 15px 0px 12px;
+  /* Wrap content (important for inline inputs). */
+  white-space: normal;
 }
 
 /* Shiny inputs in boxes should span full width. */
