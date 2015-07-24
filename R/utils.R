@@ -131,3 +131,11 @@ hasCssClass <- function(tag, class) {
   classes <- strsplit(tag$attribs$class, " +")[[1]]
   return(class %in% classes)
 }
+
+
+# Make sure a tab name is valid (there's no "." in it).
+validateTabName <- function(name) {
+  if (grepl(".", name, fixed = TRUE)) {
+    stop("tabName must not have a '.' in it.")
+  }
+}

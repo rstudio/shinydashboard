@@ -25,6 +25,8 @@ tabItem <- function(tabName = NULL, ...) {
   if (is.null(tabName))
     stop("Need tabName")
 
+  validateTabName(tabName)
+
   div(
     role = "tabpanel",
     class = "tab-pane",
