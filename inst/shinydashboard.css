@@ -25,6 +25,11 @@
   color: #000;
 }
 
+/* Sidebar user panel needs a minimum height when there's no image. */
+section.sidebar .user-panel {
+  min-height: 65px;
+}
+
 /* Inputs in the sidebar */
 section.sidebar .shiny-input-container {
   /* Proper spacing around inputs. */
