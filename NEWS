@@ -1,6 +1,8 @@
 shinydashboard 0.5.0.9xxx
 --------------------------------------------------------------------------------
 
+* If a `sidebarUserPanel` doesn't have an image, space for the image is no
+  longer allocated.
 
 shinydashboard 0.5.0
 --------------------------------------------------------------------------------
