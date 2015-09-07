@@ -144,6 +144,8 @@ sidebarUserPanel <- function(name, subtitle = NULL, image = NULL) {
       )
     },
     div(class = "pull-left info",
+      # If no image, move text to the left: by overriding default left:55px
+      style = if (is.null(image)) "left: 4px",
       p(name),
       subtitle
     )
