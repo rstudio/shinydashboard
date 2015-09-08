@@ -1,8 +1,18 @@
 shinydashboard 0.5.0.9xxx
 --------------------------------------------------------------------------------
 
+* Logout panels from Shiny Server Pro were previously not visible, but now they
+  are.
+
 * If a `sidebarUserPanel` doesn't have an image, space for the image is no
   longer allocated.
+
+* `tabNames` are now validated so that illegal characters result in an error
+  early. (#66)
+
+* `sidebarUserPanel` now displays properly. (#70)
+
+* `radioButtons` did not wrap, but now they do. (#60)
 
 shinydashboard 0.5.0
 --------------------------------------------------------------------------------
