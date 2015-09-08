@@ -96,6 +96,7 @@ code {
 <div id="TOC">
 <ul>
 <li><a href="#skins">Skins</a></li>
+<li><a href="#logout-panel">Logout panel</a></li>
 <li><a href="#css">CSS</a></li>
 <li><a href="#long-titles">Long titles</a></li>
 <li><a href="#sidebar-width">Sidebar width</a></li>
@@ -122,6 +123,39 @@ code {
 <p><img src="images/skin-red.png" alt="Red skin" /></p>
 <p>Yellow:</p>
 <p><img src="images/skin-yellow.png" alt="Yellow skin" /></p>
+</div>
+<div id="logout-panel" class="section level2">
+<h2>Logout panel</h2>
+<p>When a shinydashboard app is run in shinyapps.io or with Shiny Server Pro, and an authenticated user is logged in, a panel displaying the username and a logout link will appear in the upper-right corner. (This requires shinydashboard version 0.5.1 or greater for it to display.)</p>
+<p><img src="images/ssp-logout.png" alt="Default Shiny Server Pro logout panel" /></p>
+<p>It is possible to have a logout panel that integrates more nicely with shinydashboard. As you can see in the screenshot above, the default logout panel partially obscures the dropdown menu icon. We can instead add a user panel with dynamic UI (generated on the server) and hide the default logout panel, as shown below:</p>
+<p><img src="images/ssp-logout-custom.png" alt="Custom Shiny Server Pro logout panel" /></p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(shinydashboard)
+
+ui &lt;-<span class="st"> </span><span class="kw">dashboardPage</span>(
+  <span class="kw">dashboardHeader</span>(),
+  <span class="kw">dashboardSidebar</span>(
+    <span class="co"># Custom CSS to hide the default logout panel</span>
+    tags$<span class="kw">head</span>(tags$<span class="kw">style</span>(<span class="kw">HTML</span>(<span class="st">&#39;.shiny-server-account { display: none; }&#39;</span>))),
+
+    <span class="co"># The dynamically-generated user panel</span>
+    <span class="kw">uiOutput</span>(<span class="st">&quot;userpanel&quot;</span>)
+  ),
+  <span class="kw">dashboardBody</span>()
+)
+
+server &lt;-<span class="st"> </span>function(input, output, session) {
+  output$userpanel &lt;-<span class="st"> </span><span class="kw">renderUI</span>({
+    <span class="co"># session$user is non-NULL only in authenticated sessions</span>
+    if (!<span class="kw">is.null</span>(session$user)) {
+      <span class="kw">sidebarUserPanel</span>(
+        <span class="kw">span</span>(<span class="st">&quot;Logged in as &quot;</span>, session$user),
+        <span class="dt">subtitle =</span> <span class="kw">a</span>(<span class="kw">icon</span>(<span class="st">&quot;sign-out&quot;</span>), <span class="st">&quot;Logout&quot;</span>, <span class="dt">href=</span><span class="st">&quot;__logout__&quot;</span>))
+    }
+  })
+}
+
+<span class="kw">shinyApp</span>(ui, server)</code></pre>
 </div>
 <div id="css" class="section level2">
 <h2>CSS</h2>
@@ -215,11 +249,11 @@ code {
 <p>To create a calendar icon, you’d call:</p>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="kw">icon</span>(<span class="st">&quot;calendar&quot;</span>)</code></pre>
 <p>This simply generates HTML like this, which the browser knows what to do with:</p>
-<pre class="sourceCode html"><code class="sourceCode html"><span class="kw">&lt;i</span><span class="ot"> class=</span><span class="st">&quot;fa fa-calendar&quot;</span><span class="kw">&gt;&lt;/i&gt;</span></code></pre>
+<pre class="sourceCode HTML"><code class="sourceCode html"><span class="kw">&lt;i</span><span class="ot"> class=</span><span class="st">&quot;fa fa-calendar&quot;</span><span class="kw">&gt;&lt;/i&gt;</span></code></pre>
 <p>The icons are from Font-Awesome and Glyphicons. You can see lists of all available icons here:</p>
 <ul>
-<li><a href="http://fontawesome.io/icons/" class="uri">http://fontawesome.io/icons/</a></li>
-<li><a href="http://getbootstrap.com/components/#glyphicons" class="uri">http://getbootstrap.com/components/#glyphicons</a></li>
+<li><a href="http://fontawesome.io/icons/">http://fontawesome.io/icons/</a></li>
+<li><a href="http://getbootstrap.com/components/#glyphicons">http://getbootstrap.com/components/#glyphicons</a></li>
 </ul>
 <p>By default, the <code>icon()</code> function uses icons from Font-Awesome. To use Glyphicons, use <code>lib=&quot;glyphicon&quot;</code>)</p>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="st">&quot;Calendar from Font-Awesome:&quot;</span>, <span class="kw">icon</span>(<span class="st">&quot;calendar&quot;</span>),
