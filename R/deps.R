@@ -26,7 +26,7 @@ addDeps <- function(x) {
       stylesheet = adminLTE_css
     ),
     htmlDependency("shinydashboard",
-      as.character(packageVersion("shinydashboard")),
+      as.character(utils::packageVersion("shinydashboard")),
       c(file = system.file(package = "shinydashboard")),
       script = "shinydashboard.js",
       stylesheet = "shinydashboard.css"
