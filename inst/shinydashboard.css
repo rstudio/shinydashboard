@@ -74,3 +74,9 @@ a > .info-box {
   -o-transition: all 0 none;
   transition: none;
 }
+
+
+/*  Shiny Server Pro logout panel needs to be raised above menu bar */
+.shiny-server-account {
+  z-index: 2000;
+}
