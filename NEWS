@@ -1,4 +1,4 @@
-shinydashboard 0.5.0.9xxx
+shinydashboard 0.5.1
 --------------------------------------------------------------------------------
 
 * Logout panels from Shiny Server Pro were previously not visible, but now they
