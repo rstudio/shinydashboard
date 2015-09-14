@@ -72,7 +72,7 @@ Yellow:
 
 ## Logout panel
 
-When a shinydashboard app is run in shinyapps.io or with Shiny Server Pro, and an authenticated user is logged in, a panel displaying the username and a logout link will appear in the upper-right corner. (This requires shinydashboard version 0.5.1 or greater for it to display.)
+When a shinydashboard app is run with Shiny Server Pro and an authenticated user is logged in, a panel displaying the username and a logout link will appear in the upper-right corner. (This requires shinydashboard version 0.5.1 or greater for it to display.)
 
 ```{r eval=FALSE, echo=FALSE}
 # The ssp-logout and ssp-logout-custom apps must be run with Shiny Sever Pro,
