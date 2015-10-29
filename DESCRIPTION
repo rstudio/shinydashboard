@@ -19,3 +19,4 @@ Imports:
     htmltools (>= 0.2.6)
 BugReports: https://github.com/rstudio/shinydashboard
 RoxygenNote: 5.0.1
+
