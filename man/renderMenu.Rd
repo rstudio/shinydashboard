@@ -16,7 +16,7 @@ or a list of such objects.}
 is useful if you want to save an expression in a variable.}
 
 \item{func}{A function that returns a Shiny tag object, \code{\link{HTML}},
-  or a list of such objects (deprecated; use \code{expr} instead).}
+or a list of such objects (deprecated; use \code{expr} instead).}
 }
 \description{
 Create dynamic menu output (server side)
