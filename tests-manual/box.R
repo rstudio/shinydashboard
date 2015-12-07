@@ -1,4 +1,4 @@
-if(interactive()) {
+#if(interactive()) {
 
   library(shiny)
   # A dashboard body with a row of infoBoxes and valueBoxes, and two rows of boxes
@@ -43,7 +43,7 @@ if(interactive()) {
           )
       ),
       box(title = "Histogram box title",
-          status = "warning", solidHeader = TRUE, collapsible = TRUE,
+          status = "warning", solidHeader = TRUE, collapsible = FALSE, wrench = TRUE,
           plotOutput("plot", height = 250)
       )
     ),
@@ -171,4 +171,4 @@ if(interactive()) {
     ),
     server = server
   )
-}
+#}

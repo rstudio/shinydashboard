@@ -6,7 +6,7 @@
 \usage{
 box(..., title = NULL, footer = NULL, status = NULL,
   solidHeader = FALSE, background = NULL, width = 6, height = NULL,
-  collapsible = FALSE, collapsed = FALSE)
+  collapsible = FALSE, collapsed = FALSE, wrench = FALSE)
 }
 \arguments{
 \item{...}{Contents of the box.}
@@ -38,6 +38,8 @@ the user to collapse the box.}
 
 \item{collapsed}{If TRUE, start collapsed. This must be used with
 \code{collapsible=TRUE}.}
+
+\item{wrench}{adds a dropdown menu}
 }
 \description{
 Boxes can be used to hold content in the main body of a dashboard.

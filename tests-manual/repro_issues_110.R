@@ -2,7 +2,10 @@ if(interactive()) {
   library(shiny)
   library(shinydashboard)
 
-  header <- dashboardHeader(title = "Dashboard Demo")
+  header <- dashboardHeader(
+    #title = "Dashboard Demo",
+    title = span(tagList(icon("diamond", class = 'fa-lg'), 'Icon not showing')) # Github Issue 94
+  )
 
   body <- dashboardBody()
 
