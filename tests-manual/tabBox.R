@@ -1,4 +1,4 @@
-## This dashboard shows 3 different boxes, which have n tabs to switch content inside of them.
+if(interactive()) {
 
 library(shiny)
 
@@ -41,3 +41,4 @@ shinyApp(
     })
   }
 )
+}
