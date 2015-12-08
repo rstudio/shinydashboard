@@ -568,12 +568,14 @@ function _init() {
         //Hide the content
         box_content.slideUp(_this.animationSpeed, function () {
           box.addClass("collapsed-box");
+          box.trigger("hidden.bs.collapse");
         });
       } else {
         //Convert plus into minus
         element.children(":first")
             .removeClass(_this.icons.open)
             .addClass(_this.icons.collapse);
+        box.trigger("shown.bs.collapse");
         //Show the content
         box_content.slideDown(_this.animationSpeed, function () {
           box.removeClass("collapsed-box");
