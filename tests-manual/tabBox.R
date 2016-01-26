@@ -1,5 +1,3 @@
-if(interactive()) {
-
 library(shiny)
 
 body <- dashboardBody(
@@ -41,4 +39,3 @@ shinyApp(
     })
   }
 )
-}

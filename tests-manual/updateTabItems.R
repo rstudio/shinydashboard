@@ -1,4 +1,5 @@
-if(interactive()) {
+## This creates dashboard with a sidebar. The sidebar has a button which allows to switch between different
+## panels within the same dashboard
 
   ui <- dashboardPage(
     dashboardHeader(title = "Simple tabs"),
@@ -33,4 +34,3 @@ if(interactive()) {
   }
 
   shinyApp(ui, server)
-}

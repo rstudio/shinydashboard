@@ -1,6 +1,6 @@
 Package: shinydashboard
 Title: Create Dashboards with 'Shiny'
-Version: 0.5.2
+Version: 0.5.1.9000
 Authors@R: c(
     person("Winston", "Chang", role = c("aut", "cre"), email = "winston@rstudio.com"),
     person(family = "RStudio", role = "cph"),
@@ -15,7 +15,7 @@ Depends:
 License: GPL-2 | file LICENSE
 Imports:
     utils,
-    shiny (>= 0.12.1),
-    htmltools (>= 0.2.6)
+    shiny (>= 0.13.0),
+    htmltools (>= 0.3)
 BugReports: https://github.com/rstudio/shinydashboard
 RoxygenNote: 5.0.1
