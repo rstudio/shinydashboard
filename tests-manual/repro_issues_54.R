@@ -1,4 +1,3 @@
-# Working example
 ## Tries to reproduce Github Issue: https://github.com/rstudio/shinydashboard/issues/54
 
 # library(shiny)

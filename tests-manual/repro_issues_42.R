@@ -1,5 +1,5 @@
-if(interactive()) {
 ## Tries to reproduce Github Issue: https://github.com/rstudio/shinydashboard/issues/42
+
 library(shiny)
 library(shinydashboard)
 
@@ -41,4 +41,3 @@ server <-  function(input, output) {
 }
 
 shinyApp(ui, server)
-}

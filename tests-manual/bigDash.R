@@ -1,4 +1,5 @@
-## This tries to render a dashboard with many different components
+## This tries to render a dashboard with many different components, incl. sidebar, dropdown menus etc.
+
 library(shiny)
 library(shinydashboard)
 

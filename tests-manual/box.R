@@ -1,4 +1,5 @@
-# A dashboard body with a row of infoBoxes and valueBoxes, and two rows of boxes
+# A dashboard body with a row of infoBoxes and valueBoxes, and two rows of other boxes
+
 library(shiny)
 body <- dashboardBody(
 

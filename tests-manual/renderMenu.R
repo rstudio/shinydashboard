@@ -1,5 +1,6 @@
-library(shiny)
 # ========== Dynamic sidebarMenu ==========
+
+library(shiny)
 ui <- dashboardPage(
   dashboardHeader(title = "Dynamic sidebar"),
   dashboardSidebar(

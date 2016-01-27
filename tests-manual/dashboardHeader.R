@@ -1,4 +1,5 @@
-# A dashboard header with 3 dropdown menus
+# A dashboard header with 3 dropdown menus: messages, notifications and tasks
+
 library(shiny)
 
 header <- dashboardHeader(
