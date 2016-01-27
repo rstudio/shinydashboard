@@ -1,3 +1,6 @@
+## Creates a slider though which (dropdown) notifications are updated
+
+library(shiny)
 messageData <- data.frame(
   from = c("Admininstrator", "New User", "Support"),
   message = c(

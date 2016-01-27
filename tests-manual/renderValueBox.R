@@ -1,3 +1,4 @@
+## Display count button with two boxes which show the incremented value
 library(shiny)
 
 ui <- dashboardPage(

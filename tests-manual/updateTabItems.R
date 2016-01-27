@@ -1,5 +1,5 @@
 ## This creates dashboard with a sidebar. The sidebar has a button which allows to switch between different
-## panels within the same dashboard
+## panels (tabs) within the same dashboard
 
   ui <- dashboardPage(
     dashboardHeader(title = "Simple tabs"),
