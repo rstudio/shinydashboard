@@ -1,4 +1,5 @@
 ^.*\.Rproj$
 ^\.Rproj\.user$
 ^tools$
+^tests-manual$
 ^\.travis\.yml$
