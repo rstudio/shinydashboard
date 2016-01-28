@@ -5,8 +5,7 @@ ui = shinyUI(dashboardPage(
   dashboardHeader(),
   dashboardSidebar(disable = TRUE),
   dashboardBody(
-    box(title = "Report", width = 12,
-        verbatimTextOutput("protocol")
+    box(title = "Report", width = 12, verbatimTextOutput("protocol")
     )
 
   )

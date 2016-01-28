@@ -1,22 +1,18 @@
 ui <- dashboardPage(
   dashboardHeader(
     title = "Sidebar spill"
-
   ),
   dashboardSidebar(
     sidebarMenu(
-      menuItem(text = "sfsdf sfaosh oas fwue wi aseiu wehw wuer woeur owuer  ")
+      menuItem(text = "sfsdf sfaosh oas fwue wi aseiu wehw wuer woeur owuer")
     )
   ),
   dashboardBody(
-    fluidRow(
-
-    )
+    fluidRow()
   )
 )
 
 server <- function(input, output) {
-
 }
 
 shinyApp(ui, server)
