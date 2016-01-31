@@ -42,7 +42,7 @@ body <- dashboardBody(
         )
     ),
     box(title = "Histogram box title",
-        status = "warning", solidHeader = TRUE, collapsible = TRUE,
+        status = "warning", solidHeader = TRUE, collapsible = F, wrench = TRUE,
         plotOutput("plot", height = 250)
     )
   ),

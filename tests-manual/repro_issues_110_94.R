@@ -1,8 +1,12 @@
-## Tries to reproduce Github Issue: https://github.com/rstudio/shinydashboard/issues/110
+## Tries to reproduce Github Issue: https://github.com/rstudio/shinydashboard/issues/110 and 94
+
 library(shiny)
 library(shinydashboard)
 
-header <- dashboardHeader(title = "Dashboard Demo")
+header <- dashboardHeader(
+  ##title = "Dashboard Demo"
+  title = span(tagList(icon("diamond",class='fa-lg'), 'Icon not showing'))
+  )
 
 body <- dashboardBody()
 
