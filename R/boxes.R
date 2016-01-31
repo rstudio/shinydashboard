@@ -17,7 +17,8 @@
 #'
 #' @export
 valueBox <- function(value, subtitle, icon = NULL, color = "aqua", width = 4,
-  href = NULL) {
+  href = NULL)
+{
   validateColor(color)
   if (!is.null(icon)) tagAssert(icon, type = "i")
 
@@ -118,8 +119,8 @@ infoBox <- function(title, value = NULL, subtitle = NULL,
 #'   the user to collapse the box.
 #' @param collapsed If TRUE, start collapsed. This must be used with
 #'   \code{collapsible=TRUE}.
-#' @param ... Contents of the box.
-#' @param wrench adds a dropdown menu
+#' @param ... Contents of the box/boxItem.
+#' @param boxMenu Adds a box menu consisting of \link{boxItem}.
 #'
 #' @family boxes
 #'
@@ -250,7 +251,8 @@ infoBox <- function(title, value = NULL, subtitle = NULL,
 #' @export
 box <- function(..., title = NULL, footer = NULL, status = NULL,
                 solidHeader = FALSE, background = NULL, width = 6,
-                height = NULL, collapsible = FALSE, collapsed = FALSE, wrench = FALSE) {
+                height = NULL, collapsible = FALSE, collapsed = FALSE,
+                boxMenu = NULL) {
 
   boxClass <- "box"
   if (solidHeader || !is.null(background)) {
@@ -263,7 +265,6 @@ box <- function(..., title = NULL, footer = NULL, status = NULL,
   if (collapsible && collapsed) {
     boxClass <- paste(boxClass, "collapsed-box")
   }
-
   if (!is.null(background)) {
     validateColor(background)
     boxClass <- paste0(boxClass, " bg-", background)
@@ -279,36 +280,26 @@ box <- function(..., title = NULL, footer = NULL, status = NULL,
     titleTag <- h3(class = "box-title", title)
   }
 
+  boxTools <- NULL
   collapseTag <- NULL
-  wrenchTag <- NULL
-  boxToolsTag <- NULL
 
-  if (collapsible == TRUE && wrench == TRUE) {
-    buttonStatus <- status %OR% "default"
-
+  if (collapsible) {
     collapseIcon <- if (collapsed) "plus" else "minus"
 
-    collapseTag <- tags$button(class = paste0("btn btn-box-tool"), `data-widget` = "collapse", shiny::icon(collapseIcon))
-    wrenchTag <- div(class = paste0("btn-group"),
-                     tags$button(class = "btn btn-box-tool dropdown-toggle", `type` = "button", `data-toggle` = "dropdown", shiny::icon("wrench")),
-                     tags$ul(class = "dropdown-menu", `role` = "menu")
-                     ## todo vymyslet jak zaridit abych to pouzivatelne z UI
-    )
-
-    boxToolsTag <- div(class = "box-tools pull-right",
-                       collapseTag,
-                       wrenchTag
-    )
+    collapseTag <- tags$button(class = "btn btn-box-tool",
+                               `data-widget` = "collapse",
+                               shiny::icon(collapseIcon))
   }
 
-
-
+  if (!is.null(collapseTag) || !is.null(boxMenu)) {
+    boxTools <- div(class = "box-tools pull-right", collapseTag, boxMenu)
+  }
 
   headerTag <- NULL
-  if (!is.null(titleTag) || !is.null(collapseTag)) {
+  if (!is.null(titleTag) || !is.null(boxTools)) {
     headerTag <- div(class = "box-header",
       titleTag,
-      boxToolsTag
+      boxTools
     )
   }
 
@@ -319,6 +310,26 @@ box <- function(..., title = NULL, footer = NULL, status = NULL,
       div(class = "box-body", ...),
       if (!is.null(footer)) div(class = "box-footer", footer)
     )
+  )
+}
+
+#' @inheritParams box
+#' @param icon Default icon (if boxMenu is used) is wrench
+#' @rdname box
+#' @export
+boxItem <- function(..., icon = shiny::icon("wrench")) {
+  listOfValues <- list(...)
+  # include each arg into <li> </li> tags
+  listOfLi <- lapply(listOfValues, tags$li)
+
+  tags$div(class = "btn-group",
+           tags$button(class = "btn btn-box-tool dropdown-toggle",
+                       `type` = "button",
+                       `data-toggle` = "dropdown",
+                       icon),
+           tags$ul(class = "dropdown-menu",
+                   `role` = "menu",
+                   listOfLi)
   )
 }
 
@@ -380,8 +391,8 @@ box <- function(..., title = NULL, footer = NULL, status = NULL,
 #' }
 #' @export
 tabBox <- function(..., id = NULL, selected = NULL, title = NULL,
-                   width = 6, height = NULL, side = c("left", "right")) {
-
+                   width = 6, height = NULL, side = c("left", "right"))
+{
   side <- match.arg(side)
 
   # The content is basically a tabsetPanel with some custom modifications

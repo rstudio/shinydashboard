@@ -2,6 +2,8 @@ shinydashboard 0.5.1.9000
 --------------------------------------------------------------------------------
 * Updated to AdminLTE 2.3.2 (1ee281b).
 
+* Add wrench icon to the box-header (and a log more by using dropdown box-menu)
+
 shinydashboard 0.5.1
 --------------------------------------------------------------------------------
 

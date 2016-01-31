@@ -1,6 +1,8 @@
 # A dashboard body with a row of infoBoxes and valueBoxes, and two rows of other boxes
 
 library(shiny)
+library(shinydashboard)
+
 body <- dashboardBody(
 
   # infoBoxes
@@ -39,10 +41,15 @@ body <- dashboardBody(
         selectInput("progress", "Progress",
                     choices = c("0%" = 0, "20%" = 20, "40%" = 40, "60%" = 60, "80%" = 80,
                                 "100%" = 100)
-        )
+        ),
+        boxMenu = boxItem(a(href="https://www.bing.com", "bing it!",
+                            style = "color: yellow", target = "_blank"),
+                          downloadButton("svgdown", "download svg")),
+        collapsible = FALSE, collapsed = FALSE
     ),
     box(title = "Histogram box title",
-        status = "warning", solidHeader = TRUE, collapsible = F, wrench = TRUE,
+        status = "info", solidHeader = TRUE, collapsible = T,
+        boxMenu = boxMenuOutput("menuWrench"),
         plotOutput("plot", height = 250)
     )
   ),
@@ -74,6 +81,25 @@ body <- dashboardBody(
 )
 
 server <- function(input, output) {
+  output$menuWrench <- renderMenu({
+    boxItem(p("some text", style="color: red"),
+            a(href="https://google.cz", "google czech", style = "color: red", target = "_blank"),
+            a(href="https://www.polygon.com", "polygon!", style = "color: yellow", target = "_blank"))
+  })
+
+  select_plot2 = function() {
+    hist(rnorm(input$orders))
+  }
+
+  output$svgdown <- downloadHandler(
+    filename <- "plot.svg",
+    content = function(file) {
+      svg(file)
+      select_plot2()
+      dev.off()
+    }
+  )
+
   output$orderNum <- renderText({
     prettyNum(input$orders, big.mark=",")
   })
@@ -104,10 +130,10 @@ server <- function(input, output) {
     p("Current status is: ", icon(iconName, lib = "glyphicon"))
   })
 
-
   output$plot <- renderPlot({
     hist(rnorm(input$orders))
   })
+
 }
 # A dashboard header with 3 dropdown menus
 header <- dashboardHeader(
@@ -160,12 +186,21 @@ header <- dashboardHeader(
                         "Write documentation"
                )
   )
+
+)
+
+sidebar <- dashboardSidebar(
+  sidebarUserPanel(
+    "User Name",
+    subtitle = a(href = "#", icon("circle", class = "text-success"), "Online"),
+    image = "https://almsaeedstudio.com/themes/AdminLTE/dist/img/user2-160x160.jpg"
+  )
 )
 
 shinyApp(
   ui = dashboardPage(
     header,
-    dashboardSidebar(),
+    sidebar,
     body
   ),
   server = server

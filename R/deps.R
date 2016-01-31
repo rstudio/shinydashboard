@@ -20,7 +20,7 @@ addDeps <- function(x) {
   }
 
   dashboardDeps <- list(
-    htmlDependency("AdminLTE", "2.0.6",
+    htmlDependency("AdminLTE", "2.3.2",
       c(file = system.file("AdminLTE", package = "shinydashboard")),
       script = adminLTE_js,
       stylesheet = adminLTE_css
