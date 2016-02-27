@@ -320,7 +320,7 @@ menuItem <- function(text, ..., icon = NULL, badgeLabel = NULL, badgeColor = "gr
 #' @rdname sidebarMenu
 #' @export
 menuSubItem <- function(text, tabName = NULL, href = NULL, newtab = TRUE,
-  icon = shiny::icon("angle-double-right"), selected = NULL)
+  icon = shiny::icon("angle-double-right"), selected = NULL, id = NULL)
 {
 
   if (!is.null(href) && !is.null(tabName)) {
@@ -343,7 +343,7 @@ menuSubItem <- function(text, tabName = NULL, href = NULL, newtab = TRUE,
   }
 
 
-  tags$li(
+  tags$li( id = id,
     a(href = href,
       `data-toggle` = if (isTabItem) "tab",
       `data-value` = if (!is.null(tabName)) tabName,
