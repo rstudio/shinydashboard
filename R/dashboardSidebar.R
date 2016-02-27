@@ -250,7 +250,7 @@ sidebarMenu <- function(..., id = NULL, .list = NULL) {
 #' @rdname sidebarMenu
 #' @export
 menuItem <- function(text, ..., icon = NULL, badgeLabel = NULL, badgeColor = "green",
-                     tabName = NULL, href = NULL, newtab = TRUE, selected = NULL) {
+                     tabName = NULL, href = NULL, newtab = TRUE, selected = NULL, id = NULL) {
   subItems <- list(...)
 
   if (!is.null(icon)) tagAssert(icon, type = "i")
@@ -291,7 +291,7 @@ menuItem <- function(text, ..., icon = NULL, badgeLabel = NULL, badgeColor = "gr
   # If no subitems, return a pretty simple tag object
   if (length(subItems) == 0) {
     return(
-      tags$li(
+      tags$li(id = id,
         a(href = href,
           `data-toggle` = if (isTabItem) "tab",
           `data-value` = if (!is.null(tabName)) tabName,
@@ -305,7 +305,7 @@ menuItem <- function(text, ..., icon = NULL, badgeLabel = NULL, badgeColor = "gr
     )
   }
 
-  tags$li(class = "treeview",
+  tags$li(class = "treeview", id = id,
     a(href = href,
       icon,
       span(text),
