@@ -58,7 +58,7 @@ a > .info-box {
   color: #333;
 }
 
-/* Disable bouncy transition for sidebar toggle. */
+/* Disable bouncy transition for sidebar toggle.
 .content-wrapper,
 .right-side,
 .main-footer {
@@ -74,7 +74,7 @@ a > .info-box {
   -o-transition: all 0 none;
   transition: none;
 }
-
+*/
 
 /*  Shiny Server Pro logout panel needs to be raised above menu bar */
 .shiny-server-account {

@@ -117,7 +117,7 @@ dashboardSidebar <- function(..., disable = FALSE, width = NULL) {
     custom_css,
     tags$section(
       class = "sidebar",
-      `data-disable` = if(disable) 1 else NULL,
+      `data-disable` = if(disable) TRUE else NULL,
       list(...)
     )
   )
@@ -320,8 +320,7 @@ menuItem <- function(text, ..., icon = NULL, badgeLabel = NULL, badgeColor = "gr
 #' @rdname sidebarMenu
 #' @export
 menuSubItem <- function(text, tabName = NULL, href = NULL, newtab = TRUE,
-  icon = shiny::icon("angle-double-right"), selected = NULL)
-{
+  icon = shiny::icon("angle-double-right"), selected = NULL) {
 
   if (!is.null(href) && !is.null(tabName)) {
     stop("Can't specify both href and tabName")

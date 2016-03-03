@@ -9,6 +9,9 @@
 #'   provided, it will try to extract the title from the \code{dashboardHeader}.
 #' @param skin A color theme. One of \code{"blue"}, \code{"black"},
 #'   \code{"purple"}, \code{"green"}, \code{"red"}, or \code{"yellow"}.
+#' @param sideBarMini TRUE or FALSE (default). False collapses sidebar completly
+#'  while TRUE will show collapsed sidebar with icon(s). Title will, however,
+#'  not become responsive.
 #'
 #' @seealso \code{\link{dashboardHeader}}, \code{\link{dashboardSidebar}},
 #'   \code{\link{dashboardBody}}.
@@ -29,7 +32,7 @@
 #' }
 #' @export
 dashboardPage <- function(header, sidebar, body, title = NULL,
-  skin = c("blue", "black", "purple", "green", "red", "yellow")) {
+  skin = c("blue", "black", "purple", "green", "red", "yellow"), sideBarMini = FALSE) {
 
   tagAssert(header, type = "header", class = "main-header")
   tagAssert(sidebar, type = "aside", class = "main-sidebar")
@@ -41,8 +44,8 @@ dashboardPage <- function(header, sidebar, body, title = NULL,
     if (x$name == "span" &&
         !is.null(x$attribs$class) &&
         x$attribs$class == "logo" &&
-        length(x$children) != 0)
-    {
+        length(x$children) != 0) {
+
       x$children[[1]]
     } else {
       ""
@@ -57,8 +60,13 @@ dashboardPage <- function(header, sidebar, body, title = NULL,
     body
   )
 
+  sideBar <- NULL
+  if (sideBarMini == TRUE) {
+    sideBar <- " sidebar-mini"
+  }
+
   addDeps(
-    tags$body(class = paste0("skin-", skin), style = "min-height: 611px;",
+    tags$body(class = paste0("skin-", skin, sideBar), style = "min-height: 611px;",
       shiny::bootstrapPage(content, title = title)
     )
   )
