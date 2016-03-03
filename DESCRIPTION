@@ -1,6 +1,6 @@
 Package: shinydashboard
 Title: Create Dashboards with 'Shiny'
-Version: 0.5.1
+Version: 0.5.1.9000
 Authors@R: c(
     person("Winston", "Chang", role = c("aut", "cre"), email = "winston@rstudio.com"),
     person(family = "RStudio", role = "cph"),
@@ -8,12 +8,14 @@ Authors@R: c(
     person(family = "Adobe Systems Incorporated", role = c("ctb", "cph"), comment = "Source Sans Pro font")
     )
 Description: Create dashboards with 'Shiny'. This package provides
-  a theme on top of 'Shiny', making it easy to create attractive dashboards.
+    a theme on top of 'Shiny', making it easy to create attractive dashboards.
 URL: http://rstudio.github.io/shinydashboard/
 Depends:
     R (>= 3.0)
 License: GPL-2 | file LICENSE
 Imports:
     utils,
-    shiny (>= 0.11.1),
+    shiny (>= 0.12.1),
     htmltools (>= 0.2.6)
+BugReports: https://github.com/rstudio/shinydashboard
+RoxygenNote: 5.0.1
