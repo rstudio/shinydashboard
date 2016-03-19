@@ -6,7 +6,8 @@
 \usage{
 infoBox(title, value = NULL, subtitle = NULL,
   icon = shiny::icon("bar-chart"), color = "aqua", width = 4,
-  href = NULL, fill = FALSE)
+  href = NULL, fill = FALSE, progressBar = FALSE,
+  progressBarValue = NULL)
 }
 \arguments{
 \item{title}{Title text.}
@@ -33,6 +34,12 @@ content, and the \code{color} argument for the background of the icon. If
 \code{TRUE}, use the \code{color} argument for the background of the
 content; the icon will use the same color with a slightly darkened
 background.}
+
+\item{progressBar}{If \code{FALSE} (the default), does not add a progress bar
+below the \code{value} parameter.}
+
+\item{progressBarValue}{A numeric value to display in the progress bar. Must
+be between zero percent and 100 percent (without the percent sign). See examples.}
 }
 \description{
 An info box displays a large icon on the left side, and a title, value

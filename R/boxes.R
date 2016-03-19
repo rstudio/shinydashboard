@@ -41,7 +41,7 @@ valueBox <- function(value, subtitle, icon = NULL, color = "aqua", width = 4,
 
 #' Create an info box for the main body of a dashboard.
 #'
-#' An info box displays a large icon on the left side, and a title, value
+#' @description An info box displays a large icon on the left side, and a title, value
 #' (usually a number), and an optional smaller subtitle on the right side. Info
 #' boxes are meant to be placed in the main body of a dashboard.
 #'
@@ -58,6 +58,10 @@ valueBox <- function(value, subtitle, icon = NULL, color = "aqua", width = 4,
 #'   content; the icon will use the same color with a slightly darkened
 #'   background.
 #' @param href An optional URL to link to.
+#' @param progressBar If \code{FALSE} (the default), does not add a progress bar
+#'   below the \code{value} parameter.
+#' @param progressBarValue A numeric value to display in the progress bar. Must
+#'   be between zero percent and 100 percent (without the percent sign). See examples.
 #'
 #' @family boxes
 #' @seealso \code{\link{box}} for usage examples.
@@ -65,7 +69,7 @@ valueBox <- function(value, subtitle, icon = NULL, color = "aqua", width = 4,
 #' @export
 infoBox <- function(title, value = NULL, subtitle = NULL,
   icon = shiny::icon("bar-chart"), color = "aqua", width = 4, href = NULL,
-  fill = FALSE) {
+  fill = FALSE, progressBar = FALSE, progressBarValue = NULL) {
 
   validateColor(color)
   tagAssert(icon, type = "i")
@@ -83,7 +87,8 @@ infoBox <- function(title, value = NULL, subtitle = NULL,
     div(class = "info-box-content",
       span(class = "info-box-text", title),
       if (!is.null(value)) span(class = "info-box-number", value),
-      if (!is.null(subtitle)) p(subtitle)
+      if (progressBar) div(progressBarValue),
+      if (!is.null(subtitle)) span(class = "progress-description", subtitle)
     )
   )
 
