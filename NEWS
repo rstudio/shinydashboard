@@ -2,6 +2,12 @@ shinydashboard 0.5.1.9000
 --------------------------------------------------------------------------------
 * Updated to AdminLTE 2.3.2 (1ee281b).
 
+
+
+* Add more colors addressing #118 and #125 (dashboardPage light-skin colors and
+  "default" (grey) color boxes)
+
+
 shinydashboard 0.5.1
 --------------------------------------------------------------------------------
 
