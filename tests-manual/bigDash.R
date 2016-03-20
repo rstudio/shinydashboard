@@ -211,6 +211,7 @@ body <- dashboardBody(tabItems(
 
     box(
       width = 4,
+      status = "default",
       background = "light-blue",
       p("This is content. The background color is set to light-blue")
     )
@@ -306,6 +307,7 @@ server <- function(input, output) {
 
 ui <- dashboardPage(header,
                     sidebar,
-                    body)
+                    body,
+                    skin = "blue-light")
 
 shinyApp(ui, server)

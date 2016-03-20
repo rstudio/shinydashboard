@@ -16,6 +16,7 @@ generally appear as follows:
   \item \code{info} Blue
   \item \code{warning} Orange
   \item \code{danger} Red
+  \item \code{default} Grey
 }
 }
 \keyword{internal}

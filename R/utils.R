@@ -83,9 +83,10 @@ validateColor <- function(color) {
 #' @format NULL
 #'
 #' @keywords internal
-validColors <- c("red", "yellow", "aqua", "blue", "light-blue", "green",
+validColors <- c("red", "yellow", "aqua", "blue", "light-blue","blue-light",
+                 "green","black-light", "purple-light","green-light",
                  "navy", "teal", "olive", "lime", "orange", "fuchsia",
-                 "purple", "maroon", "black")
+                 "purple", "maroon", "black", "red-light", "yellow-light")
 
 
 # Returns TRUE if a status is valid; throws error otherwise.
@@ -112,13 +113,14 @@ validateStatus <- function(status) {
 #'   \item \code{info} Blue
 #'   \item \code{warning} Orange
 #'   \item \code{danger} Red
+#'   \item \code{default} Grey
 #' }
 #'
 #' @usage NULL
 #' @format NULL
 #'
 #' @keywords internal
-validStatuses <- c("primary", "success", "info", "warning", "danger")
+validStatuses <- c("primary", "success", "info", "warning", "danger", "default")
 
 
 "%OR%" <- function(a, b) if (!is.null(a)) a else b

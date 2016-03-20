@@ -8,10 +8,12 @@
 #' @param title A title to display in the browser's title bar. If no value is
 #'   provided, it will try to extract the title from the \code{dashboardHeader}.
 #' @param skin A color theme. One of \code{"blue"}, \code{"black"},
-#'   \code{"purple"}, \code{"green"}, \code{"red"}, or \code{"yellow"}.
+#'   \code{"purple"}, \code{"green"}, \code{"red"}, or \code{"yellow"}. Or light
+#'   skin of each color, e.g. \code{"red-light"}
 #'
 #' @seealso \code{\link{dashboardHeader}}, \code{\link{dashboardSidebar}},
 #'   \code{\link{dashboardBody}}.
+#'
 #' @examples
 #' ## Only run this example in interactive R sessions
 #' if (interactive()) {
@@ -29,7 +31,9 @@
 #' }
 #' @export
 dashboardPage <- function(header, sidebar, body, title = NULL,
-  skin = c("blue", "black", "purple", "green", "red", "yellow")) {
+  skin = c("blue", "blue-light", "black", "black-light", "purple",
+           "purple-light", "green", "green-light", "red", "red-light", "yellow",
+           "yellow-light")) {
 
   tagAssert(header, type = "header", class = "main-header")
   tagAssert(sidebar, type = "aside", class = "main-sidebar")
