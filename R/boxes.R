@@ -87,7 +87,11 @@ infoBox <- function(title, value = NULL, subtitle = NULL,
     div(class = "info-box-content",
       span(class = "info-box-text", title),
       if (!is.null(value)) span(class = "info-box-number", value),
-      if (progressBar) div(progressBarValue),
+      # if (progressBar) div(class = "progress", div(class = "progress-bar", style = progressBarValue)),
+      # if (progressBar) div(class = "progress", div(class = "progress-bar", style =
+      #                                                paste0("width: ", progressBarValue, "%; height: 2px;"))),
+
+      if (progressBar) div(class = "progress", progressBarValue),
       if (!is.null(subtitle)) span(class = "progress-description", subtitle)
     )
   )
