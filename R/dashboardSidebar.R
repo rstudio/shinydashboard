@@ -117,13 +117,6 @@ dashboardSidebar <- function(..., disable = FALSE, width = NULL,
     '))))
   }
 
-  # sideBar <- NULL
-  # if (sideBarMini == TRUE) {
-  #   sideBar <- " sidebar-mini"
-  # }
-  # sideBar
-
-
   tags$aside(class = "main-sidebar",
     custom_css,
     tags$section(

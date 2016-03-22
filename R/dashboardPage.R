@@ -57,7 +57,6 @@ dashboardPage <- function(header, sidebar, body, title = NULL,
     body
   )
 
-
   addDeps(
     tags$body(class = paste0("skin-", skin), style = "min-height: 611px;",
       shiny::bootstrapPage(content, title = title)
