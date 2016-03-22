@@ -58,10 +58,7 @@ valueBox <- function(value, subtitle, icon = NULL, color = "aqua", width = 4,
 #'   content; the icon will use the same color with a slightly darkened
 #'   background.
 #' @param href An optional URL to link to.
-#' @param progressBar If \code{FALSE} (the default), does not add a progress bar
-#'   below the \code{value} parameter.
-#' @param progressBarValue A numeric value to display in the progress bar. Must
-#'   be between zero percent and 100 percent (without the percent sign). See examples.
+#' @param progressValue Must be between 0 and 100.
 #'
 #' @family boxes
 #' @seealso \code{\link{box}} for usage examples.
@@ -69,7 +66,7 @@ valueBox <- function(value, subtitle, icon = NULL, color = "aqua", width = 4,
 #' @export
 infoBox <- function(title, value = NULL, subtitle = NULL,
   icon = shiny::icon("bar-chart"), color = "aqua", width = 4, href = NULL,
-  fill = FALSE, progressBar = FALSE, progressBarValue = NULL) {
+  fill = FALSE, progressValue = NULL) {
 
   validateColor(color)
   tagAssert(icon, type = "i")
@@ -87,11 +84,7 @@ infoBox <- function(title, value = NULL, subtitle = NULL,
     div(class = "info-box-content",
       span(class = "info-box-text", title),
       if (!is.null(value)) span(class = "info-box-number", value),
-      # if (progressBar) div(class = "progress", div(class = "progress-bar", style = progressBarValue)),
-      # if (progressBar) div(class = "progress", div(class = "progress-bar", style =
-      #                                                paste0("width: ", progressBarValue, "%; height: 2px;"))),
-
-      if (progressBar) div(class = "progress", progressBarValue),
+      if (!is.null(progressValue)) div(class = "progress", progressValue),
       if (!is.null(subtitle)) span(class = "progress-description", subtitle)
     )
   )

@@ -9,7 +9,7 @@ body <- dashboardBody(
   fluidRow(
     infoBox(
       "Orders", uiOutput("orderNum2"), subtitle = "Test", icon = icon("credit-card"),
-      progressBar = T, fill = T, progressBarValue = uiOutput("progressBarValue")
+      fill = T, progressValue = uiOutput("progressBarValue")
     ),
     infoBox(
       "Approval Rating", "60%", icon = icon("line-chart"), color = "green", fill = TRUE
@@ -93,14 +93,7 @@ server <- function(input, output) {
   })
 
   output$progressBarValue <- renderUI({
-    # input$progress
-    # numberPercent <- paste0("width: ", input$progress, "%")
-    # div(class = "progress", div(class = "progress-bar", style = numberPercent))
-
     div(class = "progress-bar", style = paste0("width: ", input$progress, "%; height: 2px;"))
-    # tagList(style = paste0("width: ", input$progress, "%; height: 2px;"))
-
-    # paste0("width: ", input$progress, "%; height: 2px;")
   })
 
   output$status <- renderText({
