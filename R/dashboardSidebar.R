@@ -320,7 +320,8 @@ menuItem <- function(text, ..., icon = NULL, badgeLabel = NULL, badgeColor = "gr
 #' @rdname sidebarMenu
 #' @export
 menuSubItem <- function(text, tabName = NULL, href = NULL, newtab = TRUE,
-  icon = shiny::icon("angle-double-right"), selected = NULL) {
+  icon = shiny::icon("angle-double-right"), selected = NULL)
+{
 
   if (!is.null(href) && !is.null(tabName)) {
     stop("Can't specify both href and tabName")

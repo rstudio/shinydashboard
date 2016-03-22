@@ -32,7 +32,9 @@
 #' }
 #' @export
 dashboardPage <- function(header, sidebar, body, title = NULL,
-  skin = c("blue", "black", "purple", "green", "red", "yellow"), sideBarMini = FALSE) {
+  skin = c("blue", "black", "purple", "green", "red", "yellow"),
+  sideBarMini = FALSE)
+{
 
   tagAssert(header, type = "header", class = "main-header")
   tagAssert(sidebar, type = "aside", class = "main-sidebar")
@@ -44,8 +46,8 @@ dashboardPage <- function(header, sidebar, body, title = NULL,
     if (x$name == "span" &&
         !is.null(x$attribs$class) &&
         x$attribs$class == "logo" &&
-        length(x$children) != 0) {
-
+        length(x$children) != 0)
+    {
       x$children[[1]]
     } else {
       ""

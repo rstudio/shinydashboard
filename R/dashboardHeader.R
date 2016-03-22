@@ -158,7 +158,8 @@ dashboardHeader <- function(..., title = NULL, titleWidth = NULL, disable = FALS
 #' @export
 dropdownMenu <- function(...,
   type = c("messages", "notifications", "tasks"),
-  badgeStatus = "primary", icon = NULL, .list = NULL) {
+  badgeStatus = "primary", icon = NULL, .list = NULL)
+{
 
   type <- match.arg(type)
   if (!is.null(badgeStatus)) validateStatus(badgeStatus)
@@ -220,7 +221,8 @@ dropdownMenu <- function(...,
 #' @seealso \code{\link{dashboardHeader}} for example usage.
 #' @export
 messageItem <- function(from, message, icon = shiny::icon("user"), time = NULL,
-  href = NULL) {
+  href = NULL)
+{
 
   tagAssert(icon, type = "i")
   if (is.null(href)) href <- "#"
@@ -250,8 +252,8 @@ messageItem <- function(from, message, icon = shiny::icon("user"), time = NULL,
 #' @seealso \code{\link{dashboardHeader}} for example usage.
 #' @export
 notificationItem <- function(text, icon = shiny::icon("warning"),
-  status = "success", href = NULL) {
-
+  status = "success", href = NULL)
+{
   tagAssert(icon, type = "i")
   validateStatus(status)
   if (is.null(href)) href <- "#"
