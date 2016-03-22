@@ -8,6 +8,9 @@
 #' @param width The width of the sidebar. This must either be a number which
 #'   specifies the width in pixels, or a string that specifies the width in CSS
 #'   units.
+#' @param sideBarMini TRUE or FALSE (default). False collapses sidebar completly
+#'  while TRUE will show collapsed sidebar with icon(s). Title will, however,
+#'  not become responsive.
 #'
 #' @seealso \code{\link{sidebarMenu}}
 #'
@@ -59,7 +62,8 @@
 #' )
 #' }
 #' @export
-dashboardSidebar <- function(..., disable = FALSE, width = NULL) {
+dashboardSidebar <- function(..., disable = FALSE, width = NULL,
+                             sideBarMini = FALSE) {
   width <- validateCssUnit(width)
 
   # Set up custom CSS for custom width
@@ -113,11 +117,19 @@ dashboardSidebar <- function(..., disable = FALSE, width = NULL) {
     '))))
   }
 
+  # sideBar <- NULL
+  # if (sideBarMini == TRUE) {
+  #   sideBar <- " sidebar-mini"
+  # }
+  # sideBar
+
+
   tags$aside(class = "main-sidebar",
     custom_css,
     tags$section(
       class = "sidebar",
-      `data-disable` = if(disable) TRUE else NULL,
+      `data-disable` = if (disable) 1 else NULL,
+      `data-minify` = if (sideBarMini) 1 else NULL,
       list(...)
     )
   )

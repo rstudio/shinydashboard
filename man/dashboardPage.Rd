@@ -5,7 +5,7 @@
 \title{Dashboard page}
 \usage{
 dashboardPage(header, sidebar, body, title = NULL, skin = c("blue", "black",
-  "purple", "green", "red", "yellow"), sideBarMini = FALSE)
+  "purple", "green", "red", "yellow"))
 }
 \arguments{
 \item{header}{A header created by \code{dashboardHeader}.}
@@ -19,10 +19,6 @@ provided, it will try to extract the title from the \code{dashboardHeader}.}
 
 \item{skin}{A color theme. One of \code{"blue"}, \code{"black"},
 \code{"purple"}, \code{"green"}, \code{"red"}, or \code{"yellow"}.}
-
-\item{sideBarMini}{TRUE or FALSE (default). False collapses sidebar completly
-while TRUE will show collapsed sidebar with icon(s). Title will, however,
-not become responsive.}
 }
 \description{
 This creates a dashboard page for use in a Shiny app.

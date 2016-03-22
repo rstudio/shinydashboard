@@ -160,7 +160,6 @@ dropdownMenu <- function(...,
   type = c("messages", "notifications", "tasks"),
   badgeStatus = "primary", icon = NULL, .list = NULL)
 {
-
   type <- match.arg(type)
   if (!is.null(badgeStatus)) validateStatus(badgeStatus)
   items <- c(list(...), .list)
@@ -223,7 +222,6 @@ dropdownMenu <- function(...,
 messageItem <- function(from, message, icon = shiny::icon("user"), time = NULL,
   href = NULL)
 {
-
   tagAssert(icon, type = "i")
   if (is.null(href)) href <- "#"
 
