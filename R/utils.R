@@ -63,31 +63,38 @@ validateColor <- function(color) {
 #'
 #' \itemize{
 #'   \item \code{red}
+#'   \item \code{red-light}
 #'   \item \code{yellow}
+#'   \item \code{yellow-light}
 #'   \item \code{aqua}
 #'   \item \code{blue}
 #'   \item \code{light-blue}
+#'   \item \code{blue-light}
 #'   \item \code{green}
+#'   \item \code{green-light}
 #'   \item \code{navy}
 #'   \item \code{teal}
+#'   \item \code{gray}
 #'   \item \code{olive}
 #'   \item \code{lime}
 #'   \item \code{orange}
 #'   \item \code{fuchsia}
 #'   \item \code{purple}
+#'   \item \code{purple-light}
 #'   \item \code{maroon}
 #'   \item \code{black}
+#'   \item \code{black-light}
 #' }
-#'
+#' @source \url{https://almsaeedstudio.com/themes/AdminLTE/documentation/index.html#layout}
+#' @source \url{https://almsaeedstudio.com/themes/AdminLTE/pages/UI/general.html}
 #' @usage NULL
 #' @format NULL
 #'
 #' @keywords internal
-validColors <- c("red", "yellow", "aqua", "blue", "light-blue","blue-light",
-                 "green","black-light", "purple-light","green-light",
-                 "navy", "teal", "olive", "lime", "orange", "fuchsia",
-                 "purple", "maroon", "black", "red-light", "yellow-light")
-
+validColors <- c("red", "red-light", "yellow", "yellow-light","green", "green-light",
+                 "blue", "light-blue","blue-light", "black", "black-light",
+                 "purple", "purple-light", "navy", "teal", "olive", "lime",
+                 "orange", "fuchsia", "maroon", "gray", "aqua")
 
 # Returns TRUE if a status is valid; throws error otherwise.
 validateStatus <- function(status) {
@@ -113,11 +120,12 @@ validateStatus <- function(status) {
 #'   \item \code{info} Blue
 #'   \item \code{warning} Orange
 #'   \item \code{danger} Red
-#'   \item \code{default} Grey
+#'   \item \code{default} Gray
 #' }
 #'
 #' @usage NULL
 #' @format NULL
+#' @source \url{https://almsaeedstudio.com/themes/AdminLTE/documentation/index.html#component-box}
 #'
 #' @keywords internal
 validStatuses <- c("primary", "success", "info", "warning", "danger", "default")
