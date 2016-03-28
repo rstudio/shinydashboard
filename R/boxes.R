@@ -41,7 +41,7 @@ valueBox <- function(value, subtitle, icon = NULL, color = "aqua", width = 4,
 
 #' Create an info box for the main body of a dashboard.
 #'
-#' @description An info box displays a large icon on the left side, and a title, value
+#' An info box displays a large icon on the left side, and a title, value
 #' (usually a number), and an optional smaller subtitle on the right side. Info
 #' boxes are meant to be placed in the main body of a dashboard.
 #'
@@ -58,7 +58,8 @@ valueBox <- function(value, subtitle, icon = NULL, color = "aqua", width = 4,
 #'   content; the icon will use the same color with a slightly darkened
 #'   background.
 #' @param href An optional URL to link to.
-#' @param progressValue Must be between 0 and 100.
+#' @param progressValue A numeric value to display in the progress bar.
+#'   Must be between 0 and 100.
 #'
 #' @family boxes
 #' @seealso \code{\link{box}} for usage examples.

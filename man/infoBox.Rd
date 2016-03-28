@@ -34,7 +34,8 @@ content, and the \code{color} argument for the background of the icon. If
 content; the icon will use the same color with a slightly darkened
 background.}
 
-\item{progressValue}{Must be between 0 and 100.}
+\item{progressValue}{A numeric value to display in the progress bar.
+Must be between 0 and 100.}
 }
 \description{
 An info box displays a large icon on the left side, and a title, value

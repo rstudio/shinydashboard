@@ -9,7 +9,7 @@ body <- dashboardBody(
   fluidRow(
     infoBox(
       "Orders", uiOutput("orderNum2"), subtitle = "Test", icon = icon("credit-card"),
-      fill = T, progressValue = uiOutput("progressBarValue")
+      fill = TRUE, progressValue = uiOutput("progressBarValue")
     ),
     infoBox(
       "Approval Rating", "60%", icon = icon("line-chart"), color = "green", fill = TRUE
