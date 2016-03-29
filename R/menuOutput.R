@@ -19,6 +19,21 @@ menuOutput <- function(outputId, tag = tags$li) {
 }
 
 
+#' Create a sidebar menu item output (client side)
+#'
+#' This is the UI-side function for creating a dynamic sidebar menu item.
+#'
+#' @inheritParams menuOutput
+#' @family menu outputs
+#' @seealso \code{\link{renderMenu}} for the corresponding server-side function
+#'   and examples, and \code{\link{menuItem}} for the corresponding function
+#'   for generating static sidebar menus.
+#' @export
+menuItemOutput <- function(outputId) {
+  menuOutput(outputId = outputId, tag = tags$li)
+}
+
+
 #' Create a dropdown menu output (client side)
 #'
 #' This is the UI-side function for creating a dynamic dropdown menu.
@@ -31,6 +46,21 @@ menuOutput <- function(outputId, tag = tags$li) {
 #' @export
 dropdownMenuOutput <- function(outputId) {
   menuOutput(outputId = outputId, tag = tags$li)
+}
+
+
+#' Create a dropdown box-menu output (client side)
+#'
+#' This is the UI-side function for creating a dynamic dropdown box-menu.
+#'
+#' @inheritParams menuOutput
+#' @family menu outputs
+#' @seealso \code{\link{renderMenu}} for the corresponding server-side function
+#'   and examples, and \code{\link{dropdownMenu}} for the corresponding function
+#'   for generating static menus.
+#' @export
+boxMenuOutput <- function(outputId) {
+  menuOutput(outputId = outputId, tag = tags$div)
 }
 
 
@@ -47,21 +77,6 @@ dropdownMenuOutput <- function(outputId) {
 sidebarMenuOutput <- function(outputId) {
   menuOutput(outputId = outputId, tag = tags$ul)
 }
-
-#' Create a sidebar menu item output (client side)
-#'
-#' This is the UI-side function for creating a dynamic sidebar menu item.
-#'
-#' @inheritParams menuOutput
-#' @family menu outputs
-#' @seealso \code{\link{renderMenu}} for the corresponding server-side function
-#'   and examples, and \code{\link{menuItem}} for the corresponding function
-#'   for generating static sidebar menus.
-#' @export
-menuItemOutput <- function(outputId) {
-  menuOutput(outputId = outputId, tag = tags$li)
-}
-
 
 #' Create dynamic menu output (server side)
 #'

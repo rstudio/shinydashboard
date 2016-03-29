@@ -119,7 +119,8 @@ infoBox <- function(title, value = NULL, subtitle = NULL,
 #'   the user to collapse the box.
 #' @param collapsed If TRUE, start collapsed. This must be used with
 #'   \code{collapsible=TRUE}.
-#' @param ... Contents of the box.
+#' @param ... Contents of the box/boxItem.
+#' @param boxMenu Adds a box menu consisting of \link{boxItem}.
 #'
 #' @family boxes
 #'
@@ -250,7 +251,8 @@ infoBox <- function(title, value = NULL, subtitle = NULL,
 #' @export
 box <- function(..., title = NULL, footer = NULL, status = NULL,
                 solidHeader = FALSE, background = NULL, width = 6,
-                height = NULL, collapsible = FALSE, collapsed = FALSE) {
+                height = NULL, collapsible = FALSE, collapsed = FALSE,
+                boxMenu = NULL) {
 
   boxClass <- "box"
   if (solidHeader || !is.null(background)) {
@@ -278,25 +280,26 @@ box <- function(..., title = NULL, footer = NULL, status = NULL,
     titleTag <- h3(class = "box-title", title)
   }
 
+  boxTools <- NULL
   collapseTag <- NULL
-  if (collapsible) {
-    buttonStatus <- status %OR% "default"
 
+  if (collapsible) {
     collapseIcon <- if (collapsed) "plus" else "minus"
 
-    collapseTag <- div(class = "box-tools pull-right",
-      tags$button(class = paste0("btn btn-box-tool"),
-        `data-widget` = "collapse",
-        shiny::icon(collapseIcon)
-      )
-    )
+    collapseTag <- tags$button(class = "btn btn-box-tool",
+                               `data-widget` = "collapse",
+                               shiny::icon(collapseIcon))
+  }
+
+  if (!is.null(collapseTag) || !is.null(boxMenu)) {
+    boxTools <- div(class = "box-tools pull-right", collapseTag, boxMenu)
   }
 
   headerTag <- NULL
-  if (!is.null(titleTag) || !is.null(collapseTag)) {
+  if (!is.null(titleTag) || !is.null(boxTools)) {
     headerTag <- div(class = "box-header",
       titleTag,
-      collapseTag
+      boxTools
     )
   }
 
@@ -307,6 +310,26 @@ box <- function(..., title = NULL, footer = NULL, status = NULL,
       div(class = "box-body", ...),
       if (!is.null(footer)) div(class = "box-footer", footer)
     )
+  )
+}
+
+#' @inheritParams box
+#' @param icon Default icon (if boxMenu is used) is wrench
+#' @rdname box
+#' @export
+boxItem <- function(..., icon = shiny::icon("wrench")) {
+  listOfValues <- list(...)
+  # include each arg into <li> </li> tags
+  listOfLi <- lapply(listOfValues, tags$li)
+
+  tags$div(class = "btn-group",
+           tags$button(class = "btn btn-box-tool dropdown-toggle",
+                       `type` = "button",
+                       `data-toggle` = "dropdown",
+                       icon),
+           tags$ul(class = "dropdown-menu",
+                   `role` = "menu",
+                   listOfLi)
   )
 }
 

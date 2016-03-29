@@ -2,14 +2,17 @@
 % Please edit documentation in R/boxes.R
 \name{box}
 \alias{box}
+\alias{boxItem}
 \title{Create a box for the main body of a dashboard}
 \usage{
 box(..., title = NULL, footer = NULL, status = NULL,
   solidHeader = FALSE, background = NULL, width = 6, height = NULL,
-  collapsible = FALSE, collapsed = FALSE)
+  collapsible = FALSE, collapsed = FALSE, boxMenu = NULL)
+
+boxItem(..., icon = shiny::icon("wrench"))
 }
 \arguments{
-\item{...}{Contents of the box.}
+\item{...}{Contents of the box/boxItem.}
 
 \item{title}{Optional title.}
 
@@ -38,6 +41,10 @@ the user to collapse the box.}
 
 \item{collapsed}{If TRUE, start collapsed. This must be used with
 \code{collapsible=TRUE}.}
+
+\item{boxMenu}{Adds a box menu consisting of \link{boxItem}.}
+
+\item{icon}{Default icon (if boxMenu is used) is wrench}
 }
 \description{
 Boxes can be used to hold content in the main body of a dashboard.
