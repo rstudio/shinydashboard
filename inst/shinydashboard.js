@@ -55,6 +55,10 @@ $(function() {
     $(".navbar > .sidebar-toggle").hide();
   }
 
+  // Optionally display only sidebar icons
+  if ($("section.sidebar").data("minify")) {
+    $("body").addClass("sidebar-mini sidebar-collapse");
+  }
 
   // menuOutputBinding
   // ------------------------------------------------------------------

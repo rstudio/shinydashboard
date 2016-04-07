@@ -4,7 +4,7 @@
 \alias{dashboardSidebar}
 \title{Create a dashboard sidebar.}
 \usage{
-dashboardSidebar(..., disable = FALSE, width = NULL)
+dashboardSidebar(..., disable = FALSE, width = NULL, sideBarMini = FALSE)
 }
 \arguments{
 \item{...}{Items to put in the sidebar.}
@@ -14,6 +14,10 @@ dashboardSidebar(..., disable = FALSE, width = NULL)
 \item{width}{The width of the sidebar. This must either be a number which
 specifies the width in pixels, or a string that specifies the width in CSS
 units.}
+
+\item{sideBarMini}{TRUE or FALSE (default). False collapses sidebar completly
+while TRUE will show collapsed sidebar with icon(s). Use
+\code{dashboardHeader(shortTitle = "DB Demo")} for responsive title.}
 }
 \description{
 A dashboard sidebar typically contains a \code{\link{sidebarMenu}}, although

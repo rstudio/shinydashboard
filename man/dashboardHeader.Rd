@@ -4,8 +4,8 @@
 \alias{dashboardHeader}
 \title{Create a header for a dashboard page}
 \usage{
-dashboardHeader(..., title = NULL, titleWidth = NULL, disable = FALSE,
-  .list = NULL)
+dashboardHeader(..., title = NULL, shortTitle = NULL, titleWidth = NULL,
+  disable = FALSE, .list = NULL)
 }
 \arguments{
 \item{...}{Items to put in the header. Should be \code{\link{dropdownMenu}}s.}
@@ -14,6 +14,9 @@ dashboardHeader(..., title = NULL, titleWidth = NULL, disable = FALSE,
 will also be used as the title shown in the browser's title bar. If you
 want that to be different from the text in the dashboard header bar, set
 the \code{title} in \code{\link{dashboardPage}}.}
+
+\item{shortTitle}{A short title for responsive dashboards. Only relevant if
+\code{dashboardSidebar(sideBarMini = T)}}
 
 \item{titleWidth}{The width of the title area. This must either be a number
 which specifies the width in pixels, or a string that specifies the width
