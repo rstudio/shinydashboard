@@ -7,6 +7,8 @@
 #'   will also be used as the title shown in the browser's title bar. If you
 #'   want that to be different from the text in the dashboard header bar, set
 #'   the \code{title} in \code{\link{dashboardPage}}.
+#' @param shortTitle A short title for responsive dashboards. Only relevant if
+#'  \code{dashboardSidebar(sideBarMini = T)}
 #' @param titleWidth The width of the title area. This must either be a number
 #'   which specifies the width in pixels, or a string that specifies the width
 #'   in CSS units.
@@ -86,7 +88,8 @@
 #' )
 #' }
 #' @export
-dashboardHeader <- function(..., title = NULL, titleWidth = NULL, disable = FALSE, .list = NULL) {
+dashboardHeader <- function(..., title = NULL, shortTitle = NULL, titleWidth = NULL,
+                            disable = FALSE, .list = NULL) {
   items <- c(list(...), .list)
   lapply(items, tagAssert, type = "li", class = "dropdown")
 
@@ -115,7 +118,9 @@ dashboardHeader <- function(..., title = NULL, titleWidth = NULL, disable = FALS
   tags$header(class = "main-header",
     custom_css,
     style = if (disable) "display: none;",
-    span(class = "logo", title),
+    a(class = "logo",
+      span(class = "logo-lg", title),
+      span(class = "logo-mini", shortTitle)),
     tags$nav(class = "navbar navbar-static-top", role = "navigation",
       # Embed hidden icon so that we get the font-awesome dependency
       span(shiny::icon("bars"), style = "display:none;"),

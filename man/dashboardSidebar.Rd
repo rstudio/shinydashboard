@@ -16,8 +16,8 @@ specifies the width in pixels, or a string that specifies the width in CSS
 units.}
 
 \item{sideBarMini}{TRUE or FALSE (default). False collapses sidebar completly
-while TRUE will show collapsed sidebar with icon(s). Title will, however,
-not become responsive.}
+while TRUE will show collapsed sidebar with icon(s). Use
+\code{dashboardHeader(shortTitle = "DB Demo")} for responsive title.}
 }
 \description{
 A dashboard sidebar typically contains a \code{\link{sidebarMenu}}, although

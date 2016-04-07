@@ -2,6 +2,11 @@ shinydashboard 0.5.1.9000
 --------------------------------------------------------------------------------
 * Updated to AdminLTE 2.3.2 (1ee281b).
 
+* Adds collapsible sidebar which is capable of showing only icons (PR #133)
+
+* Sidebar can animate into the page when clicked on the menu hide/show item
+  in the top header (#79)
+
 shinydashboard 0.5.1
 --------------------------------------------------------------------------------
 
