@@ -149,3 +149,26 @@ validateTabName <- function(name) {
     stop("tabName must not have a '.' in it.")
   }
 }
+
+
+# This is like a==b, except that if a or b is NULL or an empty vector, it won't
+# return logical(0). If a AND b are NULL/length-0, this will return TRUE; if
+# just one of them is NULL/length-0, this will FALSE. This is for use in
+# conditionals where `if(logical(0))` would cause an error. Similar to using
+# identical(a,b), but less stringent about types: `equals(1, 1L)` is TRUE, but
+# `identical(1, 1L)` is FALSE.
+equals <- function(a, b) {
+  alen <- length(a)
+  blen <- length(b)
+  if (alen==0 && blen==0) {
+    return(TRUE)
+  }
+  if (alen > 1 || blen > 1) {
+    stop("Can only compare objects of length 0 or 1")
+  }
+  if (alen==0 || blen==0) {
+    return(FALSE)
+  }
+
+  a == b
+}
