@@ -244,8 +244,8 @@ sidebarMenu <- function(..., id = NULL, .list = NULL) {
 
   # Restore a selected tab from bookmarked state. Bookmarking was added in Shiny
   # 0.14.
-  if (packageVersion("shiny") >= "0.14") {
-    selectedTabName <- restoreInput(id = id, default = NULL)
+  if (utils::packageVersion("shiny") >= "0.14") {
+    selectedTabName <- shiny::restoreInput(id = id, default = NULL)
     if (!is.null(selectedTabName)) {
       # Find the menuItem or menuSubItem with a `tabname` that matches
       # `selectedTab`. Then set `data-start-selected` to 1 for that tab and 0
