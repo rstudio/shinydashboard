@@ -265,11 +265,8 @@ sidebarMenu <- function(..., id = NULL, .list = NULL) {
         # data-start-selected="1". The []<- assignment is to preserve
         # attributes.
         item$children[] <- lapply(item$children, function(child) {
-          # Find the appro
-          if (inherits(child, "shiny.tag") &&
-              child$name == "a" &&
-              equals(child$attribs[["data-toggle"]], "tab"))
-          {
+          # Find the appropriate <a> child
+          if (tagMatches(child, name = "a", `data-toggle` = "tab")) {
             child$attribs[["data-start-selected"]] <- value
           }
 
@@ -283,17 +280,14 @@ sidebarMenu <- function(..., id = NULL, .list = NULL) {
       # that tabName, FALSE otherwise.
       itemHasTabName <- function(item, tabName) {
         # Must be a <li> tag
-        if (!(inherits(item, "shiny.tag") && item$name == "li")) {
+        if (!tagMatches(item, name = "li")) {
           return(FALSE)
         }
 
         # Look for an <a> child with data-value=tabName
         found <- FALSE
         lapply(item$children, function(child) {
-          if (inherits(child, "shiny.tag") &&
-              child$name == "a" &&
-              equals(child$attribs[["data-value"]], tabName))
-          {
+          if (tagMatches(child, name = "a", `data-value` = tabName)) {
             found <<- TRUE
           }
         })

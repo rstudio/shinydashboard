@@ -172,3 +172,39 @@ equals <- function(a, b) {
 
   a == b
 }
+
+
+# Return TRUE if a tag object matches a specific id, and/or tag name, and/or
+# class, and or other arbitrary tag attributes. Put the args after ... so that
+# caller must use named arguments.
+tagMatches <- function(item, ..., id = NULL, name = NULL, class = NULL) {
+  dots <- list(...)
+  if (!inherits(item, "shiny.tag")) {
+    return(FALSE)
+  }
+  if (!is.null(id) && !equals(item$attribs$id, id)) {
+    return(FALSE)
+  }
+  if (!is.null(name) && !equals(item$name, name)) {
+    return(FALSE)
+  }
+  if (!is.null(class)) {
+    if (is.null(item$attribs$class)) {
+      return(FALSE)
+    }
+    classes <- strsplit(item$attribs$class, " ")[[1]]
+    if (! class %in% classes) {
+      return(FALSE)
+    }
+  }
+
+  for (i in seq_along(dots)) {
+    arg     <- dots[[i]]
+    argName <- names(dots)[[i]]
+    if (!equals(item$attribs[[argName]], arg)) {
+      return(FALSE)
+    }
+  }
+
+  TRUE
+}
