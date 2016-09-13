@@ -1,5 +1,5 @@
-shinydashboard 0.5.1.9000
-==========================
+shinydashboard 0.5.2
+====================
 
 * Added ability to bookmark and restore tabs, when used with Shiny 0.14 and above. ([#152](https://github.com/rstudio/shinydashboard/issues/152), [#157](https://github.com/rstudio/shinydashboard/pull/157))
 
