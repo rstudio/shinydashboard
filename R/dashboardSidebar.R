@@ -297,8 +297,26 @@ sidebarMenu <- function(..., id = NULL, .list = NULL) {
 
       # Actually do the work of marking selected tabs and unselected ones.
       items <- lapply(items, function(item) {
-        selected <- itemHasTabName(item, selectedTabName)
-        selectItem(item, selected)
+        if (tagMatches(item, name = "li", class = "treeview")) {
+          # Search in menuSubItems
+          item$children[] <- lapply(item$children[], function(subItem) {
+
+            if (tagMatches(subItem, name = "ul", class = "treeview-menu")) {
+              subItem$children[] <- lapply(subItem$children, function(subSubItem) {
+                selected <- itemHasTabName(subSubItem, selectedTabName)
+                selectItem(subSubItem, selected)
+              })
+            }
+            subItem
+          })
+
+        } else {
+          # Regular menuItems
+          selected <- itemHasTabName(item, selectedTabName)
+          item <- selectItem(item, selected)
+        }
+
+        item
       })
     }
   }
@@ -373,9 +391,10 @@ menuItem <- function(text, ..., icon = NULL, badgeLabel = NULL, badgeColor = "gr
       span(text),
       shiny::icon("angle-left", class = "pull-right")
     ),
-    tags$ul(class = "treeview-menu",
-      subItems
-    )
+    # Use do.call so that we don't add an extra list layer to the children of the
+    # ul tag. This makes it a little easier to traverse the tree to search for
+    # selected items to restore.
+    do.call(tags$ul, c(class = "treeview-menu", subItems))
   )
 }
 
