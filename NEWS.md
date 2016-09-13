@@ -1,6 +1,10 @@
 shinydashboard 0.5.1.9000
 ==========================
 
+* Added ability to bookmark and restore tabs, when used with Shiny 0.14 and above. ([#152](https://github.com/rstudio/shinydashboard/issues/152), [#157](https://github.com/rstudio/shinydashboard/pull/157))
+
+* Fixed issue with R CMD check and Shiny version 0.14.
+
 * Updated to AdminLTE 2.3.2 (1ee281b).
 
 shinydashboard 0.5.1
