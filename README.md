@@ -1,7 +1,7 @@
 Shiny Dashboard
 ===============
 
-[![Travis-CI Build Status](https://travis-ci.org/rstudio/shinydashboard.png?branch=master)](https://travis-ci.org/rstudio/shinydashboard)
+[![Travis-CI Build Status](https://travis-ci.org/rstudio/shinydashboard.svg?branch=master)](https://travis-ci.org/rstudio/shinydashboard)
 
 ## Installation
 
