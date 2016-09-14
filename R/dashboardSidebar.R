@@ -212,7 +212,8 @@ sidebarSearchForm <- function(textId, buttonId, label = "Search...",
 #' @param id For \code{sidebarMenu}, if \code{id} is present, this id will be
 #'   used for a Shiny input value, and it will report which tab is selected. For
 #'   example, if \code{id="tabs"}, then \code{input$tabs} will be the
-#'   \code{tabName} of the currently-selected tab.
+#'   \code{tabName} of the currently-selected tab. If you want to be able to
+#'   bookmark and restore the selected tab, an \code{id} is required.
 #' @param icon An icon tag, created by \code{\link[shiny]{icon}}. If
 #'   \code{NULL}, don't display an icon.
 #' @param badgeLabel A label for an optional badge. Usually a number or a short
