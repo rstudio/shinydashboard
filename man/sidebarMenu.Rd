@@ -20,7 +20,8 @@ menuSubItem(text, tabName = NULL, href = NULL, newtab = TRUE,
 \item{id}{For \code{sidebarMenu}, if \code{id} is present, this id will be
 used for a Shiny input value, and it will report which tab is selected. For
 example, if \code{id="tabs"}, then \code{input$tabs} will be the
-\code{tabName} of the currently-selected tab.}
+\code{tabName} of the currently-selected tab. If you want to be able to
+bookmark and restore the selected tab, an \code{id} is required.}
 
 \item{.list}{An optional list containing items to put in the menu Same as the
 \code{...} arguments, but in list format. This can be useful when working
