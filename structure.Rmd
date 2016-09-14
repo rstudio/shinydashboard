@@ -350,6 +350,18 @@ A `menuItem` can do other things besides control tabs; it can also contain a lin
            href = "https://github.com/rstudio/shinydashboard/")
 ```
 
+### Bookmarking and restoring selected tabs
+
+As of version 0.14, Shiny has the ability to [bookmark and restore](http://shiny.rstudio.com/articles/bookmarking-state.html) the state of an application. To be able to bookmark and restore the selected `tabItem` in an app built with shinydashboard, you must call `sidebarMenu()` with an `id`. For example:
+
+```{r eval=FALSE}
+sidebarMenu(id = "sidebar",
+  ....
+)
+```
+
+If you've used bookmarking in a Shiny app before, you know that the UI must be wrapped in a function. The `sidebarMenu()` must be called inside the UI function. It does not work to call it outside the UI function, saved the result in a variable, and then use that result in the UI function -- if you do this, then the selected tab will save, but it will not restore.
+
 ### Dynamic content
 
 A sidebar menu can be generated dynamically, with `renderMenu` and `sidebarMenuOutput`. Here is an example app with a sidebar that is generated on the server side.
