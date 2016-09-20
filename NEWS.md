@@ -1,3 +1,8 @@
+shinydashboard 0.5.3
+=========================
+
+* Fixed ([#160](https://github.com/rstudio/shinydashboard/issues/160): Using a dynamically-created `sidebarMenu` without an `id` argument would cause the app to not start, when used with Shiny 0.14.
+
 shinydashboard 0.5.2
 ====================
 
