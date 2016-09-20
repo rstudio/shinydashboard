@@ -245,7 +245,7 @@ sidebarMenu <- function(..., id = NULL, .list = NULL) {
 
   # Restore a selected tab from bookmarked state. Bookmarking was added in Shiny
   # 0.14.
-  if (utils::packageVersion("shiny") >= "0.14") {
+  if (utils::packageVersion("shiny") >= "0.14" && !is.null(id)) {
     selectedTabName <- shiny::restoreInput(id = id, default = NULL)
     if (!is.null(selectedTabName)) {
       # Find the menuItem or menuSubItem with a `tabname` that matches
