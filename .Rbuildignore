@@ -3,3 +3,4 @@
 ^tools$
 ^tests-manual$
 ^\.travis\.yml$
+^appveyor\.yml$
