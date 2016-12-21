@@ -404,6 +404,7 @@ tabBox <- function(..., id = NULL, selected = NULL, title = NULL,
       tags$li(class = paste("header", titleClass), title)
     )
   }
-
-  div(class = paste0("col-sm-", width), content)
+  if ( is.null( id ) )
+    id <- ""
+  div(class = paste0("col-sm-", width), content, id = id)
 }
