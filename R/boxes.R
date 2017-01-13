@@ -60,7 +60,7 @@ descriptionBlock <- function(header, text, percentage, icon = 'caret-up', width 
 
   boxContent <- div(class = paste0("description-block border-right"),
       span(class = paste0("description-percentage text-", color),
-        icon("caret-up"),
+        icon(icon),
         percentage),
       h5(header),
       span(class = 'description-text', text)
