@@ -38,6 +38,42 @@ valueBox <- function(value, subtitle, icon = NULL, color = "aqua", width = 4,
   )
 }
 
+#' Create a description block for the main body of a dashboard.
+#'
+#'
+#' @inheritParams box
+#' @param header The header to display in the box. Usually a number or short text.
+#' @param text Subtitle text.
+#' @param percentage percentage to appear in description
+#' @param icon An icon tag, created by \code{\link[shiny]{icon}}.
+#' @param color A color for the box. Valid colors are listed in
+#'   \link{validColors}.
+#' @param href An optional URL to link to.
+#'
+#' @family boxes
+#' @seealso \code{\link{box}} for usage examples.
+#'
+#' @export
+descriptionBlock <- function(header, text, percentage, icon = 'caret-up', width = 4, href = NULL, color = 'green')
+{
+  validateColor(color)
+
+  boxContent <- div(class = paste0("description-block border-right"),
+      span(class = paste0("description-percentage text-", color),
+        icon("caret-up"),
+        percentage),
+      h5(header),
+      span(class = 'description-text', text)
+  )
+
+  if (!is.null(href))
+    boxContent <- a(href = href, boxContent)
+
+  div(class = if (!is.null(width)) paste0("col-sm-", width),
+    boxContent
+  )
+}
+
 
 #' Create an info box for the main body of a dashboard.
 #'
