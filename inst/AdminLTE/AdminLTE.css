@@ -5,7 +5,7 @@
   src:
     local('Source Sans Pro Light'),
     local('SourceSansPro-Light'),
-    url('Source_Sans_Pro_300.ttf') format('truetype');
+    url('fonts/Source_Sans_Pro_300.ttf') format('truetype');
 }
 @font-face {
   font-family: 'Source Sans Pro';
@@ -14,7 +14,7 @@
   src:
     local('Source Sans Pro'),
     local('SourceSansPro-Regular'),
-    url('Source_Sans_Pro_400.ttf') format('truetype');
+    url('fonts/Source_Sans_Pro_400.ttf') format('truetype');
 }
 @font-face {
   font-family: 'Source Sans Pro';
@@ -23,7 +23,7 @@
   src:
     local('Source Sans Pro Semibold'),
     local('SourceSansPro-Semibold'),
-    url('Source_Sans_Pro_600.ttf') format('truetype');
+    url('fonts/Source_Sans_Pro_600.ttf') format('truetype');
 }
 @font-face {
   font-family: 'Source Sans Pro';
@@ -32,7 +32,7 @@
   src:
     local('Source Sans Pro Bold'),
     local('SourceSansPro-Bold'),
-    url('Source_Sans_Pro_700.ttf') format('truetype');
+    url('fonts/Source_Sans_Pro_700.ttf') format('truetype');
 }
 @font-face {
   font-family: 'Source Sans Pro';
@@ -41,7 +41,7 @@
   src:
     local('Source Sans Pro Light Italic'),
     local('SourceSansPro-LightIt'),
-    url('Source_Sans_Pro_300italic.ttf') format('truetype');
+    url('fonts/Source_Sans_Pro_300italic.ttf') format('truetype');
 }
 @font-face {
   font-family: 'Source Sans Pro';
@@ -50,7 +50,7 @@
   src:
     local('Source Sans Pro Italic'),
     local('SourceSansPro-It'),
-    url('Source_Sans_Pro_400italic.ttf') format('truetype');
+    url('fonts/Source_Sans_Pro_400italic.ttf') format('truetype');
 }
 @font-face {
   font-family: 'Source Sans Pro';
@@ -59,7 +59,7 @@
   src:
     local('Source Sans Pro Semibold Italic'),
     local('SourceSansPro-SemiboldIt'),
-    url('Source_Sans_Pro_600italic.ttf') format('truetype');
+    url('fonts/Source_Sans_Pro_600italic.ttf') format('truetype');
 }
 
 /*!
