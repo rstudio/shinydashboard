@@ -39,7 +39,8 @@ section.sidebar .shiny-input-container {
 }
 
 /* Make action buttons/links look good on the sidebar panel */
-section.sidebar button, section.sidebar a {
+section.sidebar .shiny-bound-input.action-button,
+section.sidebar .shiny-bound-input.action-link {
   margin: 6px 5px 6px 15px;
   display: block;
 }
