@@ -1,6 +1,8 @@
 shinydashboard 0.5.3.9000
 =========================
 
+* Addressed [#178](https://github.com/rstudio/shinydashboard/issues/178): switch from `npm` to `yarn`. Also upgraded all yarn packages to the `latest` tag (all major changes). [#184](https://github.com/rstudio/shinydashboard/pull/184)
+
 * Fixed [#176](https://github.com/rstudio/shinydashboard/issues/176) (making buttons look good on the sidebar) by giving Shiny action buttons and links some margin space. ([#182](https://github.com/rstudio/shinydashboard/pull/182))
 
 * Updated to AdminLTE 2.3.11. ([#181](https://github.com/rstudio/shinydashboard/pull/181))
