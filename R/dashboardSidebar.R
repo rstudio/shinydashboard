@@ -121,7 +121,10 @@ dashboardSidebar <- function(..., disable = FALSE, width = NULL, collapsed = FAL
   # class to the body (not to the sidebar). However, it makes sense for the
   # `collapsed` argument to belong in this function. So this information is
   # just passed through (also as a class) to the `dashboardPage()` function
-  tags$aside(class = paste("main-sidebar", if (collapsed) "start-collapsed"),
+  tags$aside(
+    id = "main-sidebar-id",
+    class = paste("main-sidebar", if (collapsed) "start-collapsed"),
+    `data-value` = if (collapsed) "collapsed" else "expanded",
     custom_css,
     tags$section(
       class = "sidebar",

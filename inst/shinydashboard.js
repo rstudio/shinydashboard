@@ -49,16 +49,29 @@ $(function() {
 
   ensureActivatedTab();
 
+  // sendMessage to sidebar when we programmatically disable it
+  // (this ensure that the sidebar has the correct value)
+  var updateSidebarVal = function(newVal) {
+    var $obj = $('.shiny-bound-input#main-sidebar-id');
+    var inputBinding = $obj.data('shiny-input-binding');
+    alert($obj.attr('data-value'));
+    if (!newVal) inputBinding.toggleValue($obj);
+    else inputBinding.setValue($obj, newVal);
+    alert($obj.attr('data-value'));
+  };
+
   // Optionally disable sidebar
   if ($("section.sidebar").data("disable")) {
     $("body").addClass("sidebar-collapse");
+    updateSidebarVal("collapsed");
     $(".navbar > .sidebar-toggle").hide();
   }
 
   // Trigger the resize event when the sidebar is collapsed/expanded
   // (this allows images to be responsive and resize themselves)
- $(document).on("click", ".sidebar-toggle", function() {
+  $(document).on("click", ".sidebar-toggle", function() {
     $(window).trigger("resize");
+    updateSidebarVal();
   });
 
  $(document).on("click", ".treeview > a", function() {
@@ -156,6 +169,46 @@ $(function() {
     }
   });
   Shiny.inputBindings.register(tabItemInputBinding, 'shinydashboard.tabItemInput');
+
+
+
+  // sidebarInputBinding
+  // ------------------------------------------------------------------
+  var sidebarInputBinding = new Shiny.InputBinding();
+  $.extend(sidebarInputBinding, {
+    find: function(scope) {
+      return $(scope).find('#main-sidebar-id');
+    },
+    getValue: function(el) {
+      return $(el).attr("data-value");
+      // if ($('body').hasClass('sidebar-collapse')) return 'collapsed';
+      // else return 'expanded';
+    },
+    setValue: function(el, value) {
+      $(el).attr("data-value", value);
+      // if (value === 'collapsed') $('body').addClass('sidebar-collapse');
+      // else  $('body').removeClass('sidebar-collapse');
+    },
+    toggleValue: function(el) {
+      var current = this.getValue(el);
+      var newVal = (current == "collapsed") ? "expanded" : "collapsed";
+      this.setValue(el, newVal);
+    },
+    receiveMessage: function(el, data) {
+      if (data.hasOwnProperty('value'))
+        this.setValue(el, data.value);
+    },
+    subscribe: function(el, callback) {
+      $(el).on('change.sidebarInputBinding', function() {
+        callback();
+      });
+    },
+    unsubscribe: function(el) {
+      $(el).off('.sidebarInputBinding');
+    }
+  });
+  Shiny.inputBindings.register(sidebarInputBinding,
+    'shinydashboard.sidebarInputBinding');
 
 
 });
