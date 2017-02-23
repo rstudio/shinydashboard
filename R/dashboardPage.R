@@ -57,10 +57,6 @@ dashboardPage <- function(header, sidebar, body, title = NULL,
     body
   )
 
-  # if the sidebar has the class "start-collapsed", it means that the user set
-  # the `collapsed` argument of `dashboardSidebar` to TRUE
-  # collapsed <- "start-collapsed" %in% strsplit(sidebar$attribs$class, " ")[[1]]
-
   # if the sidebar has the attribute `data-value = "collapsed"`, it means that
   # the user set the `collapsed` argument of `dashboardSidebar` to TRUE
   collapsed <- "collapsed" %in% strsplit(sidebar$attribs$`data-value`, " ")[[1]]

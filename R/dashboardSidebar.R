@@ -123,8 +123,8 @@ dashboardSidebar <- function(..., disable = FALSE, width = NULL, collapsed = FAL
   # The expanded/collapsed state of the sidebar is actually set by adding a
   # class to the body (not to the sidebar). However, it makes sense for the
   # `collapsed` argument to belong in this function. So this information is
-  # just passed through (also as the `data-value`) to the `dashboardPage()`
-  # function
+  # just passed through (as the `data-value` attribute) to the
+  # `dashboardPage()` function
   tags$aside(
     id = "appSidebar",
     class = paste("main-sidebar"),
