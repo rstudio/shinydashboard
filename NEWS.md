@@ -1,6 +1,8 @@
 shinydashboard 0.5.3.9000
 =========================
 
+* Fixed [#73](https://github.com/rstudio/shinydashboard/issues/73): add `collapsed` argument to `dashboardSidebar()`, which allows it to start off collapsed. ([#186](https://github.com/rstudio/shinydashboard/pull/186))
+
 * Fixed [#62](https://github.com/rstudio/shinydashboard/issues/62): make images resize when the sidebar collapses/expands. [#185](https://github.com/rstudio/shinydashboard/pull/185)
 
 * Addressed [#178](https://github.com/rstudio/shinydashboard/issues/178): switch from `npm` to `yarn`. Also upgraded all yarn packages to the `latest` tag (all major changes). [#184](https://github.com/rstudio/shinydashboard/pull/184)
