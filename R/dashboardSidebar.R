@@ -117,14 +117,18 @@ dashboardSidebar <- function(..., disable = FALSE, width = NULL, collapsed = FAL
     '))))
   }
 
+  dataValue <- restoreInput(id = "appSidebar",
+    default = if (collapsed) "collapsed" else "expanded")
+
   # The expanded/collapsed state of the sidebar is actually set by adding a
   # class to the body (not to the sidebar). However, it makes sense for the
   # `collapsed` argument to belong in this function. So this information is
-  # just passed through (also as a class) to the `dashboardPage()` function
+  # just passed through (also as the `data-value`) to the `dashboardPage()`
+  # function
   tags$aside(
-    id = "main-sidebar-id",
-    class = paste("main-sidebar", if (collapsed) "start-collapsed"),
-    `data-value` = if (collapsed) "collapsed" else "expanded",
+    id = "appSidebar",
+    class = paste("main-sidebar"),
+    `data-value` = dataValue,
     custom_css,
     tags$section(
       class = "sidebar",

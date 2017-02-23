@@ -51,19 +51,26 @@ $(function() {
 
   // sendMessage to sidebar when we programmatically disable it
   // (this ensure that the sidebar has the correct value)
-  var updateSidebarVal = function(newVal) {
-    var $obj = $('.shiny-bound-input#main-sidebar-id');
+  var updateSidebarVal = function() {
+    var $obj = $('.shiny-bound-input.main-sidebar');
     var inputBinding = $obj.data('shiny-input-binding');
-    alert($obj.attr('data-value'));
-    if (!newVal) inputBinding.toggleValue($obj);
-    else inputBinding.setValue($obj, newVal);
-    alert($obj.attr('data-value'));
+    inputBinding.toggleValue($obj);
+    $obj.trigger('change');
+
   };
+
+  var updateItemExpanded = function(val) {
+    var $obj = $('section.sidebar.shiny-bound-input');
+    var inputBinding = $obj.data('shiny-input-binding');
+    inputBinding.setValue($obj, val);
+    $obj.trigger('change');
+
+  };
+
 
   // Optionally disable sidebar
   if ($("section.sidebar").data("disable")) {
     $("body").addClass("sidebar-collapse");
-    updateSidebarVal("collapsed");
     $(".navbar > .sidebar-toggle").hide();
   }
 
@@ -74,7 +81,19 @@ $(function() {
     updateSidebarVal();
   });
 
- $(document).on("click", ".treeview > a", function() {
+
+  // ...
+  $(document).on("click", "a[href^='#shiny-tab-']", function() {
+    console.log(this);
+    if ($(this).parent().hasClass('treeview')) {
+      updateItemExpanded($(this).attr('href').substring(1));
+    }
+  });
+
+  // var dataExpanded = $("section.sidebar").attr("data-expanded");
+  // updateItemExpanded(dataExpanded);
+
+  $(document).on("click", ".treeview > a", function() {
     $(this).next(".treeview-menu").trigger("shown");
   });
 
@@ -171,23 +190,99 @@ $(function() {
   Shiny.inputBindings.register(tabItemInputBinding, 'shinydashboard.tabItemInput');
 
 
-
-  // sidebarInputBinding
+  // sidebarmenuExpandedInputBinding
   // ------------------------------------------------------------------
-  var sidebarInputBinding = new Shiny.InputBinding();
-  $.extend(sidebarInputBinding, {
+  // This keeps tracks of what menuItem (if any) is expanded
+  var sidebarmenuExpandedInputBinding = new Shiny.InputBinding();
+  $.extend(sidebarmenuExpandedInputBinding, {
     find: function(scope) {
-      return $(scope).find('#main-sidebar-id');
+      return $(scope).find('section.sidebar');
+    },
+    getId: function(el) {
+      return "itemExpanded";
+      // return $('ul.sidebar-menu').attr('id') + "Expanded";
+    },
+
+    /* */
+    initialize: function(el) {
+      // if ($(el).attr("data-expanded")) return $(el).attr("data-expanded");
+      $(this).trigger('change');
+    },
+    /* */
+
+    // the value is the href of the open menuItem (or NULL if there's
+    // no open menuItem)
+    getValue: function(el) {
+      var $expanded = $(el).find('li ul.menu-open');
+      if ($expanded.length === 1) return $expanded.prev().attr('href').substring(1);
+      else if ($(el).attr("data-expanded")) return $(el).attr("data-expanded");
+      else return null;
+    },
+    setValue: function(el, value) {
+      // first hide everything
+      var $uls = $('.treeview-menu');
+      //$uls.each(function() {
+        //$ul.removeClass('menu-open');
+        //$ul.hide();
+      //});
+      // then show the appropriate menu
+      if (value !== null) {
+        var $ul = $('a[href="#' + value + '"]').next();
+        $ul.addClass('menu-open');
+        $ul.show();
+      }
+      /*
+      var $ul = $('a[href="' + value + '"').next();
+      if (value === "open") {
+        $ul.addClass('menu-open');
+        $ul.show();
+      } else {
+        $ul.removeClass('menu-open');
+        $ul.hide();
+      }
+      */
+    },
+    /*
+    toggleValue: function(el) {
+      var current = this.getValue(el);
+      var newVal = (current == "open") ? "closed" : "open";
+      this.setValue(el, newVal);
+    },
+    */
+    receiveMessage: function(el, data) {
+      if (data.hasOwnProperty('value'))
+        this.setValue(el, data.value);
+    },
+    subscribe: function(el, callback) {
+      $(el).on('change.sidebarmenuExpandedInputBinding', function() {
+        callback();
+      });
+    },
+    unsubscribe: function(el) {
+      $(el).off('.sidebarmenuExpandedInputBinding');
+    }
+  });
+  Shiny.inputBindings.register(sidebarmenuExpandedInputBinding,
+    'shinydashboard.sidebarmenuExpandedInputBinding');
+
+
+  // sidebarCollapsedInputBinding
+  // ------------------------------------------------------------------
+  // This keeps tracks of whether the sidebar is expanded (default)
+  // or collapsed
+  var sidebarCollapsedInputBinding = new Shiny.InputBinding();
+  $.extend(sidebarCollapsedInputBinding, {
+    find: function(scope) {
+      return $(scope).find('.main-sidebar').first();
+    },
+    getId: function(el) {
+      return "sidebarCollapsed";
     },
     getValue: function(el) {
       return $(el).attr("data-value");
-      // if ($('body').hasClass('sidebar-collapse')) return 'collapsed';
-      // else return 'expanded';
     },
     setValue: function(el, value) {
       $(el).attr("data-value", value);
-      // if (value === 'collapsed') $('body').addClass('sidebar-collapse');
-      // else  $('body').removeClass('sidebar-collapse');
     },
     toggleValue: function(el) {
       var current = this.getValue(el);
@@ -199,16 +294,14 @@ $(function() {
         this.setValue(el, data.value);
     },
     subscribe: function(el, callback) {
-      $(el).on('change.sidebarInputBinding', function() {
+      $(el).on('change.sidebarCollapsedInputBinding', function() {
         callback();
       });
     },
     unsubscribe: function(el) {
-      $(el).off('.sidebarInputBinding');
+      $(el).off('.sidebarCollapsedInputBinding');
     }
   });
-  Shiny.inputBindings.register(sidebarInputBinding,
-    'shinydashboard.sidebarInputBinding');
-
-
+  Shiny.inputBindings.register(sidebarCollapsedInputBinding,
+    'shinydashboard.sidebarCollapsedInputBinding');
 });
