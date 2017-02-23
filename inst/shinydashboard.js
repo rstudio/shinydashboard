@@ -57,7 +57,7 @@ $(function() {
 
   // Trigger the resize event when the sidebar is collapsed/expanded
   // (this allows images to be responsive and resize themselves)
-  $(".sidebar-toggle").on( "click", function() {
+ $(document).on("click", ".sidebar-toggle", function() {
     $(window).trigger("resize");
   });
 
