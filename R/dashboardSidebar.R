@@ -8,6 +8,7 @@
 #' @param width The width of the sidebar. This must either be a number which
 #'   specifies the width in pixels, or a string that specifies the width in CSS
 #'   units.
+#' @param collapsed If \code{TRUE}, the sidebar will be collapsed on app startup.
 #'
 #' @seealso \code{\link{sidebarMenu}}
 #'
@@ -59,7 +60,7 @@
 #' )
 #' }
 #' @export
-dashboardSidebar <- function(..., disable = FALSE, width = NULL) {
+dashboardSidebar <- function(..., disable = FALSE, width = NULL, collapsed = FALSE) {
   width <- validateCssUnit(width)
 
   # Set up custom CSS for custom width
@@ -113,11 +114,15 @@ dashboardSidebar <- function(..., disable = FALSE, width = NULL) {
     '))))
   }
 
-  tags$aside(class = "main-sidebar",
+  # The expanded/collapsed state of the sidebar is actually set by adding a
+  # class to the body (not to the sidebar). However, it makes sense for the
+  # `collapsed` argument to belong in this function. So this information is
+  # just passed through (also as a class) to the `dashboardPage()` function
+  tags$aside(class = paste("main-sidebar", if (collapsed) "start-collapsed"),
     custom_css,
     tags$section(
       class = "sidebar",
-      `data-disable` = if(disable) 1 else NULL,
+      `data-disable` = if (disable) 1 else NULL,
       list(...)
     )
   )
