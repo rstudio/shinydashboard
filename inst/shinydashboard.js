@@ -100,6 +100,7 @@ $(function() {
 
       Shiny.initializeInputs(el);
       Shiny.bindAll(el);
+      ensureActivatedTab();
     }
   });
   Shiny.outputBindings.register(menuOutputBinding,
