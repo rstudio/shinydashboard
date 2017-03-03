@@ -61,6 +61,10 @@ $(function() {
     $(window).trigger("resize");
   });
 
+ $(document).on("click", "a[href^='#shiny-tab']", function() {
+    $(this).next().trigger("shown");
+  });
+
   // menuOutputBinding
   // ------------------------------------------------------------------
   // Based on Shiny.htmlOutputBinding, but instead of putting the result in a
