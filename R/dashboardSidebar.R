@@ -121,6 +121,8 @@ dashboardSidebar <- function(..., disable = FALSE, width = NULL, collapsed = FAL
   dataValue <- restoreInput(id = "sidebarCollapsed",
     default = if (collapsed) "collapsed" else "expanded")
 
+  # dataExpanded <- restoreInput(id = "itemExpanded", default = NULL)
+
   # The expanded/collapsed state of the sidebar is actually set by adding a
   # class to the body (not to the sidebar). However, it makes sense for the
   # `collapsed` argument to belong in this function. So this information is
@@ -134,6 +136,7 @@ dashboardSidebar <- function(..., disable = FALSE, width = NULL, collapsed = FAL
     tags$section(
       class = "sidebar",
       `data-disable` = if (disable) 1 else NULL,
+      # `data-expanded` = dataExpanded,
       list(...)
     )
   )
@@ -402,6 +405,10 @@ menuItem <- function(text, ..., icon = NULL, badgeLabel = NULL, badgeColor = "gr
     )
   }
 
+  dataExpanded <- restoreInput(id = "itemExpanded", default = "")
+  cls <- if (dataExpanded == paste0("shiny-tab-", tabName)) " menu-open" else ""
+  display <- if (cls != "") "block" else "none"
+
   tags$li(class = "treeview",
     a(href = href,
       icon,
@@ -411,7 +418,7 @@ menuItem <- function(text, ..., icon = NULL, badgeLabel = NULL, badgeColor = "gr
     # Use do.call so that we don't add an extra list layer to the children of the
     # ul tag. This makes it a little easier to traverse the tree to search for
     # selected items to restore.
-    do.call(tags$ul, c(class = "treeview-menu", subItems))
+    do.call(tags$ul, c(class = paste0("treeview-menu", cls), style = paste0("display: ", display) , subItems))
   )
 }
 
