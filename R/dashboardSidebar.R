@@ -60,8 +60,8 @@
 #' )
 #' }
 #' @export
-dashboardSidebar <- function(..., disable = FALSE, width = NULL, collapsed = FALSE,
-                             id = "appSidebar") {
+dashboardSidebar <- function(..., disable = FALSE, width = NULL, collapsed = FALSE#, id = "main-sidebar"
+  ) {
   width <- validateCssUnit(width)
 
   # Set up custom CSS for custom width
@@ -118,7 +118,7 @@ dashboardSidebar <- function(..., disable = FALSE, width = NULL, collapsed = FAL
     '))))
   }
 
-  dataValue <- restoreInput(id = id,
+  dataValue <- restoreInput(id = "sidebarCollapsed",
     default = if (collapsed) "collapsed" else "expanded")
 
   # The expanded/collapsed state of the sidebar is actually set by adding a
@@ -127,7 +127,7 @@ dashboardSidebar <- function(..., disable = FALSE, width = NULL, collapsed = FAL
   # just passed through (as the `data-value` attribute) to the
   # `dashboardPage()` function
   tags$aside(
-    id = id,
+    #id = id,
     class = paste("main-sidebar"),
     `data-value` = dataValue,
     custom_css,
