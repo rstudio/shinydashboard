@@ -61,7 +61,7 @@ $(function() {
     $(window).trigger("resize");
   });
 
- $(document).on("click", "a[href^='#shiny-tab']", function() {
+ $(document).on("click", ".treeview > a", function() {
     $(this).next().trigger("shown");
   });
 
