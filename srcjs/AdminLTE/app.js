@@ -1,6 +1,3 @@
-//---------------------------------------------------------------------
-// Source file: ../srcjs/AdminLTE/app.js
-
 /*! AdminLTE app.js
  * ================
  * Main JS application file for AdminLTE v2. This file
@@ -783,5 +780,3 @@ function _init() {
     });
   };
 }(jQuery));
-
-//# sourceMappingURL=app.js.map

@@ -1,27 +1,82 @@
 module.exports = function(grunt) {
 
-  var srcdir = '../inst/';
+  var srcdirjs = '../srcjs/';
+  var srcdircss = '../inst/';
+  var destdirjs = '../inst/';
+  var destdircss = '../inst/';
 
   grunt.initConfig({
     pkg: pkgInfo(),
+
+    clean: {
+      options: { force: true },
+      src: [
+        destdirjs + "shinydashboard.js",
+        destdirjs + "shinydashboard.js.map",
+        destdirjs + "shinydashboard.min.js",
+        destdirjs + "shinydashboard.min.js.map",
+        destdirjs + "AdminLTE/app.js",
+        destdirjs + "AdminLTE/app.js.map",
+        destdirjs + "AdminLTE/app.min.js",
+        destdirjs + "AdminLTE/app.min.js.map",
+        destdircss + "AdminLTE/AdminLTE.min.css",
+        destdircss + "AdminLTE/_all-skins.min.css",
+      ]
+    },
+
+    concat: {
+      options: {
+        process: function(src, filepath) {
+          return '//---------------------------------------------------------------------\n' +
+            '// Source file: ' + filepath + '\n\n' + src;
+        },
+        sourceMap: true
+      },
+      shinydashboard: {
+        src: [
+          srcdirjs + 'shinydashboard-part.js'
+        ],
+        dest: destdirjs + 'shinydashboard.js'
+      },
+      adminlte: {
+        src: [
+          srcdirjs + 'AdminLTE/app.js'
+        ],
+        dest: destdirjs + 'AdminLTE/app.js'
+      }
+    },
+
     uglify: {
+      shinydashboard: {
+        options: {
+          banner: '/*! <%= pkg.name %> <%= pkg.version %> | ' +
+                  '(c) 2017-<%= grunt.template.today("yyyy") %> RStudio, Inc. | ' +
+                  'License: <%= pkg.license %> */\n',
+          sourceMap: true,
+          // Base the .min.js sourcemap off of the .js sourcemap created by concat
+          sourceMapIn: destdirjs + 'shinydashboard.js.map',
+          sourceMapIncludeSources: true
+        },
+        src: destdirjs + 'shinydashboard.js',
+        dest: destdirjs + 'shinydashboard.min.js'
+      },
       adminlte: {
         options: {
           sourceMap: true
         },
-        src: srcdir + '/AdminLTE/app.js',
-        dest: srcdir + '/AdminLTE/app.min.js'
+        src: srcdirjs + 'AdminLTE/app.js',
+        dest: destdirjs + 'AdminLTE/app.min.js'
       }
     },
 
     cssmin: {
       adminlte: {
-        src: srcdir + '/AdminLTE/AdminLTE.css',
-        dest: srcdir + '/AdminLTE/AdminLTE.min.css'
+        src: srcdircss + 'AdminLTE/AdminLTE.css',
+        dest: destdircss + 'AdminLTE/AdminLTE.min.css'
       },
       adminlte_themes: {
-        src: srcdir + '/AdminLTE/_all-skins.css',
-        dest: srcdir + '/AdminLTE/_all-skins.min.css'
+        src: srcdircss + 'AdminLTE/_all-skins.css',
+        dest: destdircss + 'AdminLTE/_all-skins.min.css'
       }
     },
 
@@ -29,15 +84,13 @@ module.exports = function(grunt) {
       options: {
         force: true  // Don't abort if there are JSHint warnings
       },
-      shinydashboard: {
-        src: srcdir + '/shinydashboard.js',
-      }
+      shinydashboard: ['*.js'].map(function(el) { return srcdirjs + el; })
     },
 
     watch: {
       shinydashboard: {
-        files: '<%= jshint.shinydashboard.src %>',
-        tasks: ['newer:jshint:shinydashboard']
+        files: '<%= concat.shinydashboard.src %>',
+        tasks: ['newer:concat:shinydashboard', 'newer:uglify:shinydashboard', 'newer:jshint:shinydashboard']
       },
       adminlte: {
         files: ['<%= uglify.adminlte.src %>', '<%= cssmin.adminlte.src %>'],
@@ -51,12 +104,16 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-contrib-cssmin');
   grunt.loadNpmTasks('grunt-contrib-jshint');
   grunt.loadNpmTasks('grunt-contrib-watch');
+  grunt.loadNpmTasks('grunt-contrib-concat');
   grunt.loadNpmTasks('grunt-newer');
 
 
-  grunt.registerTask('default', ['newer:uglify', 'newer:cssmin', 'newer:jshint']);
+  grunt.registerTask('default', ['newer:concat', 'newer:uglify', 'newer:cssmin', 'newer:jshint']);
 
 
+  // ---------------------------------------------------------------------------
+  // Utility functions
+  // ---------------------------------------------------------------------------
 
   // Return an object which merges information from package.json and the
   // DESCRIPTION file.

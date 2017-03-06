@@ -1,6 +1,3 @@
-//---------------------------------------------------------------------
-// Source file: ../srcjs/shinydashboard-part.js
-
 /* jshint browser:true, jquery:true, indent:2 */
 /* global Shiny */
 
@@ -308,5 +305,3 @@ $(function() {
   Shiny.inputBindings.register(sidebarCollapsedInputBinding,
     'shinydashboard.sidebarCollapsedInputBinding');
 });
-
-//# sourceMappingURL=shinydashboard.js.map
