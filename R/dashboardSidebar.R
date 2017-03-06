@@ -405,7 +405,7 @@ menuItem <- function(text, ..., icon = NULL, badgeLabel = NULL, badgeColor = "gr
     )
   }
 
-  dataExpanded <- restoreInput(id = "itemExpanded", default = "")
+  dataExpanded <- restoreInput(id = "itemExpanded", default = "") %OR% "" # prevent this from being NULL
   cls <- if (dataExpanded == paste0("shiny-tab-", tabName)) " menu-open" else ""
   display <- if (cls != "") "block" else "none"
 
