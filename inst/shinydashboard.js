@@ -62,7 +62,7 @@ $(function() {
   });
 
  $(document).on("click", ".treeview > a", function() {
-    $(this).next().trigger("shown");
+    $(this).next(".treeview-menu").trigger("shown");
   });
 
   // menuOutputBinding
