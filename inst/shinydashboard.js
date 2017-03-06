@@ -61,6 +61,10 @@ $(function() {
     $(window).trigger("resize");
   });
 
+ $(document).on("click", ".treeview > a", function() {
+    $(this).next(".treeview-menu").trigger("shown");
+  });
+
   // menuOutputBinding
   // ------------------------------------------------------------------
   // Based on Shiny.htmlOutputBinding, but instead of putting the result in a
