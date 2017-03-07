@@ -34,7 +34,9 @@ module.exports = function(grunt) {
       },
       shinydashboard: {
         src: [
-          srcdirjs + 'shinydashboard-part.js'
+          srcdirjs + '_start.js',
+          srcdirjs + 'shinydashboard-part.js',
+          srcdirjs + '_end.js'
         ],
         dest: destdirjs + 'shinydashboard.js'
       },
@@ -84,17 +86,17 @@ module.exports = function(grunt) {
       options: {
         force: true  // Don't abort if there are JSHint warnings
       },
-      shinydashboard: ['*.js'].map(function(el) { return srcdirjs + el; })
+      shinydashboard: destdirjs + "shinydashboard.js",
     },
 
     watch: {
       shinydashboard: {
         files: '<%= concat.shinydashboard.src %>',
-        tasks: ['newer:concat:shinydashboard', 'newer:uglify:shinydashboard', 'newer:jshint:shinydashboard']
+        tasks: ['concat:shinydashboard', 'uglify:shinydashboard', 'jshint:shinydashboard']
       },
       adminlte: {
         files: ['<%= uglify.adminlte.src %>', '<%= cssmin.adminlte.src %>'],
-        tasks: ['newer:uglify:adminlte', 'newer:cssmin:adminlte']
+        tasks: ['uglify:adminlte', 'cssmin:adminlte']
       }
     }
   });
@@ -108,7 +110,7 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-newer');
 
 
-  grunt.registerTask('default', ['newer:concat', 'newer:uglify', 'newer:cssmin', 'newer:jshint']);
+  grunt.registerTask('default', ['concat', 'uglify', 'cssmin', 'jshint']);
 
 
   // ---------------------------------------------------------------------------

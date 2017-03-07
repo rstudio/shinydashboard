@@ -1,10 +1,14 @@
 //---------------------------------------------------------------------
+// Source file: ../srcjs/_start.js
+
+$(function() {
+
+//---------------------------------------------------------------------
 // Source file: ../srcjs/shinydashboard-part.js
 
 /* jshint browser:true, jquery:true, indent:2 */
 /* global Shiny */
 
-$(function() {
   // This function handles a special case in the AdminLTE sidebar: when there
   // is a sidebar-menu with items, and one of those items has sub-items, and
   // they are used for tab navigation. Normally, if one of the items is
@@ -307,6 +311,10 @@ $(function() {
   });
   Shiny.inputBindings.register(sidebarCollapsedInputBinding,
     'shinydashboard.sidebarCollapsedInputBinding');
+
+//---------------------------------------------------------------------
+// Source file: ../srcjs/_end.js
+
 });
 
 //# sourceMappingURL=shinydashboard.js.map
