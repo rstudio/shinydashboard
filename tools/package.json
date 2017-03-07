@@ -1,11 +1,14 @@
 {
   "devDependencies": {
+    "babel-eslint": "^7.1.1",
+    "eslint-stylish-mapped": "^1.0.0",
     "grunt": "^1.0.1",
     "grunt-contrib-concat": "^1.0.1",
     "grunt-contrib-cssmin": "^2.0.0",
     "grunt-contrib-jshint": "^1.1.0",
     "grunt-contrib-uglify": "^2.1.0",
     "grunt-contrib-watch": "^1.0.0",
+    "grunt-eslint": "^19.0.0",
     "grunt-newer": "^1.2.0"
   }
 }
