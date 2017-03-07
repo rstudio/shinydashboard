@@ -4,9 +4,7 @@
 $(function() {
 
 //---------------------------------------------------------------------
-// Source file: ../srcjs/shinydashboard-part.js
-
-/* global Shiny */
+// Source file: ../srcjs/tabs.js
 
 // This function handles a special case in the AdminLTE sidebar: when there
 // is a sidebar-menu with items, and one of those items has sub-items, and
@@ -55,6 +53,9 @@ var ensureActivatedTab = function() {
 
 ensureActivatedTab();
 
+//---------------------------------------------------------------------
+// Source file: ../srcjs/sidebar.js
+
 // Optionally disable sidebar
 if ($("section.sidebar").data("disable")) {
   $("body").addClass("sidebar-collapse");
@@ -91,6 +92,11 @@ $(document).on("click", "a[href^='#shiny-tab-']", function() {
     $obj.trigger('change');
   }
 });
+
+//---------------------------------------------------------------------
+// Source file: ../srcjs/output_binding_menu.js
+
+/* global Shiny */
 
 // menuOutputBinding
 // ------------------------------------------------------------------
@@ -136,6 +142,10 @@ $.extend(menuOutputBinding, {
 Shiny.outputBindings.register(menuOutputBinding,
                               "shinydashboard.menuOutputBinding");
 
+//---------------------------------------------------------------------
+// Source file: ../srcjs/input_binding_tabItem.js
+
+/* global Shiny */
 
 // tabItemInputBinding
 // ------------------------------------------------------------------
@@ -184,6 +194,54 @@ $.extend(tabItemInputBinding, {
 });
 Shiny.inputBindings.register(tabItemInputBinding, 'shinydashboard.tabItemInput');
 
+//---------------------------------------------------------------------
+// Source file: ../srcjs/input_binding_sidebarCollapsed.js
+
+/* global Shiny */
+
+// sidebarCollapsedInputBinding
+// ------------------------------------------------------------------
+// This keeps tracks of whether the sidebar is expanded (default)
+// or collapsed
+var sidebarCollapsedInputBinding = new Shiny.InputBinding();
+$.extend(sidebarCollapsedInputBinding, {
+  find: function(scope) {
+    return $(scope).find('.main-sidebar').first();
+  },
+  getId: function(el) {
+    return "sidebarCollapsed";
+  },
+  getValue: function(el) {
+    return $(el).attr("data-value");
+  },
+  setValue: function(el, value) {
+    $(el).attr("data-value", value);
+  },
+  toggleValue: function(el) {
+    var current = this.getValue(el);
+    var newVal = (current == "collapsed") ? "expanded" : "collapsed";
+    this.setValue(el, newVal);
+  },
+  receiveMessage: function(el, data) {
+    if (data.hasOwnProperty('value'))
+      this.setValue(el, data.value);
+  },
+  subscribe: function(el, callback) {
+    $(el).on('change.sidebarCollapsedInputBinding', function() {
+      callback();
+    });
+  },
+  unsubscribe: function(el) {
+    $(el).off('.sidebarCollapsedInputBinding');
+  }
+});
+Shiny.inputBindings.register(sidebarCollapsedInputBinding,
+  'shinydashboard.sidebarCollapsedInputBinding');
+
+//---------------------------------------------------------------------
+// Source file: ../srcjs/input_binding_sidebarmenuExpanded.js
+
+/* global Shiny */
 
 // sidebarmenuExpandedInputBinding
 // ------------------------------------------------------------------
@@ -230,46 +288,6 @@ $.extend(sidebarmenuExpandedInputBinding, {
 });
 Shiny.inputBindings.register(sidebarmenuExpandedInputBinding,
   'shinydashboard.sidebarmenuExpandedInputBinding');
-
-
-// sidebarCollapsedInputBinding
-// ------------------------------------------------------------------
-// This keeps tracks of whether the sidebar is expanded (default)
-// or collapsed
-var sidebarCollapsedInputBinding = new Shiny.InputBinding();
-$.extend(sidebarCollapsedInputBinding, {
-  find: function(scope) {
-    return $(scope).find('.main-sidebar').first();
-  },
-  getId: function(el) {
-    return "sidebarCollapsed";
-  },
-  getValue: function(el) {
-    return $(el).attr("data-value");
-  },
-  setValue: function(el, value) {
-    $(el).attr("data-value", value);
-  },
-  toggleValue: function(el) {
-    var current = this.getValue(el);
-    var newVal = (current == "collapsed") ? "expanded" : "collapsed";
-    this.setValue(el, newVal);
-  },
-  receiveMessage: function(el, data) {
-    if (data.hasOwnProperty('value'))
-      this.setValue(el, data.value);
-  },
-  subscribe: function(el, callback) {
-    $(el).on('change.sidebarCollapsedInputBinding', function() {
-      callback();
-    });
-  },
-  unsubscribe: function(el) {
-    $(el).off('.sidebarCollapsedInputBinding');
-  }
-});
-Shiny.inputBindings.register(sidebarCollapsedInputBinding,
-  'shinydashboard.sidebarCollapsedInputBinding');
 
 //---------------------------------------------------------------------
 // Source file: ../srcjs/_end.js
