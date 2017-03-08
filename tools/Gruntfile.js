@@ -111,11 +111,11 @@ module.exports = function(grunt) {
     watch: {
       shinydashboard: {
         files: '<%= concat.shinydashboard.src %>',
-        tasks: ['concat:shinydashboard', 'uglify:shinydashboard', 'jshint:shinydashboard']
+        tasks: ['newer:concat:shinydashboard', 'newer:uglify:shinydashboard', 'newer:jshint:shinydashboard']
       },
       adminlte: {
         files: ['<%= uglify.adminlte.src %>', '<%= cssmin.adminlte.src %>'],
-        tasks: ['uglify:adminlte', 'cssmin:adminlte']
+        tasks: ['newer:uglify:adminlte', 'newer:cssmin:adminlte']
       }
     }
   });
@@ -127,7 +127,7 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-contrib-concat');
   grunt.loadNpmTasks('grunt-newer');
 
-  grunt.registerTask('default', ['concat', 'eslint', 'uglify', 'cssmin']);
+  grunt.registerTask('default', ['newer:concat', 'newer:eslint', 'newer:uglify', 'newer:cssmin']);
 
 
   // ---------------------------------------------------------------------------
