@@ -89,22 +89,17 @@ module.exports = function(grunt) {
 
     eslint: {
       options: {
-        parser: 'babel-eslint',
-        format: require('eslint-stylish-mapped'),
         extends: 'eslint:recommended',
         rules: {
           "consistent-return": 1,
           "dot-location": [1, "property"],
           "eqeqeq": 1,
-          // "no-shadow": 1,
           "no-undef": 1,
           "no-unused-vars": [1, {"args": "none"}],
           "guard-for-in": 1,
-          // "no-use-before-define": [1, {"functions": false}],
           "semi": [1, "always"]
         },
         envs: [
-          "es6",
           "browser",
           "jquery"
         ],
@@ -125,14 +120,12 @@ module.exports = function(grunt) {
     }
   });
 
-
   grunt.loadNpmTasks('grunt-contrib-uglify');
   grunt.loadNpmTasks('grunt-contrib-cssmin');
   grunt.loadNpmTasks('grunt-eslint');
   grunt.loadNpmTasks('grunt-contrib-watch');
   grunt.loadNpmTasks('grunt-contrib-concat');
   grunt.loadNpmTasks('grunt-newer');
-
 
   grunt.registerTask('default', ['concat', 'eslint', 'uglify', 'cssmin']);
 
@@ -171,4 +164,3 @@ module.exports = function(grunt) {
     return txt;
   }
 };
-

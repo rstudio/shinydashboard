@@ -163,14 +163,14 @@ $.extend(tabItemInputBinding, {
 
     return null;
   },
-  setValue: function(el, value) {
+  setValue: function(el, value) { // eslint-disable-line consistent-return
     var self = this;
     var anchors = $(el).find('li:not(.treeview)').children('a');
     anchors.each(function() {
       if (self._getTabName($(this)) === value) {
         $(this).tab('show');
         return false;
-      }
+      } else return true;
     });
   },
   receiveMessage: function(el, data) {
@@ -219,7 +219,7 @@ $.extend(sidebarCollapsedInputBinding, {
   },
   toggleValue: function(el) {
     var current = this.getValue(el);
-    var newVal = (current == "collapsed") ? "expanded" : "collapsed";
+    var newVal = (current === "collapsed") ? "expanded" : "collapsed";
     this.setValue(el, newVal);
   },
   receiveMessage: function(el, data) {

@@ -20,7 +20,7 @@ $.extend(sidebarCollapsedInputBinding, {
   },
   toggleValue: function(el) {
     var current = this.getValue(el);
-    var newVal = (current == "collapsed") ? "expanded" : "collapsed";
+    var newVal = (current === "collapsed") ? "expanded" : "collapsed";
     this.setValue(el, newVal);
   },
   receiveMessage: function(el, data) {
