@@ -28,17 +28,17 @@ $(document).on("click", ".sidebar-toggle", function() {
 // tabName of the fist subMenuItem inside the menuItem that is currently
 // expanded)
 $(document).on("click", ".treeview > a", function() {
-    var $obj = $('section.sidebar.shiny-bound-input');
-    var inputBinding = $obj.data('shiny-input-binding');
-    var value;
+  var $obj = $('section.sidebar.shiny-bound-input');
+  var inputBinding = $obj.data('shiny-input-binding');
+  var value;
 
-    // If this menuItem was already open, then clicking on it again,
-    // should update the input binding back to null
-    if ($(this).next().hasClass("menu-open")) {
-      value = null;
-    } else if ($(this).next().hasClass("treeview-menu")) {
-      value = $(this).next().find('a').attr('href').substring(1);
-    }
-    inputBinding.setValue($obj, value);
-    $obj.trigger('change');
+  // If this menuItem was already open, then clicking on it again,
+  // should update the input binding back to null
+  if ($(this).next().hasClass("menu-open")) {
+    value = null;
+  } else if ($(this).next().hasClass("treeview-menu")) {
+    value = $(this).next().find('a').attr('href').substring(1);
+  }
+  inputBinding.setValue($obj, value);
+  $obj.trigger('change');
 });
