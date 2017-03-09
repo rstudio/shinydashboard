@@ -19,13 +19,18 @@ $.extend(sidebarmenuExpandedInputBinding, {
   // no open menuItem)
   getValue: function(el) {
     var $expanded = $(el).find('li ul.menu-open');
-    if ($expanded.length === 1) return $expanded.prev().attr('href').substring(1);
-    else if ($(el).attr("data-expanded")) return $(el).attr("data-expanded");
-    else return null;
+    if ($expanded.length === 1) {
+      return $expanded.find('a').attr('href').substring(1);
+    } else if ($(el).attr("data-expanded")) {
+      return $(el).attr("data-expanded");
+    } else {
+      return null;
+    }
   },
   setValue: function(el, value) {
     if (value !== null) {
-      var $ul = $('a[href="#' + value + '"]').next();
+      var firstChild = 'a[href="#' + value + '"]';
+      var $ul = $(firstChild).parent().parent('.treeview-menu');
       $ul.addClass('menu-open');
       $ul.show();
     }

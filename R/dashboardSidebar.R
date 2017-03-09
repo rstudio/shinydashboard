@@ -118,10 +118,8 @@ dashboardSidebar <- function(..., disable = FALSE, width = NULL, collapsed = FAL
     '))))
   }
 
-  dataValue <- restoreInput(id = "sidebarCollapsed",
+  dataValue <- shiny::restoreInput(id = "sidebarCollapsed",
     default = if (collapsed) "collapsed" else "expanded")
-
-  # dataExpanded <- restoreInput(id = "itemExpanded", default = NULL)
 
   # The expanded/collapsed state of the sidebar is actually set by adding a
   # class to the body (not to the sidebar). However, it makes sense for the
@@ -405,8 +403,8 @@ menuItem <- function(text, ..., icon = NULL, badgeLabel = NULL, badgeColor = "gr
     )
   }
 
-  dataExpanded <- restoreInput(id = "itemExpanded", default = "") %OR% "" # prevent this from being NULL
-  cls <- if (dataExpanded == paste0("shiny-tab-", tabName)) " menu-open" else ""
+  dataExpanded <- shiny::restoreInput(id = "itemExpanded", default = "") %OR% "" # prevent this from being NULL
+  cls <- if (dataExpanded != "" && any(grepl(dataExpanded, subItems))) " menu-open" else ""
   display <- if (cls != "") "block" else "none"
 
   tags$li(class = "treeview",
@@ -425,8 +423,7 @@ menuItem <- function(text, ..., icon = NULL, badgeLabel = NULL, badgeColor = "gr
 #' @rdname sidebarMenu
 #' @export
 menuSubItem <- function(text, tabName = NULL, href = NULL, newtab = TRUE,
-  icon = shiny::icon("angle-double-right"), selected = NULL)
-{
+  icon = shiny::icon("angle-double-right"), selected = NULL) {
 
   if (!is.null(href) && !is.null(tabName)) {
     stop("Can't specify both href and tabName")

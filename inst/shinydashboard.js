@@ -84,11 +84,12 @@ $(document).on("click", ".sidebar-toggle", function() {
 // Whenever we expand a menuItem (to be expandable, it must have children),
 // update the value for the expandedItem's input binding (this is the
 // tabName of the menuItem that is currently expanded)
-$(document).on("click", "a[href^='#shiny-tab-']", function() {
-  if ($(this).parent().hasClass('treeview')) {
+$(document).on("click", ".treeview > a", function() {
+  if ($(this).next().hasClass("treeview-menu")) {
+    var id = $(this).next().find('a').attr('href').substring(1);
     var $obj = $('section.sidebar.shiny-bound-input');
     var inputBinding = $obj.data('shiny-input-binding');
-    inputBinding.setValue($obj, $(this).attr('href').substring(1));
+    inputBinding.setValue($obj, id);
     $obj.trigger('change');
   }
 });
@@ -262,13 +263,18 @@ $.extend(sidebarmenuExpandedInputBinding, {
   // no open menuItem)
   getValue: function(el) {
     var $expanded = $(el).find('li ul.menu-open');
-    if ($expanded.length === 1) return $expanded.prev().attr('href').substring(1);
-    else if ($(el).attr("data-expanded")) return $(el).attr("data-expanded");
-    else return null;
+    if ($expanded.length === 1) {
+      return $expanded.find('a').attr('href').substring(1);
+    } else if ($(el).attr("data-expanded")) {
+      return $(el).attr("data-expanded");
+    } else {
+      return null;
+    }
   },
   setValue: function(el, value) {
     if (value !== null) {
-      var $ul = $('a[href="#' + value + '"]').next();
+      var firstChild = 'a[href="#' + value + '"]';
+      var $ul = $(firstChild).parent().parent('.treeview-menu');
       $ul.addClass('menu-open');
       $ul.show();
     }

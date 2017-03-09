@@ -26,11 +26,12 @@ $(document).on("click", ".sidebar-toggle", function() {
 // Whenever we expand a menuItem (to be expandable, it must have children),
 // update the value for the expandedItem's input binding (this is the
 // tabName of the menuItem that is currently expanded)
-$(document).on("click", "a[href^='#shiny-tab-']", function() {
-  if ($(this).parent().hasClass('treeview')) {
+$(document).on("click", ".treeview > a", function() {
+  if ($(this).next().hasClass("treeview-menu")) {
+    var id = $(this).next().find('a').attr('href').substring(1);
     var $obj = $('section.sidebar.shiny-bound-input');
     var inputBinding = $obj.data('shiny-input-binding');
-    inputBinding.setValue($obj, $(this).attr('href').substring(1));
+    inputBinding.setValue($obj, id);
     $obj.trigger('change');
   }
 });
