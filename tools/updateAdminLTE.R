@@ -23,6 +23,6 @@ srcdir <- file.path(dirname(thisFile()), "../../AdminLTE/dist")
 destdir <- file.path(dirname(thisFile()), "../inst/AdminLTE")
 
 
-file.copy(file.path(srcdir, "/js/app.js"), destdir, overwrite = TRUE)
+file.copy(file.path(srcdir, "/js/app.js"), "../srcjs/AdminLTE", overwrite = TRUE)
 file.copy(file.path(srcdir, "/css/AdminLTE.css"), destdir, overwrite = TRUE)
 file.copy(file.path(srcdir, "/css/skins/_all-skins.css"), destdir, overwrite = TRUE)
