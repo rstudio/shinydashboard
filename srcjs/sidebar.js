@@ -25,13 +25,20 @@ $(document).on("click", ".sidebar-toggle", function() {
 
 // Whenever we expand a menuItem (to be expandable, it must have children),
 // update the value for the expandedItem's input binding (this is the
-// tabName of the menuItem that is currently expanded)
+// tabName of the fist subMenuItem inside the menuItem that is currently
+// expanded)
 $(document).on("click", ".treeview > a", function() {
-  if ($(this).next().hasClass("treeview-menu")) {
-    var id = $(this).next().find('a').attr('href').substring(1);
     var $obj = $('section.sidebar.shiny-bound-input');
     var inputBinding = $obj.data('shiny-input-binding');
-    inputBinding.setValue($obj, id);
+    var value;
+
+    // If this menuItem was already open, then clicking on it again,
+    // should update the input binding back to null
+    if ($(this).next().hasClass("menu-open")) {
+      value = null
+    } else if ($(this).next().hasClass("treeview-menu")) {
+      value = $(this).next().find('a').attr('href').substring(1);
+    }
+    inputBinding.setValue($obj, value);
     $obj.trigger('change');
-  }
 });
