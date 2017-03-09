@@ -93,7 +93,7 @@ $(document).on("click", ".treeview > a", function() {
     // If this menuItem was already open, then clicking on it again,
     // should update the input binding back to null
     if ($(this).next().hasClass("menu-open")) {
-      value = null
+      value = null;
     } else if ($(this).next().hasClass("treeview-menu")) {
       value = $(this).next().find('a').attr('href').substring(1);
     }
