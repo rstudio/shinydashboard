@@ -1,6 +1,7 @@
 ^.*\.Rproj$
 ^\.Rproj\.user$
 ^tools$
+^scrjs$
 ^tests-manual$
 ^\.travis\.yml$
 ^appveyor\.yml$
