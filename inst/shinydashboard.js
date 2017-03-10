@@ -26,7 +26,7 @@ var deactivateOtherTabs = function() {
   $tablinks.not($this).parent("li").removeClass("active");
 
   // Trigger event for the tabItemInputBinding
-  $sidebarMenu.trigger('change.tabItemInputBinding');
+  $('.sidebarMenuSelectedTabItem').trigger('change.tabItemInputBinding');
 };
 
 $(document).on('shown.bs.tab', '.sidebar-menu a[data-toggle="tab"]',
@@ -137,6 +137,8 @@ $.extend(menuOutputBinding, {
 
     var $html = $($.parseHTML(html));
 
+    //$(el).append('<div class></div>');
+
     // Convert the inner contents to HTML, and pass to renderHtml
     Shiny.renderHtml($html.html(), el, dependencies);
 
@@ -164,10 +166,10 @@ Shiny.outputBindings.register(menuOutputBinding,
 var tabItemInputBinding = new Shiny.InputBinding();
 $.extend(tabItemInputBinding, {
   find: function(scope) {
-    return $(scope).find('ul.sidebar-menu');
+    return $(scope).find('.sidebarMenuSelectedTabItem');
   },
   getValue: function(el) {
-    var anchor = $(el).find('li:not(.treeview).active').children('a');
+    var anchor = $(el).next('ul.sidebar-menu').find('li:not(.treeview).active').children('a');
     if (anchor.length === 1)
       return this._getTabName(anchor);
 
@@ -175,7 +177,7 @@ $.extend(tabItemInputBinding, {
   },
   setValue: function(el, value) { // eslint-disable-line consistent-return
     var self = this;
-    var anchors = $(el).find('li:not(.treeview)').children('a');
+    var anchors = $(el).next('ul.sidebar-menu').find('li:not(.treeview)').children('a');
     anchors.each(function() {
       if (self._getTabName($(this)) === value) {
         $(this).tab('show');

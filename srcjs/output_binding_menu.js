@@ -30,6 +30,8 @@ $.extend(menuOutputBinding, {
 
     var $html = $($.parseHTML(html));
 
+    //$(el).append('<div class></div>');
+
     // Convert the inner contents to HTML, and pass to renderHtml
     Shiny.renderHtml($html.html(), el, dependencies);
 

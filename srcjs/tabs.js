@@ -18,7 +18,7 @@ var deactivateOtherTabs = function() {
   $tablinks.not($this).parent("li").removeClass("active");
 
   // Trigger event for the tabItemInputBinding
-  $sidebarMenu.trigger('change.tabItemInputBinding');
+  $('.sidebarMenuSelectedTabItem').trigger('change.tabItemInputBinding');
 };
 
 $(document).on('shown.bs.tab', '.sidebar-menu a[data-toggle="tab"]',
