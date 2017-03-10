@@ -6,6 +6,8 @@ library(shinydashboard)
 library(shiny)
 library(threejs)
 
+options(shiny.launch.browser=F, shiny.minified=F, shiny.port = 4601)
+
 ui <- function(request) {
   dashboardPage(
     dashboardHeader(title = "Testing sidebar bookmarkability"),
@@ -55,22 +57,20 @@ ui <- function(request) {
   )
 }
 server <- function(input, output, session) {
-
-  data <- function() mtcars
-
   output$sidebarControls <- renderUI({
+    req(input$smenu)
      if (input$smenu %in% c("models1", "models2", "plots1")) {
        tagList(
-         selectInput("xaxis", "X axis", names(data()), selected = input$xaxis),
-         selectInput("yaxis", "Y axis", names(data()), selected = input$yaxis)
+         selectInput("xaxis", "X axis", names(mtcars), selected = input$xaxis),
+         selectInput("yaxis", "Y axis", names(mtcars), selected = input$yaxis)
        )
      } else if (input$smenu == "plots2") {
        tagList(
-         selectInput("xaxis", "X axis", names(data()), selected = input$xaxis),
-         selectInput("yaxis", "Y axis", names(data()), selected = input$yaxis),
-         selectInput("zaxis", "Z axis", names(data()), selected = input$zaxis)
+         selectInput("xaxis", "X axis", names(mtcars), selected = input$xaxis),
+         selectInput("yaxis", "Y axis", names(mtcars), selected = input$yaxis),
+         selectInput("zaxis", "Z axis", names(mtcars), selected = input$zaxis)
        )
-     }
+     } else NULL
   })
 
   formula <- reactive({
@@ -79,26 +79,26 @@ server <- function(input, output, session) {
   })
 
   output$models1 <- renderPrint({
-    summary(glm(formula(), data = data()), family = "linear")
+    summary(glm(formula(), data = mtcars), family = "linear")
   })
 
   output$models2 <- renderPrint({
-    summary(glm(formula(), data = data()), family = "binomial")
+    summary(glm(formula(), data = mtcars), family = "binomial")
   })
 
   output$plots1 <- renderPlot({
-    plot(formula(), data = data())
+    plot(formula(), data = mtcars)
   })
 
   output$plots2 <- renderScatterplotThree({
-    x <- data()[[input$xaxis]]
-    y <- data()[[input$yaxis]]
-    z <- data()[[input$zaxis]]
+    x <- mtcars[[input$xaxis]]
+    y <- mtcars[[input$yaxis]]
+    z <- mtcars[[input$zaxis]]
     scatterplot3js(x, y, z)
   })
 
   output$tbl <- renderTable({
-    data()
+    mtcars
   })
 
   observe({
