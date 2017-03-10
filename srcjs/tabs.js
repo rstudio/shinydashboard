@@ -9,8 +9,10 @@ var deactivateOtherTabs = function() {
   var $this = $(this);
   var $sidebarMenu = $this.closest("ul.sidebar-menu");
 
-  // Find all tab links under sidebar-menu
-  var $tablinks = $sidebarMenu.find("a[data-toggle='tab']");
+  // Find all tab links under sidebar-menu even if they don't have a
+  // tabName (which is why the second selector is necessary)
+  var $tablinks = $(".sidebar-menu a[data-toggle='tab']," +
+    ".sidebar-menu li.treeview > a");
 
   // If any other items are active, deactivate them
   $tablinks.not($this).parent("li").removeClass("active");
@@ -21,7 +23,6 @@ var deactivateOtherTabs = function() {
 
 $(document).on('shown.bs.tab', '.sidebar-menu a[data-toggle="tab"]',
                deactivateOtherTabs);
-
 
 // When document is ready, if there is a sidebar menu with no activated tabs,
 // activate the one specified by `data-start-selected`, or if that's not

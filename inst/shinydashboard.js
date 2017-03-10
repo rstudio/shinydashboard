@@ -17,8 +17,10 @@ var deactivateOtherTabs = function() {
   var $this = $(this);
   var $sidebarMenu = $this.closest("ul.sidebar-menu");
 
-  // Find all tab links under sidebar-menu
-  var $tablinks = $sidebarMenu.find("a[data-toggle='tab']");
+  // Find all tab links under sidebar-menu even if they don't have a
+  // tabName (which is why the second selector is necessary)
+  var $tablinks = $(".sidebar-menu a[data-toggle='tab']," +
+    ".sidebar-menu li.treeview > a");
 
   // If any other items are active, deactivate them
   $tablinks.not($this).parent("li").removeClass("active");
@@ -29,7 +31,6 @@ var deactivateOtherTabs = function() {
 
 $(document).on('shown.bs.tab', '.sidebar-menu a[data-toggle="tab"]',
                deactivateOtherTabs);
-
 
 // When document is ready, if there is a sidebar menu with no activated tabs,
 // activate the one specified by `data-start-selected`, or if that's not
@@ -86,19 +87,19 @@ $(document).on("click", ".sidebar-toggle", function() {
 // tabName of the fist subMenuItem inside the menuItem that is currently
 // expanded)
 $(document).on("click", ".treeview > a", function() {
-    var $obj = $('section.sidebar.shiny-bound-input');
-    var inputBinding = $obj.data('shiny-input-binding');
-    var value;
+  var $obj = $('section.sidebar.shiny-bound-input');
+  var inputBinding = $obj.data('shiny-input-binding');
+  var value;
 
-    // If this menuItem was already open, then clicking on it again,
-    // should update the input binding back to null
-    if ($(this).next().hasClass("menu-open")) {
-      value = null;
-    } else if ($(this).next().hasClass("treeview-menu")) {
-      value = $(this).next().find('a').attr('href').substring(1);
-    }
-    inputBinding.setValue($obj, value);
-    $obj.trigger('change');
+  // If this menuItem was already open, then clicking on it again,
+  // should update the input binding back to null
+  if ($(this).next().hasClass("menu-open")) {
+    value = null;
+  } else if ($(this).next().hasClass("treeview-menu")) {
+    value = $(this).next().find('a').attr('href').substring(1);
+  }
+  inputBinding.setValue($obj, value);
+  $obj.trigger('change');
 });
 
 //---------------------------------------------------------------------
@@ -145,6 +146,7 @@ $.extend(menuOutputBinding, {
 
     Shiny.initializeInputs(el);
     Shiny.bindAll(el);
+    ensureActivatedTab();
   }
 });
 Shiny.outputBindings.register(menuOutputBinding,
