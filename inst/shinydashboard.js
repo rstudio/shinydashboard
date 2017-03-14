@@ -14,19 +14,21 @@ $(function() {
 // because they're not designed to be used together for tab panels. This
 // code ensures that only one item will have the "active" class.
 var deactivateOtherTabs = function() {
-  var $this = $(this);
-  var $sidebarMenu = $this.closest("ul.sidebar-menu");
-
   // Find all tab links under sidebar-menu even if they don't have a
   // tabName (which is why the second selector is necessary)
   var $tablinks = $(".sidebar-menu a[data-toggle='tab']," +
     ".sidebar-menu li.treeview > a");
 
   // If any other items are active, deactivate them
-  $tablinks.not($this).parent("li").removeClass("active");
+  $tablinks.not($(this)).parent("li").removeClass("active");
 
   // Trigger event for the tabItemInputBinding
-  $('.sidebarMenuSelectedTabItem').trigger('change.tabItemInputBinding');
+  var $obj = $('.sidebarMenuSelectedTabItem');
+  var inputBinding = $obj.data('shiny-input-binding');
+  if (typeof inputBinding !== 'undefined') {
+    inputBinding.setValue($obj, $(this).attr('data-value'));
+    $obj.trigger('change');
+  }
 };
 
 $(document).on('shown.bs.tab', '.sidebar-menu a[data-toggle="tab"]',
@@ -36,7 +38,7 @@ $(document).on('shown.bs.tab', '.sidebar-menu a[data-toggle="tab"]',
 // activate the one specified by `data-start-selected`, or if that's not
 // present, the first one.
 var ensureActivatedTab = function() {
-  var $tablinks = $("ul.sidebar-menu").find("a").filter("[data-toggle='tab']");
+  var $tablinks = $(".sidebar-menu a[data-toggle='tab']");
 
   // If there's a `data-start-selected` attribute and we can find a tab with
   // that name, activate it.
@@ -137,8 +139,6 @@ $.extend(menuOutputBinding, {
 
     var $html = $($.parseHTML(html));
 
-    //$(el).append('<div class></div>');
-
     // Convert the inner contents to HTML, and pass to renderHtml
     Shiny.renderHtml($html.html(), el, dependencies);
 
@@ -146,6 +146,7 @@ $.extend(menuOutputBinding, {
     el.className = 'shinydashboard-menu-output shiny-bound-output ' +
                    $html.attr('class');
 
+    //Shiny.inputBindings.register(tabItemInputBinding, 'shinydashboard.tabItemInput');
     Shiny.initializeInputs(el);
     Shiny.bindAll(el);
     ensureActivatedTab();
@@ -153,6 +154,58 @@ $.extend(menuOutputBinding, {
 });
 Shiny.outputBindings.register(menuOutputBinding,
                               "shinydashboard.menuOutputBinding");
+
+
+/*
+
+// menuOutputBinding
+// ------------------------------------------------------------------
+  // Based on Shiny.htmlOutputBinding, but instead of putting the result in a
+// wrapper div, it replaces the origin DOM element with the new DOM elements,
+// copying over the ID and class.
+var menuOutputBinding = new Shiny.OutputBinding();
+$.extend(menuOutputBinding, {
+  find: function(scope) {
+    return $(scope).find('.shinydashboard-menu-output');
+  },
+  onValueError: function(el, err) {
+    Shiny.unbindAll(el);
+    this.renderError(el, err);
+  },
+  renderValue: function(el, data) {
+    Shiny.unbindAll(el);
+
+    var html;
+    var dependencies = [];
+    if (data === null) {
+      return;
+    } else if (typeof(data) === 'string') {
+      html = data;
+    } else if (typeof(data) === 'object') {
+      html = data.html;
+      dependencies = data.deps;
+    }
+
+    var $html = $($.parseHTML(html));
+
+    $(el).append('<div class = "shinydashboard-menu-output-child ' + $html.attr('class') + '"></div>');
+
+    // Convert the inner contents to HTML, and pass to renderHtml
+    Shiny.renderHtml($html.html(), $(el).find('.shinydashboard-menu-output-child'), dependencies);
+
+    // Extract class of wrapper, and add them to the wrapper element
+    el.className = 'shinydashboard-menu-output shiny-bound-output ' //+
+      //$html.attr('class');
+
+    Shiny.initializeInputs(el);
+    Shiny.bindAll(el);
+    ensureActivatedTab();
+  }
+});
+Shiny.outputBindings.register(menuOutputBinding,
+  "shinydashboard.menuOutputBinding");
+
+*/
 
 //---------------------------------------------------------------------
 // Source file: ../srcjs/input_binding_tabItem.js
@@ -169,20 +222,19 @@ $.extend(tabItemInputBinding, {
     return $(scope).find('.sidebarMenuSelectedTabItem');
   },
   getValue: function(el) {
-    var anchor = $(el).next('ul.sidebar-menu').find('li:not(.treeview).active').children('a');
-    if (anchor.length === 1)
-      return this._getTabName(anchor);
-
-    return null;
+    var value = $(el).attr('data-value');
+    if (value === "null") return null;
+    return value;
   },
   setValue: function(el, value) { // eslint-disable-line consistent-return
     var self = this;
-    var anchors = $(el).next('ul.sidebar-menu').find('li:not(.treeview)').children('a');
+    var anchors = $(el).parent('ul.sidebar-menu').find('li:not(.treeview)').children('a');
     anchors.each(function() {
       if (self._getTabName($(this)) === value) {
         $(this).tab('show');
+        $(el).attr('data-value', self._getTabName($(this)));
         return false;
-      } else return true;
+      } else return null;
     });
   },
   receiveMessage: function(el, data) {
@@ -204,6 +256,7 @@ $.extend(tabItemInputBinding, {
     return anchor.attr('data-value');
   }
 });
+
 Shiny.inputBindings.register(tabItemInputBinding, 'shinydashboard.tabItemInput');
 
 //---------------------------------------------------------------------

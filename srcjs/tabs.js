@@ -6,19 +6,21 @@
 // because they're not designed to be used together for tab panels. This
 // code ensures that only one item will have the "active" class.
 var deactivateOtherTabs = function() {
-  var $this = $(this);
-  var $sidebarMenu = $this.closest("ul.sidebar-menu");
-
   // Find all tab links under sidebar-menu even if they don't have a
   // tabName (which is why the second selector is necessary)
   var $tablinks = $(".sidebar-menu a[data-toggle='tab']," +
     ".sidebar-menu li.treeview > a");
 
   // If any other items are active, deactivate them
-  $tablinks.not($this).parent("li").removeClass("active");
+  $tablinks.not($(this)).parent("li").removeClass("active");
 
   // Trigger event for the tabItemInputBinding
-  $('.sidebarMenuSelectedTabItem').trigger('change.tabItemInputBinding');
+  var $obj = $('.sidebarMenuSelectedTabItem');
+  var inputBinding = $obj.data('shiny-input-binding');
+  if (typeof inputBinding !== 'undefined') {
+    inputBinding.setValue($obj, $(this).attr('data-value'));
+    $obj.trigger('change');
+  }
 };
 
 $(document).on('shown.bs.tab', '.sidebar-menu a[data-toggle="tab"]',
@@ -28,7 +30,7 @@ $(document).on('shown.bs.tab', '.sidebar-menu a[data-toggle="tab"]',
 // activate the one specified by `data-start-selected`, or if that's not
 // present, the first one.
 var ensureActivatedTab = function() {
-  var $tablinks = $("ul.sidebar-menu").find("a").filter("[data-toggle='tab']");
+  var $tablinks = $(".sidebar-menu a[data-toggle='tab']");
 
   // If there's a `data-start-selected` attribute and we can find a tab with
   // that name, activate it.

@@ -334,15 +334,14 @@ sidebarMenu <- function(..., id = NULL, .list = NULL) {
         item
       })
     }
+    items[[length(items) + 1]] <- div(id = id,
+      class = "sidebarMenuSelectedTabItem", `data-value` = selectedTabName %OR% "null")
   }
-
-  div <- div(id = id, class = "sidebarMenuSelectedTabItem")
 
   # Use do.call so that we don't add an extra list layer to the children of the
   # ul tag. This makes it a little easier to traverse the tree to search for
   # selected items to restore.
-  ul <- do.call(tags$ul, c(id = paste0("sidebar-menu-", id), class = "sidebar-menu", items))
-  div(div, ul)
+  do.call(tags$ul, c(class = "sidebar-menu", items))
 }
 
 #' @rdname sidebarMenu
