@@ -224,14 +224,14 @@ $.extend(sidebarCollapsedInputBinding, {
     return "sidebarCollapsed";
   },
   getValue: function(el) {
-    return $(el).attr("data-value");
+    return $(el).attr("data-collapsed");
   },
   setValue: function(el, value) {
-    $(el).attr("data-value", value);
+    $(el).attr("data-collapsed", value);
   },
   toggleValue: function(el) {
     var current = this.getValue(el);
-    var newVal = (current === "collapsed") ? "expanded" : "collapsed";
+    var newVal = (current === "true") ? "false" : "true";
     this.setValue(el, newVal);
   },
   receiveMessage: function(el, data) {
