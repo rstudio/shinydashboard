@@ -59,7 +59,7 @@ dashboardPage <- function(header, sidebar, body, title = NULL,
 
   # if the sidebar has the attribute `data-collapsed = "true"`, it means that
   # the user set the `collapsed` argument of `dashboardSidebar` to TRUE
-  collapsed <- "true" %in% strsplit(sidebar$attribs$`data-collapsed`, " ")[[1]]
+  collapsed <- findAttribute(sidebar, "data-collapsed", "true")
 
   addDeps(
     tags$body(
