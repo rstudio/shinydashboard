@@ -102,7 +102,6 @@ server <- function(input, output, session) {
   })
 
   observe({
-    # Trigger this observer every time an input changes
     reactiveValuesToList(input)
     session$doBookmark()
   })
@@ -114,46 +113,3 @@ server <- function(input, output, session) {
 
 enableBookmarking("url")
 shinyApp(ui, server)
-
-
-# # options(shiny.launch.browser=F, shiny.minified=F, shiny.port = 4601)
-# #
-# # library(shiny)
-# # library(shinydashboard)
-# #
-# # ui <- function(req) {
-# #   dashboardPage(
-# #     dashboardHeader(title = "Dynamic sidebar"),
-# #     dashboardSidebar(
-# #       sidebarMenuOutput("menu")
-# #       # sidebarMenu(id = "smenu",
-# #       #   menuItem("Menu item", tabName = "tab1", icon = icon("calendar"))
-# #       # )
-# #     ),
-# #     dashboardBody(
-# #       tabItems(
-# #         tabItem("tab1", "This is tab 1")
-# #       )
-# #     )
-# #   )
-# # }
-# #
-# # server <- function(input, output, session) {
-# #   output$menu <- renderMenu({
-# #     sidebarMenu(id = "smenu",
-# #       menuItem("Menu item", tabName = "tab1", icon = icon("calendar"))
-# #     )
-# #   })
-# #
-# #   observe({
-# #     # Trigger this observer every time an input changes
-# #     reactiveValuesToList(input)
-# #     session$doBookmark()
-# #   })
-# #   onBookmarked(function(url) {
-# #     updateQueryString(url)
-# #   })
-# # }
-# #
-# # enableBookmarking("url")
-# # shinyApp(ui, server)

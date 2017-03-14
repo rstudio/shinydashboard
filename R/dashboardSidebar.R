@@ -400,14 +400,17 @@ menuItem <- function(text, ..., icon = NULL, badgeLabel = NULL, badgeColor = "gr
     )
   }
 
-  # This is...
-  dataExpanded <- shiny::restoreInput(id = "sidebarItemExpanded", default = "") %OR% "" # prevent this from being NULL
+  # If we're restoring a bookmarked app, this holds the value of what menuItem (if any)
+  # was expanded (this has be to stored separately from the selected menuItem, since
+  # these actually independent in AdminLTE). If no menuItem was expanded, `dataExpanded`
+  # is NULL. However, we want to this input to get passed on (and not dropped), so we
+  # do `%OR% ""` to assure this.
+  dataExpanded <- shiny::restoreInput(id = "sidebarItemExpanded", default = "") %OR% ""
 
-  # does any subMenuItem have the the attribute `data-value` equal to the dataExpanded variable?
-  isExpanded <- dataExpanded != "" && any(unlist(lapply(subItems, findAttribute, "data-value", dataExpanded)))
-
-  cls <- if (isExpanded) " menu-open" else ""
-  display <- if (isExpanded) "block" else "none"
+  # If `dataExpanded` is not the empty string, we need to check that there is a subMenuItem
+  # in the list of `subItems` that actually has a `data-value` attribute equal to `dataExpanded`
+  isExpanded <- nzchar(dataExpanded) &&
+    any(unlist(lapply(subItems, findAttribute, "data-value", dataExpanded)))
 
   tags$li(class = "treeview",
     a(href = href,
@@ -418,8 +421,10 @@ menuItem <- function(text, ..., icon = NULL, badgeLabel = NULL, badgeColor = "gr
     # Use do.call so that we don't add an extra list layer to the children of the
     # ul tag. This makes it a little easier to traverse the tree to search for
     # selected items to restore.
-    do.call(tags$ul, c(class = paste0("treeview-menu", cls),
-      style = paste0("display: ", display), subItems))
+    do.call(tags$ul, c(
+      class = paste0("treeview-menu", if (isExpanded) " menu-open" else ""),
+      style = paste0("display: ",     if (isExpanded) "block" else "none"),
+      subItems))
   )
 }
 

@@ -107,7 +107,6 @@ server <- function(input, output, session) {
   })
 
   observe({
-    # Trigger this observer every time an input changes
     reactiveValuesToList(input)
     session$doBookmark()
   })
@@ -119,4 +118,3 @@ server <- function(input, output, session) {
 
 enableBookmarking("url")
 shinyApp(ui, server)
-
