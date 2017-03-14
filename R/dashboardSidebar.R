@@ -335,6 +335,9 @@ sidebarMenu <- function(..., id = NULL, .list = NULL) {
         item
       })
     }
+    # This is a 0 height div, whose only purpose is to hold the tabName of the currently
+    # selected menuItem in its `data-value` attribute. This is the DOM element that is
+    # bound to tabItemInputBinding in the JS side.
     items[[length(items) + 1]] <- div(id = id,
       class = "sidebarMenuSelectedTabItem", `data-value` = selectedTabName %OR% "null")
   }
@@ -434,7 +437,8 @@ menuItem <- function(text, ..., icon = NULL, badgeLabel = NULL, badgeColor = "gr
 #' @rdname sidebarMenu
 #' @export
 menuSubItem <- function(text, tabName = NULL, href = NULL, newtab = TRUE,
-  icon = shiny::icon("angle-double-right"), selected = NULL) {
+  icon = shiny::icon("angle-double-right"), selected = NULL)
+{
 
   if (!is.null(href) && !is.null(tabName)) {
     stop("Can't specify both href and tabName")
@@ -454,6 +458,7 @@ menuSubItem <- function(text, tabName = NULL, href = NULL, newtab = TRUE,
     if (newtab)
       target <- "_blank"
   }
+
 
   tags$li(
     a(href = href,

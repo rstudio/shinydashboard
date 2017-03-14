@@ -16,7 +16,7 @@ tagAssert <- function(tag, type = NULL, class = NULL, allowUI = TRUE) {
   # Skip dynamic output elements
   if (allowUI &&
       (hasCssClass(tag, "shiny-html-output") ||
-          hasCssClass(tag, "shinydashboard-menu-output"))) {
+       hasCssClass(tag, "shinydashboard-menu-output"))) {
     return()
   }
 
@@ -53,7 +53,7 @@ validateColor <- function(color) {
   }
 
   stop("Invalid color: ", color, ". Valid colors are: ",
-    paste(validColors, collapse = ", "), ".")
+       paste(validColors, collapse = ", "), ".")
 }
 
 #' Valid colors
@@ -84,8 +84,8 @@ validateColor <- function(color) {
 #'
 #' @keywords internal
 validColors <- c("red", "yellow", "aqua", "blue", "light-blue", "green",
-  "navy", "teal", "olive", "lime", "orange", "fuchsia",
-  "purple", "maroon", "black")
+                 "navy", "teal", "olive", "lime", "orange", "fuchsia",
+                 "purple", "maroon", "black")
 
 
 # Returns TRUE if a status is valid; throws error otherwise.
@@ -96,7 +96,7 @@ validateStatus <- function(status) {
   }
 
   stop("Invalid status: ", status, ". Valid statuses are: ",
-    paste(validStatuses, collapse = ", "), ".")
+       paste(validStatuses, collapse = ", "), ".")
 }
 
 
