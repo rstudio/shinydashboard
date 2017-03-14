@@ -12,6 +12,7 @@ ui <- function(request) {
   dashboardPage(
     dashboardHeader(title = "Testing dynamic sidebar bookmarking"),
     dashboardSidebar(
+      uiOutput("sidebarControls"),
       sidebarMenuOutput("menu")
     ),
     dashboardBody(
@@ -43,6 +44,7 @@ ui <- function(request) {
     )
   )
 }
+
 
 server <- function(input, output, session) {
   output$menu <- renderMenu({
@@ -118,4 +120,3 @@ server <- function(input, output, session) {
 enableBookmarking("url")
 shinyApp(ui, server)
 
-shinyApp(ui, server)
