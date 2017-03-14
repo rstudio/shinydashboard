@@ -9,32 +9,30 @@ $.extend(sidebarmenuExpandedInputBinding, {
     return $(scope).find('section.sidebar');
   },
   getId: function(el) {
-    return "itemExpanded";
+    return "sidebarItemExpanded";
   },
-  // needed so we set the appropriate value for bookmarked apps on startup
-  initialize: function(el) {
-    $(this).trigger('change');
-  },
-  // the value is the href of the open menuItem (or NULL if there's
-  // no open menuItem)
   getValue: function(el) {
-    var $expanded = $(el).find('li ul.menu-open');
-    if ($expanded.length === 1) {
-      return $expanded.find('a').attr('href').substring(1);
-    } else if ($(el).attr("data-expanded")) {
-      return $(el).attr("data-expanded");
-    } else {
-      return null;
-    }
+    var $open = $(el).find('li ul.menu-open');
+    if ($open.length === 1) return $open.find('a').attr('data-value');
+    else return null; // no menuItem is expanded
   },
   setValue: function(el, value) {
+    /*
+    var $anchor = $('.sidebar-menu li a');
+    if (value !== null)
+      $anchor = $('a[data-value="' + value + '"]').parent().parent().prev('a');
+    console.log($anchor);
+    $(document).trigger("click", $anchor);
+    */
+
+    var $ul;
     if (value !== null) {
-      var firstChild = 'a[href="#' + value + '"]';
-      var $ul = $(firstChild).parent().parent('.treeview-menu');
+      var $firstChild = $('a[data-value="' + value + '"]');
+      $ul = $firstChild.parent().parent('.treeview-menu');
       $ul.addClass('menu-open');
       $ul.show();
     } else {
-      var $ul = $(el).find('li ul.menu-open');
+      $ul = $(el).find('li ul.menu-open');
       $ul.removeClass('menu-open');
       $ul.hide();
     }

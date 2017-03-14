@@ -126,9 +126,7 @@ dashboardSidebar <- function(..., disable = FALSE, width = NULL, collapsed = FAL
   # just passed through (as the `data-value` attribute) to the
   # `dashboardPage()` function
   tags$aside(
-    class = paste("main-sidebar"),
-    `data-value` = dataValue,
-    custom_css,
+    class = "main-sidebar", `data-value` = dataValue, custom_css,
     tags$section(
       class = "sidebar",
       `data-disable` = if (disable) 1 else NULL,
@@ -402,9 +400,14 @@ menuItem <- function(text, ..., icon = NULL, badgeLabel = NULL, badgeColor = "gr
     )
   }
 
-  dataExpanded <- shiny::restoreInput(id = "itemExpanded", default = "") %OR% "" # prevent this from being NULL
-  cls <- if (dataExpanded != "" && any(grepl(dataExpanded, subItems))) " menu-open" else ""
-  display <- if (cls != "") "block" else "none"
+  # This is...
+  dataExpanded <- shiny::restoreInput(id = "sidebarItemExpanded", default = "") %OR% "" # prevent this from being NULL
+
+  # does any subMenuItem have the the attribute `data-value` equal to the dataExpanded variable?
+  isExpanded <- dataExpanded != "" && any(unlist(lapply(subItems, findAttribute, "data-value", dataExpanded)))
+
+  cls <- if (isExpanded) " menu-open" else ""
+  display <- if (isExpanded) "block" else "none"
 
   tags$li(class = "treeview",
     a(href = href,
@@ -415,7 +418,8 @@ menuItem <- function(text, ..., icon = NULL, badgeLabel = NULL, badgeColor = "gr
     # Use do.call so that we don't add an extra list layer to the children of the
     # ul tag. This makes it a little easier to traverse the tree to search for
     # selected items to restore.
-    do.call(tags$ul, c(class = paste0("treeview-menu", cls), style = paste0("display: ", display) , subItems))
+    do.call(tags$ul, c(class = paste0("treeview-menu", cls),
+      style = paste0("display: ", display), subItems))
   )
 }
 

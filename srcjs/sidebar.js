@@ -37,7 +37,7 @@ $(document).on("click", ".treeview > a", function() {
   if ($(this).next().hasClass("menu-open")) {
     value = null;
   } else if ($(this).next().hasClass("treeview-menu")) {
-    value = $(this).next().find('a').attr('href').substring(1);
+    value = $(this).next().find('a').attr('data-value');
   }
   inputBinding.setValue($obj, value);
   $obj.trigger('change');

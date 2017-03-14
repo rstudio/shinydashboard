@@ -14,15 +14,15 @@ $.extend(tabItemInputBinding, {
     if (value === "null") return null;
     return value;
   },
-  setValue: function(el, value) { // eslint-disable-line consistent-return
+  setValue: function(el, value) {
     var self = this;
     var anchors = $(el).parent('ul.sidebar-menu').find('li:not(.treeview)').children('a');
-    anchors.each(function() {
+    anchors.each(function() { // eslint-disable-line consistent-return
       if (self._getTabName($(this)) === value) {
         $(this).tab('show');
         $(el).attr('data-value', self._getTabName($(this)));
         return false;
-      } else return null;
+      }
     });
   },
   receiveMessage: function(el, data) {

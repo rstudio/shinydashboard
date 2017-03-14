@@ -98,7 +98,7 @@ $(document).on("click", ".treeview > a", function() {
   if ($(this).next().hasClass("menu-open")) {
     value = null;
   } else if ($(this).next().hasClass("treeview-menu")) {
-    value = $(this).next().find('a').attr('href').substring(1);
+    value = $(this).next().find('a').attr('data-value');
   }
   inputBinding.setValue($obj, value);
   $obj.trigger('change');
@@ -146,7 +146,6 @@ $.extend(menuOutputBinding, {
     el.className = 'shinydashboard-menu-output shiny-bound-output ' +
                    $html.attr('class');
 
-    //Shiny.inputBindings.register(tabItemInputBinding, 'shinydashboard.tabItemInput');
     Shiny.initializeInputs(el);
     Shiny.bindAll(el);
     ensureActivatedTab();
@@ -154,58 +153,6 @@ $.extend(menuOutputBinding, {
 });
 Shiny.outputBindings.register(menuOutputBinding,
                               "shinydashboard.menuOutputBinding");
-
-
-/*
-
-// menuOutputBinding
-// ------------------------------------------------------------------
-  // Based on Shiny.htmlOutputBinding, but instead of putting the result in a
-// wrapper div, it replaces the origin DOM element with the new DOM elements,
-// copying over the ID and class.
-var menuOutputBinding = new Shiny.OutputBinding();
-$.extend(menuOutputBinding, {
-  find: function(scope) {
-    return $(scope).find('.shinydashboard-menu-output');
-  },
-  onValueError: function(el, err) {
-    Shiny.unbindAll(el);
-    this.renderError(el, err);
-  },
-  renderValue: function(el, data) {
-    Shiny.unbindAll(el);
-
-    var html;
-    var dependencies = [];
-    if (data === null) {
-      return;
-    } else if (typeof(data) === 'string') {
-      html = data;
-    } else if (typeof(data) === 'object') {
-      html = data.html;
-      dependencies = data.deps;
-    }
-
-    var $html = $($.parseHTML(html));
-
-    $(el).append('<div class = "shinydashboard-menu-output-child ' + $html.attr('class') + '"></div>');
-
-    // Convert the inner contents to HTML, and pass to renderHtml
-    Shiny.renderHtml($html.html(), $(el).find('.shinydashboard-menu-output-child'), dependencies);
-
-    // Extract class of wrapper, and add them to the wrapper element
-    el.className = 'shinydashboard-menu-output shiny-bound-output ' //+
-      //$html.attr('class');
-
-    Shiny.initializeInputs(el);
-    Shiny.bindAll(el);
-    ensureActivatedTab();
-  }
-});
-Shiny.outputBindings.register(menuOutputBinding,
-  "shinydashboard.menuOutputBinding");
-
-*/
 
 //---------------------------------------------------------------------
 // Source file: ../srcjs/input_binding_tabItem.js
@@ -226,15 +173,15 @@ $.extend(tabItemInputBinding, {
     if (value === "null") return null;
     return value;
   },
-  setValue: function(el, value) { // eslint-disable-line consistent-return
+  setValue: function(el, value) {
     var self = this;
     var anchors = $(el).parent('ul.sidebar-menu').find('li:not(.treeview)').children('a');
-    anchors.each(function() {
+    anchors.each(function() { // eslint-disable-line consistent-return
       if (self._getTabName($(this)) === value) {
         $(this).tab('show');
         $(el).attr('data-value', self._getTabName($(this)));
         return false;
-      } else return null;
+      }
     });
   },
   receiveMessage: function(el, data) {
@@ -317,32 +264,30 @@ $.extend(sidebarmenuExpandedInputBinding, {
     return $(scope).find('section.sidebar');
   },
   getId: function(el) {
-    return "itemExpanded";
+    return "sidebarItemExpanded";
   },
-  // needed so we set the appropriate value for bookmarked apps on startup
-  initialize: function(el) {
-    $(this).trigger('change');
-  },
-  // the value is the href of the open menuItem (or NULL if there's
-  // no open menuItem)
   getValue: function(el) {
-    var $expanded = $(el).find('li ul.menu-open');
-    if ($expanded.length === 1) {
-      return $expanded.find('a').attr('href').substring(1);
-    } else if ($(el).attr("data-expanded")) {
-      return $(el).attr("data-expanded");
-    } else {
-      return null;
-    }
+    var $open = $(el).find('li ul.menu-open');
+    if ($open.length === 1) return $open.find('a').attr('data-value');
+    else return null; // no menuItem is expanded
   },
   setValue: function(el, value) {
+    /*
+    var $anchor = $('.sidebar-menu li a');
+    if (value !== null)
+      $anchor = $('a[data-value="' + value + '"]').parent().parent().prev('a');
+    console.log($anchor);
+    $(document).trigger("click", $anchor);
+    */
+
+    var $ul;
     if (value !== null) {
-      var firstChild = 'a[href="#' + value + '"]';
-      var $ul = $(firstChild).parent().parent('.treeview-menu');
+      var $firstChild = $('a[data-value="' + value + '"]');
+      $ul = $firstChild.parent().parent('.treeview-menu');
       $ul.addClass('menu-open');
       $ul.show();
     } else {
-      var $ul = $(el).find('li ul.menu-open');
+      $ul = $(el).find('li ul.menu-open');
       $ul.removeClass('menu-open');
       $ul.hide();
     }
