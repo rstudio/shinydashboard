@@ -96,45 +96,17 @@ $(document).on("click", ".treeview > a", function() {
   var $obj = $('section.sidebar.shiny-bound-input');
   var inputBinding = $obj.data('shiny-input-binding');
   var value;
-  var $menu = $(this).next(".treeview-menu");
-  //if ($(this).next('ul.treeview-menu').text() === "") $(this).next('ul.treeview-menu').text(" ");
-  //console.log( $(this).next('ul.treeview-menu').text(" "));
 
   // If this menuItem was already open, then clicking on it again,
   // should update the input binding back to null
   if ($(this).next().hasClass("menu-open")) {
     value = null;
-    //$menu.hide(500, function() { $menu.trigger("hidden"); });
-    //$menu.trigger("hidden");
-    //$(this).next(".treeview-menu").trigger("hidden");
   } else if ($(this).next().hasClass("treeview-menu")) {
     value = $(this).next().find('a').attr('data-value');
-    console.log(value);
-    //$menu.show(500, function() { $menu.trigger("shown"); });
-     //$(this).trigger("shown");
-     //$menu.trigger("shown");
-     //$(this).next(".treeview-menu").trigger("shown");
   }
   inputBinding.setValue($obj, value);
   $obj.trigger('change');
-  //if (value === null) $(this).next(".treeview-menu").trigger("hidden");
-  //else $(this).trigger("shown");
 });
-
-/*
-$(document).on("slideDown", ".treeview-menu", function() {
-  console.log("shown");
-  $(this).trigger("shown");
-});
-
-
-$(document).on("slideUp", ".treeview-menu", function() {
-  console.log("hidden");
-  $(this).trigger("hidden");
-});
-*/
-
-
 
 //---------------------------------------------------------------------
 // Source file: ../srcjs/output_binding_menu.js
@@ -316,18 +288,12 @@ $.extend(sidebarmenuExpandedInputBinding, {
     if (value !== null) {
       var $firstChild = $('a[data-value="' + value + '"]');
       $ul = $firstChild.parent().parent('.treeview-menu');
-      $(document).trigger('click', '.sidebar li a[data-value="' + value + '"]');
-      //$ul.trigger("shown");
-      //$ul.addClass('menu-open');
-      //$ul.show();
+      $ul.addClass('menu-open');
+      $ul.show();
     } else {
       $ul = $(el).find('li ul.menu-open');
-      var $anchor = $ul.prev('a');
-      //console.log($ul)
-      $(document).trigger('click', $anchor);
-      //$ul.removeClass('menu-open');
-      //$ul.hide();
-      //$ul.trigger("hidden");
+      $ul.removeClass('menu-open');
+      $ul.hide();
     }
   },
   receiveMessage: function(el, data) {

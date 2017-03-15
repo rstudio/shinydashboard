@@ -410,8 +410,6 @@ function _init() {
             checkElement.removeClass('menu-open');
             //Fix the layout in case the sidebar stretches over the height of the window
             //_this.layout.fix();
-            //checkElement.trigger("hidden");
-            //checkElement.trigger("slideUp");
           });
           checkElement.parent("li").removeClass("active");
         }
@@ -425,8 +423,6 @@ function _init() {
           ul.removeClass('menu-open');
           //Get the parent li
           var parent_li = $this.parent("li");
-
-          //checkElement.trigger("slideDown");
 
           //Open the target menu and add the menu-open class
           checkElement.slideDown(animationSpeed, function () {
