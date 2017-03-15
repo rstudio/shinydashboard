@@ -105,7 +105,14 @@ module.exports = function(grunt) {
         ],
         globals: ["strftime"]
       },
-      shinydashboard: [destdirjs + "shinydashboard.js"]
+      shinydashboard: [
+        srcdirjs + 'tabs.js',
+        srcdirjs + 'sidebar.js',
+        srcdirjs + 'output_binding_menu.js',
+        srcdirjs + 'input_binding_tabItem.js',
+        srcdirjs + 'input_binding_sidebarCollapsed.js',
+        srcdirjs + 'input_binding_sidebarmenuExpanded.js'
+      ]
     },
 
     watch: {
