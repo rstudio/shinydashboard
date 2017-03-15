@@ -270,7 +270,9 @@ sidebarMenu <- function(..., id = NULL, .list = NULL) {
       # Given a menuItem and a logical value for `selected`, set the
       # data-start-selected attribute to the appropriate value (1 or 0).
       selectItem <- function(item, selected) {
-        if (length(item$children) == 0) {
+
+        # in the cases that the children of menuItems are NOT menuSubItems
+        if (is.atomic(item) || length(item$children) == 0) {
           return(item)
         }
 
@@ -281,6 +283,7 @@ sidebarMenu <- function(..., id = NULL, .list = NULL) {
         # data-start-selected="1". The []<- assignment is to preserve
         # attributes.
         item$children[] <- lapply(item$children, function(child) {
+
           # Find the appropriate <a> child
           if (tagMatches(child, name = "a", `data-toggle` = "tab")) {
             child$attribs[["data-start-selected"]] <- value
@@ -429,7 +432,7 @@ menuItem <- function(text, ..., icon = NULL, badgeLabel = NULL, badgeColor = "gr
     # selected items to restore.
     do.call(tags$ul, c(
       class = paste0("treeview-menu", if (isExpanded) " menu-open" else ""),
-      style = paste0("display: ",     if (isExpanded) "block" else "none"),
+      style = paste0("display: ",     if (isExpanded) "block;" else "none;"),
       subItems))
   )
 }
