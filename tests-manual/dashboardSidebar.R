@@ -7,7 +7,7 @@ sidebar <- dashboardSidebar(
     "User Name",
     subtitle = a(href = "#", icon("circle", class = "text-success"), "Online"),
     # Image file should be in www/ subdir
-    image = "userimage.png"
+    image = paste0(getwd(),"/www/img/userimage.png")
   ),
   sidebarSearchForm(label = "Enter a number", "searchText", "searchButton"),
   sidebarMenu(
@@ -30,6 +30,11 @@ sidebar <- dashboardSidebar(
       icon = icon("bar-chart-o"),
       menuSubItem("Sub-item 1", tabName = "subitem1"),
       menuSubItem("Sub-item 2", tabName = "subitem2")
+    ),
+    menuItem(
+      "Tables",
+      icon = icon("table"),
+      tabName = "Tables"
     )
   )
 )

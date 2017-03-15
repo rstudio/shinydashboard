@@ -141,7 +141,7 @@ dashboardSidebar <- function(..., disable = FALSE, width = NULL, collapsed = FAL
 #' @seealso \code{\link{dashboardSidebar}} for example usage.
 #'
 #' @export
-sidebarUserPanel <- function(name, subtitle = NULL, image = NULL) {
+sidebarUserPanel <- function(name, subtitle = NULL, image =  paste0(getwd(),"/www/img/userimage.png")) {
   div(class = "user-panel",
     if (!is.null(image)) {
       div(class = "pull-left image",

@@ -66,7 +66,7 @@ sidebar <- dashboardSidebar(
     "User Name",
     subtitle = a(href = "#", icon("circle", class = "text-success"), "Online"),
     # Image file should be in www/ subdir
-    image = "userimage.png"
+    image = paste0(getwd(),"/www/img/userimage.png")
   ),
   sidebarSearchForm(label = "Enter a number", "searchText", "searchButton"),
   sidebarMenu(
@@ -89,6 +89,11 @@ sidebar <- dashboardSidebar(
       icon = icon("bar-chart-o"),
       menuSubItem("Sub-item 1", tabName = "subitem1"),
       menuSubItem("Sub-item 2", tabName = "subitem2")
+    ),
+    menuItem(
+     "Tables",
+     icon = icon("table"),
+     tabName = "Tables"
     )
   ),
   sidebarMenuOutput("menu")
@@ -104,7 +109,12 @@ body <- dashboardBody(tabItems(
   tabItem("subitem1",
           "Sub-item 1 tab content"),
   tabItem("subitem2",
-          "Sub-item 2 tab content")),
+          "Sub-item 2 tab content"),
+  tabItem("Tables",
+          box(
+            title = " Sample Table",width = NULL,status = "primary",
+            div(style = 'overflow-x:scroll',tableOutput('table'))
+          ))),
 
   # Boxes need to be put in a row (or column)
   fluidRow(box(plotOutput("plot1", height = 250)),
@@ -242,6 +252,11 @@ body <- dashboardBody(tabItems(
       ),
       tabPanel("Tab2", "Tab content 2")
     )
+  ),
+  fluidRow(
+    box(kpi_table_box("kpi_table_box"))
+
+    ,box(kpi_metric_box("kpi_metric_box"))
   )
 
 )
@@ -302,10 +317,17 @@ server <- function(input, output) {
   output$tabset1Selected <- renderText({
     input$tabset1
   })
+  test.table <- data.frame(lapply(1:8, function(x) {1:10}))
+  names(test.table) <- paste0('This_is_a_very_long_name_', 1:8)
+
+  output$table <- renderTable({
+    test.table
+  })
 }
 
 ui <- dashboardPage(header,
                     sidebar,
-                    body)
+                    body, footer = dashboardFooter(),controlbar = dashboardControlbar()
+)
 
 shinyApp(ui, server)

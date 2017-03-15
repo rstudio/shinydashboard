@@ -4,8 +4,8 @@
 \alias{dashboardHeader}
 \title{Create a header for a dashboard page}
 \usage{
-dashboardHeader(..., title = NULL, titleWidth = NULL, disable = FALSE,
-  .list = NULL)
+dashboardHeader(..., title = NULL, titleWidth = NULL,
+  user = dashboardUser(), disable = FALSE, .list = NULL)
 }
 \arguments{
 \item{...}{Items to put in the header. Should be \code{\link{dropdownMenu}}s.}
@@ -100,4 +100,3 @@ shinyApp(
 \seealso{
 \code{\link{dropdownMenu}}
 }
-

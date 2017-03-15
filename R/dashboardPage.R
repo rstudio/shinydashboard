@@ -5,6 +5,8 @@
 #' @param header A header created by \code{dashboardHeader}.
 #' @param sidebar A sidebar created by \code{dashboardSidebar}.
 #' @param body A body created by \code{dashboardBody}.
+#' @param footer A footer created by \code{dashboardFooter}.
+#' @param controlbar A controlbar created by \code{dashboardControlbar}.
 #' @param title A title to display in the browser's title bar. If no value is
 #'   provided, it will try to extract the title from the \code{dashboardHeader}.
 #' @param skin A color theme. One of \code{"blue"}, \code{"black"},
@@ -28,8 +30,8 @@
 #' )
 #' }
 #' @export
-dashboardPage <- function(header, sidebar, body, title = NULL,
-  skin = c("blue", "black", "purple", "green", "red", "yellow")) {
+dashboardPage <- function(header, sidebar, body, footer ,controlbar, title = NULL,
+                          skin = c("blue", "black", "purple", "green", "red", "yellow")) {
 
   tagAssert(header, type = "header", class = "main-header")
   tagAssert(sidebar, type = "aside", class = "main-sidebar")
@@ -52,9 +54,11 @@ dashboardPage <- function(header, sidebar, body, title = NULL,
   title <- title %OR% extractTitle(header)
 
   content <- div(class = "wrapper",
-    header,
-    sidebar,
-    body
+                 header,
+                 sidebar,
+                 body,
+                 footer,
+                 controlbar
   )
 
   # if the sidebar has the class "start-collapsed", it means that the user set
