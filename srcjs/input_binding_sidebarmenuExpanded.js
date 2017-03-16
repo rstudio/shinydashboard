@@ -31,6 +31,14 @@ $.extend(sidebarmenuExpandedInputBinding, {
       $ul = $firstChild.parent().parent('.treeview-menu');
       $ul.addClass('menu-open');
       $ul.show();
+
+      // $(document).trigger("click", $firstChild);
+      /*
+      $ul.slideDown(500, function () {
+        $ul.addClass('menu-open');
+        $ul.trigger('shown');
+      });
+      */
     } else {
       $ul = $(el).find('li ul.menu-open');
       $ul.removeClass('menu-open');

@@ -66,19 +66,26 @@ if ($("section.sidebar").data("disable")) {
   $(".navbar > .sidebar-toggle").hide();
 }
 
-/*
+
 // Trigger "shown" event for elements that only become visible after
 // the corresponding menuItem is expanded (otherwise, Shiny will still
 // think they're hidden and not render them)
 $(document).on("click", ".treeview > a", function() {
-  $(this).next(".treeview-menu").trigger("shown");
+
+  //$(this).next(".treeview-menu").trigger("shown");
+
+  var $ul = $(this).next(".treeview-menu");
+  $ul.slideDown(500, function (e) {
+    $ul.addClass('menu-open');
+    $ul.trigger('shown');
+    //e.stop
+  });
 });
-*/
+
 
 // Whenever the sidebar expand/collapse button is clicked:
 $(document).on("click", ".sidebar-toggle", function() {
-  // 1) Trigger the resize event (this allows images to be
-  //    responsive and resize themselves)
+  // 1) Trigger the resize event (so images are responsive and resize)
   $(window).trigger("resize");
 
   // 2) Update the value for the sidebar's input binding
@@ -290,6 +297,14 @@ $.extend(sidebarmenuExpandedInputBinding, {
       $ul = $firstChild.parent().parent('.treeview-menu');
       $ul.addClass('menu-open');
       $ul.show();
+
+      // $(document).trigger("click", $firstChild);
+      /*
+      $ul.slideDown(500, function () {
+        $ul.addClass('menu-open');
+        $ul.trigger('shown');
+      });
+      */
     } else {
       $ul = $(el).find('li ul.menu-open');
       $ul.removeClass('menu-open');
