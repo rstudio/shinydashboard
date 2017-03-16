@@ -10,15 +10,7 @@ if ($("section.sidebar").data("disable")) {
 // the corresponding menuItem is expanded (otherwise, Shiny will still
 // think they're hidden and not render them)
 $(document).on("click", ".treeview > a", function() {
-
-  //$(this).next(".treeview-menu").trigger("shown");
-
-  var $ul = $(this).next(".treeview-menu");
-  $ul.slideDown(500, function (e) {
-    $ul.addClass('menu-open');
-    $ul.trigger('shown');
-    //e.stop
-  });
+  $(this).next(".treeview-menu").trigger("shown");
 });
 
 

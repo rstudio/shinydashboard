@@ -17,28 +17,12 @@ $.extend(sidebarmenuExpandedInputBinding, {
     else return null; // no menuItem is expanded
   },
   setValue: function(el, value) {
-    /*
-    var $anchor = $('.sidebar-menu li a');
-    if (value !== null)
-      $anchor = $('a[data-value="' + value + '"]').parent().parent().prev('a');
-    console.log($anchor);
-    $(document).trigger("click", $anchor);
-    */
-
     var $ul;
     if (value !== null) {
       var $firstChild = $('a[data-value="' + value + '"]');
       $ul = $firstChild.parent().parent('.treeview-menu');
       $ul.addClass('menu-open');
       $ul.show();
-
-      // $(document).trigger("click", $firstChild);
-      /*
-      $ul.slideDown(500, function () {
-        $ul.addClass('menu-open');
-        $ul.trigger('shown');
-      });
-      */
     } else {
       $ul = $(el).find('li ul.menu-open');
       $ul.removeClass('menu-open');
