@@ -39,6 +39,7 @@ module.exports = function(grunt) {
           srcdirjs + 'sidebar.js',
           srcdirjs + 'output_binding_menu.js',
           srcdirjs + 'input_binding_tabItem.js',
+          srcdirjs + 'input_binding_sidebarCollapsed.js',
           srcdirjs + '_end.js'
         ],
         dest: destdirjs + 'shinydashboard.js'
@@ -108,6 +109,7 @@ module.exports = function(grunt) {
         srcdirjs + 'sidebar.js',
         srcdirjs + 'output_binding_menu.js',
         srcdirjs + 'input_binding_tabItem.js',
+        srcdirjs + 'input_binding_sidebarCollapsed.js',
       ]
     },
 

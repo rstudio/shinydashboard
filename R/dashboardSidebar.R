@@ -117,12 +117,19 @@ dashboardSidebar <- function(..., disable = FALSE, width = NULL, collapsed = FAL
     '))))
   }
 
+  # If we're restoring a bookmarked app, this holds the value of whether or not the
+  # sidebar was collapsed. If this is not the case, the default is whatever the user
+  # specified in the `collapsed` argument.
+  dataValue <- shiny::restoreInput(id = "sidebarCollapsed",
+    default = if (collapsed) "true" else "false")
+
   # The expanded/collapsed state of the sidebar is actually set by adding a
   # class to the body (not to the sidebar). However, it makes sense for the
   # `collapsed` argument to belong in this function. So this information is
-  # just passed through (also as a class) to the `dashboardPage()` function
-  tags$aside(class = paste("main-sidebar", if (collapsed) "start-collapsed"),
-    custom_css,
+  # just passed through (as the `data-collapsed` attribute) to the
+  # `dashboardPage()` function
+  tags$aside(
+    class = "main-sidebar", `data-collapsed` = dataValue, custom_css,
     tags$section(
       class = "sidebar",
       `data-disable` = if (disable) 1 else NULL,

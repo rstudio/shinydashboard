@@ -56,16 +56,23 @@ ensureActivatedTab();
 //---------------------------------------------------------------------
 // Source file: ../srcjs/sidebar.js
 
-// Optionally disable sidebar
+// Optionally disable sidebar (set through the `disable` argument
+// to the `dashboardSidebar` function)
 if ($("section.sidebar").data("disable")) {
   $("body").addClass("sidebar-collapse");
   $(".navbar > .sidebar-toggle").hide();
 }
 
-// Trigger the resize event when the sidebar is collapsed/expanded
-// (this allows images to be responsive and resize themselves)
+// Whenever the sidebar expand/collapse button is clicked:
 $(document).on("click", ".sidebar-toggle", function() {
+  // 1) Trigger the resize event (so images are responsive and resize)
   $(window).trigger("resize");
+
+  // 2) Update the value for the sidebar's input binding
+  var $obj = $('.main-sidebar.shiny-bound-input');
+  var inputBinding = $obj.data('shiny-input-binding');
+  inputBinding.toggleValue($obj);
+  $obj.trigger('change');
 });
 
 $(document).on("click", ".treeview > a", function() {
@@ -173,6 +180,50 @@ $.extend(tabItemInputBinding, {
   }
 });
 Shiny.inputBindings.register(tabItemInputBinding, 'shinydashboard.tabItemInput');
+
+//---------------------------------------------------------------------
+// Source file: ../srcjs/input_binding_sidebarCollapsed.js
+
+/* global Shiny */
+
+// sidebarCollapsedInputBinding
+// ------------------------------------------------------------------
+// This keeps tracks of whether the sidebar is expanded (default)
+// or collapsed
+var sidebarCollapsedInputBinding = new Shiny.InputBinding();
+$.extend(sidebarCollapsedInputBinding, {
+  find: function(scope) {
+    return $(scope).find('.main-sidebar').first();
+  },
+  getId: function(el) {
+    return "sidebarCollapsed";
+  },
+  getValue: function(el) {
+    return $(el).attr("data-collapsed");
+  },
+  setValue: function(el, value) {
+    $(el).attr("data-collapsed", value);
+  },
+  toggleValue: function(el) {
+    var current = this.getValue(el);
+    var newVal = (current === "true") ? "false" : "true";
+    this.setValue(el, newVal);
+  },
+  receiveMessage: function(el, data) {
+    if (data.hasOwnProperty('value'))
+      this.setValue(el, data.value);
+  },
+  subscribe: function(el, callback) {
+    $(el).on('change.sidebarCollapsedInputBinding', function() {
+      callback();
+    });
+  },
+  unsubscribe: function(el) {
+    $(el).off('.sidebarCollapsedInputBinding');
+  }
+});
+Shiny.inputBindings.register(sidebarCollapsedInputBinding,
+  'shinydashboard.sidebarCollapsedInputBinding');
 
 //---------------------------------------------------------------------
 // Source file: ../srcjs/_end.js
