@@ -18,4 +18,3 @@ is useful if you want to save an expression in a variable.}
 \description{
 This is the server-side function for creating a dynamic dropdown menu.
 }
-

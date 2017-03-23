@@ -100,4 +100,3 @@ shinyApp(
 \seealso{
 \code{\link{dropdownMenu}}
 }
-

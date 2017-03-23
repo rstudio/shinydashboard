@@ -72,4 +72,3 @@ shinyApp(
 \seealso{
 \code{\link{sidebarMenu}}
 }
-

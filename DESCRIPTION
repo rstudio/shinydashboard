@@ -18,4 +18,4 @@ Imports:
     shiny (>= 0.12.1),
     htmltools (>= 0.2.6)
 BugReports: https://github.com/rstudio/shinydashboard
-RoxygenNote: 5.0.1
+RoxygenNote: 6.0.1
