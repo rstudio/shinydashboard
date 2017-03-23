@@ -39,6 +39,7 @@ $.extend(menuOutputBinding, {
 
     Shiny.initializeInputs(el);
     Shiny.bindAll(el);
+    ensureActivatedTab(); // eslint-disable-line
   }
 });
 Shiny.outputBindings.register(menuOutputBinding,
