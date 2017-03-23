@@ -7,6 +7,23 @@ module.exports = function(grunt) {
 
   grunt.initConfig({
     pkg: pkgInfo(),
+
+    clean: {
+      options: { force: true },
+      src: [
+        destdirjs + "shinydashboard.js",
+        destdirjs + "shinydashboard.js.map",
+        destdirjs + "shinydashboard.min.js",
+        destdirjs + "shinydashboard.min.js.map",
+        destdirjs + "AdminLTE/app.js",
+        destdirjs + "AdminLTE/app.js.map",
+        destdirjs + "AdminLTE/app.min.js",
+        destdirjs + "AdminLTE/app.min.js.map",
+        destdircss + "AdminLTE/AdminLTE.min.css",
+        destdircss + "AdminLTE/_all-skins.min.css",
+      ]
+    },
+
     concat: {
       options: {
         process: function(src, filepath) {
@@ -25,43 +42,79 @@ module.exports = function(grunt) {
           srcdirjs + '_end.js'
         ],
         dest: destdirjs + 'shinydashboard.js'
+      },
+      adminlte: {
+        src: [
+          srcdirjs + 'AdminLTE/app.js'
+        ],
+        dest: destdirjs + 'AdminLTE/app.js'
       }
     },
 
     uglify: {
+      shinydashboard: {
+        options: {
+          banner: '/*! <%= pkg.name %> <%= pkg.version %> | ' +
+                  '(c) 2017-<%= grunt.template.today("yyyy") %> RStudio, Inc. | ' +
+                  'License: <%= pkg.license %> */\n',
+          sourceMap: true,
+          // Base the .min.js sourcemap off of the .js sourcemap created by concat
+          sourceMapIn: destdirjs + 'shinydashboard.js.map',
+          sourceMapIncludeSources: true
+        },
+        src: destdirjs + 'shinydashboard.js',
+        dest: destdirjs + 'shinydashboard.min.js'
+      },
       adminlte: {
         options: {
           sourceMap: true
         },
-        src: destdirjs + '/AdminLTE/app.js',
-        dest: destdirjs + '/AdminLTE/app.min.js'
+        src: srcdirjs + 'AdminLTE/app.js',
+        dest: destdirjs + 'AdminLTE/app.min.js'
       }
     },
 
     cssmin: {
       adminlte: {
-        src: srcdircss + '/AdminLTE/AdminLTE.css',
-        dest: srcdircss + '/AdminLTE/AdminLTE.min.css'
+        src: srcdircss + 'AdminLTE/AdminLTE.css',
+        dest: destdircss + 'AdminLTE/AdminLTE.min.css'
       },
       adminlte_themes: {
-        src: srcdircss + '/AdminLTE/_all-skins.css',
-        dest: srcdircss + '/AdminLTE/_all-skins.min.css'
+        src: srcdircss + 'AdminLTE/_all-skins.css',
+        dest: destdircss + 'AdminLTE/_all-skins.min.css'
       }
     },
 
-    jshint: {
+    eslint: {
       options: {
-        force: true  // Don't abort if there are JSHint warnings
+        extends: 'eslint:recommended',
+        rules: {
+          "consistent-return": 1,
+          "dot-location": [1, "property"],
+          "eqeqeq": 1,
+          "no-undef": 1,
+          "no-unused-vars": [1, {"args": "none"}],
+          "guard-for-in": 1,
+          "semi": [1, "always"]
+        },
+        envs: [
+          "browser",
+          "jquery"
+        ],
+        globals: ["strftime"]
       },
-      shinydashboard: {
-        src: destdirjs + '/shinydashboard.js',
-      }
+      shinydashboard: [
+        srcdirjs + 'tabs.js',
+        srcdirjs + 'sidebar.js',
+        srcdirjs + 'output_binding_menu.js',
+        srcdirjs + 'input_binding_tabItem.js',
+      ]
     },
 
     watch: {
       shinydashboard: {
-        files: '<%= jshint.shinydashboard.src %>',
-        tasks: ['newer:jshint:shinydashboard']
+        files: '<%= concat.shinydashboard.src %>',
+        tasks: ['newer:concat:shinydashboard', 'newer:uglify:shinydashboard', 'newer:jshint:shinydashboard']
       },
       adminlte: {
         files: ['<%= uglify.adminlte.src %>', '<%= cssmin.adminlte.src %>'],
@@ -70,18 +123,19 @@ module.exports = function(grunt) {
     }
   });
 
-
   grunt.loadNpmTasks('grunt-contrib-uglify');
   grunt.loadNpmTasks('grunt-contrib-cssmin');
-  grunt.loadNpmTasks('grunt-contrib-jshint');
+  grunt.loadNpmTasks('grunt-eslint');
   grunt.loadNpmTasks('grunt-contrib-watch');
   grunt.loadNpmTasks('grunt-contrib-concat');
   grunt.loadNpmTasks('grunt-newer');
 
+  grunt.registerTask('default', ['newer:concat', 'newer:eslint', 'newer:uglify', 'newer:cssmin']);
 
-  grunt.registerTask('default', ['newer:concat', 'newer:uglify', 'newer:cssmin', 'newer:jshint']);
 
-
+  // ---------------------------------------------------------------------------
+  // Utility functions
+  // ---------------------------------------------------------------------------
 
   // Return an object which merges information from package.json and the
   // DESCRIPTION file.
@@ -113,4 +167,3 @@ module.exports = function(grunt) {
     return txt;
   }
 };
-
