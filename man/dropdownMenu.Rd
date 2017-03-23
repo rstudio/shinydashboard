@@ -35,4 +35,3 @@ Create a dropdown menu to place in a dashboard header
 \seealso{
 \code{\link{dashboardHeader}} for example usage.
 }
-
