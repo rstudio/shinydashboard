@@ -83,26 +83,16 @@ $(document).on("click", ".sidebar-toggle", function() {
 // tabName of the fist subMenuItem inside the menuItem that is currently
 // expanded)
 $(document).on("click", ".treeview > a", function() {
-  var $obj = $('section.sidebar.shiny-bound-input');
-  var inputBinding = $obj.data('shiny-input-binding');
-  var value;
-
+  var $menu = $(this).next();
   // If this menuItem was already open, then clicking on it again,
-  // should update the input binding back to null. It should also
-  // trigger the "hidden" event, so Shiny doesn't worry about it
-  // while it's hidden.
-  if ($(this).next().hasClass("menu-open")) {
-    value = null;
-    $(this).next().trigger("hidden");
-  } else if ($(this).next().hasClass("treeview-menu")) {
-    // If this menuItem was closed, clicking on it should update the
-    // input binding back to the correct value. It should also trigger
-    // the "shown" event, so Shiny can interact with it.
-    value = $(this).next().find('a').attr('data-value');
-    $(this).next().trigger("shown");
-  }
-  inputBinding.setValue($obj, value, this);
-  $obj.trigger('change');
+  // should trigger the "hidden" event, so Shiny doesn't worry about
+  // it while it's hidden (and vice versa).
+  if ($menu.hasClass("menu-open")) $menu.trigger("hidden");
+  else if ($menu.hasClass("treeview-menu")) $menu.trigger("shown");
+
+  // need to set timeout to account for the slideUp/slideDown animation
+  var $obj = $('section.sidebar.shiny-bound-input');
+  setTimeout(function() { $obj.trigger('change'); }, 600);
 });
 
 //---------------------------------------------------------------------
@@ -269,21 +259,8 @@ $.extend(sidebarmenuExpandedInputBinding, {
   },
   getValue: function(el) {
     var $open = $(el).find('li ul.menu-open');
-    if ($open.length === 1) return $open.find('a').attr('data-value');
-    else return null; // no menuItem is expanded
-  },
-  setValue: function(el, value, clicked) {
-    clicked = (typeof clicked !== 'undefined') ?  clicked : null;
-    if (value !== null) {
-      var $firstChild = $('a[data-value="' + value + '"]');
-      $(document).trigger('click', $firstChild);
-    } else {
-      $(document).trigger('click', clicked);
-    }
-  },
-  receiveMessage: function(el, data) {
-    if (data.hasOwnProperty('value'))
-      this.setValue(el, data.value);
+    if ($open.length === 1) return $open.attr('data-expanded');
+    else return null;
   },
   subscribe: function(el, callback) {
     $(el).on('change.sidebarmenuExpandedInputBinding', function() {

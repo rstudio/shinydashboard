@@ -243,6 +243,13 @@ sidebarSearchForm <- function(textId, buttonId, label = "Search...",
 #' @param selected If \code{TRUE}, this \code{menuItem} or \code{menuSubItem}
 #'   will start selected. If no item have \code{selected=TRUE}, then the first
 #'   \code{menuItem} will start selected.
+#' @param expandedName A unique name given to each \code{menuItem} that serves
+#'   to indicate which one (if any) is currently expanded. (This is only applicable
+#'   to \code{menuItem}s that have children and it is mostly only useful for
+#'   bookmarking state.)
+#' @param startExpanded Should this \code{menuItem} be expanded on app startup?
+#'   (This is only applicable to \code{menuItem}s that have children, and only
+#'   one of these can be expanded at any given time).
 #' @param ... For menu items, this may consist of \code{\link{menuSubItem}}s.
 #' @param .list An optional list containing items to put in the menu Same as the
 #'   \code{...} arguments, but in list format. This can be useful when working
@@ -354,7 +361,9 @@ sidebarMenu <- function(..., id = NULL, .list = NULL) {
 #' @rdname sidebarMenu
 #' @export
 menuItem <- function(text, ..., icon = NULL, badgeLabel = NULL, badgeColor = "green",
-                     tabName = NULL, href = NULL, newtab = TRUE, selected = NULL) {
+                     tabName = NULL, href = NULL, newtab = TRUE, selected = NULL,
+                     expandedName = as.character(gsub("[[:space:]]", "", text)),
+                     startExpanded = FALSE) {
   subItems <- list(...)
 
   if (!is.null(icon)) tagAssert(icon, type = "i")
@@ -414,12 +423,12 @@ menuItem <- function(text, ..., icon = NULL, badgeLabel = NULL, badgeColor = "gr
   # these actually independent in AdminLTE). If no menuItem was expanded, `dataExpanded`
   # is NULL. However, we want to this input to get passed on (and not dropped), so we
   # do `%OR% ""` to assure this.
-  dataExpanded <- shiny::restoreInput(id = "sidebarItemExpanded", default = "") %OR% ""
+  default <- if (startExpanded) expandedName else ""
+  dataExpanded <- shiny::restoreInput(id = "sidebarItemExpanded", default) %OR% ""
 
-  # If `dataExpanded` is not the empty string, we need to check that there is a subMenuItem
-  # in the list of `subItems` that actually has a `data-value` attribute equal to `dataExpanded`
-  isExpanded <- nzchar(dataExpanded) &&
-    any(unlist(lapply(subItems, findAttribute, "data-value", dataExpanded)))
+  # If `dataExpanded` is not the empty string, we need to check that it is eqaul to the
+  # this menuItem's `expandedName``
+  isExpanded <- nzchar(dataExpanded) && (dataExpanded == expandedName)
 
   tags$li(class = "treeview",
     a(href = href,
@@ -433,6 +442,7 @@ menuItem <- function(text, ..., icon = NULL, badgeLabel = NULL, badgeColor = "gr
     do.call(tags$ul, c(
       class = paste0("treeview-menu", if (isExpanded) " menu-open" else ""),
       style = paste0("display: ",     if (isExpanded) "block;" else "none;"),
+      `data-expanded` = expandedName,
       subItems))
   )
 }

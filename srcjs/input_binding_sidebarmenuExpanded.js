@@ -13,21 +13,8 @@ $.extend(sidebarmenuExpandedInputBinding, {
   },
   getValue: function(el) {
     var $open = $(el).find('li ul.menu-open');
-    if ($open.length === 1) return $open.find('a').attr('data-value');
-    else return null; // no menuItem is expanded
-  },
-  setValue: function(el, value, clicked) {
-    clicked = (typeof clicked !== 'undefined') ?  clicked : null;
-    if (value !== null) {
-      var $firstChild = $('a[data-value="' + value + '"]');
-      $(document).trigger('click', $firstChild);
-    } else {
-      $(document).trigger('click', clicked);
-    }
-  },
-  receiveMessage: function(el, data) {
-    if (data.hasOwnProperty('value'))
-      this.setValue(el, data.value);
+    if ($open.length === 1) return $open.attr('data-expanded');
+    else return null;
   },
   subscribe: function(el, callback) {
     $(el).on('change.sidebarmenuExpandedInputBinding', function() {
