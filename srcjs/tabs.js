@@ -43,6 +43,8 @@ var ensureActivatedTab = function() {
   // If we got this far, just activate the first tab.
   if (! $tablinks.parent("li").hasClass("active") ) {
     $tablinks.first().tab("show");
+    $(".sidebarMenuSelectedTabItem").attr("data-value",
+      $tablinks.first().attr("data-value"));
   }
 };
 
