@@ -1,7 +1,11 @@
-/* jshint browser:true, jquery:true, indent:2 */
-/* global Shiny */
+//---------------------------------------------------------------------
+// Source file: ../srcjs/_start.js
 
 $(function() {
+
+//---------------------------------------------------------------------
+// Source file: ../srcjs/tabs.js
+
   // This function handles a special case in the AdminLTE sidebar: when there
   // is a sidebar-menu with items, and one of those items has sub-items, and
   // they are used for tab navigation. Normally, if one of the items is
@@ -49,6 +53,9 @@ $(function() {
 
   ensureActivatedTab();
 
+//---------------------------------------------------------------------
+// Source file: ../srcjs/sidebar.js
+
   // Optionally disable sidebar
   if ($("section.sidebar").data("disable")) {
     $("body").addClass("sidebar-collapse");
@@ -64,6 +71,11 @@ $(function() {
  $(document).on("click", ".treeview > a", function() {
     $(this).next(".treeview-menu").trigger("shown");
   });
+
+//---------------------------------------------------------------------
+// Source file: ../srcjs/output_binding_menu.js
+
+  /* global Shiny */
 
   // menuOutputBinding
   // ------------------------------------------------------------------
@@ -109,6 +121,10 @@ $(function() {
   Shiny.outputBindings.register(menuOutputBinding,
                                 "shinydashboard.menuOutputBinding");
 
+//---------------------------------------------------------------------
+// Source file: ../srcjs/input_binding_tabItem.js
+
+  /* global Shiny */
 
   // tabItemInputBinding
   // ------------------------------------------------------------------
@@ -157,5 +173,9 @@ $(function() {
   });
   Shiny.inputBindings.register(tabItemInputBinding, 'shinydashboard.tabItemInput');
 
+//---------------------------------------------------------------------
+// Source file: ../srcjs/_end.js
 
 });
+
+//# sourceMappingURL=shinydashboard.js.map

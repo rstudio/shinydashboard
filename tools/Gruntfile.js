@@ -1,27 +1,51 @@
 module.exports = function(grunt) {
 
-  var srcdir = '../inst/';
+  var srcdirjs = '../srcjs/';
+  var srcdircss = '../inst/';
+  var destdirjs = '../inst/';
+  var destdircss = '../inst/';
 
   grunt.initConfig({
     pkg: pkgInfo(),
+    concat: {
+      options: {
+        process: function(src, filepath) {
+          return '//---------------------------------------------------------------------\n' +
+            '// Source file: ' + filepath + '\n\n' + src;
+        },
+        sourceMap: true
+      },
+      shinydashboard: {
+        src: [
+          srcdirjs + '_start.js',
+          srcdirjs + 'tabs.js',
+          srcdirjs + 'sidebar.js',
+          srcdirjs + 'output_binding_menu.js',
+          srcdirjs + 'input_binding_tabItem.js',
+          srcdirjs + '_end.js'
+        ],
+        dest: destdirjs + 'shinydashboard.js'
+      }
+    },
+
     uglify: {
       adminlte: {
         options: {
           sourceMap: true
         },
-        src: srcdir + '/AdminLTE/app.js',
-        dest: srcdir + '/AdminLTE/app.min.js'
+        src: destdirjs + '/AdminLTE/app.js',
+        dest: destdirjs + '/AdminLTE/app.min.js'
       }
     },
 
     cssmin: {
       adminlte: {
-        src: srcdir + '/AdminLTE/AdminLTE.css',
-        dest: srcdir + '/AdminLTE/AdminLTE.min.css'
+        src: srcdircss + '/AdminLTE/AdminLTE.css',
+        dest: srcdircss + '/AdminLTE/AdminLTE.min.css'
       },
       adminlte_themes: {
-        src: srcdir + '/AdminLTE/_all-skins.css',
-        dest: srcdir + '/AdminLTE/_all-skins.min.css'
+        src: srcdircss + '/AdminLTE/_all-skins.css',
+        dest: srcdircss + '/AdminLTE/_all-skins.min.css'
       }
     },
 
@@ -30,7 +54,7 @@ module.exports = function(grunt) {
         force: true  // Don't abort if there are JSHint warnings
       },
       shinydashboard: {
-        src: srcdir + '/shinydashboard.js',
+        src: destdirjs + '/shinydashboard.js',
       }
     },
 
@@ -51,10 +75,11 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-contrib-cssmin');
   grunt.loadNpmTasks('grunt-contrib-jshint');
   grunt.loadNpmTasks('grunt-contrib-watch');
+  grunt.loadNpmTasks('grunt-contrib-concat');
   grunt.loadNpmTasks('grunt-newer');
 
 
-  grunt.registerTask('default', ['newer:uglify', 'newer:cssmin', 'newer:jshint']);
+  grunt.registerTask('default', ['newer:concat', 'newer:uglify', 'newer:cssmin', 'newer:jshint']);
 
 
 
