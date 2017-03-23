@@ -66,15 +66,6 @@ if ($("section.sidebar").data("disable")) {
   $(".navbar > .sidebar-toggle").hide();
 }
 
-
-// Trigger "shown" event for elements that only become visible after
-// the corresponding menuItem is expanded (otherwise, Shiny will still
-// think they're hidden and not render them)
-$(document).on("click", ".treeview > a", function() {
-  $(this).next(".treeview-menu").trigger("shown");
-});
-
-
 // Whenever the sidebar expand/collapse button is clicked:
 $(document).on("click", ".sidebar-toggle", function() {
   // 1) Trigger the resize event (so images are responsive and resize)
@@ -97,13 +88,20 @@ $(document).on("click", ".treeview > a", function() {
   var value;
 
   // If this menuItem was already open, then clicking on it again,
-  // should update the input binding back to null
+  // should update the input binding back to null. It should also
+  // trigger the "hidden" event, so Shiny doesn't worry about it
+  // while it's hidden.
   if ($(this).next().hasClass("menu-open")) {
     value = null;
+    $(this).next().trigger("hidden");
   } else if ($(this).next().hasClass("treeview-menu")) {
+    // If this menuItem was closed, clicking on it should update the
+    // input binding back to the correct value. It should also trigger
+    // the "shown" event, so Shiny can interact with it.
     value = $(this).next().find('a').attr('data-value');
+    $(this).next().trigger("shown");
   }
-  inputBinding.setValue($obj, value);
+  inputBinding.setValue($obj, value, this);
   $obj.trigger('change');
 });
 
@@ -274,17 +272,13 @@ $.extend(sidebarmenuExpandedInputBinding, {
     if ($open.length === 1) return $open.find('a').attr('data-value');
     else return null; // no menuItem is expanded
   },
-  setValue: function(el, value) {
-    var $ul;
+  setValue: function(el, value, clicked) {
+    clicked = (typeof clicked !== 'undefined') ?  clicked : null;
     if (value !== null) {
       var $firstChild = $('a[data-value="' + value + '"]');
-      $ul = $firstChild.parent().parent('.treeview-menu');
-      $ul.addClass('menu-open');
-      $ul.show();
+      $(document).trigger('click', $firstChild);
     } else {
-      $ul = $(el).find('li ul.menu-open');
-      $ul.removeClass('menu-open');
-      $ul.hide();
+      $(document).trigger('click', clicked);
     }
   },
   receiveMessage: function(el, data) {

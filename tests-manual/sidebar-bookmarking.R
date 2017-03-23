@@ -14,7 +14,7 @@ ui <- function(request) {
     dashboardSidebar(
       uiOutput("sidebarControls"),
       sidebarMenu(id = "smenu",
-        menuItem("Frontpage", tabName = "front"),
+        menuItem(strong("Frontpage"), tabName = "front"),
         menuItem("Models",
           menuSubItem("Linear model", "models1"),
           menuSubItem("Logistic regression", "models2")
