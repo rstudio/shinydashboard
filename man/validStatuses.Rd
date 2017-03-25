@@ -4,6 +4,9 @@
 \name{validStatuses}
 \alias{validStatuses}
 \title{Valid statuses}
+\source{
+\url{https://almsaeedstudio.com/themes/AdminLTE/documentation/index.html#component-box}
+}
 \description{
 These status strings correspond to colors as defined in Bootstrap's CSS.
 Although the colors can vary depending on the particular CSS selector, they
@@ -16,6 +19,7 @@ generally appear as follows:
   \item \code{info} Blue
   \item \code{warning} Orange
   \item \code{danger} Red
+  \item \code{default} Grey
 }
 }
 \keyword{internal}

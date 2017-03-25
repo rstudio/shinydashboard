@@ -4,6 +4,11 @@
 \name{validColors}
 \alias{validColors}
 \title{Valid colors}
+\source{
+\url{https://almsaeedstudio.com/themes/AdminLTE/documentation/index.html#layout}
+
+\url{https://almsaeedstudio.com/themes/AdminLTE/pages/UI/general.html}
+}
 \description{
 These are valid colors for various dashboard components. Valid colors are
 listed below.
@@ -11,20 +16,27 @@ listed below.
 \details{
 \itemize{
   \item \code{red}
+  \item \code{red-light}
   \item \code{yellow}
+  \item \code{yellow-light}
   \item \code{aqua}
   \item \code{blue}
   \item \code{light-blue}
+  \item \code{blue-light}
   \item \code{green}
+  \item \code{green-light}
   \item \code{navy}
   \item \code{teal}
+  \item \code{gray}
   \item \code{olive}
   \item \code{lime}
   \item \code{orange}
   \item \code{fuchsia}
   \item \code{purple}
+  \item \code{purple-light}
   \item \code{maroon}
   \item \code{black}
+  \item \code{black-light}
 }
 }
 \keyword{internal}
