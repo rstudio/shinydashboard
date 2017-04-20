@@ -37,7 +37,7 @@ dashboardPage <- function(header, sidebar, body, title = NULL,
   skin <- match.arg(skin)
 
   extractTitle <- function(header) {
-    x <- header$children[[1]]
+    x <- header$children[[2]]
     if (x$name == "span" &&
         !is.null(x$attribs$class) &&
         x$attribs$class == "logo" &&
