@@ -7,21 +7,20 @@
 var tabItemInputBinding = new Shiny.InputBinding();
 $.extend(tabItemInputBinding, {
   find: function(scope) {
-    return $(scope).find('ul.sidebar-menu');
+    return $(scope).find('.sidebarMenuSelectedTabItem');
   },
   getValue: function(el) {
-    var anchor = $(el).find('li:not(.treeview).active').children('a');
-    if (anchor.length === 1)
-      return this._getTabName(anchor);
-
-    return null;
+    var value = $(el).attr('data-value');
+    if (value === "null") return null;
+    return value;
   },
   setValue: function(el, value) {
     var self = this;
-    var anchors = $(el).find('li:not(.treeview)').children('a');
+    var anchors = $(el).parent('ul.sidebar-menu').find('li:not(.treeview)').children('a');
     anchors.each(function() { // eslint-disable-line consistent-return
       if (self._getTabName($(this)) === value) {
         $(this).tab('show');
+        $(el).attr('data-value', self._getTabName($(this)));
         return false;
       }
     });
@@ -45,4 +44,5 @@ $.extend(tabItemInputBinding, {
     return anchor.attr('data-value');
   }
 });
+
 Shiny.inputBindings.register(tabItemInputBinding, 'shinydashboard.tabItemInput');

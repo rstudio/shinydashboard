@@ -14,28 +14,31 @@ $(function() {
 // because they're not designed to be used together for tab panels. This
 // code ensures that only one item will have the "active" class.
 var deactivateOtherTabs = function() {
-  var $this = $(this);
-  var $sidebarMenu = $this.closest("ul.sidebar-menu");
-
-  // Find all tab links under sidebar-menu
-  var $tablinks = $sidebarMenu.find("a[data-toggle='tab']");
+  // Find all tab links under sidebar-menu even if they don't have a
+  // tabName (which is why the second selector is necessary)
+  var $tablinks = $(".sidebar-menu a[data-toggle='tab']," +
+    ".sidebar-menu li.treeview > a");
 
   // If any other items are active, deactivate them
-  $tablinks.not($this).parent("li").removeClass("active");
+  $tablinks.not($(this)).parent("li").removeClass("active");
 
   // Trigger event for the tabItemInputBinding
-  $sidebarMenu.trigger('change.tabItemInputBinding');
+  var $obj = $('.sidebarMenuSelectedTabItem');
+  var inputBinding = $obj.data('shiny-input-binding');
+  if (typeof inputBinding !== 'undefined') {
+    inputBinding.setValue($obj, $(this).attr('data-value'));
+    $obj.trigger('change');
+  }
 };
 
 $(document).on('shown.bs.tab', '.sidebar-menu a[data-toggle="tab"]',
                deactivateOtherTabs);
 
-
 // When document is ready, if there is a sidebar menu with no activated tabs,
 // activate the one specified by `data-start-selected`, or if that's not
 // present, the first one.
 var ensureActivatedTab = function() {
-  var $tablinks = $("ul.sidebar-menu").find("a").filter("[data-toggle='tab']");
+  var $tablinks = $(".sidebar-menu a[data-toggle='tab']");
 
   // If there's a `data-start-selected` attribute and we can find a tab with
   // that name, activate it.
@@ -48,6 +51,8 @@ var ensureActivatedTab = function() {
   // If we got this far, just activate the first tab.
   if (! $tablinks.parent("li").hasClass("active") ) {
     $tablinks.first().tab("show");
+    $(".sidebarMenuSelectedTabItem").attr("data-value",
+      $tablinks.first().attr("data-value"));
   }
 };
 
@@ -75,8 +80,21 @@ $(document).on("click", ".sidebar-toggle", function() {
   $obj.trigger('change');
 });
 
+// Whenever we expand a menuItem (to be expandable, it must have children),
+// update the value for the expandedItem's input binding (this is the
+// tabName of the fist subMenuItem inside the menuItem that is currently
+// expanded)
 $(document).on("click", ".treeview > a", function() {
-  $(this).next(".treeview-menu").trigger("shown");
+  var $menu = $(this).next();
+  // If this menuItem was already open, then clicking on it again,
+  // should trigger the "hidden" event, so Shiny doesn't worry about
+  // it while it's hidden (and vice versa).
+  if ($menu.hasClass("menu-open")) $menu.trigger("hidden");
+  else if ($menu.hasClass("treeview-menu")) $menu.trigger("shown");
+
+  // need to set timeout to account for the slideUp/slideDown animation
+  var $obj = $('section.sidebar.shiny-bound-input');
+  setTimeout(function() { $obj.trigger('change'); }, 600);
 });
 
 //---------------------------------------------------------------------
@@ -141,21 +159,20 @@ Shiny.outputBindings.register(menuOutputBinding,
 var tabItemInputBinding = new Shiny.InputBinding();
 $.extend(tabItemInputBinding, {
   find: function(scope) {
-    return $(scope).find('ul.sidebar-menu');
+    return $(scope).find('.sidebarMenuSelectedTabItem');
   },
   getValue: function(el) {
-    var anchor = $(el).find('li:not(.treeview).active').children('a');
-    if (anchor.length === 1)
-      return this._getTabName(anchor);
-
-    return null;
+    var value = $(el).attr('data-value');
+    if (value === "null") return null;
+    return value;
   },
   setValue: function(el, value) {
     var self = this;
-    var anchors = $(el).find('li:not(.treeview)').children('a');
+    var anchors = $(el).parent('ul.sidebar-menu').find('li:not(.treeview)').children('a');
     anchors.each(function() { // eslint-disable-line consistent-return
       if (self._getTabName($(this)) === value) {
         $(this).tab('show');
+        $(el).attr('data-value', self._getTabName($(this)));
         return false;
       }
     });
@@ -179,6 +196,7 @@ $.extend(tabItemInputBinding, {
     return anchor.attr('data-value');
   }
 });
+
 Shiny.inputBindings.register(tabItemInputBinding, 'shinydashboard.tabItemInput');
 
 //---------------------------------------------------------------------
@@ -224,6 +242,39 @@ $.extend(sidebarCollapsedInputBinding, {
 });
 Shiny.inputBindings.register(sidebarCollapsedInputBinding,
   'shinydashboard.sidebarCollapsedInputBinding');
+
+//---------------------------------------------------------------------
+// Source file: ../srcjs/input_binding_sidebarmenuExpanded.js
+
+/* global Shiny */
+
+// sidebarmenuExpandedInputBinding
+// ------------------------------------------------------------------
+// This keeps tracks of what menuItem (if any) is expanded
+var sidebarmenuExpandedInputBinding = new Shiny.InputBinding();
+$.extend(sidebarmenuExpandedInputBinding, {
+  find: function(scope) {
+    return $(scope).find('section.sidebar');
+  },
+  getId: function(el) {
+    return "sidebarItemExpanded";
+  },
+  getValue: function(el) {
+    var $open = $(el).find('li ul.menu-open');
+    if ($open.length === 1) return $open.attr('data-expanded');
+    else return null;
+  },
+  subscribe: function(el, callback) {
+    $(el).on('change.sidebarmenuExpandedInputBinding', function() {
+      callback();
+    });
+  },
+  unsubscribe: function(el) {
+    $(el).off('.sidebarmenuExpandedInputBinding');
+  }
+});
+Shiny.inputBindings.register(sidebarmenuExpandedInputBinding,
+  'shinydashboard.sidebarmenuExpandedInputBinding');
 
 //---------------------------------------------------------------------
 // Source file: ../srcjs/_end.js

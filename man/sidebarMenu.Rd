@@ -9,7 +9,9 @@
 sidebarMenu(..., id = NULL, .list = NULL)
 
 menuItem(text, ..., icon = NULL, badgeLabel = NULL, badgeColor = "green",
-  tabName = NULL, href = NULL, newtab = TRUE, selected = NULL)
+  tabName = NULL, href = NULL, newtab = TRUE, selected = NULL,
+  expandedName = as.character(gsub("[[:space:]]", "", text)),
+  startExpanded = FALSE)
 
 menuSubItem(text, tabName = NULL, href = NULL, newtab = TRUE,
   icon = shiny::icon("angle-double-right"), selected = NULL)
@@ -49,6 +51,15 @@ browser tab?}
 \item{selected}{If \code{TRUE}, this \code{menuItem} or \code{menuSubItem}
 will start selected. If no item have \code{selected=TRUE}, then the first
 \code{menuItem} will start selected.}
+
+\item{expandedName}{A unique name given to each \code{menuItem} that serves
+to indicate which one (if any) is currently expanded. (This is only applicable
+to \code{menuItem}s that have children and it is mostly only useful for
+bookmarking state.)}
+
+\item{startExpanded}{Should this \code{menuItem} be expanded on app startup?
+(This is only applicable to \code{menuItem}s that have children, and only
+one of these can be expanded at any given time).}
 }
 \description{
 A \code{dashboardSidebar} can contain a \code{sidebarMenu}. A

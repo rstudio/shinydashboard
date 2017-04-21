@@ -6,28 +6,31 @@
 // because they're not designed to be used together for tab panels. This
 // code ensures that only one item will have the "active" class.
 var deactivateOtherTabs = function() {
-  var $this = $(this);
-  var $sidebarMenu = $this.closest("ul.sidebar-menu");
-
-  // Find all tab links under sidebar-menu
-  var $tablinks = $sidebarMenu.find("a[data-toggle='tab']");
+  // Find all tab links under sidebar-menu even if they don't have a
+  // tabName (which is why the second selector is necessary)
+  var $tablinks = $(".sidebar-menu a[data-toggle='tab']," +
+    ".sidebar-menu li.treeview > a");
 
   // If any other items are active, deactivate them
-  $tablinks.not($this).parent("li").removeClass("active");
+  $tablinks.not($(this)).parent("li").removeClass("active");
 
   // Trigger event for the tabItemInputBinding
-  $sidebarMenu.trigger('change.tabItemInputBinding');
+  var $obj = $('.sidebarMenuSelectedTabItem');
+  var inputBinding = $obj.data('shiny-input-binding');
+  if (typeof inputBinding !== 'undefined') {
+    inputBinding.setValue($obj, $(this).attr('data-value'));
+    $obj.trigger('change');
+  }
 };
 
 $(document).on('shown.bs.tab', '.sidebar-menu a[data-toggle="tab"]',
                deactivateOtherTabs);
 
-
 // When document is ready, if there is a sidebar menu with no activated tabs,
 // activate the one specified by `data-start-selected`, or if that's not
 // present, the first one.
 var ensureActivatedTab = function() {
-  var $tablinks = $("ul.sidebar-menu").find("a").filter("[data-toggle='tab']");
+  var $tablinks = $(".sidebar-menu a[data-toggle='tab']");
 
   // If there's a `data-start-selected` attribute and we can find a tab with
   // that name, activate it.
@@ -40,6 +43,8 @@ var ensureActivatedTab = function() {
   // If we got this far, just activate the first tab.
   if (! $tablinks.parent("li").hasClass("active") ) {
     $tablinks.first().tab("show");
+    $(".sidebarMenuSelectedTabItem").attr("data-value",
+      $tablinks.first().attr("data-value"));
   }
 };
 

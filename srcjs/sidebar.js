@@ -17,6 +17,19 @@ $(document).on("click", ".sidebar-toggle", function() {
   $obj.trigger('change');
 });
 
+// Whenever we expand a menuItem (to be expandable, it must have children),
+// update the value for the expandedItem's input binding (this is the
+// tabName of the fist subMenuItem inside the menuItem that is currently
+// expanded)
 $(document).on("click", ".treeview > a", function() {
-  $(this).next(".treeview-menu").trigger("shown");
+  var $menu = $(this).next();
+  // If this menuItem was already open, then clicking on it again,
+  // should trigger the "hidden" event, so Shiny doesn't worry about
+  // it while it's hidden (and vice versa).
+  if ($menu.hasClass("menu-open")) $menu.trigger("hidden");
+  else if ($menu.hasClass("treeview-menu")) $menu.trigger("shown");
+
+  // need to set timeout to account for the slideUp/slideDown animation
+  var $obj = $('section.sidebar.shiny-bound-input');
+  setTimeout(function() { $obj.trigger('change'); }, 600);
 });
