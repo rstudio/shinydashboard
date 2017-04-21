@@ -3,7 +3,9 @@ shinydashboard 0.5.3.9000
 
 * Fixed [#127](https://github.com/rstudio/shinydashboard/issues/127) and [#177](https://github.com/rstudio/shinydashboard/issues/177): previously, if `dashboardSidebar()` was called with an explicit `width` parameter, mobile rendering would look weird (the sidebar wouldn't completely disappear when it was collapsed, and content in the dashboard body would be hidden under the still-visible sidebar). ([#204](https://github.com/rstudio/shinydashboard/pull/204))
 
-* Fixed [#89](https://github.com/rstudio/shinydashboard/issues/89): We claimed that `dashboardPage()` would try to extract the page's title from `dashboardHeader()` (if the title is not provided directly to `dashboardPage()`); however, we were selecting the wrong child of the header tag object. ([#203](https://github.com/rstudio/shinydashboard/pull/203))
+* Fixed [#79](https://github.com/rstudio/shinydashboard/issues/79): Re-enable slight css transition when the sidebar is expanded/collapsed. ([#205](https://github.com/rstudio/shinydashboard/pull/205)).
+
+* Fixed [#89](https://github.com/rstudio/shinydashboard/issues/89): We claimed that `dashboardPage()` would try to extract the page's title from `dashboardHeader()` (if the title is not provided directly to `dashboardPage()`); however, we were selecting the wrong child of the header tag object ([#203](https://github.com/rstudio/shinydashboard/pull/203))
 	
 * Fixed [#129](https://github.com/rstudio/shinydashboard/issues/129): Trigger shown/hidden event for Shiny outputs in the sidebar. ([#194](https://github.com/rstudio/shinydashboard/pull/194))
 	
