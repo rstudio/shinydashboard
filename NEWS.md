@@ -1,6 +1,10 @@
 shinydashboard 0.5.3.9000
 =========================
 
+* Fixed [#71](https://github.com/rstudio/shinydashboard/issues/71) and [#87](https://github.com/rstudio/shinydashboard/issues/87): detect and enforce selected tab for dynamic sidebars. ([#189](https://github.com/rstudio/shinydashboard/pull/189))
+
+* Divided JS code into chunks.
+
 * Fixed [#127](https://github.com/rstudio/shinydashboard/issues/127) and [#177](https://github.com/rstudio/shinydashboard/issues/177): previously, if `dashboardSidebar()` was called with an explicit `width` parameter, mobile rendering would look weird (the sidebar wouldn't completely disappear when it was collapsed, and content in the dashboard body would be hidden under the still-visible sidebar). ([#204](https://github.com/rstudio/shinydashboard/pull/204))
 
 * Fixed [#79](https://github.com/rstudio/shinydashboard/issues/79): Re-enable slight css transition when the sidebar is expanded/collapsed. ([#205](https://github.com/rstudio/shinydashboard/pull/205)).

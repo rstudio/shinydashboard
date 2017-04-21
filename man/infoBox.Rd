@@ -45,4 +45,3 @@ boxes are meant to be placed in the main body of a dashboard.
 Other boxes: \code{\link{box}}, \code{\link{tabBox}},
   \code{\link{valueBox}}
 }
-

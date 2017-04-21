@@ -26,4 +26,3 @@ A search form consists of a text input field and a search button.
 Other sidebar items: \code{\link{sidebarMenu}},
   \code{\link{sidebarUserPanel}}
 }
-
