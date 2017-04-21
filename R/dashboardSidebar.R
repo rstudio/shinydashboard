@@ -72,6 +72,9 @@ dashboardSidebar <- function(..., disable = FALSE, width = NULL, collapsed = FAL
     # media query (min-width: 768px), so that it won't override other media
     # queries (like max-width: 767px) that work for narrower screens.
     custom_css <- tags$head(tags$style(HTML(gsub("_WIDTH_", width, fixed = TRUE, '
+      .main-sidebar, .left-side {
+        width: _WIDTH_;
+      }
       @media (min-width: 768px) {
         .content-wrapper,
         .right-side,
