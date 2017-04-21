@@ -424,6 +424,12 @@ function _init() {
           //Get the parent li
           var parent_li = $this.parent("li");
 
+          // shiny-mod (see README-shiny-mods.md)
+          var shinyOutput = checkElement.find('.shiny-bound-output');
+          if (shinyOutput.length !== 0 && shinyOutput.first().html().length === 0) {
+            shinyOutput.first().html('<br/>');
+          }
+
           //Open the target menu and add the menu-open class
           checkElement.slideDown(animationSpeed, function () {
             //Add the class active to the parent li
