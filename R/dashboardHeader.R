@@ -86,7 +86,7 @@
 #' )
 #' }
 #' @export
-dashboardHeader <- function(..., title = NULL, titleWidth = NULL, disable = FALSE, .list = NULL) {
+dashboardHeader <- function(..., title = NULL, titleWidth = NULL, user = dashboardUser() ,disable = FALSE, .list = NULL) {
   items <- c(list(...), .list)
   lapply(items, tagAssert, type = "li", class = "dropdown")
 
@@ -101,35 +101,44 @@ dashboardHeader <- function(..., title = NULL, titleWidth = NULL, disable = FALS
     # query (min-width: 768px), so that it won't override other media queries
     # (like max-width: 767px) that work for narrower screens.
     custom_css <- tags$head(tags$style(HTML(gsub("_WIDTH_", titleWidth, fixed = TRUE, '
-      @media (min-width: 768px) {
-        .main-header > .navbar {
-          margin-left: _WIDTH_;
-        }
-        .main-header .logo {
-          width: _WIDTH_;
-        }
-      }
-    '))))
+                                                 @media (min-width: 768px) {
+                                                 .main-header > .navbar {
+                                                 margin-left: _WIDTH_;
+                                                 }
+                                                 .main-header .logo {
+                                                 width: _WIDTH_;
+                                                 }
+                                                 }
+                                                 '))))
   }
 
   tags$header(class = "main-header",
-    custom_css,
-    style = if (disable) "display: none;",
-    span(class = "logo", title),
-    tags$nav(class = "navbar navbar-static-top", role = "navigation",
-      # Embed hidden icon so that we get the font-awesome dependency
-      span(shiny::icon("bars"), style = "display:none;"),
-      # Sidebar toggle button
-      a(href="#", class="sidebar-toggle", `data-toggle`="offcanvas",
-        role="button",
-        span(class="sr-only", "Toggle navigation")
-      ),
-      div(class = "navbar-custom-menu",
-        tags$ul(class = "nav navbar-nav",
-          items
-        )
-      )
-    )
+              custom_css,
+              style = if (disable) "display: none;",
+              span(class = "logo", title),
+              tags$nav(class = "navbar navbar-static-top", role = "navigation",
+                       # Embed hidden icon so that we get the font-awesome dependency
+                       span(shiny::icon("bars"), style = "display:none;"),
+                       # Sidebar toggle button
+                       a(href="#",id = "sbtoggle" ,class="sidebar-toggle", `data-toggle`="offcanvas",
+                         role="button",
+                         span(class="sr-only", "Toggle navigation")
+                       ),
+                       div(class = "navbar-custom-menu",
+                           tags$ul(class = "nav navbar-nav",
+                                   items,
+                                   # add user account info panel on top right of header panel - create from dashboardUser.R
+                                   user,
+                                   # add control bar on top right of header panel
+                                   # HTML('<li><a href="#" data-toggle="control-sidebar"><i class="fa fa-gears"></i></a></li>')
+                                   tags$li(
+                                     tags$a(
+                                       href="#", `data-toggle`="control-sidebar", shiny::icon("gears")
+                                     )
+                                   )
+                           )
+                       )
+              )
   )
 }
 
@@ -157,8 +166,8 @@ dashboardHeader <- function(..., title = NULL, titleWidth = NULL, disable = FALS
 #'
 #' @export
 dropdownMenu <- function(...,
-  type = c("messages", "notifications", "tasks"),
-  badgeStatus = "primary", icon = NULL, .list = NULL)
+                         type = c("messages", "notifications", "tasks"),
+                         badgeStatus = "primary", icon = NULL, .list = NULL)
 {
   type <- match.arg(type)
   if (!is.null(badgeStatus)) validateStatus(badgeStatus)
@@ -171,9 +180,9 @@ dropdownMenu <- function(...,
 
   if (is.null(icon)) {
     icon <- switch(type,
-      messages = shiny::icon("envelope"),
-      notifications = shiny::icon("warning"),
-      tasks = shiny::icon("tasks")
+                   messages = shiny::icon("envelope"),
+                   notifications = shiny::icon("warning"),
+                   tasks = shiny::icon("tasks")
     )
   }
 
@@ -185,20 +194,20 @@ dropdownMenu <- function(...,
   }
 
   tags$li(class = dropdownClass,
-    a(href = "#", class = "dropdown-toggle", `data-toggle` = "dropdown",
-      icon,
-      badge
-    ),
-    tags$ul(class = "dropdown-menu",
-      tags$li(class = "header", paste("You have", numItems, type)),
-      tags$li(
-        tags$ul(class = "menu",
-          items
-        )
-      )
-      # TODO: This would need to be added to the outer ul
-      # tags$li(class = "footer", a(href="#", "View all"))
-    )
+          a(href = "#", class = "dropdown-toggle", `data-toggle` = "dropdown",
+            icon,
+            badge
+          ),
+          tags$ul(class = "dropdown-menu",
+                  tags$li(class = "header", paste("You have", numItems, type)),
+                  tags$li(
+                    tags$ul(class = "menu",
+                            items
+                    )
+                  )
+                  # TODO: This would need to be added to the outer ul
+                  # tags$li(class = "footer", a(href="#", "View all"))
+          )
   )
 
 }
@@ -220,7 +229,7 @@ dropdownMenu <- function(...,
 #' @seealso \code{\link{dashboardHeader}} for example usage.
 #' @export
 messageItem <- function(from, message, icon = shiny::icon("user"), time = NULL,
-  href = NULL)
+                        href = NULL)
 {
   tagAssert(icon, type = "i")
   if (is.null(href)) href <- "#"
@@ -250,7 +259,7 @@ messageItem <- function(from, message, icon = shiny::icon("user"), time = NULL,
 #' @seealso \code{\link{dashboardHeader}} for example usage.
 #' @export
 notificationItem <- function(text, icon = shiny::icon("warning"),
-  status = "success", href = NULL)
+                             status = "success", href = NULL)
 {
   tagAssert(icon, type = "i")
   validateStatus(status)
@@ -283,18 +292,18 @@ taskItem <- function(text, value = 0, color = "aqua", href = NULL) {
   tags$li(
     a(href = href,
       h3(text,
-        tags$small(class = "pull-right", paste0(value, "%"))
+         tags$small(class = "pull-right", paste0(value, "%"))
       ),
       div(class = "progress xs",
-        div(
-          class = paste0("progress-bar progress-bar-", color),
-          style = paste0("width: ", value, "%"),
-          role = "progressbar",
-          `aria-valuenow` = value,
-          `aria-valuemin` = "0",
-          `aria-valuemax` = "100",
-          span(class = "sr-only", paste0(value, "% complete"))
-        )
+          div(
+            class = paste0("progress-bar progress-bar-", color),
+            style = paste0("width: ", value, "%"),
+            role = "progressbar",
+            `aria-valuenow` = value,
+            `aria-valuemin` = "0",
+            `aria-valuemax` = "100",
+            span(class = "sr-only", paste0(value, "% complete"))
+          )
       )
     )
   )

@@ -89,10 +89,9 @@ body {
 }
 /* Layout */
 .wrapper {
-  height: 100%;
+  min-height: 100%;
   position: relative;
-  overflow-x: hidden;
-  overflow-y: auto;
+  overflow: hidden;
 }
 .wrapper:before,
 .wrapper:after {
@@ -142,7 +141,8 @@ body {
   .sidebar-collapse .content-wrapper,
   .sidebar-collapse .right-side,
   .sidebar-collapse .main-footer {
-    margin-left: 0;
+    margin-left: 50px! important;
+    z-index : 840;
   }
 }
 @media (max-width: 767px) {
@@ -362,6 +362,11 @@ a:focus {
   font-weight: 300;
   overflow: hidden;
 }
+@media (min-width: 768px)  {
+  .sidebar-collapse .main-header .logo {
+    width: 50px;
+  }
+}
 .main-header .logo .logo-lg {
   display: block;
 }
@@ -505,14 +510,22 @@ a:focus {
   }
 }
 @media (min-width: 768px) {
+  .sidebar-collapse .main-header .navbar {
+    margin-left : 50px;
+  }
+}
+@media (min-width: 768px) {
   .sidebar-collapse .main-sidebar,
   .sidebar-collapse .left-side {
     -webkit-transform: translate(-230px, 0);
     -ms-transform: translate(-230px, 0);
     -o-transform: translate(-230px, 0);
-    transform: translate(-230px, 0);
+    transform: translate(0, 0);
+    width: 41px!important;
   }
 }
+
+
 @media (max-width: 767px) {
   .sidebar-open .main-sidebar,
   .sidebar-open .left-side {
@@ -654,13 +667,13 @@ a:focus {
  * Component: Sidebar Mini
  */
 @media (min-width: 768px) {
-  .sidebar-mini.sidebar-collapse .content-wrapper,
-  .sidebar-mini.sidebar-collapse .right-side,
-  .sidebar-mini.sidebar-collapse .main-footer {
+  .sidebar-collapse .content-wrapper,
+  .sidebar-collapse .right-side,
+  .sidebar-collapse .main-footer {
     margin-left: 50px !important;
     z-index: 840;
   }
-  .sidebar-mini.sidebar-collapse .main-sidebar {
+  .skin-blue.sidebar-collapse .main-sidebar {
     -webkit-transform: translate(0, 0);
     -ms-transform: translate(0, 0);
     -o-transform: translate(0, 0);
@@ -668,37 +681,37 @@ a:focus {
     width: 50px !important;
     z-index: 850;
   }
-  .sidebar-mini.sidebar-collapse .sidebar-menu > li {
+  .sidebar-collapse .sidebar-menu > li {
     position: relative;
   }
-  .sidebar-mini.sidebar-collapse .sidebar-menu > li > a {
+  .sidebar-collapse .sidebar-menu > li > a {
     margin-right: 0;
   }
-  .sidebar-mini.sidebar-collapse .sidebar-menu > li > a > span {
+  .sidebar-collapse .sidebar-menu > li > a > span {
     border-top-right-radius: 4px;
   }
-  .sidebar-mini.sidebar-collapse .sidebar-menu > li:not(.treeview) > a > span {
+  .sidebar-collapse .sidebar-menu > li:not(.treeview) > a > span {
     border-bottom-right-radius: 4px;
   }
-  .sidebar-mini.sidebar-collapse .sidebar-menu > li > .treeview-menu {
+  .sidebar-collapse .sidebar-menu > li > .treeview-menu {
     padding-top: 5px;
     padding-bottom: 5px;
     border-bottom-right-radius: 4px;
   }
-  .sidebar-mini.sidebar-collapse .sidebar-menu > li:hover > a > span:not(.pull-right),
-  .sidebar-mini.sidebar-collapse .sidebar-menu > li:hover > .treeview-menu {
+  .sidebar-collapse .sidebar-menu > li:hover > a > span:not(.pull-right),
+  .sidebar-collapse .sidebar-menu > li:hover > .treeview-menu {
     display: block !important;
     position: absolute;
     width: 180px;
     left: 50px;
   }
-  .sidebar-mini.sidebar-collapse .sidebar-menu > li:hover > a > span {
+  .sidebar-collapse .sidebar-menu > li:hover > a > span {
     top: 0;
     margin-left: -3px;
     padding: 12px 5px 12px 20px;
     background-color: inherit;
   }
-  .sidebar-mini.sidebar-collapse .sidebar-menu > li:hover > a > .pull-right-container {
+  .sidebar-collapse .sidebar-menu > li:hover > a > .pull-right-container {
     position: relative!important;
     float: right;
     width: auto!important;
@@ -706,35 +719,35 @@ a:focus {
     top: -22px !important;
     z-index: 900;
   }
-  .sidebar-mini.sidebar-collapse .sidebar-menu > li:hover > a > .pull-right-container > .label:not(:first-of-type) {
+  .sidebar-collapse .sidebar-menu > li:hover > a > .pull-right-container > .label:not(:first-of-type) {
     display: none;
   }
-  .sidebar-mini.sidebar-collapse .sidebar-menu > li:hover > .treeview-menu {
+  .sidebar-collapse .sidebar-menu > li:hover > .treeview-menu {
     top: 44px;
     margin-left: 0;
   }
-  .sidebar-mini.sidebar-collapse .main-sidebar .user-panel > .info,
-  .sidebar-mini.sidebar-collapse .sidebar-form,
-  .sidebar-mini.sidebar-collapse .sidebar-menu > li > a > span,
-  .sidebar-mini.sidebar-collapse .sidebar-menu > li > .treeview-menu,
-  .sidebar-mini.sidebar-collapse .sidebar-menu > li > a > .pull-right,
-  .sidebar-mini.sidebar-collapse .sidebar-menu li.header {
+  .sidebar-collapse .main-sidebar .user-panel > .info,
+  .sidebar-collapse .sidebar-form,
+  .sidebar-collapse .sidebar-menu > li > a > span,
+  .sidebar-collapse .sidebar-menu > li > .treeview-menu,
+  .sidebar-collapse .sidebar-menu > li > a > .pull-right,
+  .sidebar-collapse .sidebar-menu li.header {
     display: none !important;
     -webkit-transform: translateZ(0);
   }
-  .sidebar-mini.sidebar-collapse .main-header .logo {
+  .sidebar-collapse .main-header .logo {
     width: 50px;
   }
-  .sidebar-mini.sidebar-collapse .main-header .logo > .logo-mini {
+  .sidebar-collapse .main-header .logo > .logo-mini {
     display: block;
     margin-left: -15px;
     margin-right: -15px;
     font-size: 18px;
   }
-  .sidebar-mini.sidebar-collapse .main-header .logo > .logo-lg {
+  .sidebar-collapse .main-header .logo > .logo-lg {
     display: none;
   }
-  .sidebar-mini.sidebar-collapse .main-header .navbar {
+  .sidebar-collapse .main-header .navbar {
     margin-left: 50px;
   }
 }

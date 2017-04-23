@@ -4,7 +4,8 @@
 \alias{sidebarUserPanel}
 \title{A panel displaying user information in a sidebar}
 \usage{
-sidebarUserPanel(name, subtitle = NULL, image = NULL)
+sidebarUserPanel(name, subtitle = NULL, image = paste0(getwd(),
+  "/www/img/userimage.png"))
 }
 \arguments{
 \item{name}{Name of the user.}
