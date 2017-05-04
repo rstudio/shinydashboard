@@ -12,32 +12,51 @@
 
 <title>Customizing dashboard appearance</title>
 
-<script src="libs/jquery-1.11.0/jquery.min.js"></script>
+<script src="libs/jquery-1.11.3/jquery.min.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<link href="libs/bootstrap-3.3.1/css/bootstrap.min.css" rel="stylesheet" />
-<script src="libs/bootstrap-3.3.1/js/bootstrap.min.js"></script>
-<script src="libs/bootstrap-3.3.1/shim/html5shiv.min.js"></script>
-<script src="libs/bootstrap-3.3.1/shim/respond.min.js"></script>
+<link href="libs/bootstrap-3.3.5/css/bootstrap.min.css" rel="stylesheet" />
+<script src="libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+<script src="libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
+<script src="libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<script src="libs/navigation-1.1/tabsets.js"></script>
 
 
 <style type="text/css">code{white-space: pre;}</style>
 <style type="text/css">
+div.sourceCode { overflow-x: auto; }
 table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
   margin: 0; padding: 0; vertical-align: baseline; border: none; }
 table.sourceCode { width: 100%; line-height: 100%; }
 td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; background-color: #dddddd; }
 td.sourceCode { padding-left: 5px; }
-code > span.kw { font-weight: bold; }
-code > span.dt { color: #800000; }
-code > span.dv { color: #0000ff; }
-code > span.bn { color: #0000ff; }
-code > span.fl { color: #800080; }
-code > span.ch { color: #ff00ff; }
-code > span.st { color: #dd0000; }
-code > span.co { color: #808080; font-style: italic; }
-code > span.al { color: #00ff00; font-weight: bold; }
-code > span.fu { color: #000080; }
-code > span.er { color: #ff0000; font-weight: bold; }
+code > span.kw { font-weight: bold; } /* Keyword */
+code > span.dt { color: #800000; } /* DataType */
+code > span.dv { color: #0000ff; } /* DecVal */
+code > span.bn { color: #0000ff; } /* BaseN */
+code > span.fl { color: #800080; } /* Float */
+code > span.ch { color: #ff00ff; } /* Char */
+code > span.st { color: #dd0000; } /* String */
+code > span.co { color: #808080; font-style: italic; } /* Comment */
+code > span.al { color: #00ff00; font-weight: bold; } /* Alert */
+code > span.fu { color: #000080; } /* Function */
+code > span.er { color: #ff0000; font-weight: bold; } /* Error */
+code > span.wa { color: #ff0000; font-weight: bold; } /* Warning */
+code > span.cn { color: #000000; } /* Constant */
+code > span.sc { color: #ff00ff; } /* SpecialChar */
+code > span.vs { color: #dd0000; } /* VerbatimString */
+code > span.ss { color: #dd0000; } /* SpecialString */
+code > span.im { } /* Import */
+code > span.va { } /* Variable */
+code > span.cf { } /* ControlFlow */
+code > span.op { } /* Operator */
+code > span.bu { } /* BuiltIn */
+code > span.ex { } /* Extension */
+code > span.pp { font-weight: bold; } /* Preprocessor */
+code > span.at { } /* Attribute */
+code > span.do { color: #808080; font-style: italic; } /* Documentation */
+code > span.an { color: #808080; font-weight: bold; font-style: italic; } /* Annotation */
+code > span.cv { color: #808080; font-weight: bold; font-style: italic; } /* CommentVar */
+code > span.in { color: #808080; font-weight: bold; font-style: italic; } /* Information */
 </style>
 <style type="text/css">
   pre:not([class]) {
@@ -76,6 +95,7 @@ code {
         <li role="presentation" id="nav-structure"><a href="structure.html">Structure</a></li>
         <li role="presentation" id="nav-appearance"><a href="appearance.html">Appearance</a></li>
         <li role="presentation" id="nav-examples"><a href="examples.html">Examples</a></li>
+        <li role="presentation" id="nav-mech"><a href="mechanics.html">Mechanics</a></li>
         <li role="presentation" id="nav-github"><a href="https://github.com/rstudio/shinydashboard">GitHub</a></li>
       </ul>
   </nav>
@@ -112,25 +132,49 @@ code {
 <h2>Skins</h2>
 <p>There are a number of color themes, or skins. The default is blue, but there are also black, purple, green, red, and yellow. You can choose which theme to use with <code>dashboardPage(skin = &quot;blue&quot;)</code>, <code>dashboardPage(skin = &quot;black&quot;)</code>, and so on.</p>
 <p>Blue:</p>
-<p><img src="images/skin-blue.png" alt="Blue skin" /></p>
+<div class="figure">
+<img src="images/skin-blue.png" alt="Blue skin" />
+<p class="caption">Blue skin</p>
+</div>
 <p>Black:</p>
-<p><img src="images/skin-black.png" alt="Black skin" /></p>
+<div class="figure">
+<img src="images/skin-black.png" alt="Black skin" />
+<p class="caption">Black skin</p>
+</div>
 <p>Purple:</p>
-<p><img src="images/skin-purple.png" alt="Purple skin" /></p>
+<div class="figure">
+<img src="images/skin-purple.png" alt="Purple skin" />
+<p class="caption">Purple skin</p>
+</div>
 <p>Green:</p>
-<p><img src="images/skin-green.png" alt="Green skin" /></p>
+<div class="figure">
+<img src="images/skin-green.png" alt="Green skin" />
+<p class="caption">Green skin</p>
+</div>
 <p>Red:</p>
-<p><img src="images/skin-red.png" alt="Red skin" /></p>
+<div class="figure">
+<img src="images/skin-red.png" alt="Red skin" />
+<p class="caption">Red skin</p>
+</div>
 <p>Yellow:</p>
-<p><img src="images/skin-yellow.png" alt="Yellow skin" /></p>
+<div class="figure">
+<img src="images/skin-yellow.png" alt="Yellow skin" />
+<p class="caption">Yellow skin</p>
+</div>
 </div>
 <div id="logout-panel" class="section level2">
 <h2>Logout panel</h2>
 <p>When a shinydashboard app is run with Shiny Server Pro and an authenticated user is logged in, a panel displaying the username and a logout link will appear in the upper-right corner. (This requires shinydashboard version 0.5.1 or greater for it to display.)</p>
-<p><img src="images/ssp-logout.png" alt="Default Shiny Server Pro logout panel" /></p>
+<div class="figure">
+<img src="images/ssp-logout.png" alt="Default Shiny Server Pro logout panel" />
+<p class="caption">Default Shiny Server Pro logout panel</p>
+</div>
 <p>It is possible to have a logout panel that integrates more nicely with shinydashboard. As you can see in the screenshot above, the default logout panel partially obscures the dropdown menu icon. We can instead add a user panel with dynamic UI (generated on the server) and hide the default logout panel, as shown below:</p>
-<p><img src="images/ssp-logout-custom.png" alt="Custom Shiny Server Pro logout panel" /></p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(shinydashboard)
+<div class="figure">
+<img src="images/ssp-logout-custom.png" alt="Custom Shiny Server Pro logout panel" />
+<p class="caption">Custom Shiny Server Pro logout panel</p>
+</div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(shinydashboard)
 
 ui &lt;-<span class="st"> </span><span class="kw">dashboardPage</span>(
   <span class="kw">dashboardHeader</span>(),
@@ -155,20 +199,23 @@ server &lt;-<span class="st"> </span>function(input, output, session) {
   })
 }
 
-<span class="kw">shinyApp</span>(ui, server)</code></pre>
+<span class="kw">shinyApp</span>(ui, server)</code></pre></div>
 </div>
 <div id="css" class="section level2">
 <h2>CSS</h2>
 <p>You can add custom CSS to your app by creating a <code>www/</code> subdirectory to your app and adding a CSS file there. Suppose, for example, you want to change the title font of your dashboard to the same font as the rest of the dashboard, so that it looks like this:</p>
-<p><img src="images/css-logo-font.png" alt="Custom font" /></p>
+<div class="figure">
+<img src="images/css-logo-font.png" alt="Custom font" />
+<p class="caption">Custom font</p>
+</div>
 <p>To do this, first create a file named <code>www/custom.css</code> with the following:</p>
-<pre class="sourceCode css"><code class="sourceCode css"><span class="fl">.main-header</span> <span class="fl">.logo</span> <span class="kw">{</span>
+<div class="sourceCode"><pre class="sourceCode css"><code class="sourceCode css"><span class="fl">.main-header</span> <span class="fl">.logo</span> <span class="kw">{</span>
   <span class="kw">font-family:</span> <span class="st">&quot;Georgia&quot;</span>, Times, <span class="st">&quot;Times New Roman&quot;</span>, <span class="dt">serif</span><span class="kw">;</span>
   <span class="kw">font-weight:</span> <span class="dt">bold</span><span class="kw">;</span>
   <span class="kw">font-size:</span> <span class="dt">24px</span><span class="kw">;</span>
-<span class="kw">}</span></code></pre>
+<span class="kw">}</span></code></pre></div>
 <p>Then refer to that CSS file from the UI of your app:</p>
-<pre class="sourceCode r"><code class="sourceCode r">## ui.R ##
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">## ui.R ##
 <span class="kw">dashboardPage</span>(
   <span class="kw">dashboardHeader</span>(<span class="dt">title =</span> <span class="st">&quot;Custom font&quot;</span>),
   <span class="kw">dashboardSidebar</span>(),
@@ -177,9 +224,9 @@ server &lt;-<span class="st"> </span>function(input, output, session) {
       tags$<span class="kw">link</span>(<span class="dt">rel =</span> <span class="st">&quot;stylesheet&quot;</span>, <span class="dt">type =</span> <span class="st">&quot;text/css&quot;</span>, <span class="dt">href =</span> <span class="st">&quot;custom.css&quot;</span>)
     )
   )
-)</code></pre>
+)</code></pre></div>
 <p>A second way to include CSS is to put it directly in the UI code for your app:</p>
-<pre class="sourceCode r"><code class="sourceCode r">## ui.R ##
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">## ui.R ##
 <span class="kw">dashboardPage</span>(
   <span class="kw">dashboardHeader</span>(<span class="dt">title =</span> <span class="st">&quot;Custom font&quot;</span>),
   <span class="kw">dashboardSidebar</span>(),
@@ -192,14 +239,17 @@ server &lt;-<span class="st"> </span>function(input, output, session) {
 <span class="st">      }</span>
 <span class="st">    &#39;</span>)))
   )
-)</code></pre>
+)</code></pre></div>
 <p>There other ways to add custom CSS to a Shiny application. See Shiny’s <a href="http://shiny.rstudio.com/articles/css.html">CSS article</a> for more information.</p>
 </div>
 <div id="long-titles" class="section level2">
 <h2>Long titles</h2>
 <p>In some cases, the title that you wish to use won’t fit in the default width in the header bar. You can make the space for the title wider with the <code>titleWidth</code> option. In this example, we’ve increased the width for the title to 450 pixels, and also set the background color of the title area (using custom CSS) to be the same as the rest of the header bar.</p>
-<p><img src="images/long-title.png" alt="Long title" /></p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">shinyApp</span>(
+<div class="figure">
+<img src="images/long-title.png" alt="Long title" />
+<p class="caption">Long title</p>
+</div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">shinyApp</span>(
   <span class="dt">ui =</span> <span class="kw">dashboardPage</span>(
     <span class="kw">dashboardHeader</span>(
       <span class="dt">title =</span> <span class="st">&quot;Example of a long title that needs more space&quot;</span>,
@@ -220,13 +270,16 @@ server &lt;-<span class="st"> </span>function(input, output, session) {
     )
   ),
   <span class="dt">server =</span> function(input, output) { }
-)</code></pre>
+)</code></pre></div>
 </div>
 <div id="sidebar-width" class="section level2">
 <h2>Sidebar width</h2>
 <p>To change the width of the sidebar, you can use the <code>width</code> option. This example has a wider title and sidebar:</p>
-<p><img src="images/sidebar-width.png" alt="Sidebar width" /></p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">shinyApp</span>(
+<div class="figure">
+<img src="images/sidebar-width.png" alt="Sidebar width" />
+<p class="caption">Sidebar width</p>
+</div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">shinyApp</span>(
   <span class="dt">ui =</span> <span class="kw">dashboardPage</span>(
     <span class="kw">dashboardHeader</span>(
       <span class="dt">title =</span> <span class="st">&quot;Title and sidebar 350 pixels wide&quot;</span>,
@@ -241,32 +294,41 @@ server &lt;-<span class="st"> </span>function(input, output, session) {
     <span class="kw">dashboardBody</span>()
   ),
   <span class="dt">server =</span> function(input, output) { }
-)</code></pre>
+)</code></pre></div>
 </div>
 <div id="icons" class="section level2">
 <h2>Icons</h2>
 <p>Icons are used liberally in shinydashboard. The icons used in Shiny and shinydashboard are really just characters from special font sets, and they’re created with Shiny’s <code>icon()</code> function.</p>
 <p>To create a calendar icon, you’d call:</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">icon</span>(<span class="st">&quot;calendar&quot;</span>)</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">icon</span>(<span class="st">&quot;calendar&quot;</span>)</code></pre></div>
 <p>This simply generates HTML like this, which the browser knows what to do with:</p>
-<pre class="sourceCode HTML"><code class="sourceCode html"><span class="kw">&lt;i</span><span class="ot"> class=</span><span class="st">&quot;fa fa-calendar&quot;</span><span class="kw">&gt;&lt;/i&gt;</span></code></pre>
+<div class="sourceCode"><pre class="sourceCode html"><code class="sourceCode html"><span class="kw">&lt;i</span><span class="ot"> class=</span><span class="st">&quot;fa fa-calendar&quot;</span><span class="kw">&gt;&lt;/i&gt;</span></code></pre></div>
 <p>The icons are from Font-Awesome and Glyphicons. You can see lists of all available icons here:</p>
 <ul>
-<li><a href="http://fontawesome.io/icons/">http://fontawesome.io/icons/</a></li>
-<li><a href="http://getbootstrap.com/components/#glyphicons">http://getbootstrap.com/components/#glyphicons</a></li>
+<li><a href="http://fontawesome.io/icons/" class="uri">http://fontawesome.io/icons/</a></li>
+<li><a href="http://getbootstrap.com/components/#glyphicons" class="uri">http://getbootstrap.com/components/#glyphicons</a></li>
 </ul>
 <p>By default, the <code>icon()</code> function uses icons from Font-Awesome. To use Glyphicons, use <code>lib=&quot;glyphicon&quot;</code>)</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="st">&quot;Calendar from Font-Awesome:&quot;</span>, <span class="kw">icon</span>(<span class="st">&quot;calendar&quot;</span>),
-<span class="st">&quot;Cog from Glyphicons:&quot;</span>, <span class="kw">icon</span>(<span class="st">&quot;cog&quot;</span>, <span class="dt">lib =</span> <span class="st">&quot;glyphicon&quot;</span>)</code></pre>
-<p><img src="images/icons.png" alt="Icons" /></p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="st">&quot;Calendar from Font-Awesome:&quot;</span>, <span class="kw">icon</span>(<span class="st">&quot;calendar&quot;</span>),
+<span class="st">&quot;Cog from Glyphicons:&quot;</span>, <span class="kw">icon</span>(<span class="st">&quot;cog&quot;</span>, <span class="dt">lib =</span> <span class="st">&quot;glyphicon&quot;</span>)</code></pre></div>
+<div class="figure">
+<img src="images/icons.png" alt="Icons" />
+<p class="caption">Icons</p>
+</div>
 </div>
 <div id="statuses-and-colors" class="section level2">
 <h2>Statuses and colors</h2>
 <p>Many <strong>shinydashboard</strong> components have a <code>status</code> or <code>color</code> argument.</p>
 <p><code>status</code> is a property of some Bootstrap classes. It can have values like <code>status=&quot;primary&quot;</code>, <code>status=&quot;success&quot;</code>, and others. The image below shows which colors they usually are associated with:</p>
-<p><img src="images/statuses.png" alt="Statuses" /></p>
+<div class="figure">
+<img src="images/statuses.png" alt="Statuses" />
+<p class="caption">Statuses</p>
+</div>
 <p>The <code>color</code> argument is more straightforward. It can have values like <code>color=&quot;red&quot;</code>, <code>color=&quot;black&quot;</code>, and others. Here are the names and appearances of colors:</p>
-<p><img src="images/colors.png" alt="Colors" /></p>
+<div class="figure">
+<img src="images/colors.png" alt="Colors" />
+<p class="caption">Colors</p>
+</div>
 <p>The valid statuses and colors are also listed in <code>?validStatuses</code> and <code>?validColors</code>.</p>
 </div>
 

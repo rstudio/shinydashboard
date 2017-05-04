@@ -10,20 +10,20 @@
 
 
 
+
 <title>Shiny Dashboard</title>
 
-<script src="libs/jquery-1.11.0/jquery.min.js"></script>
+<script src="libs/jquery-1.11.3/jquery.min.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<link href="libs/bootstrap-3.3.1/css/bootstrap.min.css" rel="stylesheet" />
-<script src="libs/bootstrap-3.3.1/js/bootstrap.min.js"></script>
-<script src="libs/bootstrap-3.3.1/shim/html5shiv.min.js"></script>
-<script src="libs/bootstrap-3.3.1/shim/respond.min.js"></script>
+<link href="libs/bootstrap-3.3.5/css/bootstrap.min.css" rel="stylesheet" />
+<script src="libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+<script src="libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
+<script src="libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<script src="libs/navigation-1.1/tabsets.js"></script>
+<link href="libs/highlightjs-1.1/textmate.css" rel="stylesheet" />
+<script src="libs/highlightjs-1.1/highlight.js"></script>
 
 <style type="text/css">code{white-space: pre;}</style>
-<link rel="stylesheet"
-      href="libs/highlight/textmate.css"
-      type="text/css" />
-<script src="libs/highlight/highlight.js"></script>
 <style type="text/css">
   pre:not([class]) {
     background-color: white;
@@ -37,6 +37,34 @@ if (window.hljs && document.readyState && document.readyState === "complete") {
 }
 </script>
 
+
+
+<style type="text/css">
+h1 {
+  font-size: 34px;
+}
+h1.title {
+  font-size: 38px;
+}
+h2 {
+  font-size: 30px;
+}
+h3 {
+  font-size: 24px;
+}
+h4 {
+  font-size: 18px;
+}
+h5 {
+  font-size: 16px;
+}
+h6 {
+  font-size: 12px;
+}
+.table th:not([align]) {
+  text-align: left;
+}
+</style>
 
 <link rel="stylesheet" href="custom.css" type="text/css" />
 
@@ -54,12 +82,34 @@ code {
   color: inherit;
   background-color: rgba(0, 0, 0, 0.04);
 }
-img { 
-  max-width:100%; 
-  height: auto; 
+img {
+  max-width:100%;
+  height: auto;
+}
+.tabbed-pane {
+  padding-top: 12px;
+}
+button.code-folding-btn:focus {
+  outline: none;
 }
 </style>
+
+
+
 <div class="container-fluid main-container">
+
+<!-- tabsets -->
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+</script>
+
+<!-- code folding -->
+
+
+
+
 
 <!--html_preserve-->
 
@@ -72,6 +122,7 @@ img {
         <li role="presentation" id="nav-structure"><a href="structure.html">Structure</a></li>
         <li role="presentation" id="nav-appearance"><a href="appearance.html">Appearance</a></li>
         <li role="presentation" id="nav-examples"><a href="examples.html">Examples</a></li>
+        <li role="presentation" id="nav-mech"><a href="mechanics.html">Mechanics</a></li>
         <li role="presentation" id="nav-github"><a href="https://github.com/rstudio/shinydashboard">GitHub</a></li>
       </ul>
   </nav>
@@ -83,8 +134,12 @@ img {
 
 <!--/html_preserve-->
 
-<div id="header">
-<h1 class="title">Shiny Dashboard</h1>
+<div class="fluid-row" id="header">
+
+
+
+<h1 class="title toc-ignore">Shiny Dashboard</h1>
+
 </div>
 
 
@@ -93,10 +148,16 @@ img {
 <strong>shinydashboard</strong> makes it easy to use <a href="http://shiny.rstudio.com/">Shiny</a> to create dashboards like these:
 </p>
 </div>
-<p><img src="images/dashboard.png" alt="Dashboard" /></p>
-<p><img src="images/buses.png" alt="Bus dashboard" /></p>
+<div class="figure">
+<img src="images/dashboard.png" alt="Dashboard" />
+<p class="caption">Dashboard</p>
+</div>
+<div class="figure">
+<img src="images/buses.png" alt="Bus dashboard" />
+<p class="caption">Bus dashboard</p>
+</div>
 <div class="text-center">
-<a class="btn btn-success btn-lg" href="get_started.html" role="button">Get started <span class="glyphicon glyphicon-arrow-right"></span> </a>
+<p><a class="btn btn-success btn-lg" href="get_started.html" role="button">Get started <span class="glyphicon glyphicon-arrow-right"></span> </a></p>
 </div>
 
 </div> <!-- page-body -->
@@ -149,14 +210,20 @@ $(document).ready(function () {
 });
 </script>
 
+
+
 </div>
 
 <script>
 
 // add bootstrap table styles to pandoc tables
-$(document).ready(function () {
+function bootstrapStylePandocTables() {
   $('tr.header').parent('thead').parent('table').addClass('table table-condensed');
+}
+$(document).ready(function () {
+  bootstrapStylePandocTables();
 });
+
 
 </script>
 
