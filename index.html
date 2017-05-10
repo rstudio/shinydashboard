@@ -175,18 +175,20 @@ $(document).ready(function () {
 <script>
 // manage active state of headres and navigation based on current page
 $(document).ready(function () {
-  
+
   // compute name of page
   href = window.location.pathname;
   href = href.substr(href.lastIndexOf('/') + 1);
   if (href == "")
     href = "index.html";
-  
+
   var pagelinks = {
     "index.html": "#nav-home",
     "get_started.html": "#nav-get-started",
     "structure.html": "#nav-structure",
-    "appearance.html": "#nav-appearance"
+    "appearance.html": "#nav-appearance",
+    "behavior.html": "#nav-behavior",
+    "examples.html": "#nav-examples"
   };
 
   if (pagelinks[href]) {

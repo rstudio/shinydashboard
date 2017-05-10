@@ -72,8 +72,8 @@ code {
 <div class="col-sm-3">
 <div id="TOC">
 <ul>
-<li><a href="#shinydashboard-mechanics-and-interactivity"><strong>shinydashboard</strong> mechanics and interactivity</a><ul>
-<li><a href="#shinydashboard-specific-components"><strong>shinydashboard</strong>-specific components</a><ul>
+<li><a href="#shinydashboard-mechanics-and-interactivity"><code>shinydashboard</code> mechanics and interactivity</a><ul>
+<li><a href="#shinydashboard-specific-components"><code>shinydashboard</code>-specific components</a><ul>
 <li><a href="#a-caveat-about-dropdownmenus">A caveat about <code>dropdownMenu</code>s</a></li>
 </ul></li>
 <li><a href="#bookmarking">Bookmarking</a></li>
@@ -84,10 +84,10 @@ code {
 <div class="col-sm-9 pull-right">
 
 <div id="shinydashboard-mechanics-and-interactivity" class="section level1">
-<h1><strong>shinydashboard</strong> mechanics and interactivity</h1>
+<h1><code>shinydashboard</code> mechanics and interactivity</h1>
 <p>Shinydashboard supports all the normal interactive functionality that Shiny does. If you need a refresher on all the interactive capabilities of Shiny (through inputs, outputs, reactives, etc), take a look at <a href="https://shiny.rstudio.com/articles/">our website’s articles</a>.</p>
 <div id="shinydashboard-specific-components" class="section level2">
-<h2><strong>shinydashboard</strong>-specific components</h2>
+<h2><code>shinydashboard</code>-specific components</h2>
 <div id="a-caveat-about-dropdownmenus" class="section level3">
 <h3>A caveat about <code>dropdownMenu</code>s</h3>
 <p>While it is possible to render dynamic dropdown menus, it’s not possible to treat them as inputs. For exmaple, you can re-render a dynamic dropdown menu if the data changes</p>
@@ -165,18 +165,20 @@ dashboardBody(
 <script>
 // manage active state of headres and navigation based on current page
 $(document).ready(function () {
-  
+
   // compute name of page
   href = window.location.pathname;
   href = href.substr(href.lastIndexOf('/') + 1);
   if (href == "")
     href = "index.html";
-  
+
   var pagelinks = {
     "index.html": "#nav-home",
     "get_started.html": "#nav-get-started",
     "structure.html": "#nav-structure",
-    "appearance.html": "#nav-appearance"
+    "appearance.html": "#nav-appearance",
+    "behavior.html": "#nav-behavior",
+    "examples.html": "#nav-examples"
   };
 
   if (pagelinks[href]) {
