@@ -9,7 +9,6 @@ output:
 ```{r echo = FALSE, message=FALSE}
 library(shiny)
 library(shinydashboard)
-library(webshot)
 
 knitr::opts_chunk$set(collapse = TRUE, comment = "##")
 
@@ -26,79 +25,136 @@ Shinydashboard supports all the normal interactive functionality that Shiny does
 
 ## `shinydashboard`-specific components
 
-### A caveat about `dropdownMenu`s
+In addition to all the normal Shiny inputs and outputs that can be present in a `shinydashboard` app, there are a few things that are specific to the structure of such apps. In particular, most `shinydashboard` apps have a sidebar. We have had a repeated feature request to make the state of the sidebar something that an app author can access through Shiny. The way we can make this happen is to treat several aspects of the sidebar as additional Shiny inputs, that we can access in the app's server function through `ìnput$`. As of the 0.6 `shinydashboard` release, this functionality is now available. There are three new inputs that are generated automcatically if you have a sidebar in your app. However, two these are not normal inputs, since they are generated automatically and have a fixed name (rather than you, as the app author, deciding that name). But they are quite a bit input-like, in the sense that the user can see them in the UI, and change their value by interacting with them.
 
-While it is possible to render dynamic dropdown menus, it's not possible to treat them as inputs. For exmaple, you can re-render a dynamic dropdown menu if the data changes
+Let's get into the details. The three sidebar-related new automatic inputs are:
 
-However, there is no current way to see if the user clicked on one of the items in a dropdown menu.
+### Knowing which `menuItem()` or `menuSubItem()` is currently selected
+
+Before `shinydashboard` 0.6, it was already possible to find the currently-selected `menuItem()` or `menuSubItem()`, if the `sidebarMenu()` has an `id` (and the `menuItem()`/`menuSubItem()` has a `tabName`). In particular, if you pass in `id = "tabs"` to your `sidebarMenu()`, then you can know which sidebar item is selected by accessing the variable `input$tabs`. The value associated with `input$tabs` is given by the `tabName` argument of the currently selected `menuItem()` (or `menuSubItem()`).
+  
+Here is a small example app. Notice that no `tabItems( tabItem(), tabItem(), ... )` is used in this app, even though all childless `menuItem()`s and `menuSubItem()`s have a `tabName` argument:
+  
+```{r eval=FALSE}
+library(shiny)
+library(shinydashboard)
+
+ui <- dashboardPage(
+  dashboardHeader(), 
+  dashboardSidebar(
+    sidebarMenu(
+      # Setting id makes input$tabs give the tabName of currently-selected tab
+      id = "tabs",
+      
+      menuItem("Dashboard", tabName = "dashboard", icon = icon("dashboard")),
+      menuItem("Widgets", icon = icon("th"), tabName = "widgets", badgeLabel = "new"),
+      menuItem("Charts", icon = icon("bar-chart-o"),
+        menuSubItem("Sub-item 1", tabName = "subitem1"),
+        menuSubItem("Sub-item 2", tabName = "subitem2")
+      )
+    )
+  ),
+  dashboardBody(
+    textOutput("res")
+  )
+)
+
+server <- function(input, output, session) {
+  output$res <- renderText({
+    paste("You've selected:", input$tabs)
+  })
+}
+
+shinyApp(ui, server)
+```
+
+#### Caveats and other small print
+
+- As mentioned, `sidebarMenu()` _must_ take in an `id`. For example if you pass in `id = "tabs"`, then, anywhere in the server function, you can know which `menuItem()` (or `menuSubItem()`) is selected by accessing `input$tabs`. If you don't pass in an `id`, you won't be able access to this information. In addition, you need to specify a `tabName` for all "leaf" items (i.e. all `menuItem()`s or `menuSubItem()`s that don't have any children), even if you wouldn't need it otherwise. If you don't specify a `tabName`, then that item will not be clickable, though the the other items will continue to function as normal (i.e. not specifying a `tabName` for an item is functionally the same as not having that item at all - except for the different visual look - since you won't be able to interact with it at all).
+
+- This works exactly the same for dynamically generated `sidebarMenu()`s. Here's an identical looking app, whose only difference is that the sidebar menu is generated dynamically:
+
+```{r eval=FALSE}
+library(shiny)
+library(shinydashboard)
+
+ui <- dashboardPage(
+  dashboardHeader(), 
+  dashboardSidebar(
+    sidebarMenuOutput("menu")
+  ),
+  dashboardBody(
+    textOutput("res")
+  )
+)
+
+server <- function(input, output, session) {
+  output$res <- renderText({
+    paste("You've selected:", input$tabs)
+  })
+  output$menu <- renderMenu({
+    sidebarMenu(
+      # Setting id makes input$tabs give the tabName of currently-selected tab
+      id = "tabs",
+      
+      menuItem("Dashboard", tabName = "dashboard", icon = icon("dashboard")),
+      menuItem("Widgets", icon = icon("th"), tabName = "widgets", badgeLabel = "new"),
+      menuItem("Charts", icon = icon("bar-chart-o"),
+        menuSubItem("Sub-item 1", tabName = "subitem1"),
+        menuSubItem("Sub-item 2", tabName = "subitem2")
+      )
+    )
+  })
+}
+
+shinyApp(ui, server)
+```
+
+_Note_: There used to be a bug in `shinydashboard` that would result in no item starting as selected if the sidebar menu was rendered dynamically. This was been fixed in `shinydashboard` 0.6. In short, there should always be a selected item when the sidebar menu finishes rendering. This can be specified by the app author by adding the argument `selected = TRUE` to the desired `menuItem()` or `menuSubItem()`. If none is specified, the first item that has a `tabName` will be selected by default.
+
+
+- Childless `menuItem()`s (and `menuSubItem()`s) v childfull `menuItem()`s behave differently and there's different arguments that apply to either:
+     - Childless `menuItem()`s/`menuSubItem()`s must be given a `tabName` param; in addition, *one* of these can have `selected = TRUE`, which lets Shiny know that you want `input$tabs` to start out this that item's `tabName` on app startup (if you specified a `tabItem()` for that `tabName`, that will what you first see in the dashboard body when you launch your app).
+     - "Childfull" `menuItem()`s cannot have a `tabName` or a `selected` argument (or rather, they can, but this will be completely ignored by Shiny). Instead (and once #199 is merged), at most, *one* of them can take a `startExpanded = TRUE`, which tells Shiny to start up with that `menuItem()` expanded, i.e. revealing all its children. (The reason that, at most, only one childfull `menuItem()` can start expanded is because in general in AdminLTE, only one thing can be expanded in the sidebar at any one time). In alternative to `tabName`, you can pass in an `expandedName`, which is how Shiny lets you know which (if any) `menuItem()` is currently expanded.
+
+### Knowing which `menuItem()`, if any, is currently expanded
+
+There's an automatic way to access which childfull `menuItem()` (if any) is currently expanded. Anywhere on your server function use `input$sidebarItemExpanded` to get the `expandedName` of the currently expanded `menuItem()` (or `NULL` is none is currently expanded). (Don't worry: even if you don't pass in an `expandedName`, Shiny has a sensible default -- it will construct one for you by taking the mandatory `text` argument you passed and removing all white space.) You can use `input$sidebarItemExpanded` as any other input, including making other UI elements conditional on it. And the cherry on top: since you get this input "for free," you also get bookmarking of this input "for free." (I.e. the bookmarked URL will capture which, if any, `menuItem()` was expanded and on restore, it will expand the same).
+
+### Knowing whether the whole sidebar is expanded or collapsed
+
+Similarly, there is also an automatic way to access whether the whole sidebar is expanded or collapsed at the moment. Use `input$sidebarCollapsed` to know if the sidebar is collapsed (`"true"`) or expanded (`"false"`). While this may seem less interesting than the former, it is mostly useful for bookmarking. (I.e. the bookmarked URL will capture whether the sidebar is collapsed or expanded and, on restore, it will have the same value and look).
 
 ## Bookmarking
 
+These additions to `shinydashboard` will allow it to integrate a lot better  with [bookmarkable state](https://shiny.rstudio.com/articles/bookmarking-state.html). As of `shinydashboard` 0.6, the state of the sidebar will be automatically bookmarked. For example, the app below does not specify any explicit inputs, but the state of the sidebar is automatically bookmarked (you can see this in the URL):
 
-----------------
+```{r eval=FALSE}
+library(shiny)
+library(shinydashboard)
 
-Here's where we're at right now:
+ui <- dashboardPage(
+    dashboardHeader(),
+    dashboardSidebar(),
+    dashboardBody()
+)
 
-- As Winston said above, it isn't currently possible to get the currently selected `notificationItem()` (or, for that matter, `messageItem()` or `taskItem()`). It might make sense to add an `id` param to the `dropdownMenu()` function and set a Shiny input with that `id`. To get this working properly (and play nice with bookmarking, document, etc.) is a reasonable amount of work, so we're not doing it for the upcoming release (May 2017). I opened another issue targeted specifically at this, with some ideas of what we'd want to do for that feature: #208 
-
-- As Winston also said, it's already possible to find the currently-selected `menuItem()` or `menuSubItem()`, if the `sidebarMenu()` has an `id`, and the `menuItem()`/`menuSubItem()` has a `tabName`. 
-  
-  <details>
-  <summary>Here's an example (<strong>click on the arrow to show the code</strong>).<p>Notice that no <code>tabItems( tabItem(), tabItem(), ... )</code> is used in this app, even though all childless <code>menuItem()</code>s and <code>menuSubItem()</code>s have a <code>tabName</code> argument.</p></summary>
-  
-  ```r
-  library(shiny)
-  library(shinydashboard)
-
-  ui <- dashboardPage(
-    dashboardHeader(), 
-    dashboardSidebar(
-      sidebarMenu(
-        # Setting id makes input$tabs give the tabName of currently-selected tab
-        id = "tabs",
-        
-        menuItem("Dashboard", tabName = "dashboard", icon = icon("dashboard")),
-        menuItem("Widgets", icon = icon("th"), tabName = "widgets", badgeLabel = "new"),
-        menuItem("Charts", icon = icon("bar-chart-o"),
-          menuSubItem("Sub-item 1", tabName = "subitem1"),
-          menuSubItem("Sub-item 2", tabName = "subitem2")
-        )
-      )
-    ),
-    dashboardBody(
-      textOutput("res")
-    )
-  )
-
-  server <- function(input, output, session) {
-    output$res <- renderText({
-      paste("You've selected:", input$tabs)
+server <- function(input, output, session) {   
+    observe({
+        # Trigger this observer every time an input changes
+        reactiveValuesToList(input)
+        session$doBookmark()
     })
-  }
+    onBookmarked(function(url) {
+        updateQueryString(url)
+    })
+}
+enableBookmarking("url")
+shinyApp(ui, server)
+```
 
-  shinyApp(ui, server)
-  ```
-  
-  </details>
-  <br>
+### A note about `dropdownMenu`s
 
-  **Caveats**:
-  - As mentioned, `sidebarMenu()` must take in an `id`. For example if you pass in `id = "tabs"`, then, anywhere in the server function, you can know which `menuItem()` (or `menuSubItem()`) is selected by accessing `input$tabs`.
+While it is possible to render dynamic dropdown menus, it's not possible to treat them as inputs. For example, you can re-render a dynamic dropdown menu if the data changes. For instance, in [this app](https://gist.github.com/bborgesr/21e3a955b8640cfe480dd11f06b21bf5), we can dynamically add items to a `dropdownMenu` via a modal window.
 
-  - Childless `menuItem()`s (and `menuSubItem()`s) v childfull `menuItem()`s behave differently and there's different arguments that apply to either:
-     - Childless `menuItem()`s/`menuSubItem()`s must be given a `tabName` param; in addition, *one* of these can have `selected = TRUE`, which lets Shiny know that you want `input$tabs` to start out this that item's `tabName` on app startup (if you specified a `tabItem()` for that `tabName`, that will what you first see in the dashboard body when you launch your app).
-     - "Childfull" `menuItem()`s cannot have a `tabName` or a `selected` argument (or rather, they can, but this will be completely ignored by Shiny). Instead (and once #199 is merged), at most, *one* of them can take a `startExpanded = TRUE`, which tells Shiny to start up with that `menuItem()` expanded, i.e. revealing all its children. (The reason that, at most, only one childfull `menuItem()` can start expanded is because in general in AdminLTE, only one thing can be expanded in the sidebar at any one time). In alternative to `tabName`, you can pass in an `expandedName`, which is how Shiny lets you know which (if any) `menuItem()` is currently expanded (more on that below, and note that this also required #199 to have been merged).
-
-  - _This last one is more of a **bonus (!!)** than a caveat, but oh well..._
-     Once #199 is merged, you also get a couple of other things "for free" (no need to add an `id` or anything, like above):
-       - There's an automatic way to access which childfull `menuItem()` (if any) is currently expanded. Anywhere on your server function use `input$sidebarItemExpanded` to get the `expandedName` of the currently expanded `menuItem()` (or `NULL` is none is currently expanded). (Don't worry: even if you don't pass in an `expandedName`, Shiny has a sensible default -- it will construct one for you by taking the mandatory `text` argument you passed and removing all white space.) You can use `input$sidebarItemExpanded` as any other input, including making other UI elements conditional on it. And the cherry on top: since you get this input "for free," you also get bookmarking of this input "for free." (I.e. the bookmarked URL will capture which, if any, `menuItem()` was expanded and on restore, it will expand the same).
-
-       - Similarly, there is also an automatic way to access whether the whole sidebar is expanded or collapsed at the moment. Use `input$sidebarCollapsed` to know if the sidebar is collapsed (`"true"`) or expanded (`"false"`). While this may seem less interesting than the former, it is mostly useful for bookmarking. (I.e. the bookmarked URL will capture whether the sidebar is collapsed or expanded and, on restore, it will have the same value and look).
-
---------
-
-So, TLDR:
-
-- the original ask for `menuItem()`s is already possible;
-- the original ask for `notificationItem()`s (and their message and task counterparts) is sketched out in #208 for future development;
-- there's a few caveats, as well as extra goodies that come in once #199 is merged.
+However, there is no current way to see if the user clicked on one of the items in a dropdown menu. This is something that is not originally supported in [AdminLTE](https://almsaeedstudio.com/preview). While we may add this functionality in the future, for now, we can only keep track of things that have a Shiny input binding. (To be more specific, if you write your own custom Javascript, you can get around this limitation, but it's not always trivial and it's not natively supported by `shinydashboard`.)
