@@ -115,30 +115,27 @@ code {
 <div class="col-sm-3">
 <div id="TOC">
 <ul>
-<li><a href="#shinydashboard-mechanics-and-interactivity"><code>shinydashboard</code> mechanics and interactivity</a><ul>
 <li><a href="#shinydashboard-specific-components"><code>shinydashboard</code>-specific components</a><ul>
-<li><a href="#knowing-which-menuitem-or-menusubitem-is-currently-selected">Knowing which <code>menuItem()</code> or <code>menuSubItem()</code> is currently selected</a></li>
+<li><a href="#knowing-which-menuitem-or-menusubitem-is-currently-selected">Knowing which <code>menuItem()</code> or <code>menuSubItem()</code> is currently selected</a><ul>
+<li><a href="#caveats-and-other-small-print">Caveats and other small print</a></li>
+</ul></li>
 <li><a href="#knowing-which-menuitem-if-any-is-currently-expanded">Knowing which <code>menuItem()</code>, if any, is currently expanded</a></li>
 <li><a href="#knowing-whether-the-whole-sidebar-is-expanded-or-collapsed">Knowing whether the whole sidebar is expanded or collapsed</a></li>
 </ul></li>
-<li><a href="#bookmarking">Bookmarking</a><ul>
+<li><a href="#bookmarking">Bookmarking</a></li>
 <li><a href="#a-note-about-dropdownmenus">A note about <code>dropdownMenu</code>s</a></li>
-</ul></li>
-</ul></li>
 </ul>
 </div>
 </div>
 <div class="col-sm-9 pull-right">
 
-<div id="shinydashboard-mechanics-and-interactivity" class="section level1">
-<h1><code>shinydashboard</code> mechanics and interactivity</h1>
 <p>Shinydashboard supports all the normal interactive functionality that Shiny does. If you need a refresher on all the interactive capabilities of Shiny (through inputs, outputs, reactives, etc), take a look at <a href="https://shiny.rstudio.com/articles/">our website’s articles</a>.</p>
-<div id="shinydashboard-specific-components" class="section level2">
-<h2><code>shinydashboard</code>-specific components</h2>
+<div id="shinydashboard-specific-components" class="section level1">
+<h1><code>shinydashboard</code>-specific components</h1>
 <p>In addition to all the normal Shiny inputs and outputs that can be present in a <code>shinydashboard</code> app, there are a few things that are specific to the structure of such apps. In particular, most <code>shinydashboard</code> apps have a sidebar. We have had a repeated feature request to make the state of the sidebar something that an app author can access through Shiny. The way we can make this happen is to treat several aspects of the sidebar as additional Shiny inputs, that we can access in the app’s server function through <code>ìnput$</code>. As of the 0.6 <code>shinydashboard</code> release, this functionality is now available. There are three new inputs that are generated automcatically if you have a sidebar in your app. However, two these are not normal inputs, since they are generated automatically and have a fixed name (rather than you, as the app author, deciding that name). But they are quite a bit input-like, in the sense that the user can see them in the UI, and change their value by interacting with them.</p>
 <p>Let’s get into the details. The three sidebar-related new automatic inputs are:</p>
-<div id="knowing-which-menuitem-or-menusubitem-is-currently-selected" class="section level3">
-<h3>Knowing which <code>menuItem()</code> or <code>menuSubItem()</code> is currently selected</h3>
+<div id="knowing-which-menuitem-or-menusubitem-is-currently-selected" class="section level2">
+<h2>Knowing which <code>menuItem()</code> or <code>menuSubItem()</code> is currently selected</h2>
 <p>Before <code>shinydashboard</code> 0.6, it was already possible to find the currently-selected <code>menuItem()</code> or <code>menuSubItem()</code>, if the <code>sidebarMenu()</code> has an <code>id</code> (and the <code>menuItem()</code>/<code>menuSubItem()</code> has a <code>tabName</code>). In particular, if you pass in <code>id = &quot;tabs&quot;</code> to your <code>sidebarMenu()</code>, then you can know which sidebar item is selected by accessing the variable <code>input$tabs</code>. The value associated with <code>input$tabs</code> is given by the <code>tabName</code> argument of the currently selected <code>menuItem()</code> (or <code>menuSubItem()</code>).</p>
 <p>Here is a small example app. Notice that no <code>tabItems( tabItem(), tabItem(), ... )</code> is used in this app, even though all childless <code>menuItem()</code>s and <code>menuSubItem()</code>s have a <code>tabName</code> argument:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(shiny)
@@ -171,12 +168,11 @@ server &lt;-<span class="st"> </span>function(input, output, session) {
 }
 
 <span class="kw">shinyApp</span>(ui, server)</code></pre></div>
-<div id="caveats-and-other-small-print" class="section level4">
-<h4>Caveats and other small print</h4>
+<div id="caveats-and-other-small-print" class="section level3">
+<h3>Caveats and other small print</h3>
 <ul>
 <li><p>As mentioned, <code>sidebarMenu()</code> <em>must</em> take in an <code>id</code>. For example if you pass in <code>id = &quot;tabs&quot;</code>, then, anywhere in the server function, you can know which <code>menuItem()</code> (or <code>menuSubItem()</code>) is selected by accessing <code>input$tabs</code>. If you don’t pass in an <code>id</code>, you won’t be able access to this information. In addition, you need to specify a <code>tabName</code> for all “leaf” items (i.e. all <code>menuItem()</code>s or <code>menuSubItem()</code>s that don’t have any children), even if you wouldn’t need it otherwise. If you don’t specify a <code>tabName</code>, then that item will not be clickable, though the the other items will continue to function as normal (i.e. not specifying a <code>tabName</code> for an item is functionally the same as not having that item at all - except for the different visual look - since you won’t be able to interact with it at all).</p></li>
-<li><p>This works exactly the same for dynamically generated <code>sidebarMenu()</code>s. Here’s an identical looking app, whose only difference is that the sidebar menu is generated dynamically:</p></li>
-</ul>
+<li><p>This works exactly the same for dynamically generated <code>sidebarMenu()</code>s. Here’s an identical looking app, whose only difference is that the sidebar menu is generated dynamically:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(shiny)
 <span class="kw">library</span>(shinydashboard)
 
@@ -198,7 +194,7 @@ server &lt;-<span class="st"> </span>function(input, output, session) {
     <span class="kw">sidebarMenu</span>(
       <span class="co"># Setting id makes input$tabs give the tabName of currently-selected tab</span>
       <span class="dt">id =</span> <span class="st">&quot;tabs&quot;</span>,
-      
+
       <span class="kw">menuItem</span>(<span class="st">&quot;Dashboard&quot;</span>, <span class="dt">tabName =</span> <span class="st">&quot;dashboard&quot;</span>, <span class="dt">icon =</span> <span class="kw">icon</span>(<span class="st">&quot;dashboard&quot;</span>)),
       <span class="kw">menuItem</span>(<span class="st">&quot;Widgets&quot;</span>, <span class="dt">icon =</span> <span class="kw">icon</span>(<span class="st">&quot;th&quot;</span>), <span class="dt">tabName =</span> <span class="st">&quot;widgets&quot;</span>, <span class="dt">badgeLabel =</span> <span class="st">&quot;new&quot;</span>),
       <span class="kw">menuItem</span>(<span class="st">&quot;Charts&quot;</span>, <span class="dt">icon =</span> <span class="kw">icon</span>(<span class="st">&quot;bar-chart-o&quot;</span>),
@@ -210,27 +206,26 @@ server &lt;-<span class="st"> </span>function(input, output, session) {
 }
 
 <span class="kw">shinyApp</span>(ui, server)</code></pre></div>
-<p><em>Note</em>: There used to be a bug in <code>shinydashboard</code> that would result in no item starting as selected if the sidebar menu was rendered dynamically. This was been fixed in <code>shinydashboard</code> 0.6. In short, there should always be a selected item when the sidebar menu finishes rendering. This can be specified by the app author by adding the argument <code>selected = TRUE</code> to the desired <code>menuItem()</code> or <code>menuSubItem()</code>. If none is specified, the first item that has a <code>tabName</code> will be selected by default.</p>
+<p><em>Note</em>: There used to be a bug in <code>shinydashboard</code> that would result in no item starting as selected if the sidebar menu was rendered dynamically. This was been fixed in <code>shinydashboard</code> 0.6. In short, there should always be a selected item when the sidebar menu finishes rendering. This can be specified by the app author by adding the argument <code>selected = TRUE</code> to the desired <code>menuItem()</code> or <code>menuSubItem()</code>. If none is specified, the first item that has a <code>tabName</code> will be selected by default.</p></li>
+<li><p>Childless <code>menuItem()</code>s (and <code>menuSubItem()</code>s) and “childfull”&quot; <code>menuItem()</code>s behave differently and there’s different arguments that apply to either:</p>
 <ul>
-<li>Childless <code>menuItem()</code>s (and <code>menuSubItem()</code>s) v childfull <code>menuItem()</code>s behave differently and there’s different arguments that apply to either:
-<ul>
-<li>Childless <code>menuItem()</code>s/<code>menuSubItem()</code>s must be given a <code>tabName</code> param; in addition, <em>one</em> of these can have <code>selected = TRUE</code>, which lets Shiny know that you want <code>input$tabs</code> to start out this that item’s <code>tabName</code> on app startup (if you specified a <code>tabItem()</code> for that <code>tabName</code>, that will what you first see in the dashboard body when you launch your app).</li>
-<li>“Childfull” <code>menuItem()</code>s cannot have a <code>tabName</code> or a <code>selected</code> argument (or rather, they can, but this will be completely ignored by Shiny). Instead (and once #199 is merged), at most, <em>one</em> of them can take a <code>startExpanded = TRUE</code>, which tells Shiny to start up with that <code>menuItem()</code> expanded, i.e. revealing all its children. (The reason that, at most, only one childfull <code>menuItem()</code> can start expanded is because in general in AdminLTE, only one thing can be expanded in the sidebar at any one time). In alternative to <code>tabName</code>, you can pass in an <code>expandedName</code>, which is how Shiny lets you know which (if any) <code>menuItem()</code> is currently expanded.</li>
+<li><p>Childless <code>menuItem()</code>s/<code>menuSubItem()</code>s must be given a <code>tabName</code> argument; in addition, <em>one</em> of these can have <code>selected = TRUE</code>, which lets Shiny know that you want <code>input$tabs</code> (if you passed in <code>id = &quot;tabs&quot;</code> to <code>sidebarMenu()</code>) to start out with that item’s <code>tabName</code> on app startup (if you specified a <code>tabItem()</code> for that <code>tabName</code>, that will what you first see in the dashboard body when you launch your app).</p></li>
+<li><p>“Childfull” <code>menuItem()</code>s cannot have a <code>tabName</code> or a <code>selected</code> argument (or rather, they can, but this will be completely ignored by Shiny). Instead, at most, <em>one</em> of them can take a <code>startExpanded = TRUE</code>, which tells Shiny to start up with that <code>menuItem()</code> expanded, i.e. revealing all its children. (The reason that, at most, only one childfull <code>menuItem()</code> can start expanded is because in general in AdminLTE, only one thing can be expanded in the sidebar at any one time). In alternative to <code>tabName</code>, you can pass in an <code>expandedName</code>, which is how Shiny lets you know which (if any) <code>menuItem()</code> is currently expanded.</p></li>
 </ul></li>
 </ul>
 </div>
 </div>
-<div id="knowing-which-menuitem-if-any-is-currently-expanded" class="section level3">
-<h3>Knowing which <code>menuItem()</code>, if any, is currently expanded</h3>
+<div id="knowing-which-menuitem-if-any-is-currently-expanded" class="section level2">
+<h2>Knowing which <code>menuItem()</code>, if any, is currently expanded</h2>
 <p>There’s an automatic way to access which childfull <code>menuItem()</code> (if any) is currently expanded. Anywhere on your server function use <code>input$sidebarItemExpanded</code> to get the <code>expandedName</code> of the currently expanded <code>menuItem()</code> (or <code>NULL</code> is none is currently expanded). (Don’t worry: even if you don’t pass in an <code>expandedName</code>, Shiny has a sensible default – it will construct one for you by taking the mandatory <code>text</code> argument you passed and removing all white space.) You can use <code>input$sidebarItemExpanded</code> as any other input, including making other UI elements conditional on it. And the cherry on top: since you get this input “for free,” you also get bookmarking of this input “for free.” (I.e. the bookmarked URL will capture which, if any, <code>menuItem()</code> was expanded and on restore, it will expand the same).</p>
 </div>
-<div id="knowing-whether-the-whole-sidebar-is-expanded-or-collapsed" class="section level3">
-<h3>Knowing whether the whole sidebar is expanded or collapsed</h3>
+<div id="knowing-whether-the-whole-sidebar-is-expanded-or-collapsed" class="section level2">
+<h2>Knowing whether the whole sidebar is expanded or collapsed</h2>
 <p>Similarly, there is also an automatic way to access whether the whole sidebar is expanded or collapsed at the moment. Use <code>input$sidebarCollapsed</code> to know if the sidebar is collapsed (<code>&quot;true&quot;</code>) or expanded (<code>&quot;false&quot;</code>). While this may seem less interesting than the former, it is mostly useful for bookmarking. (I.e. the bookmarked URL will capture whether the sidebar is collapsed or expanded and, on restore, it will have the same value and look).</p>
 </div>
 </div>
-<div id="bookmarking" class="section level2">
-<h2>Bookmarking</h2>
+<div id="bookmarking" class="section level1">
+<h1>Bookmarking</h1>
 <p>These additions to <code>shinydashboard</code> will allow it to integrate a lot better with <a href="https://shiny.rstudio.com/articles/bookmarking-state.html">bookmarkable state</a>. As of <code>shinydashboard</code> 0.6, the state of the sidebar will be automatically bookmarked. For example, the app below does not specify any explicit inputs, but the state of the sidebar is automatically bookmarked (you can see this in the URL):</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(shiny)
 <span class="kw">library</span>(shinydashboard)
@@ -253,12 +248,11 @@ server &lt;-<span class="st"> </span>function(input, output, session) {
 }
 <span class="kw">enableBookmarking</span>(<span class="st">&quot;url&quot;</span>)
 <span class="kw">shinyApp</span>(ui, server)</code></pre></div>
-<div id="a-note-about-dropdownmenus" class="section level3">
-<h3>A note about <code>dropdownMenu</code>s</h3>
+</div>
+<div id="a-note-about-dropdownmenus" class="section level1">
+<h1>A note about <code>dropdownMenu</code>s</h1>
 <p>While it is possible to render dynamic dropdown menus, it’s not possible to treat them as inputs. For example, you can re-render a dynamic dropdown menu if the data changes. For instance, in <a href="https://gist.github.com/bborgesr/21e3a955b8640cfe480dd11f06b21bf5">this app</a>, we can dynamically add items to a <code>dropdownMenu</code> via a modal window.</p>
 <p>However, there is no current way to see if the user clicked on one of the items in a dropdown menu. This is something that is not originally supported in <a href="https://almsaeedstudio.com/preview">AdminLTE</a>. While we may add this functionality in the future, for now, we can only keep track of things that have a Shiny input binding. (To be more specific, if you write your own custom Javascript, you can get around this limitation, but it’s not always trivial and it’s not natively supported by <code>shinydashboard</code>.)</p>
-</div>
-</div>
 </div>
 
 </div>
