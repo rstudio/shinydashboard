@@ -74,48 +74,50 @@ shinyApp(ui, server)
 
 - This works exactly the same for dynamically generated `sidebarMenu()`s. Here's an identical looking app, whose only difference is that the sidebar menu is generated dynamically:
 
-```{r eval=FALSE}
-library(shiny)
-library(shinydashboard)
-
-ui <- dashboardPage(
-  dashboardHeader(), 
-  dashboardSidebar(
-    sidebarMenuOutput("menu")
-  ),
-  dashboardBody(
-    textOutput("res")
-  )
-)
-
-server <- function(input, output, session) {
-  output$res <- renderText({
-    paste("You've selected:", input$tabs)
-  })
-  output$menu <- renderMenu({
-    sidebarMenu(
-      # Setting id makes input$tabs give the tabName of currently-selected tab
-      id = "tabs",
-      
-      menuItem("Dashboard", tabName = "dashboard", icon = icon("dashboard")),
-      menuItem("Widgets", icon = icon("th"), tabName = "widgets", badgeLabel = "new"),
-      menuItem("Charts", icon = icon("bar-chart-o"),
-        menuSubItem("Sub-item 1", tabName = "subitem1"),
-        menuSubItem("Sub-item 2", tabName = "subitem2")
-      )
+  ```{r eval=FALSE}
+  library(shiny)
+  library(shinydashboard)
+  
+  ui <- dashboardPage(
+    dashboardHeader(), 
+    dashboardSidebar(
+      sidebarMenuOutput("menu")
+    ),
+    dashboardBody(
+      textOutput("res")
     )
-  })
-}
+  )
+  
+  server <- function(input, output, session) {
+    output$res <- renderText({
+      paste("You've selected:", input$tabs)
+    })
+    output$menu <- renderMenu({
+      sidebarMenu(
+        # Setting id makes input$tabs give the tabName of currently-selected tab
+        id = "tabs",
+        
+        menuItem("Dashboard", tabName = "dashboard", icon = icon("dashboard")),
+        menuItem("Widgets", icon = icon("th"), tabName = "widgets", badgeLabel = "new"),
+        menuItem("Charts", icon = icon("bar-chart-o"),
+          menuSubItem("Sub-item 1", tabName = "subitem1"),
+          menuSubItem("Sub-item 2", tabName = "subitem2")
+        )
+      )
+    })
+  }
+  
+  shinyApp(ui, server)
+  ```
 
-shinyApp(ui, server)
-```
-
-_Note_: There used to be a bug in `shinydashboard` that would result in no item starting as selected if the sidebar menu was rendered dynamically. This was been fixed in `shinydashboard` 0.6. In short, there should always be a selected item when the sidebar menu finishes rendering. This can be specified by the app author by adding the argument `selected = TRUE` to the desired `menuItem()` or `menuSubItem()`. If none is specified, the first item that has a `tabName` will be selected by default.
+  _Note_: There used to be a bug in `shinydashboard` that would result in no item starting as selected if the sidebar menu was rendered dynamically. This was been fixed in `shinydashboard` 0.6. In short, there should always be a selected item when the sidebar menu finishes rendering. This can be specified by the app author by adding the argument `selected = TRUE` to the desired `menuItem()` or `menuSubItem()`. If none is specified, the first item that has a `tabName` will be selected by default.
 
 
-- Childless `menuItem()`s (and `menuSubItem()`s) v childfull `menuItem()`s behave differently and there's different arguments that apply to either:
-     - Childless `menuItem()`s/`menuSubItem()`s must be given a `tabName` param; in addition, *one* of these can have `selected = TRUE`, which lets Shiny know that you want `input$tabs` to start out this that item's `tabName` on app startup (if you specified a `tabItem()` for that `tabName`, that will what you first see in the dashboard body when you launch your app).
-     - "Childfull" `menuItem()`s cannot have a `tabName` or a `selected` argument (or rather, they can, but this will be completely ignored by Shiny). Instead (and once #199 is merged), at most, *one* of them can take a `startExpanded = TRUE`, which tells Shiny to start up with that `menuItem()` expanded, i.e. revealing all its children. (The reason that, at most, only one childfull `menuItem()` can start expanded is because in general in AdminLTE, only one thing can be expanded in the sidebar at any one time). In alternative to `tabName`, you can pass in an `expandedName`, which is how Shiny lets you know which (if any) `menuItem()` is currently expanded.
+- Childless `menuItem()`s (and `menuSubItem()`s) and "childfull"" `menuItem()`s behave differently and there's different arguments that apply to either:
+
+  - Childless `menuItem()`s/`menuSubItem()`s must be given a `tabName` argument; in addition, *one* of these can have `selected = TRUE`, which lets Shiny know that you want `input$tabs` (if you passed in `id = "tabs"` to `sidebarMenu()`) to start out with that item's `tabName` on app startup (if you specified a `tabItem()` for that `tabName`, that will what you first see in the dashboard body when you launch your app).
+
+  - "Childfull" `menuItem()`s cannot have a `tabName` or a `selected` argument (or rather, they can, but this will be completely ignored by Shiny). Instead (and once #199 is merged), at most, *one* of them can take a `startExpanded = TRUE`, which tells Shiny to start up with that `menuItem()` expanded, i.e. revealing all its children. (The reason that, at most, only one childfull `menuItem()` can start expanded is because in general in AdminLTE, only one thing can be expanded in the sidebar at any one time). In alternative to `tabName`, you can pass in an `expandedName`, which is how Shiny lets you know which (if any) `menuItem()` is currently expanded.
 
 ### Knowing which `menuItem()`, if any, is currently expanded
 
