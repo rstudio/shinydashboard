@@ -297,7 +297,11 @@ ui &lt;-<span class="st"> </span><span class="kw">dashboardPage</span>(
 
 server &lt;-<span class="st"> </span>function(input, output, session) {
   output$res &lt;-<span class="st"> </span><span class="kw">renderText</span>({
-    <span class="kw">paste</span>(<span class="st">&quot;Sidebar is collapsed:&quot;</span>, input$sidebarCollapsed)
+    if (input$sidebarCollapsed) {
+      <span class="st">&quot;Sidebar is collapsed&quot;</span>
+    } else {
+      <span class="st">&quot;Sidebar is expanded&quot;</span>
+    }
   })
 }
 
