@@ -4,7 +4,6 @@ output:
   html_document:
     toc: true
     template: ./template-toc.html
-    css: styles.css
 ---
 
 ```{r echo = FALSE, message=FALSE}
@@ -33,6 +32,9 @@ Let's get into the details. The three sidebar-related new automatic inputs are:
 Before `shinydashboard` 0.6, it was already possible to find the currently-selected `menuItem()` or `menuSubItem()`, if the `sidebarMenu()` has an `id` (and the `menuItem()`/`menuSubItem()` has a `tabName`). In particular, if you pass in `id = "tabs"` to your `sidebarMenu()`, then you can know which sidebar item is selected by accessing the variable `input$tabs`. The value associated with `input$tabs` is given by the `tabName` argument of the currently selected `menuItem()` (or `menuSubItem()`).
   
 Here is a small example app. Notice that no `tabItems( tabItem(), tabItem(), ... )` is used in this app, even though all childless `menuItem()`s and `menuSubItem()`s have a `tabName` argument:
+
+<details>
+  <summary>app.R</summary>
   
 ```{r eval=FALSE}
 library(shiny)
@@ -66,55 +68,59 @@ server <- function(input, output, session) {
 
 shinyApp(ui, server)
 ```
+
+</details>
 
 ### Caveats and other small print
 
 - As mentioned, `sidebarMenu()` _must_ take in an `id`. For example if you pass in `id = "tabs"`, then, anywhere in the server function, you can know which `menuItem()` (or `menuSubItem()`) is selected by accessing `input$tabs`. If you don't pass in an `id`, you won't be able access to this information. In addition, you need to specify a `tabName` for all "leaf" items (i.e. all `menuItem()`s or `menuSubItem()`s that don't have any children), even if you wouldn't need it otherwise. If you don't specify a `tabName`, then that item will not be clickable, though the the other items will continue to function as normal (i.e. not specifying a `tabName` for an item is functionally the same as not having that item at all - except for the different visual look - since you won't be able to interact with it at all).
 
+
 - This works exactly the same for dynamically generated `sidebarMenu()`s. Here's an identical looking app, whose only difference is that the sidebar menu is generated dynamically:
 
-  <details>
-    <summary>app.R</summary>
+    <details>
+      <summary>app.R</summary>
     
-```{r eval=FALSE}
-library(shiny)
-library(shinydashboard)
-
-ui <- dashboardPage(
-  dashboardHeader(), 
-  dashboardSidebar(
-    sidebarMenuOutput("menu")
-  ),
-  dashboardBody(
-    textOutput("res")
-  )
-)
-
-server <- function(input, output, session) {
-  output$res <- renderText({
-    paste("You've selected:", input$tabs)
-  })
-  output$menu <- renderMenu({
-    sidebarMenu(
-      # Setting id makes input$tabs give the tabName of currently-selected tab
-      id = "tabs",
-      
-      menuItem("Dashboard", tabName = "dashboard", icon = icon("dashboard")),
-      menuItem("Widgets", icon = icon("th"), tabName = "widgets", badgeLabel = "new"),
-      menuItem("Charts", icon = icon("bar-chart-o"),
-        menuSubItem("Sub-item 1", tabName = "subitem1"),
-        menuSubItem("Sub-item 2", tabName = "subitem2")
+    ```{r eval=FALSE}
+    library(shiny)
+    library(shinydashboard)
+    
+    ui <- dashboardPage(
+      dashboardHeader(), 
+      dashboardSidebar(
+        sidebarMenuOutput("menu")
+      ),
+      dashboardBody(
+        textOutput("res")
       )
     )
-  })
-}
-
-shinyApp(ui, server)
-```
     
-  </details>
-  
-  _Note_: There used to be a bug in `shinydashboard` that would result in no item starting as selected if the sidebar menu was rendered dynamically. This was been fixed in `shinydashboard` 0.6. In short, there should always be a selected item when the sidebar menu finishes rendering. This can be specified by the app author by adding the argument `selected = TRUE` to the desired `menuItem()` or `menuSubItem()`. If none is specified, the first item that has a `tabName` will be selected by default.
+    server <- function(input, output, session) {
+      output$res <- renderText({
+        paste("You've selected:", input$tabs)
+      })
+      output$menu <- renderMenu({
+        sidebarMenu(
+          # Setting id makes input$tabs give the tabName of currently-selected tab
+          id = "tabs",
+          
+          menuItem("Dashboard", tabName = "dashboard", icon = icon("dashboard")),
+          menuItem("Widgets", icon = icon("th"), tabName = "widgets", badgeLabel = "new"),
+          menuItem("Charts", icon = icon("bar-chart-o"),
+            menuSubItem("Sub-item 1", tabName = "subitem1"),
+            menuSubItem("Sub-item 2", tabName = "subitem2")
+          )
+        )
+      })
+    }
+    
+    shinyApp(ui, server)
+    ```
+      
+    </details>
+    
+    _Note_: There used to be a bug in `shinydashboard` that would result in no item starting as selected if the sidebar menu was rendered dynamically. This was been fixed in `shinydashboard` 0.6. In short, there should always be a selected item when the sidebar menu finishes rendering. This can be specified by the app author by adding the argument `selected = TRUE` to the desired `menuItem()` or `menuSubItem()`. If none is specified, the first item that has a `tabName` will be selected by default.
+    
 
 - Childless `menuItem()`s (and `menuSubItem()`s) and "childfull"" `menuItem()`s behave differently and there's different arguments that apply to either:
 
@@ -134,6 +140,9 @@ Similarly, there is also an automatic way to access whether the whole sidebar is
 
 These additions to `shinydashboard` will allow it to integrate a lot better  with [bookmarkable state](https://shiny.rstudio.com/articles/bookmarking-state.html). As of `shinydashboard` 0.6, the state of the sidebar will be automatically bookmarked. For example, the app below does not specify any explicit inputs, but the state of the sidebar is automatically bookmarked (you can see this in the URL):
 
+<details>
+  <summary>app.R</summary>
+  
 ```{r eval=FALSE}
 library(shiny)
 library(shinydashboard)
@@ -158,8 +167,82 @@ enableBookmarking("url")
 shinyApp(ui, server)
 ```
 
+</details>
+ 
 # A note about `dropdownMenu`s
 
-While it is possible to render dynamic dropdown menus, it's not possible to treat them as inputs. For example, you can re-render a dynamic dropdown menu if the data changes. For instance, in [this app](https://gist.github.com/bborgesr/21e3a955b8640cfe480dd11f06b21bf5), we can dynamically add items to a `dropdownMenu` via a modal window.
+While it is possible to render dynamic dropdown menus, it's not possible to treat them as inputs. For example, you can re-render a dynamic dropdown menu if the data changes. For instance, in this app, we can dynamically add items to a `dropdownMenu` via a modal window:
+
+<details>
+  <summary>app.R</summary>
+  
+```{r, eval = FALSE}
+library(shiny)
+library(shinydashboard)
+
+ui <- dashboardPage(
+  dashboardHeader(title = "Dropdowns 2.0",
+    dropdownMenuOutput("menu")
+  ),
+  dashboardSidebar(
+    helpText("Add another item to the dropdown menu by clicking ",
+             "on the button below"),
+    actionButton("addItem", "Add another item")
+  ),
+  dashboardBody()
+)
+
+server <- function(input, output, session) {
+  tasks <-  reactiveValues(
+      code = list(id = "code", value = 15, color = "aqua",
+                  text = "Refactor code"),
+      layout = list(id = "layout", value = 40, color = "green",
+                    text = "Design new layout"),
+      docs = list(id = "docs", value = 25, color = "red",
+                  text = "Write documentation")
+    )
+
+  # actually render the dropdownMenu
+  output$menu <- renderMenu({
+    items <- lapply(tasks, function(el) {
+      taskItem(value = el$value, color = el$color, text = el$text)
+    })
+    dropdownMenu(
+      type = "tasks", badgeStatus = "danger",
+      .list = items
+    )
+  })
+
+  observeEvent(input$addItem, {
+    showModal(modalDialog(title = "Add new task",
+      textInput(paste0("id", input$addItem), "Task ID"),
+      numericInput(paste0("val", input$addItem), "Task value", 0),
+      selectInput(paste0("col", input$addItem), "Task color",
+        choices = c("red", "yellow", "aqua", "blue",
+          "light-blue", "green", "navy", "teal",
+          "olive", "lime", "orange", "fuchsia",
+          "purple", "maroon", "black")
+      ),
+      textInput(paste0("text", input$addItem), "Task text"),
+      actionButton(paste0("go", input$addItem), "Add item"),
+      easyClose = TRUE, footer = NULL
+    ))
+
+    observeEvent(input[[paste0("go", input$addItem)]], {
+      tasks[[paste0("id", input$addItem)]] <- list(
+        id = input[[paste0("id", input$addItem)]],
+        value = input[[paste0("val", input$addItem)]],
+        color = input[[paste0("col", input$addItem)]],
+        text = input[[paste0("text", input$addItem)]]
+      )
+      removeModal()
+    })
+  })
+}
+
+shinyApp(ui, server)
+```
+
+</details>
 
 However, there is no current way to see if the user clicked on one of the items in a dropdown menu. This is something that is not originally supported in [AdminLTE](https://almsaeedstudio.com/preview). While we may add this functionality in the future, for now, we can only keep track of things that have a Shiny input binding. (To be more specific, if you write your own custom Javascript, you can get around this limitation, but it's not always trivial and it's not natively supported by `shinydashboard`.)

@@ -27,6 +27,25 @@ img {
   border-radius: 4px;
 }
 
+summary {
+  display: block;
+}
+
+  summary::-webkit-details-marker {
+  display: none;
+}
+
+summary::before {
+  content: '\25B6';
+  padding-right: 0.5em;
+}
+
+details[open] > summary::before {
+  content: '\25BC';
+}
+
+
+
 code {
   font-family: Consolas, Monaco, 'Courier New', monospace;
   font-size: 85%;
