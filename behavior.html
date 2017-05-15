@@ -341,13 +341,13 @@ server &lt;-<span class="st"> </span>function(input, output, session) {}
 </div>
 <div id="a-note-about-dropdownmenus" class="section level1">
 <h1>A note about <strong>dropdownMenu</strong>s</h1>
-<p>While it is possible to render dynamic dropdown menus (placed in the app’s header), it’s not possible to treat them as inputs. In other words, you can re-render a dynamic dropdown menu if the data changes. For example, in this app, we can dynamically add items to a <code>dropdownMenu</code> via a modal window:</p>
+<p>Another shinydashboard-specific component that is not seen in vanilla Shiny apps is the <code>dropdownMenu()</code>, one or more of which can be placed in the dashboard header. Like a <code>sidebarMenu()</code>, a <code>dropdownMenu()</code> can be either rendered statically in the UI, or dynamically in ther server function. However, while it’s possible to update dynamic dropdown menus (by re-rendering them if, for example, the data changes), it’s not possible to treat them as inputs. For example, in this app, we can dynamically add items to a <code>dropdownMenu</code> via a modal window:</p>
 <p><details> <summary>app.R</summary></p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(shiny)
 <span class="kw">library</span>(shinydashboard)
 
 ui &lt;-<span class="st"> </span><span class="kw">dashboardPage</span>(
-  <span class="kw">dashboardHeader</span>(<span class="dt">title =</span> <span class="st">&quot;Dropdowns 2.0&quot;</span>,
+  <span class="kw">dashboardHeader</span>(
     <span class="kw">dropdownMenuOutput</span>(<span class="st">&quot;menu&quot;</span>)
   ),
   <span class="kw">dashboardSidebar</span>(

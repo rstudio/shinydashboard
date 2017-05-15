@@ -264,7 +264,7 @@ shinyApp(ui, server, enableBookmarking = "url")
  
 # A note about **dropdownMenu**s
 
-While it is possible to render dynamic dropdown menus (placed in the app's header), it's not possible to treat them as inputs. In other words, you can re-render a dynamic dropdown menu if the data changes. For example, in this app, we can dynamically add items to a `dropdownMenu` via a modal window:
+Another shinydashboard-specific component that is not seen in vanilla Shiny apps is the `dropdownMenu()`, one or more of which can be placed in the dashboard header. Like a `sidebarMenu()`, a `dropdownMenu()` can be either rendered statically in the UI, or dynamically in ther server function. However, while it's possible to update dynamic dropdown menus (by re-rendering them if, for example, the data changes), it's not possible to treat them as inputs. For example, in this app, we can dynamically add items to a `dropdownMenu` via a modal window:
 
 <details>
   <summary>app.R</summary>
@@ -274,7 +274,7 @@ library(shiny)
 library(shinydashboard)
 
 ui <- dashboardPage(
-  dashboardHeader(title = "Dropdowns 2.0",
+  dashboardHeader(
     dropdownMenuOutput("menu")
   ),
   dashboardSidebar(
