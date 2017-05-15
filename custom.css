@@ -118,8 +118,10 @@ summary {
 summary::before {
   content: '\25B6';
   padding-right: 0.5em;
+  cursor: pointer;
 }
 
 details[open] > summary::before {
   content: '\25BC';
+  cursor: pointer;
 }

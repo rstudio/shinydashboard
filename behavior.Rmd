@@ -16,7 +16,6 @@ knitr::opts_chunk$set(collapse = TRUE, comment = "##")
 knit_print.shiny.tag <- function(x, ...) {
   as.character(x)
 }
-
 ```
 
 Shinydashboard supports all the normal interactive functionality that Shiny does. If you need a refresher on all the interactive capabilities of Shiny (through inputs, outputs, reactives, etc), take a look at [our website's articles](https://shiny.rstudio.com/articles/).
