@@ -65,7 +65,7 @@ code > span.in { color: #808080; font-weight: bold; font-style: italic; } /* Inf
 </style>
 
 
-<link rel="stylesheet" href="custom.css" type="text/css" />
+<link rel="stylesheet" href="styles.css" type="text/css" />
 
 </head>
 
@@ -172,7 +172,9 @@ server &lt;-<span class="st"> </span>function(input, output, session) {
 <h3>Caveats and other small print</h3>
 <ul>
 <li><p>As mentioned, <code>sidebarMenu()</code> <em>must</em> take in an <code>id</code>. For example if you pass in <code>id = &quot;tabs&quot;</code>, then, anywhere in the server function, you can know which <code>menuItem()</code> (or <code>menuSubItem()</code>) is selected by accessing <code>input$tabs</code>. If you don’t pass in an <code>id</code>, you won’t be able access to this information. In addition, you need to specify a <code>tabName</code> for all “leaf” items (i.e. all <code>menuItem()</code>s or <code>menuSubItem()</code>s that don’t have any children), even if you wouldn’t need it otherwise. If you don’t specify a <code>tabName</code>, then that item will not be clickable, though the the other items will continue to function as normal (i.e. not specifying a <code>tabName</code> for an item is functionally the same as not having that item at all - except for the different visual look - since you won’t be able to interact with it at all).</p></li>
-<li><p>This works exactly the same for dynamically generated <code>sidebarMenu()</code>s. Here’s an identical looking app, whose only difference is that the sidebar menu is generated dynamically:</p>
+<li><p>This works exactly the same for dynamically generated <code>sidebarMenu()</code>s. Here’s an identical looking app, whose only difference is that the sidebar menu is generated dynamically:</p></li>
+</ul>
+<p><details> <summary>app.R</summary></p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(shiny)
 <span class="kw">library</span>(shinydashboard)
 
@@ -194,7 +196,7 @@ server &lt;-<span class="st"> </span>function(input, output, session) {
     <span class="kw">sidebarMenu</span>(
       <span class="co"># Setting id makes input$tabs give the tabName of currently-selected tab</span>
       <span class="dt">id =</span> <span class="st">&quot;tabs&quot;</span>,
-
+      
       <span class="kw">menuItem</span>(<span class="st">&quot;Dashboard&quot;</span>, <span class="dt">tabName =</span> <span class="st">&quot;dashboard&quot;</span>, <span class="dt">icon =</span> <span class="kw">icon</span>(<span class="st">&quot;dashboard&quot;</span>)),
       <span class="kw">menuItem</span>(<span class="st">&quot;Widgets&quot;</span>, <span class="dt">icon =</span> <span class="kw">icon</span>(<span class="st">&quot;th&quot;</span>), <span class="dt">tabName =</span> <span class="st">&quot;widgets&quot;</span>, <span class="dt">badgeLabel =</span> <span class="st">&quot;new&quot;</span>),
       <span class="kw">menuItem</span>(<span class="st">&quot;Charts&quot;</span>, <span class="dt">icon =</span> <span class="kw">icon</span>(<span class="st">&quot;bar-chart-o&quot;</span>),
@@ -206,7 +208,9 @@ server &lt;-<span class="st"> </span>function(input, output, session) {
 }
 
 <span class="kw">shinyApp</span>(ui, server)</code></pre></div>
-<p><em>Note</em>: There used to be a bug in <code>shinydashboard</code> that would result in no item starting as selected if the sidebar menu was rendered dynamically. This was been fixed in <code>shinydashboard</code> 0.6. In short, there should always be a selected item when the sidebar menu finishes rendering. This can be specified by the app author by adding the argument <code>selected = TRUE</code> to the desired <code>menuItem()</code> or <code>menuSubItem()</code>. If none is specified, the first item that has a <code>tabName</code> will be selected by default.</p></li>
+<p></details></p>
+<p><em>Note</em>: There used to be a bug in <code>shinydashboard</code> that would result in no item starting as selected if the sidebar menu was rendered dynamically. This was been fixed in <code>shinydashboard</code> 0.6. In short, there should always be a selected item when the sidebar menu finishes rendering. This can be specified by the app author by adding the argument <code>selected = TRUE</code> to the desired <code>menuItem()</code> or <code>menuSubItem()</code>. If none is specified, the first item that has a <code>tabName</code> will be selected by default.</p>
+<ul>
 <li><p>Childless <code>menuItem()</code>s (and <code>menuSubItem()</code>s) and “childfull”&quot; <code>menuItem()</code>s behave differently and there’s different arguments that apply to either:</p>
 <ul>
 <li><p>Childless <code>menuItem()</code>s/<code>menuSubItem()</code>s must be given a <code>tabName</code> argument; in addition, <em>one</em> of these can have <code>selected = TRUE</code>, which lets Shiny know that you want <code>input$tabs</code> (if you passed in <code>id = &quot;tabs&quot;</code> to <code>sidebarMenu()</code>) to start out with that item’s <code>tabName</code> on app startup (if you specified a <code>tabItem()</code> for that <code>tabName</code>, that will what you first see in the dashboard body when you launch your app).</p></li>

@@ -1,0 +1,20 @@
+
+details summary::-webkit-details-marker {
+  display: none;
+}
+
+details::before {
+  left: 2px;
+  border: 8px solid transparent;
+  border-width: 8px 12px;
+  border-left-color: #3e8ac7;
+  background: transparent;
+  margin: -8px 0 0;
+  padding-right: 10px;
+  content: "";
+  position: absolute;
+  top: 50%;
+  display: block;
+  float: left;
+}
+
