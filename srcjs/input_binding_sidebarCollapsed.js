@@ -13,14 +13,14 @@ $.extend(sidebarCollapsedInputBinding, {
     return "sidebarCollapsed";
   },
   getValue: function(el) {
-    return $(el).attr("data-collapsed");
+    return $(el).attr("data-collapsed") === "true";
   },
   setValue: function(el, value) {
     $(el).attr("data-collapsed", value);
   },
   toggleValue: function(el) {
     var current = this.getValue(el);
-    var newVal = (current === "true") ? "false" : "true";
+    var newVal = current ? "false" : "true";
     this.setValue(el, newVal);
   },
   receiveMessage: function(el, data) {
