@@ -212,7 +212,11 @@ ui <- dashboardPage(
 
 server <- function(input, output, session) {
   output$res <- renderText({
-    paste("Sidebar is collapsed:", input$sidebarCollapsed)
+    if (input$sidebarCollapsed) {
+      "Sidebar is collapsed"
+    } else {
+      "Sidebar is expanded"
+    }
   })
 }
 
