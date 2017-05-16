@@ -22,4 +22,3 @@ contents.}
 Assert that a tag has specified properties
 }
 \keyword{internal}
-
