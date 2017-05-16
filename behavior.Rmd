@@ -191,7 +191,7 @@ shinyApp(ui, server)
 
 ## Know whether the whole sidebar is expanded or collapsed
 
-Similarly, as of shinydashboard 0.6, there is also an automatic way to access whether the whole sidebar is expanded or collapsed at the moment. Use `input$sidebarCollapsed` to know if the sidebar is collapsed (`"true"`) or expanded (`"false"`). While this may seem less interesting than the former two inputs, it is mostly useful for bookmarking (i.e. the bookmarked URL will capture whether the sidebar is collapsed or expanded and, on restore, it will have the same value and look).
+Similarly, as of shinydashboard 0.6, there is also an automatic way to access whether the whole sidebar is expanded or collapsed at the moment. Use `input$sidebarCollapsed` to know if the sidebar is collapsed (`TRUE`) or expanded (`FALSE`). While this may seem less interesting than the former two inputs, it is mostly useful for bookmarking (i.e. the bookmarked URL will capture whether the sidebar is collapsed or expanded and, on restore, it will have the same value and look).
 
 Here's an example app:
 

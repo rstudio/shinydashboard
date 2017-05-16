@@ -281,7 +281,7 @@ server &lt;-<span class="st"> </span>function(input, output, session) {
 </div>
 <div id="know-whether-the-whole-sidebar-is-expanded-or-collapsed" class="section level2">
 <h2>Know whether the whole sidebar is expanded or collapsed</h2>
-<p>Similarly, as of shinydashboard 0.6, there is also an automatic way to access whether the whole sidebar is expanded or collapsed at the moment. Use <code>input$sidebarCollapsed</code> to know if the sidebar is collapsed (<code>&quot;true&quot;</code>) or expanded (<code>&quot;false&quot;</code>). While this may seem less interesting than the former two inputs, it is mostly useful for bookmarking (i.e. the bookmarked URL will capture whether the sidebar is collapsed or expanded and, on restore, it will have the same value and look).</p>
+<p>Similarly, as of shinydashboard 0.6, there is also an automatic way to access whether the whole sidebar is expanded or collapsed at the moment. Use <code>input$sidebarCollapsed</code> to know if the sidebar is collapsed (<code>TRUE</code>) or expanded (<code>FALSE</code>). While this may seem less interesting than the former two inputs, it is mostly useful for bookmarking (i.e. the bookmarked URL will capture whether the sidebar is collapsed or expanded and, on restore, it will have the same value and look).</p>
 <p>Here’s an example app:</p>
 <p><details> <summary>app.R</summary></p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(shiny)
