@@ -12,32 +12,51 @@
 
 <title>Shiny Dashboard Structure</title>
 
-<script src="libs/jquery-1.11.0/jquery.min.js"></script>
+<script src="libs/jquery-1.11.3/jquery.min.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<link href="libs/bootstrap-3.3.1/css/bootstrap.min.css" rel="stylesheet" />
-<script src="libs/bootstrap-3.3.1/js/bootstrap.min.js"></script>
-<script src="libs/bootstrap-3.3.1/shim/html5shiv.min.js"></script>
-<script src="libs/bootstrap-3.3.1/shim/respond.min.js"></script>
+<link href="libs/bootstrap-3.3.5/css/bootstrap.min.css" rel="stylesheet" />
+<script src="libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+<script src="libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
+<script src="libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<script src="libs/navigation-1.1/tabsets.js"></script>
 
 
 <style type="text/css">code{white-space: pre;}</style>
 <style type="text/css">
+div.sourceCode { overflow-x: auto; }
 table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
   margin: 0; padding: 0; vertical-align: baseline; border: none; }
 table.sourceCode { width: 100%; line-height: 100%; }
 td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; background-color: #dddddd; }
 td.sourceCode { padding-left: 5px; }
-code > span.kw { font-weight: bold; }
-code > span.dt { color: #800000; }
-code > span.dv { color: #0000ff; }
-code > span.bn { color: #0000ff; }
-code > span.fl { color: #800080; }
-code > span.ch { color: #ff00ff; }
-code > span.st { color: #dd0000; }
-code > span.co { color: #808080; font-style: italic; }
-code > span.al { color: #00ff00; font-weight: bold; }
-code > span.fu { color: #000080; }
-code > span.er { color: #ff0000; font-weight: bold; }
+code > span.kw { font-weight: bold; } /* Keyword */
+code > span.dt { color: #800000; } /* DataType */
+code > span.dv { color: #0000ff; } /* DecVal */
+code > span.bn { color: #0000ff; } /* BaseN */
+code > span.fl { color: #800080; } /* Float */
+code > span.ch { color: #ff00ff; } /* Char */
+code > span.st { color: #dd0000; } /* String */
+code > span.co { color: #808080; font-style: italic; } /* Comment */
+code > span.al { color: #00ff00; font-weight: bold; } /* Alert */
+code > span.fu { color: #000080; } /* Function */
+code > span.er { color: #ff0000; font-weight: bold; } /* Error */
+code > span.wa { color: #ff0000; font-weight: bold; } /* Warning */
+code > span.cn { color: #000000; } /* Constant */
+code > span.sc { color: #ff00ff; } /* SpecialChar */
+code > span.vs { color: #dd0000; } /* VerbatimString */
+code > span.ss { color: #dd0000; } /* SpecialString */
+code > span.im { } /* Import */
+code > span.va { } /* Variable */
+code > span.cf { } /* ControlFlow */
+code > span.op { } /* Operator */
+code > span.bu { } /* BuiltIn */
+code > span.ex { } /* Extension */
+code > span.pp { font-weight: bold; } /* Preprocessor */
+code > span.at { } /* Attribute */
+code > span.do { color: #808080; font-style: italic; } /* Documentation */
+code > span.an { color: #808080; font-weight: bold; font-style: italic; } /* Annotation */
+code > span.cv { color: #808080; font-weight: bold; font-style: italic; } /* CommentVar */
+code > span.in { color: #808080; font-weight: bold; font-style: italic; } /* Information */
 </style>
 <style type="text/css">
   pre:not([class]) {
@@ -75,6 +94,7 @@ code {
         <li role="presentation" id="nav-get-started"><a href="get_started.html">Get started</a></li>
         <li role="presentation" id="nav-structure"><a href="structure.html">Structure</a></li>
         <li role="presentation" id="nav-appearance"><a href="appearance.html">Appearance</a></li>
+        <li role="presentation" id="nav-behavior"><a href="behavior.html">Behavior</a></li>
         <li role="presentation" id="nav-examples"><a href="examples.html">Examples</a></li>
         <li role="presentation" id="nav-github"><a href="https://github.com/rstudio/shinydashboard">GitHub</a></li>
       </ul>
@@ -107,6 +127,7 @@ code {
 </ul></li>
 <li><a href="#sidebar">Sidebar</a><ul>
 <li><a href="#sidebar-menu-items-and-tabs">Sidebar menu items and tabs</a><ul>
+<li><a href="#bookmarking-and-restoring-selected-tabs">Bookmarking and restoring selected tabs</a></li>
 <li><a href="#dynamic-content-1">Dynamic content</a></li>
 </ul></li>
 <li><a href="#inputs-in-the-sidebar">Inputs in the sidebar</a></li>
@@ -133,7 +154,7 @@ code {
 <h1>Background: Shiny and HTML</h1>
 <p>To understand how the parts of a dashboard work together, we first need to know how a Shiny UI is built, and how it relates to the HTML of a web page.</p>
 <p>The HTML tag functions in Shiny, like <code>div()</code> and <code>p()</code> return objects that can be rendered as HTML. For example, when you run these commands at the R console, it will print out HTML:</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="co"># A basic div</span>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># A basic div</span>
 <span class="kw">div</span>(<span class="dt">class =</span> <span class="st">&quot;my-class&quot;</span>, <span class="st">&quot;Div content&quot;</span>)
 ## &lt;div class=&quot;my-class&quot;&gt;Div content&lt;/div&gt;
 
@@ -141,9 +162,9 @@ code {
 <span class="kw">div</span>(<span class="dt">class =</span> <span class="st">&quot;my-class&quot;</span>, <span class="kw">p</span>(<span class="st">&quot;Paragraph text&quot;</span>))
 ## &lt;div class=&quot;my-class&quot;&gt;
 ##   &lt;p&gt;Paragraph text&lt;/p&gt;
-## &lt;/div&gt;</code></pre>
+## &lt;/div&gt;</code></pre></div>
 <p>Some functions return more complex HTML fragments, and they insulate you, the user, from having to know all the ins and outs of the HTML required to create things like a text input or a sidebar:</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">textInput</span>(<span class="st">&quot;Id&quot;</span>, <span class="st">&quot;Label&quot;</span>)
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">textInput</span>(<span class="st">&quot;Id&quot;</span>, <span class="st">&quot;Label&quot;</span>)
 ## &lt;div class=&quot;form-group shiny-input-container&quot;&gt;
 ##   &lt;label for=&quot;Id&quot;&gt;Label&lt;/label&gt;
 ##   &lt;input id=&quot;Id&quot; type=&quot;text&quot; class=&quot;form-control&quot; value=&quot;&quot;/&gt;
@@ -158,40 +179,46 @@ code {
 ##     &lt;div&gt;First div&lt;/div&gt;
 ##     &lt;div&gt;Second div&lt;/div&gt;
 ##   &lt;/form&gt;
-## &lt;/div&gt;</code></pre>
+## &lt;/div&gt;</code></pre></div>
 <p>The UI for a Shiny app is built out of these pieces of HTML. The <strong>shinydashboard</strong> package provides a set of functions designed to create HTML that will generate a dashboard. If you copy the UI code for a dashboard page (above) and paste into the R console, it will print out HTML for the dashboard.</p>
 </div>
 <div id="structure-overview" class="section level1">
 <h1>Structure overview</h1>
 <p>The <code>dashboardPage()</code> function expects three components: a header, sidebar, and body:</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">dashboardPage</span>(
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">dashboardPage</span>(
   <span class="kw">dashboardHeader</span>(),
   <span class="kw">dashboardSidebar</span>(),
   <span class="kw">dashboardBody</span>()
-)</code></pre>
+)</code></pre></div>
 <p>For more complicated apps, splitting app into pieces can make it more readable:</p>
-<pre class="sourceCode r"><code class="sourceCode r">header &lt;-<span class="st"> </span><span class="kw">dashboardHeader</span>()
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">header &lt;-<span class="st"> </span><span class="kw">dashboardHeader</span>()
 
 sidebar &lt;-<span class="st"> </span><span class="kw">dashboardSidebar</span>()
 
 body &lt;-<span class="st"> </span><span class="kw">dashboardBody</span>()
 
-<span class="kw">dashboardPage</span>(header, sidebar, body)</code></pre>
+<span class="kw">dashboardPage</span>(header, sidebar, body)</code></pre></div>
 <p>Now we’ll look at each of the three main components of a <strong>shinydashboard</strong>.</p>
 </div>
 <div id="header" class="section level1">
 <h1>Header</h1>
 <p>A header can have a title and dropdown menus. Here’s an example:</p>
-<p><img src="images/header.png" alt="Header" /></p>
+<div class="figure">
+<img src="images/header.png" alt="Header" />
+<p class="caption">Header</p>
+</div>
 <p>Setting the title is simple; just use the <code>title</code> argument:</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">dashboardHeader</span>(<span class="dt">title =</span> <span class="st">&quot;My Dashboard&quot;</span>)</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">dashboardHeader</span>(<span class="dt">title =</span> <span class="st">&quot;My Dashboard&quot;</span>)</code></pre></div>
 <p>The dropdown menus are generated by the <code>dropdownMenu()</code> function. There are three types of menus – messages, notifications, and tasks – and each one must be populated with a corresponding type of item.</p>
 <div id="message-menus" class="section level2">
 <h2>Message menus</h2>
 <p>A message menu looks like this:</p>
-<p><img src="images/menu-messages.png" alt="Messages menu" /></p>
+<div class="figure">
+<img src="images/menu-messages.png" alt="Messages menu" />
+<p class="caption">Messages menu</p>
+</div>
 <p>A <code>messageItem</code> contained in a message menu needs values for <code>from</code> and <code>message</code>. You can also control the icon and a notification time string. By default, the icon is a silhouette of a person. (<a href="appearance.html#icons">Read more about icons</a>) The time string can be any text. For example, it could be a relative date/time like <code>&quot;5 minutes&quot;</code>, <code>&quot;today&quot;</code>, or <code>&quot;12:30pm yesterday&quot;</code>, or an absolute time, like <code>&quot;2014-12-01 13:45&quot;</code>.</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">dropdownMenu</span>(<span class="dt">type =</span> <span class="st">&quot;messages&quot;</span>,
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">dropdownMenu</span>(<span class="dt">type =</span> <span class="st">&quot;messages&quot;</span>,
   <span class="kw">messageItem</span>(
     <span class="dt">from =</span> <span class="st">&quot;Sales Dept&quot;</span>,
     <span class="dt">message =</span> <span class="st">&quot;Sales are steady this month.&quot;</span>
@@ -208,13 +235,13 @@ body &lt;-<span class="st"> </span><span class="kw">dashboardBody</span>()
     <span class="dt">icon =</span> <span class="kw">icon</span>(<span class="st">&quot;life-ring&quot;</span>),
     <span class="dt">time =</span> <span class="st">&quot;2014-12-01&quot;</span>
   )
-)</code></pre>
+)</code></pre></div>
 <div id="dynamic-content" class="section level3">
 <h3>Dynamic content</h3>
 <p>In most cases, you’ll want to make the content dynamic. That means that the HTML content is generated on the server side and sent to the client for rendering. In the UI code, you’d use <code>dropdownMenuOutput</code> like this:</p>
-<pre class="sourceCode r"><code class="sourceCode r">  <span class="kw">dashboardHeader</span>(<span class="kw">dropdownMenuOutput</span>(<span class="st">&quot;messageMenu&quot;</span>))</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">  <span class="kw">dashboardHeader</span>(<span class="kw">dropdownMenuOutput</span>(<span class="st">&quot;messageMenu&quot;</span>))</code></pre></div>
 <p>And on the server side, you’d generate the entire menu in a <code>renderMenu</code>, like this:</p>
-<pre class="sourceCode r"><code class="sourceCode r">output$messageMenu &lt;-<span class="st"> </span><span class="kw">renderMenu</span>({
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">output$messageMenu &lt;-<span class="st"> </span><span class="kw">renderMenu</span>({
   <span class="co"># Code to generate each of the messageItems here, in a list. This assumes</span>
   <span class="co"># that messageData is a data frame with two columns, &#39;from&#39; and &#39;message&#39;.</span>
   msgs &lt;-<span class="st"> </span><span class="kw">apply</span>(messageData, <span class="dv">1</span>, function(row) {
@@ -224,7 +251,7 @@ body &lt;-<span class="st"> </span><span class="kw">dashboardBody</span>()
   <span class="co"># This is equivalent to calling:</span>
   <span class="co">#   dropdownMenu(type=&quot;messages&quot;, msgs[[1]], msgs[[2]], ...)</span>
   <span class="kw">dropdownMenu</span>(<span class="dt">type =</span> <span class="st">&quot;messages&quot;</span>, <span class="dt">.list =</span> msgs)
-})</code></pre>
+})</code></pre></div>
 <p>For an interactive example, see the help page for <code>?renderMenu</code>.</p>
 <p>This is a customized version of dynamic UI in Shiny. For more about using dynamic UI, see <a href="http://shiny.rstudio.com/gallery/dynamic-ui.html">this example</a>.</p>
 </div>
@@ -232,9 +259,12 @@ body &lt;-<span class="st"> </span><span class="kw">dashboardBody</span>()
 <div id="notification-menus" class="section level2">
 <h2>Notification menus</h2>
 <p>This is what a notification menu looks like:</p>
-<p><img src="images/menu-notifications.png" alt="Notifications menu" /></p>
+<div class="figure">
+<img src="images/menu-notifications.png" alt="Notifications menu" />
+<p class="caption">Notifications menu</p>
+</div>
 <p>A <code>notificationItem</code> contained in a notification contains a text notification. You can also control the icon and the status color. The different possible statuses are shown <a href="appearance.html#statuses-and-colors">here</a>.</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">dropdownMenu</span>(<span class="dt">type =</span> <span class="st">&quot;notifications&quot;</span>,
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">dropdownMenu</span>(<span class="dt">type =</span> <span class="st">&quot;notifications&quot;</span>,
   <span class="kw">notificationItem</span>(
     <span class="dt">text =</span> <span class="st">&quot;5 new users today&quot;</span>,
     <span class="kw">icon</span>(<span class="st">&quot;users&quot;</span>)
@@ -249,14 +279,17 @@ body &lt;-<span class="st"> </span><span class="kw">dashboardBody</span>()
     <span class="dt">icon =</span> <span class="kw">icon</span>(<span class="st">&quot;exclamation-triangle&quot;</span>),
     <span class="dt">status =</span> <span class="st">&quot;warning&quot;</span>
   )
-)</code></pre>
+)</code></pre></div>
 </div>
 <div id="task-menus" class="section level2">
 <h2>Task menus</h2>
 <p>This is a task menu:</p>
-<p><img src="images/menu-tasks.png" alt="Tasks menu" /></p>
+<div class="figure">
+<img src="images/menu-tasks.png" alt="Tasks menu" />
+<p class="caption">Tasks menu</p>
+</div>
 <p>Task items have a progress bar and a text label. You can also specify the color of the bar. Valid colors are listed in <code>?validColors</code>.</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">dropdownMenu</span>(<span class="dt">type =</span> <span class="st">&quot;tasks&quot;</span>, <span class="dt">badgeStatus =</span> <span class="st">&quot;success&quot;</span>,
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">dropdownMenu</span>(<span class="dt">type =</span> <span class="st">&quot;tasks&quot;</span>, <span class="dt">badgeStatus =</span> <span class="st">&quot;success&quot;</span>,
   <span class="kw">taskItem</span>(<span class="dt">value =</span> <span class="dv">90</span>, <span class="dt">color =</span> <span class="st">&quot;green&quot;</span>,
     <span class="st">&quot;Documentation&quot;</span>
   ),
@@ -269,26 +302,35 @@ body &lt;-<span class="st"> </span><span class="kw">dashboardBody</span>()
   <span class="kw">taskItem</span>(<span class="dt">value =</span> <span class="dv">80</span>, <span class="dt">color =</span> <span class="st">&quot;red&quot;</span>,
     <span class="st">&quot;Overall project&quot;</span>
   )
-)</code></pre>
+)</code></pre></div>
 </div>
 <div id="disabling-the-header" class="section level2">
 <h2>Disabling the header</h2>
 <p>If you don’t want to show a header bar, you can disable it with:</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">dashboardHeader</span>(<span class="dt">disable =</span> <span class="ot">TRUE</span>)</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">dashboardHeader</span>(<span class="dt">disable =</span> <span class="ot">TRUE</span>)</code></pre></div>
 </div>
 </div>
 <div id="sidebar" class="section level1">
 <h1>Sidebar</h1>
 <p>A sidebar is typically used for quick navigation. It can contain menu items that behave like tabs in a <code>tabPanel</code>, as well as Shiny inputs, like sliders and text inputs.</p>
-<p><img src="images/sidebar.png" alt="Sidebar" /></p>
+<div class="figure">
+<img src="images/sidebar.png" alt="Sidebar" />
+<p class="caption">Sidebar</p>
+</div>
 <div id="sidebar-menu-items-and-tabs" class="section level2">
 <h2>Sidebar menu items and tabs</h2>
 <p>Links in the sidebar can be used like <code>tabPanel</code>s from Shiny. That is, when you click on a link, it will display different content in the body of the dashboard. Here is an example of a simple tabPanel:</p>
-<p><img src="images/sidebar-tabs.png" alt="Tabs" /></p>
+<div class="figure">
+<img src="images/sidebar-tabs.png" alt="Tabs" />
+<p class="caption">Tabs</p>
+</div>
 <p>When the user clicks on one of the menu items, it switches content in the main body:</p>
-<p><img src="images/sidebar-tabs-2.png" alt="Tabs" /></p>
+<div class="figure">
+<img src="images/sidebar-tabs-2.png" alt="Tabs" />
+<p class="caption">Tabs</p>
+</div>
 <p>The menu items are put in <code>sidebarMenu()</code> as follows. To match up a <code>menuItem</code> with a <code>tabItem</code>, make sure that they have matching values for <code>tabName</code>.</p>
-<pre class="sourceCode r"><code class="sourceCode r">## ui.R ##
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">## ui.R ##
 sidebar &lt;-<span class="st"> </span><span class="kw">dashboardSidebar</span>(
   <span class="kw">sidebarMenu</span>(
     <span class="kw">menuItem</span>(<span class="st">&quot;Dashboard&quot;</span>, <span class="dt">tabName =</span> <span class="st">&quot;dashboard&quot;</span>, <span class="dt">icon =</span> <span class="kw">icon</span>(<span class="st">&quot;dashboard&quot;</span>)),
@@ -314,15 +356,23 @@ body &lt;-<span class="st"> </span><span class="kw">dashboardBody</span>(
   <span class="kw">dashboardHeader</span>(<span class="dt">title =</span> <span class="st">&quot;Simple tabs&quot;</span>),
   sidebar,
   body
-)</code></pre>
+)</code></pre></div>
 <p><code>menuItem</code>s have an option icon, which is created by the <code>icon()</code> function from Shiny. (<a href="appearance.html#icons">More information</a> about using icons.) They also have an optional badge, with <code>badgeLabel</code> and <code>badgeColor</code>.</p>
 <p>A <code>menuItem</code> can do other things besides control tabs; it can also contain a link to external content, if you supply a value for <code>href</code>. By default, these external links open in a new browser tab or window; this can be controlled with the <code>newtab</code> option.</p>
-<pre class="sourceCode r"><code class="sourceCode r">  <span class="kw">menuItem</span>(<span class="st">&quot;Source code&quot;</span>, <span class="dt">icon =</span> <span class="kw">icon</span>(<span class="st">&quot;file-code-o&quot;</span>), 
-           <span class="dt">href =</span> <span class="st">&quot;https://github.com/rstudio/shinydashboard/&quot;</span>)</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">  <span class="kw">menuItem</span>(<span class="st">&quot;Source code&quot;</span>, <span class="dt">icon =</span> <span class="kw">icon</span>(<span class="st">&quot;file-code-o&quot;</span>), 
+           <span class="dt">href =</span> <span class="st">&quot;https://github.com/rstudio/shinydashboard/&quot;</span>)</code></pre></div>
+<div id="bookmarking-and-restoring-selected-tabs" class="section level3">
+<h3>Bookmarking and restoring selected tabs</h3>
+<p>As of version 0.14, Shiny has the ability to <a href="http://shiny.rstudio.com/articles/bookmarking-state.html">bookmark and restore</a> the state of an application. To be able to bookmark and restore the selected <code>tabItem</code> in an app built with shinydashboard, you must call <code>sidebarMenu()</code> with an <code>id</code>. For example:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">sidebarMenu</span>(<span class="dt">id =</span> <span class="st">&quot;sidebar&quot;</span>,
+  ....
+)</code></pre></div>
+<p>If you’ve used bookmarking in a Shiny app before, you know that the UI must be wrapped in a function. The <code>sidebarMenu()</code> must be called inside the UI function. It does not work to call it outside the UI function, saved the result in a variable, and then use that result in the UI function – if you do this, then the selected tab will save, but it will not restore.</p>
+</div>
 <div id="dynamic-content-1" class="section level3">
 <h3>Dynamic content</h3>
 <p>A sidebar menu can be generated dynamically, with <code>renderMenu</code> and <code>sidebarMenuOutput</code>. Here is an example app with a sidebar that is generated on the server side.</p>
-<pre class="sourceCode r"><code class="sourceCode r">ui &lt;-<span class="st"> </span><span class="kw">dashboardPage</span>(
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">ui &lt;-<span class="st"> </span><span class="kw">dashboardPage</span>(
   <span class="kw">dashboardHeader</span>(<span class="dt">title =</span> <span class="st">&quot;Dynamic sidebar&quot;</span>),
   <span class="kw">dashboardSidebar</span>(
     <span class="kw">sidebarMenuOutput</span>(<span class="st">&quot;menu&quot;</span>)
@@ -338,9 +388,9 @@ server &lt;-<span class="st"> </span>function(input, output) {
   })
 }
 
-<span class="kw">shinyApp</span>(ui, server)</code></pre>
+<span class="kw">shinyApp</span>(ui, server)</code></pre></div>
 <p>It’s also possible to dynamically generate individual items:</p>
-<pre class="sourceCode r"><code class="sourceCode r">ui &lt;-<span class="st"> </span><span class="kw">dashboardPage</span>(
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">ui &lt;-<span class="st"> </span><span class="kw">dashboardPage</span>(
   <span class="kw">dashboardHeader</span>(<span class="dt">title =</span> <span class="st">&quot;Dynamic sidebar&quot;</span>),
   <span class="kw">dashboardSidebar</span>(
     <span class="kw">sidebarMenu</span>(
@@ -356,22 +406,25 @@ server &lt;-<span class="st"> </span>function(input, output) {
   })
 }
 
-<span class="kw">shinyApp</span>(ui, server)</code></pre>
+<span class="kw">shinyApp</span>(ui, server)</code></pre></div>
 </div>
 </div>
 <div id="inputs-in-the-sidebar" class="section level2">
 <h2>Inputs in the sidebar</h2>
 <p>A sidebar can also contain ordinary inputs, like <code>sliderInput</code>s and <code>textInput</code>s.</p>
-<p><img src="images/sidebar-inputs.png" alt="Sidebar inputs" /></p>
+<div class="figure">
+<img src="images/sidebar-inputs.png" alt="Sidebar inputs" />
+<p class="caption">Sidebar inputs</p>
+</div>
 <p><strong>shinydashboard</strong> also includes a special type of input, a <code>sidebarSearchForm</code>, which is on top in the screenshot above. This is essentially a specially formatted text input and and actionButton which appears as a magnifying glass icon (the icon can be changed with the <code>icon</code> argument).</p>
-<pre class="sourceCode r"><code class="sourceCode r">  <span class="kw">sidebarSearchForm</span>(<span class="dt">textId =</span> <span class="st">&quot;searchText&quot;</span>, <span class="dt">buttonId =</span> <span class="st">&quot;searchButton&quot;</span>,
-                    <span class="dt">label =</span> <span class="st">&quot;Search...&quot;</span>)</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">  <span class="kw">sidebarSearchForm</span>(<span class="dt">textId =</span> <span class="st">&quot;searchText&quot;</span>, <span class="dt">buttonId =</span> <span class="st">&quot;searchButton&quot;</span>,
+                    <span class="dt">label =</span> <span class="st">&quot;Search...&quot;</span>)</code></pre></div>
 <p>For this search form, the corresponding values in the server-side code would be <code>input$searchText</code> and <code>input$searchButton</code>.</p>
 </div>
 <div id="disabling-the-sidebar" class="section level2">
 <h2>Disabling the sidebar</h2>
 <p>If you don’t want a sidebar, you can disable it with:</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">dashboardSidebar</span>(<span class="dt">disable =</span> <span class="ot">TRUE</span>)</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">dashboardSidebar</span>(<span class="dt">disable =</span> <span class="ot">TRUE</span>)</code></pre></div>
 </div>
 </div>
 <div id="body" class="section level1">
@@ -381,7 +434,7 @@ server &lt;-<span class="st"> </span>function(input, output) {
 <h2>Boxes</h2>
 <p>Boxes are the main building blocks of dashboard pages. A basic box can be created with the <code>box()</code> function, and the contents of the box can be (most) any Shiny UI content.</p>
 <p>In a typical dashboard, these boxes would be placed inside a <code>fluidRow()</code> (we’ll see more on dashboard layout later):</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="co"># This is just the body component of a dashboard</span>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># This is just the body component of a dashboard</span>
 <span class="kw">dashboardBody</span>(
   <span class="kw">fluidRow</span>(
     <span class="kw">box</span>(<span class="kw">plotOutput</span>(<span class="st">&quot;plot1&quot;</span>)),
@@ -392,20 +445,26 @@ server &lt;-<span class="st"> </span>function(input, output) {
       <span class="kw">textInput</span>(<span class="st">&quot;text&quot;</span>, <span class="st">&quot;Text input:&quot;</span>)
     )
   )
-)</code></pre>
-<p><img src="images/body-boxes-basic.png" alt="Basic boxes" /></p>
+)</code></pre></div>
+<div class="figure">
+<img src="images/body-boxes-basic.png" alt="Basic boxes" />
+<p class="caption">Basic boxes</p>
+</div>
 <p>Boxes can have titles and header bar colors with the <code>title</code> and <code>status</code> options. The different possible statuses are shown <a href="appearance.html#statuses-and-colors">here</a>.</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">box</span>(<span class="dt">title =</span> <span class="st">&quot;Histogram&quot;</span>, <span class="dt">status =</span> <span class="st">&quot;primary&quot;</span>, <span class="kw">plotOutput</span>(<span class="st">&quot;plot2&quot;</span>, <span class="dt">height =</span> <span class="dv">250</span>)),
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">box</span>(<span class="dt">title =</span> <span class="st">&quot;Histogram&quot;</span>, <span class="dt">status =</span> <span class="st">&quot;primary&quot;</span>, <span class="kw">plotOutput</span>(<span class="st">&quot;plot2&quot;</span>, <span class="dt">height =</span> <span class="dv">250</span>)),
 
 <span class="kw">box</span>(
   <span class="dt">title =</span> <span class="st">&quot;Inputs&quot;</span>, <span class="dt">status =</span> <span class="st">&quot;warning&quot;</span>,
   <span class="st">&quot;Box content here&quot;</span>, <span class="kw">br</span>(), <span class="st">&quot;More box content&quot;</span>,
   <span class="kw">sliderInput</span>(<span class="st">&quot;slider&quot;</span>, <span class="st">&quot;Slider input:&quot;</span>, <span class="dv">1</span>, <span class="dv">100</span>, <span class="dv">50</span>),
   <span class="kw">textInput</span>(<span class="st">&quot;text&quot;</span>, <span class="st">&quot;Text input:&quot;</span>)
-)</code></pre>
-<p><img src="images/body-boxes-header.png" alt="Box header color and title" /></p>
+)</code></pre></div>
+<div class="figure">
+<img src="images/body-boxes-header.png" alt="Box header color and title" />
+<p class="caption">Box header color and title</p>
+</div>
 <p>You can have solid headers with <code>solidHeader=TRUE</code>, and display a button in the upper right that will collapse the box with <code>collapsible=TRUE</code>:</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">box</span>(
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">box</span>(
   <span class="dt">title =</span> <span class="st">&quot;Histogram&quot;</span>, <span class="dt">status =</span> <span class="st">&quot;primary&quot;</span>, <span class="dt">solidHeader =</span> <span class="ot">TRUE</span>,
   <span class="dt">collapsible =</span> <span class="ot">TRUE</span>,
   <span class="kw">plotOutput</span>(<span class="st">&quot;plot3&quot;</span>, <span class="dt">height =</span> <span class="dv">250</span>)
@@ -416,10 +475,13 @@ server &lt;-<span class="st"> </span>function(input, output) {
   <span class="st">&quot;Box content here&quot;</span>, <span class="kw">br</span>(), <span class="st">&quot;More box content&quot;</span>,
   <span class="kw">sliderInput</span>(<span class="st">&quot;slider&quot;</span>, <span class="st">&quot;Slider input:&quot;</span>, <span class="dv">1</span>, <span class="dv">100</span>, <span class="dv">50</span>),
   <span class="kw">textInput</span>(<span class="st">&quot;text&quot;</span>, <span class="st">&quot;Text input:&quot;</span>)
-)</code></pre>
-<p><img src="images/body-boxes-header-2.png" alt="Solid header and collapse" /></p>
+)</code></pre></div>
+<div class="figure">
+<img src="images/body-boxes-header-2.png" alt="Solid header and collapse" />
+<p class="caption">Solid header and collapse</p>
+</div>
 <p>If you want the boxes to not have a gray or colored bar on top, use <code>solidHeader=TRUE</code> and don’t give a value for <code>status</code>:</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">box</span>(
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">box</span>(
   <span class="dt">title =</span> <span class="st">&quot;Histogram&quot;</span>, <span class="dt">solidHeader =</span> <span class="ot">TRUE</span>,
   <span class="dt">collapsible =</span> <span class="ot">TRUE</span>,
   <span class="kw">plotOutput</span>(<span class="st">&quot;plot3&quot;</span>, <span class="dt">height =</span> <span class="dv">250</span>)
@@ -430,10 +492,13 @@ server &lt;-<span class="st"> </span>function(input, output) {
   <span class="st">&quot;Box content here&quot;</span>, <span class="kw">br</span>(), <span class="st">&quot;More box content&quot;</span>,
   <span class="kw">sliderInput</span>(<span class="st">&quot;slider&quot;</span>, <span class="st">&quot;Slider input:&quot;</span>, <span class="dv">1</span>, <span class="dv">100</span>, <span class="dv">50</span>),
   <span class="kw">textInput</span>(<span class="st">&quot;text&quot;</span>, <span class="st">&quot;Text input:&quot;</span>)
-)</code></pre>
-<p><img src="images/body-boxes-header-3.png" alt="No colored bar" /></p>
+)</code></pre></div>
+<div class="figure">
+<img src="images/body-boxes-header-3.png" alt="No colored bar" />
+<p class="caption">No colored bar</p>
+</div>
 <p>Finally, it’s also possible to have a solid background, with the <code>background</code> option. The different possible colors are shown <a href="appearance.html#statuses-and-colors">here</a>.</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">box</span>(
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">box</span>(
   <span class="dt">title =</span> <span class="st">&quot;Histogram&quot;</span>, <span class="dt">background =</span> <span class="st">&quot;maroon&quot;</span>, <span class="dt">solidHeader =</span> <span class="ot">TRUE</span>,
   <span class="kw">plotOutput</span>(<span class="st">&quot;plot4&quot;</span>, <span class="dt">height =</span> <span class="dv">250</span>)
 ),
@@ -443,15 +508,21 @@ server &lt;-<span class="st"> </span>function(input, output) {
   <span class="st">&quot;Box content here&quot;</span>, <span class="kw">br</span>(), <span class="st">&quot;More box content&quot;</span>,
   <span class="kw">sliderInput</span>(<span class="st">&quot;slider&quot;</span>, <span class="st">&quot;Slider input:&quot;</span>, <span class="dv">1</span>, <span class="dv">100</span>, <span class="dv">50</span>),
   <span class="kw">textInput</span>(<span class="st">&quot;text&quot;</span>, <span class="st">&quot;Text input:&quot;</span>)
-)</code></pre>
-<p><img src="images/body-boxes-header-4.png" alt="Solid background" /></p>
+)</code></pre></div>
+<div class="figure">
+<img src="images/body-boxes-header-4.png" alt="Solid background" />
+<p class="caption">Solid background</p>
+</div>
 <div id="tabbox" class="section level3">
 <h3>tabBox</h3>
 <p>If you want a box to have tabs for displaying different sets of content, you can use a <code>tabBox</code>.</p>
-<p><img src="images/body-tabboxes.png" alt="Tabbed boxes" /></p>
+<div class="figure">
+<img src="images/body-tabboxes.png" alt="Tabbed boxes" />
+<p class="caption">Tabbed boxes</p>
+</div>
 <p>The code to generate this app is below. A <code>tabBox</code> is similar to a <code>tabsetPanel</code> from Shiny in that it takes <code>tabPanels</code> as inputs, allows you to choose which tab is selected, and can be assigned an <code>id</code>. If <code>id</code> is present, you can access which tab is selected from the server; in the example below, it’s accessed with <code>input$tabset1</code>.</p>
 <p>A <code>tabBox</code> also has similarities to a regular <code>box</code> from shinydashboard, in that you can control the <code>height</code>, <code>width</code>, and <code>title</code>. You can also choose which side the tabs appear on, with the <code>side</code> argument. Note that if <code>side=&quot;right&quot;</code>, the tabs will be displayed in reverse order.</p>
-<pre class="sourceCode r"><code class="sourceCode r">body &lt;-<span class="st"> </span><span class="kw">dashboardBody</span>(
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">body &lt;-<span class="st"> </span><span class="kw">dashboardBody</span>(
   <span class="kw">fluidRow</span>(
     <span class="kw">tabBox</span>(
       <span class="dt">title =</span> <span class="st">&quot;First tabBox&quot;</span>,
@@ -493,15 +564,18 @@ server &lt;-<span class="st"> </span>function(input, output) {
       input$tabset1
     })
   }
-)</code></pre>
+)</code></pre></div>
 </div>
 <div id="infobox" class="section level3">
 <h3>infoBox</h3>
 <p>There is a special kind of box that is used for displaying simple numeric or text values, with an icon. Here are some examples:</p>
-<p><img src="images/body-infoboxes.png" alt="Info boxes" /></p>
+<div class="figure">
+<img src="images/body-infoboxes.png" alt="Info boxes" />
+<p class="caption">Info boxes</p>
+</div>
 <p>The code to generate these <code>infoBox</code>es is below. The first row of infoBoxes uses the default setting of <code>fill=FALSE</code>, while the second row uses <code>fill=TRUE</code>.</p>
 <p>Since the content of an <code>infoBox</code> will usually be dynamic, <strong>shinydashboard</strong> contains the helper functions <code>infoBoxOutput</code> and <code>renderInfoBox</code> for dynamic content. The different possible colors are shown <a href="appearance.html#statuses-and-colors">here</a>.</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(shinydashboard)
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(shinydashboard)
 
 ui &lt;-<span class="st"> </span><span class="kw">dashboardPage</span>(
   <span class="kw">dashboardHeader</span>(<span class="dt">title =</span> <span class="st">&quot;Info boxes&quot;</span>),
@@ -559,14 +633,17 @@ server &lt;-<span class="st"> </span>function(input, output) {
   })
 }
 
-<span class="kw">shinyApp</span>(ui, server)</code></pre>
+<span class="kw">shinyApp</span>(ui, server)</code></pre></div>
 </div>
 <div id="valuebox" class="section level3">
 <h3>valueBox</h3>
 <p><code>valueBox</code>es are similar to <code>infoBox</code>es, but have a somewhat different appearance.</p>
-<p><img src="images/body-valueboxes.png" alt="Value boxes" /></p>
+<div class="figure">
+<img src="images/body-valueboxes.png" alt="Value boxes" />
+<p class="caption">Value boxes</p>
+</div>
 <p>The code to generate these <code>valueBox</code>es is below. As with the <code>infoBox</code>es above, some of these <code>valueBox</code>es are static and some are dynamic.</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(shinydashboard)
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(shinydashboard)
 
 ui &lt;-<span class="st"> </span><span class="kw">dashboardPage</span>(
   <span class="kw">dashboardHeader</span>(<span class="dt">title =</span> <span class="st">&quot;Value boxes&quot;</span>),
@@ -604,7 +681,7 @@ server &lt;-<span class="st"> </span>function(input, output) {
   })
 }
 
-<span class="kw">shinyApp</span>(ui, server)</code></pre>
+<span class="kw">shinyApp</span>(ui, server)</code></pre></div>
 </div>
 </div>
 <div id="layouts" class="section level2">
@@ -615,9 +692,12 @@ server &lt;-<span class="st"> </span>function(input, output) {
 <h3>Row-based layout</h3>
 <p>In a row-based layout, boxes must go in a row created by <code>fluidRow()</code>. Rows have a grid width of 12, so a box with <code>width=4</code> takes up one-third of the width, and a box with <code>width=6</code> (the default) takes up half of the width.</p>
 <p>With a row-based layout, the tops of the boxes in each row will be aligned, but the bottoms may not be – it depends on the content of each box. A row-based layout might look like this:</p>
-<p><img src="images/layout-rows.png" alt="Row-based layout" /></p>
+<div class="figure">
+<img src="images/layout-rows.png" alt="Row-based layout" />
+<p class="caption">Row-based layout</p>
+</div>
 <p>This code is the basic scaffolding for these three rows of boxes:</p>
-<pre class="sourceCode r"><code class="sourceCode r">body &lt;-<span class="st"> </span><span class="kw">dashboardBody</span>(
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">body &lt;-<span class="st"> </span><span class="kw">dashboardBody</span>(
   <span class="kw">fluidRow</span>(
     <span class="kw">box</span>(<span class="dt">title =</span> <span class="st">&quot;Box title&quot;</span>, <span class="st">&quot;Box content&quot;</span>),
     <span class="kw">box</span>(<span class="dt">status =</span> <span class="st">&quot;warning&quot;</span>, <span class="st">&quot;Box content&quot;</span>)
@@ -662,19 +742,25 @@ ui &lt;-<span class="st"> </span><span class="kw">dashboardPage</span>(
 )
 
 <span class="co"># Preview the UI in the console</span>
-<span class="kw">shinyApp</span>(<span class="dt">ui =</span> ui, <span class="dt">server =</span> function(input, output) { })</code></pre>
+<span class="kw">shinyApp</span>(<span class="dt">ui =</span> ui, <span class="dt">server =</span> function(input, output) { })</code></pre></div>
 <p>It’s possible to force the boxes to all be the same height, by setting <code>height</code>. In contrast to <code>width</code>, which is set using the 12-wide Bootstrap gride, <code>height</code> is specified in pixels. (This difference is because HTML/CSS layout handles width and height differently. Unfortunately, there isn’t a straightforward way to get equal column heights with Bootstrap.)</p>
 <p>For example:</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">box</span>(<span class="dt">title =</span> <span class="st">&quot;Box title&quot;</span>, <span class="dt">height =</span> <span class="dv">300</span>, <span class="st">&quot;Box content&quot;</span>),</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">box</span>(<span class="dt">title =</span> <span class="st">&quot;Box title&quot;</span>, <span class="dt">height =</span> <span class="dv">300</span>, <span class="st">&quot;Box content&quot;</span>),</code></pre></div>
 <p>If we set the height of all the boxes, we can get a dashboard like this:</p>
-<p><img src="images/layout-rows-height.png" alt="Row-based layout with fixed height" /></p>
+<div class="figure">
+<img src="images/layout-rows-height.png" alt="Row-based layout with fixed height" />
+<p class="caption">Row-based layout with fixed height</p>
+</div>
 </div>
 <div id="column-based-layout" class="section level3">
 <h3>Column-based layout</h3>
 <p>With a column-based layout, you first create a column and then place boxes within those columns.</p>
-<p><img src="images/layout-cols.png" alt="Column-based layout" /></p>
+<div class="figure">
+<img src="images/layout-cols.png" alt="Column-based layout" />
+<p class="caption">Column-based layout</p>
+</div>
 <p>The code below is the basic scaffolding for this column-based layout. Notice that within the <code>fluidRow</code>, there are <code>column</code>s with a specified width, and then each of the boxes in the column have <code>width=NULL</code>.</p>
-<pre class="sourceCode r"><code class="sourceCode r">body &lt;-<span class="st"> </span><span class="kw">dashboardBody</span>(
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">body &lt;-<span class="st"> </span><span class="kw">dashboardBody</span>(
   <span class="kw">fluidRow</span>(
     <span class="kw">column</span>(<span class="dt">width =</span> <span class="dv">4</span>,
       <span class="kw">box</span>(
@@ -727,14 +813,17 @@ ui &lt;-<span class="st"> </span><span class="kw">dashboardPage</span>(
 )
 
 <span class="co"># Preview the UI in the console</span>
-<span class="kw">shinyApp</span>(<span class="dt">ui =</span> ui, <span class="dt">server =</span> function(input, output) { })</code></pre>
+<span class="kw">shinyApp</span>(<span class="dt">ui =</span> ui, <span class="dt">server =</span> function(input, output) { })</code></pre></div>
 </div>
 <div id="mixed-row-and-column-layout" class="section level3">
 <h3>Mixed row and column layout</h3>
 <p>It’s also possible to use a mix of rows and columns. In this example, the top two boxes are in a row, and the rest are in columns:</p>
-<p><img src="images/layout-mixed.png" alt="Mixed row and column layout" /></p>
+<div class="figure">
+<img src="images/layout-mixed.png" alt="Mixed row and column layout" />
+<p class="caption">Mixed row and column layout</p>
+</div>
 <p>This is the scaffolding for this mixed layout:</p>
-<pre class="sourceCode r"><code class="sourceCode r">body &lt;-<span class="st"> </span><span class="kw">dashboardBody</span>(
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">body &lt;-<span class="st"> </span><span class="kw">dashboardBody</span>(
   <span class="kw">fluidRow</span>(
     <span class="kw">box</span>(
       <span class="dt">title =</span> <span class="st">&quot;Box title&quot;</span>, <span class="dt">width =</span> <span class="dv">6</span>, <span class="dt">status =</span> <span class="st">&quot;primary&quot;</span>,
@@ -790,10 +879,10 @@ ui &lt;-<span class="st"> </span><span class="kw">dashboardPage</span>(
 )
 
 <span class="co"># Preview the UI in the console</span>
-<span class="kw">shinyApp</span>(<span class="dt">ui =</span> ui, <span class="dt">server =</span> function(input, output) { })</code></pre>
+<span class="kw">shinyApp</span>(<span class="dt">ui =</span> ui, <span class="dt">server =</span> function(input, output) { })</code></pre></div>
 <div class="text-center">
 <p><strong>Next</strong>: learn about customizing the appearance of a dashboard.</p>
-<a class="btn btn-success btn-lg" href="appearance.html" role="button">Continue <span class="glyphicon glyphicon-arrow-right"></span> </a>
+<p><a class="btn btn-success btn-lg" href="appearance.html" role="button">Continue <span class="glyphicon glyphicon-arrow-right"></span> </a></p>
 </div>
 </div>
 </div>
@@ -817,18 +906,20 @@ ui &lt;-<span class="st"> </span><span class="kw">dashboardPage</span>(
 <script>
 // manage active state of headres and navigation based on current page
 $(document).ready(function () {
-  
+
   // compute name of page
   href = window.location.pathname;
   href = href.substr(href.lastIndexOf('/') + 1);
   if (href == "")
     href = "index.html";
-  
+
   var pagelinks = {
     "index.html": "#nav-home",
     "get_started.html": "#nav-get-started",
     "structure.html": "#nav-structure",
-    "appearance.html": "#nav-appearance"
+    "appearance.html": "#nav-appearance",
+    "behavior.html": "#nav-behavior",
+    "examples.html": "#nav-examples"
   };
 
   if (pagelinks[href]) {

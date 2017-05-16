@@ -12,12 +12,13 @@
 
 <title>Shiny Dashboard Examples</title>
 
-<script src="libs/jquery-1.11.0/jquery.min.js"></script>
+<script src="libs/jquery-1.11.3/jquery.min.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<link href="libs/bootstrap-3.3.1/css/bootstrap.min.css" rel="stylesheet" />
-<script src="libs/bootstrap-3.3.1/js/bootstrap.min.js"></script>
-<script src="libs/bootstrap-3.3.1/shim/html5shiv.min.js"></script>
-<script src="libs/bootstrap-3.3.1/shim/respond.min.js"></script>
+<link href="libs/bootstrap-3.3.5/css/bootstrap.min.css" rel="stylesheet" />
+<script src="libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+<script src="libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
+<script src="libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<script src="libs/navigation-1.1/tabsets.js"></script>
 
 
 
@@ -50,6 +51,7 @@ code {
         <li role="presentation" id="nav-get-started"><a href="get_started.html">Get started</a></li>
         <li role="presentation" id="nav-structure"><a href="structure.html">Structure</a></li>
         <li role="presentation" id="nav-appearance"><a href="appearance.html">Appearance</a></li>
+        <li role="presentation" id="nav-behavior"><a href="behavior.html">Behavior</a></li>
         <li role="presentation" id="nav-examples"><a href="examples.html">Examples</a></li>
         <li role="presentation" id="nav-github"><a href="https://github.com/rstudio/shinydashboard">GitHub</a></li>
       </ul>
@@ -100,18 +102,20 @@ code {
 <script>
 // manage active state of headres and navigation based on current page
 $(document).ready(function () {
-  
+
   // compute name of page
   href = window.location.pathname;
   href = href.substr(href.lastIndexOf('/') + 1);
   if (href == "")
     href = "index.html";
-  
+
   var pagelinks = {
     "index.html": "#nav-home",
     "get_started.html": "#nav-get-started",
     "structure.html": "#nav-structure",
-    "appearance.html": "#nav-appearance"
+    "appearance.html": "#nav-appearance",
+    "behavior.html": "#nav-behavior",
+    "examples.html": "#nav-examples"
   };
 
   if (pagelinks[href]) {
