@@ -121,7 +121,7 @@ dashboardSidebar <- function(..., disable = FALSE, width = NULL, collapsed = FAL
   # sidebar was collapsed. If this is not the case, the default is whatever the user
   # specified in the `collapsed` argument.
   dataValue <- shiny::restoreInput(id = "sidebarCollapsed", default = collapsed)
-  if (disable) dataValue <- TRUE
+  if (disable) dataValue <- TRUE # this is a workaround to fix #209
   dataValueString <- if (dataValue) "true" else "false"
 
   # The expanded/collapsed state of the sidebar is actually set by adding a
