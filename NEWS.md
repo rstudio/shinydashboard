@@ -7,25 +7,25 @@ This release of shinydashboard was aimed at both fixing bugs and also bringing t
 
 ### New features
 
-* Address [#179](https://github.com/rstudio/shinydashboard/issues/179) support for bookmarking the expanded/collapsed state of the whole sidebar. (commit [e71c93f](https://github.com/rstudio/shinydashboard/pull/199/commits/e71c93fa7a71f229e725efd4a7867e431cd57679))
+* Address [#179](https://github.com/rstudio/shinydashboard/issues/179) support for bookmarking the expanded/collapsed state of the whole sidebar. (commit [e71c93f](https://github.com/rstudio/shinydashboard/commit/e71c93fa7a71f229e725efd4a7867e431cd57679))
 
-* Added Shiny input to keep track of which sidebar `menuItem` is expanded (if any), which makes bookmarking the exact state of the sidebar trivial. (commit [6901b90](https://github.com/rstudio/shinydashboard/pull/199/commits/6901b90b8c866b89d02514cfc01fdfab88175602))
+* Added Shiny input to keep track of which sidebar `menuItem` is expanded (if any), which makes bookmarking the exact state of the sidebar trivial. (commit [6901b90](https://github.com/rstudio/shinydashboard/commit/6901b90b8c866b89d02514cfc01fdfab88175602))
 
 ### Minor new features and improvements
 
 * Addressed [#165](https://github.com/rstudio/shinydashboard/issues/165): added a new optional argument, called `headerText` to the `dropdownMenu()` function. If provided by the user, this text (instead of the default) will be shown on the header of the menu (only visible when the menu is expanded). See `?dropdownMenu` for more details. [#207](https://github.com/rstudio/shinydashboard/pull/207)
 
-* Split JS files. (commit [ea91503](https://github.com/rstudio/shinydashboard/pull/199/commits/ea915038ae2126f48c15e3aac41782a22b16c506)). More updates to Gruntfile and structure. (commit [4e80616](https://github.com/rstudio/shinydashboard/pull/199/commits/4e80616c5b3aa0dc73022dc815288b5ba7c35be0))
+* Split JS files. (commit [ea91503](https://github.com/rstudio/shinydashboard/commit/ea915038ae2126f48c15e3aac41782a22b16c506)). More updates to Gruntfile and structure. (commit [4e80616](https://github.com/rstudio/shinydashboard/commit/4e80616c5b3aa0dc73022dc815288b5ba7c35be0))
 
-* Better shown/hidden mechanic for Shiny inputs inside collapsible `menuItem`s. (commit [6901b90](https://github.com/rstudio/shinydashboard/pull/199/commits/6901b90b8c866b89d02514cfc01fdfab88175602))
+* Better shown/hidden mechanic for Shiny inputs inside collapsible `menuItem`s. (commit [6901b90](https://github.com/rstudio/shinydashboard/commit/6901b90b8c866b89d02514cfc01fdfab88175602))
 
-* Added hack on adminLTE/app.js in order to make the `slideUp`/`slideDown` css transitions look reasonable when its content is initially empty (use case is for hidden Shiny outputs that are not rendered until the first time the `menuItem` is expanded and reveal them -- i.e. first time that `trigger("shown")` is called). (commit [25725a6](https://github.com/rstudio/shinydashboard/pull/199/commits/25725a67ce3dd841786dd82b0e46624c6a7d4722))
+* Added hack on adminLTE/app.js in order to make the `slideUp`/`slideDown` css transitions look reasonable when its content is initially empty (use case is for hidden Shiny outputs that are not rendered until the first time the `menuItem` is expanded and reveal them -- i.e. first time that `trigger("shown")` is called). (commit [25725a6](https://github.com/rstudio/shinydashboard/commit/25725a67ce3dd841786dd82b0e46624c6a7d4722))
 
-* Added manual tests for bookmarking and the shown/hidden events that happen on the sidebar. (commit [9e3e55d](https://github.com/rstudio/shinydashboard/pull/199/commits/9e3e55de8cc63d4bdd179251cd53eeb845441d3d))
+* Added manual tests for bookmarking and the shown/hidden events that happen on the sidebar. (commit [9e3e55d](https://github.com/rstudio/shinydashboard/commit/9e3e55de8cc63d4bdd179251cd53eeb845441d3d))
 
 ### Bug fixes
 
-* Fixed [#71](https://github.com/rstudio/shinydashboard/issues/71) and [#87](https://github.com/rstudio/shinydashboard/issues/87): detect and enforce selected tab for dynamic sidebar menus by calling `ensureActivatedTab()` for these. (commit [9b88a79](https://github.com/rstudio/shinydashboard/pull/199/commits/9b88a790df058432165ca3b483b5bbfe1d267326))
+* Fixed [#71](https://github.com/rstudio/shinydashboard/issues/71) and [#87](https://github.com/rstudio/shinydashboard/issues/87): detect and enforce selected tab for dynamic sidebar menus by calling `ensureActivatedTab()` for these. (commit [9b88a79](https://github.com/rstudio/shinydashboard/commit/9b88a790df058432165ca3b483b5bbfe1d267326))
 
 * Fixed [#127](https://github.com/rstudio/shinydashboard/issues/127) and [#177](https://github.com/rstudio/shinydashboard/issues/177): previously, if `dashboardSidebar()` was called with an explicit `width` parameter, mobile rendering would look weird (the sidebar wouldn't completely disappear when it was collapsed, and content in the dashboard body would be hidden under the still-visible sidebar). ([#204](https://github.com/rstudio/shinydashboard/pull/204))
 
@@ -43,7 +43,7 @@ This release of shinydashboard was aimed at both fixing bugs and also bringing t
 
 ### Library updates
 
-* Update documentation to newest version of roxygen. (commit [#541d3c1](https://github.com/rstudio/shinydashboard/pull/199/commits/541d3c13467446c8e89b178d95b0984729559059))
+* Update documentation to newest version of roxygen. (commit [#541d3c1](https://github.com/rstudio/shinydashboard/commit/541d3c13467446c8e89b178d95b0984729559059))
 
 * Addressed [#178](https://github.com/rstudio/shinydashboard/issues/178): switch from `npm` to `yarn`. Also upgraded all yarn packages to the `latest` tag (all major changes). [#184](https://github.com/rstudio/shinydashboard/pull/184)
 
