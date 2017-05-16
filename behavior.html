@@ -321,7 +321,8 @@ server &lt;-<span class="st"> </span>function(input, output, session) {
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(shiny)
 <span class="kw">library</span>(shinydashboard)
 
-ui &lt;-<span class="st"> </span><span class="kw">dashboardPage</span>(
+ui &lt;-<span class="st"> </span>function(req) {
+  <span class="kw">dashboardPage</span>(
     <span class="kw">dashboardHeader</span>(),
     <span class="kw">dashboardSidebar</span>(
       <span class="kw">sidebarMenu</span>(<span class="dt">id =</span> <span class="st">&quot;tabs&quot;</span>,
@@ -336,7 +337,8 @@ ui &lt;-<span class="st"> </span><span class="kw">dashboardPage</span>(
     <span class="kw">dashboardBody</span>(
       <span class="kw">bookmarkButton</span>()
     )
-)
+  )
+}
 
 server &lt;-<span class="st"> </span>function(input, output, session) {}
 

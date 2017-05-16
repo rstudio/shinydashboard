@@ -241,7 +241,8 @@ As alluded in the previous sections, the features added in shinydashboard 0.6 al
 library(shiny)
 library(shinydashboard)
 
-ui <- dashboardPage(
+ui <- function(req) {
+  dashboardPage(
     dashboardHeader(),
     dashboardSidebar(
       sidebarMenu(id = "tabs",
@@ -256,7 +257,8 @@ ui <- dashboardPage(
     dashboardBody(
       bookmarkButton()
     )
-)
+  )
+}
 
 server <- function(input, output, session) {}
 
