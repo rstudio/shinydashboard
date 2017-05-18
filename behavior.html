@@ -139,7 +139,12 @@ code {
 <div id="know-which-menuitem-or-menusubitem-is-currently-selected" class="section level2">
 <h2>Know which <strong>menuItem()</strong> or <strong>menuSubItem()</strong> is currently selected</h2>
 <p>You can find the currently-selected <code>menuItem()</code> or <code>menuSubItem()</code>, provided that the <code>sidebarMenu()</code> has an <code>id</code> (and the <code>menuItem()</code>/<code>menuSubItem()</code> has a <code>tabName</code>). In particular, if you pass in <code>id = &quot;tabs&quot;</code> to your <code>sidebarMenu()</code>, then you can know which sidebar item is selected by accessing the variable <code>input$tabs</code>. The value associated with <code>input$tabs</code> is given by the <code>tabName</code> argument of the currently selected <code>menuItem()</code> (or <code>menuSubItem()</code>).</p>
-<p>Here is a small example app. Notice that all childless <code>menuItem()</code>s and <code>menuSubItem()</code>s have a <code>tabName</code> argument:</p>
+<p>The screenshot below shows an app that indicates which <code>menuItem()</code> is selected:</p>
+<div class="figure">
+<img src="images/sidebar-input.png" />
+
+</div>
+<p>Here’s the code for the app pictured above. Notice that all childless <code>menuItem()</code>s and <code>menuSubItem()</code>s have a <code>tabName</code> argument:</p>
 <p><details> <summary>app.R</summary></p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(shiny)
 <span class="kw">library</span>(shinydashboard)
@@ -230,7 +235,12 @@ server &lt;-<span class="st"> </span>function(input, output, session) {
 <div id="know-which-menuitem-if-any-is-currently-expanded" class="section level2">
 <h2>Know which <strong>menuItem()</strong>, if any, is currently expanded</h2>
 <p>As of shinydashboard 0.6, there’s an automatic way to access which “childfull” <code>menuItem()</code> (if any) is currently expanded. Anywhere on your server function, use <code>input$sidebarItemExpanded</code> to get the <code>expandedName</code> of the currently expanded <code>menuItem()</code> (or <code>NULL</code> if none is currently expanded). If you don’t pass in an <code>expandedName</code>, Shiny has a sensible default – it will use the mandatory <code>text</code> argument that was passed in, without any white space. You can use <code>input$sidebarItemExpanded</code> as any other input, including making other UI elements conditional on it.</p>
-<p>Here’s a small example app:</p>
+<p>The screenshot below shows an app that starts with the “Charts” <code>menuItem()</code> expanded:</p>
+<div class="figure">
+<img src="images/sidebar-expanded.png" />
+
+</div>
+<p>Here’s the code for the app pictured above:</p>
 <p><details> <summary>app.R</summary></p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(shiny)
 <span class="kw">library</span>(shinydashboard)
@@ -241,7 +251,7 @@ ui &lt;-<span class="st"> </span><span class="kw">dashboardPage</span>(
     <span class="kw">sidebarMenu</span>(
       <span class="kw">menuItem</span>(<span class="st">&quot;Dashboard&quot;</span>, <span class="dt">tabName =</span> <span class="st">&quot;dashboard&quot;</span>, <span class="dt">icon =</span> <span class="kw">icon</span>(<span class="st">&quot;dashboard&quot;</span>)),
       <span class="kw">menuItem</span>(<span class="st">&quot;Widgets&quot;</span>, <span class="dt">icon =</span> <span class="kw">icon</span>(<span class="st">&quot;th&quot;</span>), <span class="dt">tabName =</span> <span class="st">&quot;widgets&quot;</span>),
-      <span class="kw">menuItem</span>(<span class="st">&quot;Charts&quot;</span>, <span class="dt">icon =</span> <span class="kw">icon</span>(<span class="st">&quot;bar-chart-o&quot;</span>,), <span class="dt">startExpanded =</span> <span class="ot">TRUE</span>,
+      <span class="kw">menuItem</span>(<span class="st">&quot;Charts&quot;</span>, <span class="dt">icon =</span> <span class="kw">icon</span>(<span class="st">&quot;bar-chart-o&quot;</span>), <span class="dt">startExpanded =</span> <span class="ot">TRUE</span>,
         <span class="kw">menuSubItem</span>(<span class="st">&quot;Sub-item 1&quot;</span>, <span class="dt">tabName =</span> <span class="st">&quot;subitem1&quot;</span>),
         <span class="kw">menuSubItem</span>(<span class="st">&quot;Sub-item 2&quot;</span>, <span class="dt">tabName =</span> <span class="st">&quot;subitem2&quot;</span>)
       )

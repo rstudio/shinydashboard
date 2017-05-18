@@ -4,11 +4,14 @@ output:
   html_document:
     toc: true
     template: ./template-toc.html
+editor_options: 
+  chunk_output_type: console
 ---
 
 ```{r echo = FALSE, message=FALSE}
 library(shiny)
 library(shinydashboard)
+library(webshot)
 
 knitr::opts_chunk$set(collapse = TRUE, comment = "##")
 
@@ -29,8 +32,22 @@ Let's get into the details. The three sidebar-related inputs allow you to:
 ## Know which **menuItem()** or **menuSubItem()** is currently selected
 
 You can find the currently-selected `menuItem()` or `menuSubItem()`, provided that the `sidebarMenu()` has an `id` (and the `menuItem()`/`menuSubItem()` has a `tabName`). In particular, if you pass in `id = "tabs"` to your `sidebarMenu()`, then you can know which sidebar item is selected by accessing the variable `input$tabs`. The value associated with `input$tabs` is given by the `tabName` argument of the currently selected `menuItem()` (or `menuSubItem()`).
-  
-Here is a small example app. Notice that all childless `menuItem()`s and `menuSubItem()`s have a `tabName` argument:
+
+The screenshot below shows an app that indicates which `menuItem()` is selected:
+
+```{r eval=FALSE, echo=FALSE}
+appshot('_apps/sidebar-input/', 'images/sidebar-input.png',
+  delay=1, vwidth=1000,
+  selector = c(".main-header > .logo", ".sidebar"),
+  expand = c(0, 10, 10, 0)
+) %>%
+  resize('75%') %>%
+  shrink()
+```
+
+![](images/sidebar-input.png)
+
+Here's the code for the app pictured above. Notice that all childless `menuItem()`s and `menuSubItem()`s have a `tabName` argument:
 
 <details>
   <summary>app.R</summary>
@@ -135,7 +152,21 @@ shinyApp(ui, server)
 
 As of shinydashboard 0.6, there's an automatic way to access which "childfull" `menuItem()` (if any) is currently expanded. Anywhere on your server function, use `input$sidebarItemExpanded` to get the `expandedName` of the currently expanded `menuItem()` (or `NULL` if none is currently expanded). If you don't pass in an `expandedName`, Shiny has a sensible default -- it will use the mandatory `text` argument that was passed in, without any white space. You can use `input$sidebarItemExpanded` as any other input, including making other UI elements conditional on it.
 
-Here's a small example app:
+The screenshot below shows an app that starts with the "Charts" `menuItem()` expanded:
+
+```{r eval=FALSE, echo=FALSE}
+appshot('_apps/sidebar-expanded/', 'images/sidebar-expanded.png',
+  delay=1, vwidth=1000,
+  selector = c(".main-header > .logo", ".sidebar"),
+  expand = c(0, 10, 10, 0)
+) %>%
+  resize('75%') %>%
+  shrink()
+```
+
+![](images/sidebar-expanded.png)
+
+Here's the code for the app pictured above:
 
 <details>
   <summary>app.R</summary>
@@ -150,7 +181,7 @@ ui <- dashboardPage(
     sidebarMenu(
       menuItem("Dashboard", tabName = "dashboard", icon = icon("dashboard")),
       menuItem("Widgets", icon = icon("th"), tabName = "widgets"),
-      menuItem("Charts", icon = icon("bar-chart-o",), startExpanded = TRUE,
+      menuItem("Charts", icon = icon("bar-chart-o"), startExpanded = TRUE,
         menuSubItem("Sub-item 1", tabName = "subitem1"),
         menuSubItem("Sub-item 2", tabName = "subitem2")
       )
