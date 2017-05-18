@@ -16,4 +16,3 @@ pattern is for the main body to contain \code{\link{tabItems}}.
 \seealso{
 \code{\link{tabItems}}, \code{\link{box}}, \code{\link{valueBox}}.
 }
-

@@ -149,6 +149,12 @@ dashboardHeader <- function(..., title = NULL, titleWidth = NULL, disable = FALS
 #' @param icon An icon to display in the header. By default, the icon is
 #'   automatically selected depending on \code{type}, but it can be overriden
 #'   with this argument.
+#' @param headerText An optional text argument used for the header of the
+#'   dropdown menu (this is only visible when the menu is expanded). If none is
+#'   provided by the user, the default is "You have \code{x} messages," where
+#'   \code{x} is the number of items in the menu (if the \code{type} is
+#'   specified to be "notifications" or "tasks," the default text shows "You
+#'   have \code{x} notifications" or  "You have \code{x} tasks," respectively).
 #' @param .list An optional list containing items to put in the menu Same as the
 #'   \code{...} arguments, but in list format. This can be useful when working
 #'   with programmatically generated items.
@@ -158,7 +164,8 @@ dashboardHeader <- function(..., title = NULL, titleWidth = NULL, disable = FALS
 #' @export
 dropdownMenu <- function(...,
   type = c("messages", "notifications", "tasks"),
-  badgeStatus = "primary", icon = NULL, .list = NULL)
+  badgeStatus = "primary", icon = NULL, headerText = NULL,
+  .list = NULL)
 {
   type <- match.arg(type)
   if (!is.null(badgeStatus)) validateStatus(badgeStatus)
@@ -184,13 +191,17 @@ dropdownMenu <- function(...,
     badge <- span(class = paste0("label label-", badgeStatus), numItems)
   }
 
+  if (is.null(headerText)) {
+    headerText <- paste("You have", numItems, type)
+  }
+
   tags$li(class = dropdownClass,
     a(href = "#", class = "dropdown-toggle", `data-toggle` = "dropdown",
       icon,
       badge
     ),
     tags$ul(class = "dropdown-menu",
-      tags$li(class = "header", paste("You have", numItems, type)),
+      tags$li(class = "header", headerText),
       tags$li(
         tags$ul(class = "menu",
           items

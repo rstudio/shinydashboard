@@ -87,4 +87,3 @@ shinyApp(
 Other boxes: \code{\link{box}}, \code{\link{infoBox}},
   \code{\link{valueBox}}
 }
-

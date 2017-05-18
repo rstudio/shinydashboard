@@ -5,7 +5,7 @@
 \title{Create a dropdown menu to place in a dashboard header}
 \usage{
 dropdownMenu(..., type = c("messages", "notifications", "tasks"),
-  badgeStatus = "primary", icon = NULL, .list = NULL)
+  badgeStatus = "primary", icon = NULL, headerText = NULL, .list = NULL)
 }
 \arguments{
 \item{...}{Items to put in the menu. Typically, message menus should contain
@@ -25,6 +25,13 @@ badge.}
 automatically selected depending on \code{type}, but it can be overriden
 with this argument.}
 
+\item{headerText}{An optional text argument used for the header of the
+dropdown menu (this is only visible when the menu is expanded). If none is
+provided by the user, the default is "You have \code{x} messages," where
+\code{x} is the number of items in the menu (if the \code{type} is
+specified to be "notifications" or "tasks," the default text shows "You
+have \code{x} notifications" or  "You have \code{x} tasks," respectively).}
+
 \item{.list}{An optional list containing items to put in the menu Same as the
 \code{...} arguments, but in list format. This can be useful when working
 with programmatically generated items.}
@@ -35,4 +42,3 @@ Create a dropdown menu to place in a dashboard header
 \seealso{
 \code{\link{dashboardHeader}} for example usage.
 }
-

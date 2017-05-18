@@ -19,4 +19,3 @@ One tab to put inside a tab items container
 \code{\link{menuItem}}, \code{\link{menuSubItem}},
   \code{\link{tabItems}}. See \code{\link{sidebarMenu}} for a usage example.
 }
-

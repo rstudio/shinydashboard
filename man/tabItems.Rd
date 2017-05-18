@@ -17,4 +17,3 @@ A container for tab items
 \code{\link{menuItem}}, \code{\link{menuSubItem}},
   \code{\link{tabItem}}. See \code{\link{sidebarMenu}} for a usage example.
 }
-

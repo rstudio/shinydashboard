@@ -26,4 +26,3 @@ Create a notification item to place in a dropdown notification menu
 Other menu items: \code{\link{messageItem}},
   \code{\link{taskItem}}
 }
-

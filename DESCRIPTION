@@ -1,8 +1,9 @@
 Package: shinydashboard
 Title: Create Dashboards with 'Shiny'
-Version: 0.5.3
+Version: 0.6.0
 Authors@R: c(
     person("Winston", "Chang", role = c("aut", "cre"), email = "winston@rstudio.com"),
+    person("Barbara", "Borges Ribeiro", role = "aut", email = "barbara@rstudio.com"),
     person(family = "RStudio", role = "cph"),
     person(family = "Almasaeed Studio", role = c("ctb", "cph"), comment = "AdminLTE theme for Bootstrap"),
     person(family = "Adobe Systems Incorporated", role = c("ctb", "cph"), comment = "Source Sans Pro font")
@@ -18,4 +19,4 @@ Imports:
     shiny (>= 0.12.1),
     htmltools (>= 0.2.6)
 BugReports: https://github.com/rstudio/shinydashboard
-RoxygenNote: 5.0.1.9000
+RoxygenNote: 6.0.1

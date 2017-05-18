@@ -43,4 +43,3 @@ shinyApp(
 \code{\link{dashboardHeader}}, \code{\link{dashboardSidebar}},
   \code{\link{dashboardBody}}.
 }
-

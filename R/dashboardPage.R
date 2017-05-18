@@ -37,7 +37,7 @@ dashboardPage <- function(header, sidebar, body, title = NULL,
   skin <- match.arg(skin)
 
   extractTitle <- function(header) {
-    x <- header$children[[1]]
+    x <- header$children[[2]]
     if (x$name == "span" &&
         !is.null(x$attribs$class) &&
         x$attribs$class == "logo" &&
@@ -57,8 +57,16 @@ dashboardPage <- function(header, sidebar, body, title = NULL,
     body
   )
 
+  # if the sidebar has the attribute `data-collapsed = "true"`, it means that
+  # the user set the `collapsed` argument of `dashboardSidebar` to TRUE
+  collapsed <- findAttribute(sidebar, "data-collapsed", "true")
+
   addDeps(
-    tags$body(class = paste0("skin-", skin), style = "min-height: 611px;",
+    tags$body(
+      # the "sidebar-collapse" class on the body means that the sidebar should
+      # the collapsed (AdminLTE code)
+      class = paste0("skin-", skin, if (collapsed) " sidebar-collapse"),
+      style = "min-height: 611px;",
       shiny::bootstrapPage(content, title = title)
     )
   )

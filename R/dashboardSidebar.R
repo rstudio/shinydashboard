@@ -8,6 +8,7 @@
 #' @param width The width of the sidebar. This must either be a number which
 #'   specifies the width in pixels, or a string that specifies the width in CSS
 #'   units.
+#' @param collapsed If \code{TRUE}, the sidebar will be collapsed on app startup.
 #'
 #' @seealso \code{\link{sidebarMenu}}
 #'
@@ -59,7 +60,7 @@
 #' )
 #' }
 #' @export
-dashboardSidebar <- function(..., disable = FALSE, width = NULL) {
+dashboardSidebar <- function(..., disable = FALSE, width = NULL, collapsed = FALSE) {
   width <- validateCssUnit(width)
 
   # Set up custom CSS for custom width
@@ -71,6 +72,9 @@ dashboardSidebar <- function(..., disable = FALSE, width = NULL) {
     # media query (min-width: 768px), so that it won't override other media
     # queries (like max-width: 767px) that work for narrower screens.
     custom_css <- tags$head(tags$style(HTML(gsub("_WIDTH_", width, fixed = TRUE, '
+      .main-sidebar, .left-side {
+        width: _WIDTH_;
+      }
       @media (min-width: 768px) {
         .content-wrapper,
         .right-side,
@@ -113,11 +117,23 @@ dashboardSidebar <- function(..., disable = FALSE, width = NULL) {
     '))))
   }
 
-  tags$aside(class = "main-sidebar",
-    custom_css,
+  # If we're restoring a bookmarked app, this holds the value of whether or not the
+  # sidebar was collapsed. If this is not the case, the default is whatever the user
+  # specified in the `collapsed` argument.
+  dataValue <- shiny::restoreInput(id = "sidebarCollapsed", default = collapsed)
+  if (disable) dataValue <- TRUE # this is a workaround to fix #209
+  dataValueString <- if (dataValue) "true" else "false"
+
+  # The expanded/collapsed state of the sidebar is actually set by adding a
+  # class to the body (not to the sidebar). However, it makes sense for the
+  # `collapsed` argument to belong in this function. So this information is
+  # just passed through (as the `data-collapsed` attribute) to the
+  # `dashboardPage()` function
+  tags$aside(
+    class = "main-sidebar", `data-collapsed` = dataValueString, custom_css,
     tags$section(
       class = "sidebar",
-      `data-disable` = if(disable) 1 else NULL,
+      `data-disable` = if (disable) 1 else NULL,
       list(...)
     )
   )
@@ -228,6 +244,13 @@ sidebarSearchForm <- function(textId, buttonId, label = "Search...",
 #' @param selected If \code{TRUE}, this \code{menuItem} or \code{menuSubItem}
 #'   will start selected. If no item have \code{selected=TRUE}, then the first
 #'   \code{menuItem} will start selected.
+#' @param expandedName A unique name given to each \code{menuItem} that serves
+#'   to indicate which one (if any) is currently expanded. (This is only applicable
+#'   to \code{menuItem}s that have children and it is mostly only useful for
+#'   bookmarking state.)
+#' @param startExpanded Should this \code{menuItem} be expanded on app startup?
+#'   (This is only applicable to \code{menuItem}s that have children, and only
+#'   one of these can be expanded at any given time).
 #' @param ... For menu items, this may consist of \code{\link{menuSubItem}}s.
 #' @param .list An optional list containing items to put in the menu Same as the
 #'   \code{...} arguments, but in list format. This can be useful when working
@@ -255,7 +278,9 @@ sidebarMenu <- function(..., id = NULL, .list = NULL) {
       # Given a menuItem and a logical value for `selected`, set the
       # data-start-selected attribute to the appropriate value (1 or 0).
       selectItem <- function(item, selected) {
-        if (length(item$children) == 0) {
+
+        # in the cases that the children of menuItems are NOT menuSubItems
+        if (is.atomic(item) || length(item$children) == 0) {
           return(item)
         }
 
@@ -266,6 +291,7 @@ sidebarMenu <- function(..., id = NULL, .list = NULL) {
         # data-start-selected="1". The []<- assignment is to preserve
         # attributes.
         item$children[] <- lapply(item$children, function(child) {
+
           # Find the appropriate <a> child
           if (tagMatches(child, name = "a", `data-toggle` = "tab")) {
             child$attribs[["data-start-selected"]] <- value
@@ -320,18 +346,25 @@ sidebarMenu <- function(..., id = NULL, .list = NULL) {
         item
       })
     }
+    # This is a 0 height div, whose only purpose is to hold the tabName of the currently
+    # selected menuItem in its `data-value` attribute. This is the DOM element that is
+    # bound to tabItemInputBinding in the JS side.
+    items[[length(items) + 1]] <- div(id = id,
+      class = "sidebarMenuSelectedTabItem", `data-value` = selectedTabName %OR% "null")
   }
 
   # Use do.call so that we don't add an extra list layer to the children of the
   # ul tag. This makes it a little easier to traverse the tree to search for
   # selected items to restore.
-  do.call(tags$ul, c(id = id, class = "sidebar-menu", items))
+  do.call(tags$ul, c(class = "sidebar-menu", items))
 }
 
 #' @rdname sidebarMenu
 #' @export
 menuItem <- function(text, ..., icon = NULL, badgeLabel = NULL, badgeColor = "green",
-                     tabName = NULL, href = NULL, newtab = TRUE, selected = NULL, id = NULL) {
+                     tabName = NULL, href = NULL, newtab = TRUE, selected = NULL, id = NULL,
+                     expandedName = as.character(gsub("[[:space:]]", "", text)),
+                     startExpanded = FALSE) {
   subItems <- list(...)
 
   if (!is.null(icon)) tagAssert(icon, type = "i")
@@ -386,6 +419,18 @@ menuItem <- function(text, ..., icon = NULL, badgeLabel = NULL, badgeColor = "gr
     )
   }
 
+  # If we're restoring a bookmarked app, this holds the value of what menuItem (if any)
+  # was expanded (this has be to stored separately from the selected menuItem, since
+  # these actually independent in AdminLTE). If no menuItem was expanded, `dataExpanded`
+  # is NULL. However, we want to this input to get passed on (and not dropped), so we
+  # do `%OR% ""` to assure this.
+  default <- if (startExpanded) expandedName else ""
+  dataExpanded <- shiny::restoreInput(id = "sidebarItemExpanded", default) %OR% ""
+
+  # If `dataExpanded` is not the empty string, we need to check that it is eqaul to the
+  # this menuItem's `expandedName``
+  isExpanded <- nzchar(dataExpanded) && (dataExpanded == expandedName)
+
   tags$li(class = "treeview", id = id,
     a(href = href,
       icon,
@@ -395,7 +440,11 @@ menuItem <- function(text, ..., icon = NULL, badgeLabel = NULL, badgeColor = "gr
     # Use do.call so that we don't add an extra list layer to the children of the
     # ul tag. This makes it a little easier to traverse the tree to search for
     # selected items to restore.
-    do.call(tags$ul, c(class = "treeview-menu", subItems))
+    do.call(tags$ul, c(
+      class = paste0("treeview-menu", if (isExpanded) " menu-open" else ""),
+      style = paste0("display: ",     if (isExpanded) "block;" else "none;"),
+      `data-expanded` = expandedName,
+      subItems))
   )
 }
 
