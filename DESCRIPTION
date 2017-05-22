@@ -16,7 +16,7 @@ Depends:
 License: GPL-2 | file LICENSE
 Imports:
     utils,
-    shiny (>= 0.12.1),
+    shiny (>= 1.0.0),
     htmltools (>= 0.2.6)
 BugReports: https://github.com/rstudio/shinydashboard
 RoxygenNote: 6.0.1
