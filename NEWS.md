@@ -1,5 +1,19 @@
-shinydashboard 0.6.0
+shinydashboard 0.6.0.9000
 =========================
+
+## Full changelog
+
+### New features
+
+### Minor new features and improvements
+
+### Bug fixes
+
+### Library updates
+
+
+shinydashboard 0.6.0
+====================
 
 This release of shinydashboard was aimed at both fixing bugs and also bringing the package up to speed with users' requests and Shiny itself (especially fully bringing [bookmarkable state](https://shiny.rstudio.com/articles/bookmarking-state.html) to shinydashboard's sidebar). In addition to the changes listed below, we also added a [new "Behavior" section to the shinydashboard website](https://rstudio.github.io/shinydashboard/behavior.html) to explain this release's two biggest new features.
 
