@@ -45,14 +45,16 @@ var ensureActivatedTab = function() {
   var $startTab = $tablinks.filter("[data-start-selected='1']");
   if ($startTab.length !== 0) {
     $startTab.tab("show");
-    return;
+  } else {
+    // If we got this far, just activate the first tab.
+    $startTab = $tablinks.first();
+    if (! $tablinks.parent("li").hasClass("active") ) {
+      $startTab.tab("show");
+    }
   }
-
-  // If we got this far, just activate the first tab.
-  if (! $tablinks.parent("li").hasClass("active") ) {
-    $tablinks.first().tab("show");
+  if ($startTab.length !== 0) {
     $(".sidebarMenuSelectedTabItem").attr("data-value",
-      $tablinks.first().attr("data-value"));
+      $startTab.attr("data-value"));
   }
 };
 
