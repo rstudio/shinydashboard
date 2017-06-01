@@ -35,16 +35,15 @@ var ensureActivatedTab = function() {
   // If there's a `data-start-selected` attribute and we can find a tab with
   // that name, activate it.
   var $startTab = $tablinks.filter("[data-start-selected='1']");
+  if ($startTab.length === 0) {
+    // If no tab starts selected, use the first one, if present
+    $startTab = $tablinks.first();
+  }
+
+  // If there are no tabs, $startTab.length will be 0.
   if ($startTab.length !== 0) {
     $startTab.tab("show");
-  } else {
-    // If we got this far, just activate the first tab.
-    $startTab = $tablinks.first();
-    if (! $tablinks.parent("li").hasClass("active") ) {
-      $startTab.tab("show");
-    }
-  }
-  if ($startTab.length !== 0) {
+
     $(".sidebarMenuSelectedTabItem").attr("data-value",
       $startTab.attr("data-value"));
   }
