@@ -5,8 +5,10 @@ if ($("section.sidebar").data("disable")) {
   $(".navbar > .sidebar-toggle").hide();
 }
 
-// Whenever the sidebar expand/collapse button is clicked:
-$(document).on("click", ".sidebar-toggle", function() {
+// Whenever the sidebar changes from collapsed to expanded and vice versa,
+// call this function, so that we can trigger the resize event on the rest
+// of the window and also update the value for the sidebar's input binding.
+var sidebarChange = function() {
   // 1) Trigger the resize event (so images are responsive and resize)
   $(window).trigger("resize");
 
@@ -15,7 +17,13 @@ $(document).on("click", ".sidebar-toggle", function() {
   var inputBinding = $obj.data('shiny-input-binding');
   inputBinding.toggleValue($obj);
   $obj.trigger('change');
-});
+};
+
+// Whenever the sidebar finishes a transition (which it does every time it
+// changes from collapsed to expanded and vice versa), call sidebarChange()
+$( ".main-sidebar" ).on(
+  'webkitTransitionEnd otransitionend oTransitionEnd msTransitionEnd transitionend',
+    sidebarChange);
 
 // Whenever we expand a menuItem (to be expandable, it must have children),
 // update the value for the expandedItem's input binding (this is the
