@@ -9,8 +9,9 @@ shinydashboard 0.6.0.9000
 
 ### Bug fixes
 
-### Library updates
+* Fixed [#214](https://github.com/rstudio/shinydashboard/issues/214): make sure that the `data-value` attribute of `.sidebarMenuSelectedTabItem` is always set in the body of the `ensureActivatedTab()` function. ([#216](https://github.com/rstudio/shinydashboard/pull/216))
 
+### Library updates
 
 shinydashboard 0.6.0
 ====================
