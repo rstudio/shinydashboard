@@ -11,6 +11,8 @@ shinydashboard 0.6.0.9000
 
 * Fixed [#214](https://github.com/rstudio/shinydashboard/issues/214): make sure that the `data-value` attribute of `.sidebarMenuSelectedTabItem` is always set in the body of the `ensureActivatedTab()` function. ([#216](https://github.com/rstudio/shinydashboard/pull/216))
 
+* Fixed [#217](https://github.com/rstudio/shinydashboard/issues/217): correct `input$sidebarCollapsed` value for edge cases by attaching the change event to the end of the sidebar CSS transitions (instead of when the toggle button is clicked). Also make sure that `input$sidebarCollapsed` is set to `FALSE` when the app starts up with the sidebar already collapsed. ([#222](https://github.com/rstudio/shinydashboard/pull/222))
+
 ### Library updates
 
 shinydashboard 0.6.0

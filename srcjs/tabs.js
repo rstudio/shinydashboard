@@ -44,6 +44,10 @@ var ensureActivatedTab = function() {
   if ($startTab.length !== 0) {
     $startTab.tab("show");
 
+    // This is indirectly setting the value of the Shiny input by setting
+    // an attribute on the html element it is bound to. We cannot use the
+    // inputBinding's setValue() method here because this is called too
+    // early (before Shiny has fully initialized)
     $(".sidebarMenuSelectedTabItem").attr("data-value",
       $startTab.attr("data-value"));
   }
