@@ -32,7 +32,7 @@ var sidebarChange = function() {
 
 // Whenever the sidebar finishes a transition (which it does every time it
 // changes from collapsed to expanded and vice versa), call sidebarChange()
-$( ".main-sidebar" ).on(
+$(".main-sidebar").on(
   'webkitTransitionEnd otransitionend oTransitionEnd msTransitionEnd transitionend',
     sidebarChange);
 
@@ -43,6 +43,10 @@ $( ".main-sidebar" ).on(
 // is negative. That we know of, `$(".main-sidebar").is(":visible")` is always
 // true, so there is no need to check for that.
 if ($(".main-sidebar").offset().left < 0) {
+  // This is indirectly setting the value of the Shiny input by setting
+  // an attribute on the html element it is bound to. We cannot use the
+  // inputBinding's setValue() method here because this is called too
+  // early (before Shiny has fully initialized)
   $(".main-sidebar").attr("data-collapsed", "true");
 }
 
