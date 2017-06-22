@@ -1,5 +1,29 @@
-shinydashboard 0.6.0
+shinydashboard 0.6.1.9000
 =========================
+
+## Full changelog
+
+### New features
+
+### Minor new features and improvements
+
+### Bug fixes
+
+### Library updates
+
+shinydashboard 0.6.1
+====================
+
+This is a hotfix release of shinydashboard, meant to fix a few edge cases that have surfaced since the last release.
+
+## Full changelog
+
+* Fixed [#214](https://github.com/rstudio/shinydashboard/issues/214): make sure that the `data-value` attribute of `.sidebarMenuSelectedTabItem` is always set in the body of the `ensureActivatedTab()` function. ([#216](https://github.com/rstudio/shinydashboard/pull/216))
+
+* Fixed [#217](https://github.com/rstudio/shinydashboard/issues/217): correct `input$sidebarCollapsed` value for edge cases by attaching the change event to the end of the sidebar CSS transitions (instead of when the toggle button is clicked). Also make sure that `input$sidebarCollapsed` is set to `FALSE` when the app starts up with the sidebar already collapsed. ([#222](https://github.com/rstudio/shinydashboard/pull/222))
+
+shinydashboard 0.6.0
+====================
 
 This release of shinydashboard was aimed at both fixing bugs and also bringing the package up to speed with users' requests and Shiny itself (especially fully bringing [bookmarkable state](https://shiny.rstudio.com/articles/bookmarking-state.html) to shinydashboard's sidebar). In addition to the changes listed below, we also added a [new "Behavior" section to the shinydashboard website](https://rstudio.github.io/shinydashboard/behavior.html) to explain this release's two biggest new features.
 
