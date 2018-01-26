@@ -249,10 +249,8 @@ Shiny.inputBindings.register(tabItemInputBinding, 'shinydashboard.tabItemInput')
 var sidebarCollapsedInputBinding = new Shiny.InputBinding();
 $.extend(sidebarCollapsedInputBinding, {
   find: function(scope) {
+    // This will also have id="sidebarCollapsed"
     return $(scope).find('.main-sidebar').first();
-  },
-  getId: function(el) {
-    return "sidebarCollapsed";
   },
   getValue: function(el) {
     return $(el).attr("data-collapsed") === "true";
@@ -292,10 +290,8 @@ Shiny.inputBindings.register(sidebarCollapsedInputBinding,
 var sidebarmenuExpandedInputBinding = new Shiny.InputBinding();
 $.extend(sidebarmenuExpandedInputBinding, {
   find: function(scope) {
+    // This will also have id="sidebarItemExpanded"
     return $(scope).find('section.sidebar');
-  },
-  getId: function(el) {
-    return "sidebarItemExpanded";
   },
   getValue: function(el) {
     var $open = $(el).find('li ul.menu-open');

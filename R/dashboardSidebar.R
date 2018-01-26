@@ -130,8 +130,10 @@ dashboardSidebar <- function(..., disable = FALSE, width = NULL, collapsed = FAL
   # just passed through (as the `data-collapsed` attribute) to the
   # `dashboardPage()` function
   tags$aside(
+    id = "sidebarCollapsed",
     class = "main-sidebar", `data-collapsed` = dataValueString, custom_css,
     tags$section(
+      id = "sidebarItemExpanded",
       class = "sidebar",
       `data-disable` = if (disable) 1 else NULL,
       list(...)
