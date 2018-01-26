@@ -6,10 +6,8 @@
 var sidebarmenuExpandedInputBinding = new Shiny.InputBinding();
 $.extend(sidebarmenuExpandedInputBinding, {
   find: function(scope) {
+    // This will also have id="sidebarItemExpanded"
     return $(scope).find('section.sidebar');
-  },
-  getId: function(el) {
-    return "sidebarItemExpanded";
   },
   getValue: function(el) {
     var $open = $(el).find('li ul.menu-open');
