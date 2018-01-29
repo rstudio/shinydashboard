@@ -1,9 +1,11 @@
-shinydashboard 0.6.1.9000
+shinydashboard 0.6.1.9001
 =========================
 
 ## Full changelog
 
 ### New features
+
+* Changed license from GPL-2 to GPL>=2 (meaning GPL version 2 or later). ([#258](https://github.com/rstudio/shinydashboard/issues/258))
 
 ### Minor new features and improvements
 
