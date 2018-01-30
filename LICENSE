@@ -1,9 +1,9 @@
-The shinydashboard package as a whole is distributed under GPL-2 (GNU GENERAL
-PUBLIC LICENSE version 2).
+The shinydashboard package as a whole is distributed under Version 2 of the GPL
+or any later version.
 
-The shinydashboard package inludes other GPL-2 compatible software components.
-The following is a list of these components (full copies of the license
-agreements used by these components are included below):
+The shinydashboard package inludes other GPL-2 and GPL-3 compatible software
+components. The following is a list of these components (full copies of the
+license agreements used by these components are included below):
 
 - AdminLTE, https://github.com/almasaeed2010/AdminLTE
 - Google Web Fonts, https://www.google.com/fonts/attribution
