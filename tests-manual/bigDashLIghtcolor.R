@@ -62,6 +62,8 @@ header <- dashboardHeader(
   )
 )
 sidebar <- dashboardSidebar(
+  headerPanel("Hello ")  ,
+  
   sidebarUserPanel(
     "User Name",
     subtitle = a(href = "#", icon("circle", class = "text-success"), "Online"),
@@ -92,6 +94,7 @@ sidebar <- dashboardSidebar(
     )
   ),
   sidebarMenuOutput("menu")
+  
 )
 
 body <- dashboardBody(tabItems(
@@ -306,6 +309,6 @@ server <- function(input, output) {
 
 ui <- dashboardPage(header,
                     sidebar,
-                    body,skin = "green-light")
+                    body,skin = "blue-light")
 
 shinyApp(ui, server)

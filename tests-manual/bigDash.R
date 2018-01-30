@@ -62,6 +62,8 @@ header <- dashboardHeader(
   )
 )
 sidebar <- dashboardSidebar(
+  headerPanel("Hello ")  ,
+  
   sidebarUserPanel(
     "User Name",
     subtitle = a(href = "#", icon("circle", class = "text-success"), "Online"),
@@ -91,7 +93,7 @@ sidebar <- dashboardSidebar(
       menuSubItem("Sub-item 2", tabName = "subitem2")
     )
   ),
-  sidebarMenuOutput("menu")
+  sidebarMenuOutput("menu") 
 )
 
 body <- dashboardBody(tabItems(
