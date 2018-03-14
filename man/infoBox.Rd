@@ -6,7 +6,7 @@
 \usage{
 infoBox(title, value = NULL, subtitle = NULL,
   icon = shiny::icon("bar-chart"), color = "aqua", width = 4,
-  href = NULL, fill = FALSE, id = id)
+  href = NULL, fill = FALSE, id = NULL)
 }
 \arguments{
 \item{title}{Title text.}
