@@ -25,3 +25,4 @@ Create a task item to place in a dropdown task menu
 Other menu items: \code{\link{messageItem}},
   \code{\link{notificationItem}}
 }
+\concept{menu items}

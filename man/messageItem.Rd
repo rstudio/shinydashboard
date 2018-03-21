@@ -30,3 +30,4 @@ Create a message item to place in a dropdown message menu
 Other menu items: \code{\link{notificationItem}},
   \code{\link{taskItem}}
 }
+\concept{menu items}

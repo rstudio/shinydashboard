@@ -36,3 +36,4 @@ to be placed in the main body of a dashboard.
 Other boxes: \code{\link{box}}, \code{\link{infoBox}},
   \code{\link{tabBox}}
 }
+\concept{boxes}
