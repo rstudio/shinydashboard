@@ -14,6 +14,12 @@ $.extend(sidebarmenuExpandedInputBinding, {
     if ($open.length === 1) return $open.attr('data-expanded');
     else return null;
   },
+  setValue: function(el, value) {
+    var $menuItem = $(el).find("[data-expanded='" + value + "']");
+    // This will trigger actions defined by AdminLTE, as well as actions
+    // defined in sidebar.js.
+    $menuItem.prev().trigger("click");
+  },
   subscribe: function(el, callback) {
     $(el).on('change.sidebarmenuExpandedInputBinding', function() {
       callback();
