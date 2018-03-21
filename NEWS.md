@@ -11,6 +11,8 @@ shinydashboard 0.6.1.9001
 
 ### Bug fixes
 
+* Fixed [shinytest/#167](https://github.com/rstudio/shinytest/issues/167): shinydashboard did not work properly with shinytest. (#256](https://github.com/rstudio/shinydashboard/pull/256))
+
 * Fixed [#257](https://github.com/rstudio/shinydashboard/issues/257): Calling the `setValue()` method on `sidebarmenuExpandedInputBinding` did not cause the submenu to expand. This caused screenshots from shinytest to be incorrect.
 
 * Fixed [#235](https://github.com/rstudio/shinydashboard/issues/235): make sure that the text input field and search button line up when using `sidebarSearchForm`. ([#243](https://github.com/rstudio/shinydashboard/pull/243))
