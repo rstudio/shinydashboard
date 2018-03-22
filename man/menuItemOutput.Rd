@@ -21,3 +21,4 @@ Other menu outputs: \code{\link{dropdownMenuOutput}},
   \code{\link{menuOutput}}, \code{\link{renderMenu}},
   \code{\link{sidebarMenuOutput}}
 }
+\concept{menu outputs}

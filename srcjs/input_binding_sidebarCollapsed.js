@@ -7,10 +7,8 @@
 var sidebarCollapsedInputBinding = new Shiny.InputBinding();
 $.extend(sidebarCollapsedInputBinding, {
   find: function(scope) {
+    // This will also have id="sidebarCollapsed"
     return $(scope).find('.main-sidebar').first();
-  },
-  getId: function(el) {
-    return "sidebarCollapsed";
   },
   getValue: function(el) {
     return $(el).attr("data-collapsed") === "true";

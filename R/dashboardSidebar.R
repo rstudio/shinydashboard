@@ -130,8 +130,10 @@ dashboardSidebar <- function(..., disable = FALSE, width = NULL, collapsed = FAL
   # just passed through (as the `data-collapsed` attribute) to the
   # `dashboardPage()` function
   tags$aside(
+    id = "sidebarCollapsed",
     class = "main-sidebar", `data-collapsed` = dataValueString, custom_css,
     tags$section(
+      id = "sidebarItemExpanded",
       class = "sidebar",
       `data-disable` = if (disable) 1 else NULL,
       list(...)
@@ -188,7 +190,7 @@ sidebarSearchForm <- function(textId, buttonId, label = "Search...",
   tags$form(class = "sidebar-form",
     div(class = "input-group",
       tags$input(id = textId, type = "text", class = "form-control",
-        placeholder = label
+        placeholder = label, style = "margin: 5px;"
       ),
       span(class = "input-group-btn",
         tags$button(id = buttonId, type = "button",

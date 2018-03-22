@@ -1,13 +1,23 @@
-shinydashboard 0.6.1.9000
+shinydashboard 0.6.1.9001
 =========================
 
 ## Full changelog
 
 ### New features
 
+* Changed license from GPL-2 to GPL>=2 (meaning GPL version 2 or later). ([#258](https://github.com/rstudio/shinydashboard/issues/258))
+
 ### Minor new features and improvements
 
 ### Bug fixes
+
+* Fixed [shinytest/#167](https://github.com/rstudio/shinytest/issues/167): shinydashboard did not work properly with shinytest. (#256](https://github.com/rstudio/shinydashboard/pull/256))
+
+* Fixed [#257](https://github.com/rstudio/shinydashboard/issues/257): Calling the `setValue()` method on `sidebarmenuExpandedInputBinding` did not cause the submenu to expand. This caused screenshots from shinytest to be incorrect.
+
+* Fixed [#235](https://github.com/rstudio/shinydashboard/issues/235): make sure that the text input field and search button line up when using `sidebarSearchForm`. ([#243](https://github.com/rstudio/shinydashboard/pull/243))
+
+* Fixed [#229](https://github.com/rstudio/shinydashboard/issues/229): only run `ensureActivatedTab()` after `renderMenu()` is called *_if_* the `el` in question has class `"sidebar-menu"`. Since this function is used for both `dropdownMenuOutput` and `sidebarMenuOutput`, we have to make sure that `ensureActivatedTab()` is only called if it's the latter case (otherwise, you get unexpected tab redirections when updating a dropdown menu). ([#233](https://github.com/rstudio/shinydashboard/pull/233))
 
 ### Library updates
 

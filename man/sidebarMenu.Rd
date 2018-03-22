@@ -93,3 +93,4 @@ colored oval containing text.
 Other sidebar items: \code{\link{sidebarSearchForm}},
   \code{\link{sidebarUserPanel}}
 }
+\concept{sidebar items}

@@ -102,3 +102,4 @@ Other menu outputs: \code{\link{dropdownMenuOutput}},
   \code{\link{menuItemOutput}}, \code{\link{menuOutput}},
   \code{\link{sidebarMenuOutput}}
 }
+\concept{menu outputs}

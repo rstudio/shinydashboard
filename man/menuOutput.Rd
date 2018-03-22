@@ -28,3 +28,4 @@ Other menu outputs: \code{\link{dropdownMenuOutput}},
   \code{\link{menuItemOutput}}, \code{\link{renderMenu}},
   \code{\link{sidebarMenuOutput}}
 }
+\concept{menu outputs}

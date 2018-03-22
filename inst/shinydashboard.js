@@ -179,7 +179,7 @@ $.extend(menuOutputBinding, {
 
     Shiny.initializeInputs(el);
     Shiny.bindAll(el);
-    ensureActivatedTab(); // eslint-disable-line
+    if ($(el).hasClass("sidebar-menu")) ensureActivatedTab(); // eslint-disable-line
   }
 });
 Shiny.outputBindings.register(menuOutputBinding,
@@ -249,10 +249,8 @@ Shiny.inputBindings.register(tabItemInputBinding, 'shinydashboard.tabItemInput')
 var sidebarCollapsedInputBinding = new Shiny.InputBinding();
 $.extend(sidebarCollapsedInputBinding, {
   find: function(scope) {
+    // This will also have id="sidebarCollapsed"
     return $(scope).find('.main-sidebar').first();
-  },
-  getId: function(el) {
-    return "sidebarCollapsed";
   },
   getValue: function(el) {
     return $(el).attr("data-collapsed") === "true";
@@ -292,15 +290,19 @@ Shiny.inputBindings.register(sidebarCollapsedInputBinding,
 var sidebarmenuExpandedInputBinding = new Shiny.InputBinding();
 $.extend(sidebarmenuExpandedInputBinding, {
   find: function(scope) {
+    // This will also have id="sidebarItemExpanded"
     return $(scope).find('section.sidebar');
-  },
-  getId: function(el) {
-    return "sidebarItemExpanded";
   },
   getValue: function(el) {
     var $open = $(el).find('li ul.menu-open');
     if ($open.length === 1) return $open.attr('data-expanded');
     else return null;
+  },
+  setValue: function(el, value) {
+    var $menuItem = $(el).find("[data-expanded='" + value + "']");
+    // This will trigger actions defined by AdminLTE, as well as actions
+    // defined in sidebar.js.
+    $menuItem.prev().trigger("click");
   },
   subscribe: function(el, callback) {
     $(el).on('change.sidebarmenuExpandedInputBinding', function() {

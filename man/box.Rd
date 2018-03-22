@@ -173,3 +173,4 @@ shinyApp(
 Other boxes: \code{\link{infoBox}}, \code{\link{tabBox}},
   \code{\link{valueBox}}
 }
+\concept{boxes}
