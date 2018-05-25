@@ -5,6 +5,17 @@ shinydashboard 0.7.0
 
 ### New features
 
+* Shiny async support: render functions can now handle promises.
+
+### Bug fixes
+
+shinydashboard 0.7.0
+====================
+
+## Full changelog
+
+### New features
+
 * Changed license from GPL-2 to GPL>=2 (meaning GPL version 2 or later). ([#258](https://github.com/rstudio/shinydashboard/issues/258))
 
 ### Bug fixes

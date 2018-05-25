@@ -61,6 +61,7 @@ infoBoxOutput <- valueBoxOutput
 #'
 #' shinyApp(ui, server)
 #' }
+#' @import promises
 #' @export
 renderValueBox <- function(expr, env = parent.frame(), quoted = FALSE) {
   # Convert the expression to a function
@@ -70,10 +71,16 @@ renderValueBox <- function(expr, env = parent.frame(), quoted = FALSE) {
   # send it to renderUI.
   shiny::renderUI({
     vbox <- vbox_fun()
-    tagAssert(vbox, type = "div")
+    if (is.promising(vbox)) {
+      vbox %...T>%
+        tagAssert(type = "div") %...>%
+        { .$children[[1]] }
+    } else {
+      tagAssert(vbox, type = "div")
 
-    # Strip off outer div, since it's already present in output
-    vbox$children[[1]]
+      # Strip off outer div, since it's already present in output
+      vbox$children[[1]]
+    }
   })
 }
 
