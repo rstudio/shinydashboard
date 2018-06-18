@@ -1,3 +1,14 @@
+shinydashboard 0.7.0.9000
+=========================
+
+## Full changelog
+
+### New features
+
+* Shiny async support: render functions can now handle promises. Instead of returning a `valueBox` to `renderValueBox`, return a promise that resolves to a `valueBox` (for example).
+
+### Bug fixes
+
 shinydashboard 0.7.0
 ====================
 
