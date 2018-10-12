@@ -9,6 +9,8 @@ shinydashboard 0.7.0.9000
 
 ### Bug fixes
 
+* Fixed [#297](https://github.com/rstudio/shinydashboard/issues/297): recent versions of Shiny caused the sidebar toggle icon to not render because FontAwesome was upgraded in Shiny. ([#299](https://github.com/rstudio/shinydashboard/pull/299))
+
 shinydashboard 0.7.0
 ====================
 
