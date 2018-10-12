@@ -68,3 +68,14 @@ a > .info-box {
 .shiny-server-account {
   z-index: 2000;
 }
+
+/* fontAwesome is the FA4 family name; 'Font Awesome 5 Free' is the FA 5 name.
+ * This rule makes the sidebar-toggle 'bars' icon appear properly both in
+ * Shiny <= 1.1 (FA4) and Shiny 1.2+ (FA5).
+ * The font-weight value is for FA5, as multiple styles are mapped
+ * to different weights.
+ */
+.main-header .sidebar-toggle {
+  font-family: fontAwesome, 'Font Awesome 5 Free';
+  font-weight: 900;
+}
