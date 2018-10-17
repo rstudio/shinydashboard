@@ -1,3 +1,6 @@
+# `.` is used in renderValueBox
+utils::globalVariables(".")
+
 #' Create an info or value box output (client side)
 #'
 #' This is the UI-side function for creating a dynamic \code{\link{valueBox}} or
