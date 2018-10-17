@@ -1,5 +1,5 @@
-shinydashboard 0.7.0.9000
-=========================
+shinydashboard 0.7.1
+====================
 
 ## Full changelog
 
