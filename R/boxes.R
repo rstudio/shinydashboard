@@ -102,7 +102,7 @@ updateValueBoxValue <- function(session, ...) {
 #' @export
 infoBox <- function(title, value = NULL, subtitle = NULL,
   icon = shiny::icon("bar-chart"), color = "aqua", width = 4, href = NULL,
-  fill = FALSE) {
+  fill = FALSE, id = NULL) {
 
   validateColor(color)
   tagAssert(icon, type = "i")
@@ -110,6 +110,7 @@ infoBox <- function(title, value = NULL, subtitle = NULL,
   colorClass <- paste0("bg-", color)
 
   boxContent <- div(
+    id = id,
     class = "info-box",
     class = if (fill) colorClass,
     span(
