@@ -5,6 +5,8 @@ Shiny.addCustomMessageHandler('streamBox', function(data) {
       // get element
       el = document.getElementById(key);
 
+      // TODO: Error handling... what if el does not exist?
+
       // update value
       if (el.className.includes("small-box")) {
         // for valueBox
