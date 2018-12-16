@@ -1,13 +1,16 @@
 
 
-Shiny.addCustomMessageHandler('streamValueBox', function(data) {
+Shiny.addCustomMessageHandler('streamBox', function(data) {
     $.each(data, function(key, val){
-      // update the value (in unhealthy fashion)
+      // get element
       el = document.getElementById(key);
 
+      // update value
       if (el.className.includes("small-box")) {
-        el.getElementsByClassName("valuebox-value")[0].innerText = val;
+        // for valueBox
+        el.getElementsByClassName("value-box-value")[0].innerText = val;
       } else if (el.className.includes("info-box")) {
+        // for infoBox
         el.getElementsByClassName("info-box-number")[0].innerText = val;
       }
     });
