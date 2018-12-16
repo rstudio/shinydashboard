@@ -48,7 +48,7 @@ streamValueBox <- function(id, value, subtitle, icon = NULL, color = "aqua", wid
   boxContent <- div( id = id,
     class = paste0("small-box bg-", color),
     div(class = "inner",
-      h3(value),
+      h3(class = "valuebox-value", value),
       p(subtitle)
     ),
     if (!is.null(icon)) div(class = "icon-large", icon)
