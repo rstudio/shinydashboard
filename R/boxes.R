@@ -38,6 +38,43 @@ valueBox <- function(value, subtitle, icon = NULL, color = "aqua", width = 4,
   )
 }
 
+#' @export
+streamValueBox <- function(id, value, subtitle, icon = NULL, color = "aqua", width = 4,
+  href = NULL)
+{
+  validateColor(color)
+  if (!is.null(icon)) tagAssert(icon, type = "i")
+
+  boxContent <- div( id = id,
+    class = paste0("small-box bg-", color),
+    div(class = "inner",
+      h3(value),
+      p(subtitle)
+    ),
+    if (!is.null(icon)) div(class = "icon-large", icon)
+  )
+
+  if (!is.null(href))
+    boxContent <- a(href = href, boxContent)
+
+  div(class = if (!is.null(width)) paste0("col-sm-", width),
+    boxContent
+  )
+}
+
+#' @export
+updateValueBoxValue <- function(session, ...) {
+  if (missing(session)) {
+    stop("Must provide a session, a name, and a value")
+  }
+
+  li <- rlang::list2(...)
+
+  session$sendCustomMessage("streamValueBox", li)
+
+  invisible()
+}
+
 
 #' Create an info box for the main body of a dashboard.
 #'
