@@ -11,6 +11,7 @@
 #' @param color A color for the box. Valid colors are listed in
 #'   \link{validColors}.
 #' @param href An optional URL to link to.
+#' @param id An optional id to uniquely identify the box
 #'
 #' @family boxes
 #' @seealso \code{\link{box}} for usage examples.
@@ -38,18 +39,6 @@ valueBox <- function(value, subtitle, icon = NULL, color = "aqua", width = 4,
   )
 }
 
-#' @export
-updateBoxValue <- function(session, ...) {
-  if (missing(session)) {
-    stop("Must provide a session, a name, and a value")
-  }
-
-  li <- rlang::list2(...)
-
-  session$sendCustomMessage("streamBox", li)
-
-  invisible()
-}
 
 
 #' Create an info box for the main body of a dashboard.
@@ -71,6 +60,7 @@ updateBoxValue <- function(session, ...) {
 #'   content; the icon will use the same color with a slightly darkened
 #'   background.
 #' @param href An optional URL to link to.
+#' @param id An optional id to uniquely identify the box
 #'
 #' @family boxes
 #' @seealso \code{\link{box}} for usage examples.
@@ -417,4 +407,33 @@ tabBox <- function(..., id = NULL, selected = NULL, title = NULL,
   }
 
   div(class = paste0("col-sm-", width), content)
+}
+
+#' Update the value of an infoBox or valueBox
+#'
+#' This function allows you to update the value of
+#' an infoBox or valuebox without re-rendering the
+#' entire box. It is useful for streaming data or
+#' very regularly updating values
+#'
+#' @param session The session object that the infoBox
+#' or valueBox belongs to
+#' @param ... name=value pairs, where name is the id
+#' (unique identifier) of an infoBox or valueBox, and
+#' value is the value the box should display
+#'
+#' @family boxes
+#' @seealso \code{\link{infoBox}}, \code{\link{valueBox}}
+#'
+#' @export
+updateBoxValue <- function(session, ...) {
+  if (missing(session)) {
+    stop("Must provide a session, a name, and a value")
+  }
+
+  li <- rlang::list2(...)
+
+  session$sendCustomMessage("streamBox", li)
+
+  invisible()
 }
