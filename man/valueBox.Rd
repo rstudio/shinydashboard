@@ -5,7 +5,7 @@
 \title{Create a value box for the main body of a dashboard.}
 \usage{
 valueBox(value, subtitle, icon = NULL, color = "aqua", width = 4,
-  href = NULL)
+  href = NULL, id = NULL)
 }
 \arguments{
 \item{value}{The value to display in the box. Usually a number or short text.}
@@ -24,6 +24,8 @@ layouts, use \code{NULL} for the width; the width is set by the column that
 contains the box.}
 
 \item{href}{An optional URL to link to.}
+
+\item{id}{An optional id to uniquely identify the box}
 }
 \description{
 A value box displays a value (usually a number) in large text, with a smaller
@@ -34,6 +36,6 @@ to be placed in the main body of a dashboard.
 \code{\link{box}} for usage examples.
 
 Other boxes: \code{\link{box}}, \code{\link{infoBox}},
-  \code{\link{tabBox}}
+  \code{\link{tabBox}}, \code{\link{updateBoxValue}}
 }
 \concept{boxes}

@@ -85,6 +85,6 @@ shinyApp(
 }
 \seealso{
 Other boxes: \code{\link{box}}, \code{\link{infoBox}},
-  \code{\link{valueBox}}
+  \code{\link{updateBoxValue}}, \code{\link{valueBox}}
 }
 \concept{boxes}
