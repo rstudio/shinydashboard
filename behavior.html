@@ -23,40 +23,72 @@
 
 <style type="text/css">code{white-space: pre;}</style>
 <style type="text/css">
-div.sourceCode { overflow-x: auto; }
-table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
-  margin: 0; padding: 0; vertical-align: baseline; border: none; }
-table.sourceCode { width: 100%; line-height: 100%; }
-td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; background-color: #dddddd; }
-td.sourceCode { padding-left: 5px; }
-code > span.kw { font-weight: bold; } /* Keyword */
-code > span.dt { color: #800000; } /* DataType */
-code > span.dv { color: #0000ff; } /* DecVal */
-code > span.bn { color: #0000ff; } /* BaseN */
-code > span.fl { color: #800080; } /* Float */
-code > span.ch { color: #ff00ff; } /* Char */
-code > span.st { color: #dd0000; } /* String */
-code > span.co { color: #808080; font-style: italic; } /* Comment */
-code > span.al { color: #00ff00; font-weight: bold; } /* Alert */
-code > span.fu { color: #000080; } /* Function */
-code > span.er { color: #ff0000; font-weight: bold; } /* Error */
-code > span.wa { color: #ff0000; font-weight: bold; } /* Warning */
-code > span.cn { color: #000000; } /* Constant */
-code > span.sc { color: #ff00ff; } /* SpecialChar */
-code > span.vs { color: #dd0000; } /* VerbatimString */
-code > span.ss { color: #dd0000; } /* SpecialString */
-code > span.im { } /* Import */
-code > span.va { } /* Variable */
-code > span.cf { } /* ControlFlow */
-code > span.op { } /* Operator */
-code > span.bu { } /* BuiltIn */
-code > span.ex { } /* Extension */
-code > span.pp { font-weight: bold; } /* Preprocessor */
-code > span.at { } /* Attribute */
-code > span.do { color: #808080; font-style: italic; } /* Documentation */
-code > span.an { color: #808080; font-weight: bold; font-style: italic; } /* Annotation */
-code > span.cv { color: #808080; font-weight: bold; font-style: italic; } /* CommentVar */
-code > span.in { color: #808080; font-weight: bold; font-style: italic; } /* Information */
+a.sourceLine { display: inline-block; line-height: 1.25; }
+a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
+a.sourceLine:empty { height: 1.2em; position: absolute; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+a.sourceLine { text-indent: -1em; padding-left: 1em; }
+}
+pre.numberSource a.sourceLine
+  { position: relative; }
+pre.numberSource a.sourceLine:empty
+  { position: absolute; }
+pre.numberSource a.sourceLine::before
+  { content: attr(data-line-number);
+    position: absolute; left: -5em; text-align: right; vertical-align: baseline;
+    border: none; pointer-events: all;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    background-color: #ffffff;
+    color: #a0a0a0;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #a0a0a0;  padding-left: 4px; }
+div.sourceCode
+  { color: #1f1c1b; background-color: #ffffff; }
+@media screen {
+a.sourceLine::before { text-decoration: underline; }
+}
+code span. { color: #1f1c1b; } /* Normal */
+code span.al { color: #bf0303; background-color: #f7e6e6; font-weight: bold; } /* Alert */
+code span.an { color: #ca60ca; } /* Annotation */
+code span.at { color: #0057ae; } /* Attribute */
+code span.bn { color: #b08000; } /* BaseN */
+code span.bu { color: #644a9b; font-weight: bold; } /* BuiltIn */
+code span.cf { color: #1f1c1b; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #924c9d; } /* Char */
+code span.cn { color: #aa5500; } /* Constant */
+code span.co { color: #898887; } /* Comment */
+code span.cv { color: #0095ff; } /* CommentVar */
+code span.do { color: #607880; } /* Documentation */
+code span.dt { color: #0057ae; } /* DataType */
+code span.dv { color: #b08000; } /* DecVal */
+code span.er { color: #bf0303; text-decoration: underline; } /* Error */
+code span.ex { color: #0095ff; font-weight: bold; } /* Extension */
+code span.fl { color: #b08000; } /* Float */
+code span.fu { color: #644a9b; } /* Function */
+code span.im { color: #ff5500; } /* Import */
+code span.in { color: #b08000; } /* Information */
+code span.kw { color: #1f1c1b; font-weight: bold; } /* Keyword */
+code span.op { color: #1f1c1b; } /* Operator */
+code span.ot { color: #006e28; } /* Other */
+code span.pp { color: #006e28; } /* Preprocessor */
+code span.re { color: #0057ae; background-color: #e0e9f8; } /* RegionMarker */
+code span.sc { color: #3daee9; } /* SpecialChar */
+code span.ss { color: #ff5500; } /* SpecialString */
+code span.st { color: #bf0303; } /* String */
+code span.va { color: #0057ae; } /* Variable */
+code span.vs { color: #bf0303; } /* VerbatimString */
+code span.wa { color: #bf0303; } /* Warning */
 </style>
 <style type="text/css">
   pre:not([class]) {
@@ -116,7 +148,7 @@ code {
 <div id="TOC">
 <ul>
 <li><a href="#shinydashboard-specific-components">shinydashboard-specific components</a><ul>
-<li><a href="#know-which-menuitem-or-menusubitem-is-currently-selected">Know which <strong>menuItem()</strong> or <strong>menuSubItem()</strong> is currently selected</a><ul>
+<li><a href="#know-which-tab-is-currently-visible">Know which tab is currently visible</a><ul>
 <li><a href="#the-small-print">The small print</a></li>
 </ul></li>
 <li><a href="#know-which-menuitem-if-any-is-currently-expanded">Know which <strong>menuItem()</strong>, if any, is currently expanded</a><ul>
@@ -125,110 +157,111 @@ code {
 <li><a href="#know-whether-the-whole-sidebar-is-expanded-or-collapsed">Know whether the whole sidebar is expanded or collapsed</a></li>
 </ul></li>
 <li><a href="#bookmarking">Bookmarking</a></li>
+<li><a href="#testing-with-shinytest">Testing with shinytest</a></li>
 <li><a href="#a-note-about-dropdownmenus">A note about <strong>dropdownMenu</strong>s</a></li>
 </ul>
 </div>
 </div>
 <div class="col-sm-9 pull-right">
 
+<pre><code>## Warning: package &#39;shiny&#39; was built under R version 3.5.2</code></pre>
 <p>Shinydashboard supports all the normal interactive functionality that Shiny does. If you need a refresher on all the interactive capabilities of Shiny (through inputs, outputs, reactives, etc), take a look at <a href="https://shiny.rstudio.com/articles/">our website’s articles</a>.</p>
 <div id="shinydashboard-specific-components" class="section level1">
 <h1>shinydashboard-specific components</h1>
 <p>In addition to all the normal Shiny inputs and outputs that can be present in a shinydashboard app, there are a few things that are specific to the structure of such apps. In particular, most shinydashboard apps have a sidebar. As of the 0.6 shinydashboard release, app authors can access the entire state of the sidebar as Shiny inputs. There are up to three inputs that can be generated if you have a sidebar in your app. (However, it should be noted that two these are not “normal” inputs, since they are generated automatically and have a fixed name – rather than you, as the app author, deciding that name.)</p>
 <p>Let’s get into the details. The three sidebar-related inputs allow you to:</p>
-<div id="know-which-menuitem-or-menusubitem-is-currently-selected" class="section level2">
-<h2>Know which <strong>menuItem()</strong> or <strong>menuSubItem()</strong> is currently selected</h2>
-<p>You can find the currently-selected <code>menuItem()</code> or <code>menuSubItem()</code>, provided that the <code>sidebarMenu()</code> has an <code>id</code> (and the <code>menuItem()</code>/<code>menuSubItem()</code> has a <code>tabName</code>). In particular, if you pass in <code>id = &quot;tabs&quot;</code> to your <code>sidebarMenu()</code>, then you can know which sidebar item is selected by accessing the variable <code>input$tabs</code>. The value associated with <code>input$tabs</code> is given by the <code>tabName</code> argument of the currently selected <code>menuItem()</code> (or <code>menuSubItem()</code>).</p>
+<div id="know-which-tab-is-currently-visible" class="section level2">
+<h2>Know which tab is currently visible</h2>
+<p>If you want to know which tab is currently visible, you need to know which menu item is active. To do this, the <code>sidebarMenu()</code> must have an <code>id</code>, and the <code>menuItem()</code>/<code>menuSubItem()</code> must have a <code>tabName</code>. In particular, if you pass in <code>id = &quot;tabs&quot;</code> to your <code>sidebarMenu()</code>, then you can know which sidebar item is selected by accessing the variable <code>input$tabs</code>. The value associated with <code>input$tabs</code> is given by the <code>tabName</code> argument of the currently selected <code>menuItem()</code> (or <code>menuSubItem()</code>).</p>
 <p>The screenshot below shows an app that indicates which <code>menuItem()</code> is selected:</p>
-<div class="figure">
-<img src="images/sidebar-input.png" />
-
-</div>
+<p><img src="images/sidebar-input.png" /></p>
 <p>Here’s the code for the app pictured above. Notice that all childless <code>menuItem()</code>s and <code>menuSubItem()</code>s have a <code>tabName</code> argument:</p>
-<p><details> <summary>app.R</summary></p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(shiny)
-<span class="kw">library</span>(shinydashboard)
-
-ui &lt;-<span class="st"> </span><span class="kw">dashboardPage</span>(
-  <span class="kw">dashboardHeader</span>(), 
-  <span class="kw">dashboardSidebar</span>(
-    <span class="kw">sidebarMenu</span>(
-      <span class="co"># Setting id makes input$tabs give the tabName of currently-selected tab</span>
-      <span class="dt">id =</span> <span class="st">&quot;tabs&quot;</span>,
-      
-      <span class="kw">menuItem</span>(<span class="st">&quot;Dashboard&quot;</span>, <span class="dt">tabName =</span> <span class="st">&quot;dashboard&quot;</span>, <span class="dt">icon =</span> <span class="kw">icon</span>(<span class="st">&quot;dashboard&quot;</span>)),
-      <span class="kw">menuItem</span>(<span class="st">&quot;Widgets&quot;</span>, <span class="dt">icon =</span> <span class="kw">icon</span>(<span class="st">&quot;th&quot;</span>), <span class="dt">tabName =</span> <span class="st">&quot;widgets&quot;</span>),
-      <span class="kw">menuItem</span>(<span class="st">&quot;Charts&quot;</span>, <span class="dt">icon =</span> <span class="kw">icon</span>(<span class="st">&quot;bar-chart-o&quot;</span>),
-        <span class="kw">menuSubItem</span>(<span class="st">&quot;Sub-item 1&quot;</span>, <span class="dt">tabName =</span> <span class="st">&quot;subitem1&quot;</span>),
-        <span class="kw">menuSubItem</span>(<span class="st">&quot;Sub-item 2&quot;</span>, <span class="dt">tabName =</span> <span class="st">&quot;subitem2&quot;</span>)
-      )
-    ),
-    <span class="kw">textOutput</span>(<span class="st">&quot;res&quot;</span>)
-  ),
-  <span class="kw">dashboardBody</span>(
-    <span class="kw">tabItems</span>(
-      <span class="kw">tabItem</span>(<span class="st">&quot;dashboard&quot;</span>, <span class="st">&quot;Dashboard tab content&quot;</span>),
-      <span class="kw">tabItem</span>(<span class="st">&quot;widgets&quot;</span>, <span class="st">&quot;Widgets tab content&quot;</span>),
-      <span class="kw">tabItem</span>(<span class="st">&quot;subitem1&quot;</span>, <span class="st">&quot;Sub-item 1 tab content&quot;</span>),
-      <span class="kw">tabItem</span>(<span class="st">&quot;subitem2&quot;</span>, <span class="st">&quot;Sub-item 2 tab content&quot;</span>) 
-    )
-  )
-)
-
-server &lt;-<span class="st"> </span>function(input, output, session) {
-  output$res &lt;-<span class="st"> </span><span class="kw">renderText</span>({
-    <span class="kw">paste</span>(<span class="st">&quot;You&#39;ve selected:&quot;</span>, input$tabs)
-  })
-}
-
-<span class="kw">shinyApp</span>(ui, server)</code></pre></div>
-<p></details></p>
+<details>
+<p><summary>app.R</summary></p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2-1" data-line-number="1"><span class="kw">library</span>(shiny)</a>
+<a class="sourceLine" id="cb2-2" data-line-number="2"><span class="kw">library</span>(shinydashboard)</a>
+<a class="sourceLine" id="cb2-3" data-line-number="3"></a>
+<a class="sourceLine" id="cb2-4" data-line-number="4">ui &lt;-<span class="st"> </span><span class="kw">dashboardPage</span>(</a>
+<a class="sourceLine" id="cb2-5" data-line-number="5">  <span class="kw">dashboardHeader</span>(), </a>
+<a class="sourceLine" id="cb2-6" data-line-number="6">  <span class="kw">dashboardSidebar</span>(</a>
+<a class="sourceLine" id="cb2-7" data-line-number="7">    <span class="kw">sidebarMenu</span>(</a>
+<a class="sourceLine" id="cb2-8" data-line-number="8">      <span class="co"># Setting id makes input$tabs give the tabName of currently-selected tab</span></a>
+<a class="sourceLine" id="cb2-9" data-line-number="9">      <span class="dt">id =</span> <span class="st">&quot;tabs&quot;</span>,</a>
+<a class="sourceLine" id="cb2-10" data-line-number="10">      </a>
+<a class="sourceLine" id="cb2-11" data-line-number="11">      <span class="kw">menuItem</span>(<span class="st">&quot;Dashboard&quot;</span>, <span class="dt">tabName =</span> <span class="st">&quot;dashboard&quot;</span>, <span class="dt">icon =</span> <span class="kw">icon</span>(<span class="st">&quot;dashboard&quot;</span>)),</a>
+<a class="sourceLine" id="cb2-12" data-line-number="12">      <span class="kw">menuItem</span>(<span class="st">&quot;Widgets&quot;</span>, <span class="dt">icon =</span> <span class="kw">icon</span>(<span class="st">&quot;th&quot;</span>), <span class="dt">tabName =</span> <span class="st">&quot;widgets&quot;</span>),</a>
+<a class="sourceLine" id="cb2-13" data-line-number="13">      <span class="kw">menuItem</span>(<span class="st">&quot;Charts&quot;</span>, <span class="dt">icon =</span> <span class="kw">icon</span>(<span class="st">&quot;bar-chart-o&quot;</span>),</a>
+<a class="sourceLine" id="cb2-14" data-line-number="14">        <span class="kw">menuSubItem</span>(<span class="st">&quot;Sub-item 1&quot;</span>, <span class="dt">tabName =</span> <span class="st">&quot;subitem1&quot;</span>),</a>
+<a class="sourceLine" id="cb2-15" data-line-number="15">        <span class="kw">menuSubItem</span>(<span class="st">&quot;Sub-item 2&quot;</span>, <span class="dt">tabName =</span> <span class="st">&quot;subitem2&quot;</span>)</a>
+<a class="sourceLine" id="cb2-16" data-line-number="16">      )</a>
+<a class="sourceLine" id="cb2-17" data-line-number="17">    ),</a>
+<a class="sourceLine" id="cb2-18" data-line-number="18">    <span class="kw">textOutput</span>(<span class="st">&quot;res&quot;</span>)</a>
+<a class="sourceLine" id="cb2-19" data-line-number="19">  ),</a>
+<a class="sourceLine" id="cb2-20" data-line-number="20">  <span class="kw">dashboardBody</span>(</a>
+<a class="sourceLine" id="cb2-21" data-line-number="21">    <span class="kw">tabItems</span>(</a>
+<a class="sourceLine" id="cb2-22" data-line-number="22">      <span class="kw">tabItem</span>(<span class="st">&quot;dashboard&quot;</span>, <span class="st">&quot;Dashboard tab content&quot;</span>),</a>
+<a class="sourceLine" id="cb2-23" data-line-number="23">      <span class="kw">tabItem</span>(<span class="st">&quot;widgets&quot;</span>, <span class="st">&quot;Widgets tab content&quot;</span>),</a>
+<a class="sourceLine" id="cb2-24" data-line-number="24">      <span class="kw">tabItem</span>(<span class="st">&quot;subitem1&quot;</span>, <span class="st">&quot;Sub-item 1 tab content&quot;</span>),</a>
+<a class="sourceLine" id="cb2-25" data-line-number="25">      <span class="kw">tabItem</span>(<span class="st">&quot;subitem2&quot;</span>, <span class="st">&quot;Sub-item 2 tab content&quot;</span>) </a>
+<a class="sourceLine" id="cb2-26" data-line-number="26">    )</a>
+<a class="sourceLine" id="cb2-27" data-line-number="27">  )</a>
+<a class="sourceLine" id="cb2-28" data-line-number="28">)</a>
+<a class="sourceLine" id="cb2-29" data-line-number="29"></a>
+<a class="sourceLine" id="cb2-30" data-line-number="30">server &lt;-<span class="st"> </span><span class="cf">function</span>(input, output, session) {</a>
+<a class="sourceLine" id="cb2-31" data-line-number="31">  output<span class="op">$</span>res &lt;-<span class="st"> </span><span class="kw">renderText</span>({</a>
+<a class="sourceLine" id="cb2-32" data-line-number="32">    <span class="kw">paste</span>(<span class="st">&quot;You&#39;ve selected:&quot;</span>, input<span class="op">$</span>tabs)</a>
+<a class="sourceLine" id="cb2-33" data-line-number="33">  })</a>
+<a class="sourceLine" id="cb2-34" data-line-number="34">}</a>
+<a class="sourceLine" id="cb2-35" data-line-number="35"></a>
+<a class="sourceLine" id="cb2-36" data-line-number="36"><span class="kw">shinyApp</span>(ui, server)</a></code></pre></div>
+</details>
 <div id="the-small-print" class="section level3">
 <h3>The small print</h3>
 <ul>
 <li><p>As mentioned, <code>sidebarMenu()</code> <em>must</em> take in an <code>id</code>. For example if you pass in <code>id = &quot;tabs&quot;</code>, then, anywhere in the server function, you can know which <code>menuItem()</code> (or <code>menuSubItem()</code>) is selected by accessing <code>input$tabs</code>. If you don’t pass in an <code>id</code>, you won’t be able access to this information. In addition, you need to specify a <code>tabName</code> for all “leaf” items (i.e. all <code>menuItem()</code>s or <code>menuSubItem()</code>s that don’t have any children), even if you wouldn’t need it otherwise. If you don’t specify a <code>tabName</code>, then that item will not be clickable, though the the other items will continue to function as normal (i.e. not specifying a <code>tabName</code> for an item is functionally the same as not having that item at all - except for the different visual look - since you won’t be able to interact with it at all).</p></li>
 <li><p>This works exactly the same for dynamically generated <code>sidebarMenu()</code>s. Here’s an identical-looking app, whose only difference is that the sidebar menu is generated dynamically:</p>
-<p><details> <summary>app.R</summary></p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(shiny)
-<span class="kw">library</span>(shinydashboard)
-
-ui &lt;-<span class="st"> </span><span class="kw">dashboardPage</span>(
-  <span class="kw">dashboardHeader</span>(), 
-  <span class="kw">dashboardSidebar</span>(
-    <span class="kw">sidebarMenuOutput</span>(<span class="st">&quot;menu&quot;</span>),
-    <span class="kw">textOutput</span>(<span class="st">&quot;res&quot;</span>)
-  ),
-  <span class="kw">dashboardBody</span>(
-    <span class="kw">tabItems</span>(
-      <span class="kw">tabItem</span>(<span class="st">&quot;dashboard&quot;</span>, <span class="st">&quot;Dashboard tab content&quot;</span>),
-      <span class="kw">tabItem</span>(<span class="st">&quot;widgets&quot;</span>, <span class="st">&quot;Widgets tab content&quot;</span>),
-      <span class="kw">tabItem</span>(<span class="st">&quot;subitem1&quot;</span>, <span class="st">&quot;Sub-item 1 tab content&quot;</span>),
-      <span class="kw">tabItem</span>(<span class="st">&quot;subitem2&quot;</span>, <span class="st">&quot;Sub-item 2 tab content&quot;</span>) 
-    )
-  )
-)
-
-server &lt;-<span class="st"> </span>function(input, output, session) {
-  output$res &lt;-<span class="st"> </span><span class="kw">renderText</span>({
-    <span class="kw">paste</span>(<span class="st">&quot;You&#39;ve selected:&quot;</span>, input$tabs)
-  })
-  output$menu &lt;-<span class="st"> </span><span class="kw">renderMenu</span>({
-    <span class="kw">sidebarMenu</span>(
-      <span class="co"># Setting id makes input$tabs give the tabName of currently-selected tab</span>
-      <span class="dt">id =</span> <span class="st">&quot;tabs&quot;</span>,
-
-      <span class="kw">menuItem</span>(<span class="st">&quot;Dashboard&quot;</span>, <span class="dt">tabName =</span> <span class="st">&quot;dashboard&quot;</span>, <span class="dt">icon =</span> <span class="kw">icon</span>(<span class="st">&quot;dashboard&quot;</span>)),
-      <span class="kw">menuItem</span>(<span class="st">&quot;Widgets&quot;</span>, <span class="dt">icon =</span> <span class="kw">icon</span>(<span class="st">&quot;th&quot;</span>), <span class="dt">tabName =</span> <span class="st">&quot;widgets&quot;</span>),
-      <span class="kw">menuItem</span>(<span class="st">&quot;Charts&quot;</span>, <span class="dt">icon =</span> <span class="kw">icon</span>(<span class="st">&quot;bar-chart-o&quot;</span>),
-        <span class="kw">menuSubItem</span>(<span class="st">&quot;Sub-item 1&quot;</span>, <span class="dt">tabName =</span> <span class="st">&quot;subitem1&quot;</span>),
-        <span class="kw">menuSubItem</span>(<span class="st">&quot;Sub-item 2&quot;</span>, <span class="dt">tabName =</span> <span class="st">&quot;subitem2&quot;</span>)
-      )
-    )
-  })
-}
-
-<span class="kw">shinyApp</span>(ui, server)</code></pre></div>
-<p></details></p></li>
+<details>
+<p><summary>app.R</summary></p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb3-1" data-line-number="1">  <span class="kw">library</span>(shiny)</a>
+<a class="sourceLine" id="cb3-2" data-line-number="2">  <span class="kw">library</span>(shinydashboard)</a>
+<a class="sourceLine" id="cb3-3" data-line-number="3"></a>
+<a class="sourceLine" id="cb3-4" data-line-number="4">  ui &lt;-<span class="st"> </span><span class="kw">dashboardPage</span>(</a>
+<a class="sourceLine" id="cb3-5" data-line-number="5">    <span class="kw">dashboardHeader</span>(), </a>
+<a class="sourceLine" id="cb3-6" data-line-number="6">    <span class="kw">dashboardSidebar</span>(</a>
+<a class="sourceLine" id="cb3-7" data-line-number="7">      <span class="kw">sidebarMenuOutput</span>(<span class="st">&quot;menu&quot;</span>),</a>
+<a class="sourceLine" id="cb3-8" data-line-number="8">      <span class="kw">textOutput</span>(<span class="st">&quot;res&quot;</span>)</a>
+<a class="sourceLine" id="cb3-9" data-line-number="9">    ),</a>
+<a class="sourceLine" id="cb3-10" data-line-number="10">    <span class="kw">dashboardBody</span>(</a>
+<a class="sourceLine" id="cb3-11" data-line-number="11">      <span class="kw">tabItems</span>(</a>
+<a class="sourceLine" id="cb3-12" data-line-number="12">        <span class="kw">tabItem</span>(<span class="st">&quot;dashboard&quot;</span>, <span class="st">&quot;Dashboard tab content&quot;</span>),</a>
+<a class="sourceLine" id="cb3-13" data-line-number="13">        <span class="kw">tabItem</span>(<span class="st">&quot;widgets&quot;</span>, <span class="st">&quot;Widgets tab content&quot;</span>),</a>
+<a class="sourceLine" id="cb3-14" data-line-number="14">        <span class="kw">tabItem</span>(<span class="st">&quot;subitem1&quot;</span>, <span class="st">&quot;Sub-item 1 tab content&quot;</span>),</a>
+<a class="sourceLine" id="cb3-15" data-line-number="15">        <span class="kw">tabItem</span>(<span class="st">&quot;subitem2&quot;</span>, <span class="st">&quot;Sub-item 2 tab content&quot;</span>) </a>
+<a class="sourceLine" id="cb3-16" data-line-number="16">      )</a>
+<a class="sourceLine" id="cb3-17" data-line-number="17">    )</a>
+<a class="sourceLine" id="cb3-18" data-line-number="18">  )</a>
+<a class="sourceLine" id="cb3-19" data-line-number="19"></a>
+<a class="sourceLine" id="cb3-20" data-line-number="20">  server &lt;-<span class="st"> </span><span class="cf">function</span>(input, output, session) {</a>
+<a class="sourceLine" id="cb3-21" data-line-number="21">    output<span class="op">$</span>res &lt;-<span class="st"> </span><span class="kw">renderText</span>({</a>
+<a class="sourceLine" id="cb3-22" data-line-number="22">      <span class="kw">paste</span>(<span class="st">&quot;You&#39;ve selected:&quot;</span>, input<span class="op">$</span>tabs)</a>
+<a class="sourceLine" id="cb3-23" data-line-number="23">    })</a>
+<a class="sourceLine" id="cb3-24" data-line-number="24">    output<span class="op">$</span>menu &lt;-<span class="st"> </span><span class="kw">renderMenu</span>({</a>
+<a class="sourceLine" id="cb3-25" data-line-number="25">      <span class="kw">sidebarMenu</span>(</a>
+<a class="sourceLine" id="cb3-26" data-line-number="26">        <span class="co"># Setting id makes input$tabs give the tabName of currently-selected tab</span></a>
+<a class="sourceLine" id="cb3-27" data-line-number="27">        <span class="dt">id =</span> <span class="st">&quot;tabs&quot;</span>,</a>
+<a class="sourceLine" id="cb3-28" data-line-number="28"></a>
+<a class="sourceLine" id="cb3-29" data-line-number="29">        <span class="kw">menuItem</span>(<span class="st">&quot;Dashboard&quot;</span>, <span class="dt">tabName =</span> <span class="st">&quot;dashboard&quot;</span>, <span class="dt">icon =</span> <span class="kw">icon</span>(<span class="st">&quot;dashboard&quot;</span>)),</a>
+<a class="sourceLine" id="cb3-30" data-line-number="30">        <span class="kw">menuItem</span>(<span class="st">&quot;Widgets&quot;</span>, <span class="dt">icon =</span> <span class="kw">icon</span>(<span class="st">&quot;th&quot;</span>), <span class="dt">tabName =</span> <span class="st">&quot;widgets&quot;</span>),</a>
+<a class="sourceLine" id="cb3-31" data-line-number="31">        <span class="kw">menuItem</span>(<span class="st">&quot;Charts&quot;</span>, <span class="dt">icon =</span> <span class="kw">icon</span>(<span class="st">&quot;bar-chart-o&quot;</span>),</a>
+<a class="sourceLine" id="cb3-32" data-line-number="32">          <span class="kw">menuSubItem</span>(<span class="st">&quot;Sub-item 1&quot;</span>, <span class="dt">tabName =</span> <span class="st">&quot;subitem1&quot;</span>),</a>
+<a class="sourceLine" id="cb3-33" data-line-number="33">          <span class="kw">menuSubItem</span>(<span class="st">&quot;Sub-item 2&quot;</span>, <span class="dt">tabName =</span> <span class="st">&quot;subitem2&quot;</span>)</a>
+<a class="sourceLine" id="cb3-34" data-line-number="34">        )</a>
+<a class="sourceLine" id="cb3-35" data-line-number="35">      )</a>
+<a class="sourceLine" id="cb3-36" data-line-number="36">    })</a>
+<a class="sourceLine" id="cb3-37" data-line-number="37">  }</a>
+<a class="sourceLine" id="cb3-38" data-line-number="38"></a>
+<a class="sourceLine" id="cb3-39" data-line-number="39">  <span class="kw">shinyApp</span>(ui, server)</a></code></pre></div>
+</details></li>
 </ul>
 </div>
 </div>
@@ -236,47 +269,45 @@ server &lt;-<span class="st"> </span>function(input, output, session) {
 <h2>Know which <strong>menuItem()</strong>, if any, is currently expanded</h2>
 <p>As of shinydashboard 0.6, there’s an automatic way to access which “childfull” <code>menuItem()</code> (if any) is currently expanded. Anywhere on your server function, use <code>input$sidebarItemExpanded</code> to get the <code>expandedName</code> of the currently expanded <code>menuItem()</code> (or <code>NULL</code> if none is currently expanded). If you don’t pass in an <code>expandedName</code>, Shiny has a sensible default – it will use the mandatory <code>text</code> argument that was passed in, without any white space. You can use <code>input$sidebarItemExpanded</code> as any other input, including making other UI elements conditional on it.</p>
 <p>The screenshot below shows an app that starts with the “Charts” <code>menuItem()</code> expanded:</p>
-<div class="figure">
-<img src="images/sidebar-expanded.png" />
-
-</div>
+<p><img src="images/sidebar-expanded.png" /></p>
 <p>Here’s the code for the app pictured above:</p>
-<p><details> <summary>app.R</summary></p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(shiny)
-<span class="kw">library</span>(shinydashboard)
-
-ui &lt;-<span class="st"> </span><span class="kw">dashboardPage</span>(
-  <span class="kw">dashboardHeader</span>(), 
-  <span class="kw">dashboardSidebar</span>(
-    <span class="kw">sidebarMenu</span>(
-      <span class="kw">menuItem</span>(<span class="st">&quot;Dashboard&quot;</span>, <span class="dt">tabName =</span> <span class="st">&quot;dashboard&quot;</span>, <span class="dt">icon =</span> <span class="kw">icon</span>(<span class="st">&quot;dashboard&quot;</span>)),
-      <span class="kw">menuItem</span>(<span class="st">&quot;Widgets&quot;</span>, <span class="dt">icon =</span> <span class="kw">icon</span>(<span class="st">&quot;th&quot;</span>), <span class="dt">tabName =</span> <span class="st">&quot;widgets&quot;</span>),
-      <span class="kw">menuItem</span>(<span class="st">&quot;Charts&quot;</span>, <span class="dt">icon =</span> <span class="kw">icon</span>(<span class="st">&quot;bar-chart-o&quot;</span>), <span class="dt">startExpanded =</span> <span class="ot">TRUE</span>,
-        <span class="kw">menuSubItem</span>(<span class="st">&quot;Sub-item 1&quot;</span>, <span class="dt">tabName =</span> <span class="st">&quot;subitem1&quot;</span>),
-        <span class="kw">menuSubItem</span>(<span class="st">&quot;Sub-item 2&quot;</span>, <span class="dt">tabName =</span> <span class="st">&quot;subitem2&quot;</span>)
-      )
-    ),
-    <span class="kw">textOutput</span>(<span class="st">&quot;res&quot;</span>)
-  ),
-  <span class="kw">dashboardBody</span>(
-    <span class="kw">tabItems</span>(
-      <span class="kw">tabItem</span>(<span class="st">&quot;dashboard&quot;</span>, <span class="st">&quot;Dashboard tab content&quot;</span>),
-      <span class="kw">tabItem</span>(<span class="st">&quot;widgets&quot;</span>, <span class="st">&quot;Widgets tab content&quot;</span>),
-      <span class="kw">tabItem</span>(<span class="st">&quot;subitem1&quot;</span>, <span class="st">&quot;Sub-item 1 tab content&quot;</span>),
-      <span class="kw">tabItem</span>(<span class="st">&quot;subitem2&quot;</span>, <span class="st">&quot;Sub-item 2 tab content&quot;</span>) 
-    )
-  )
-)
-
-server &lt;-<span class="st"> </span>function(input, output, session) {
-  output$res &lt;-<span class="st"> </span><span class="kw">renderText</span>({
-    <span class="kw">req</span>(input$sidebarItemExpanded)
-    <span class="kw">paste</span>(<span class="st">&quot;Expanded menuItem:&quot;</span>, input$sidebarItemExpanded)
-  })
-}
-
-<span class="kw">shinyApp</span>(ui, server)</code></pre></div>
-<p></details></p>
+<details>
+<p><summary>app.R</summary></p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb4-1" data-line-number="1"><span class="kw">library</span>(shiny)</a>
+<a class="sourceLine" id="cb4-2" data-line-number="2"><span class="kw">library</span>(shinydashboard)</a>
+<a class="sourceLine" id="cb4-3" data-line-number="3"></a>
+<a class="sourceLine" id="cb4-4" data-line-number="4">ui &lt;-<span class="st"> </span><span class="kw">dashboardPage</span>(</a>
+<a class="sourceLine" id="cb4-5" data-line-number="5">  <span class="kw">dashboardHeader</span>(), </a>
+<a class="sourceLine" id="cb4-6" data-line-number="6">  <span class="kw">dashboardSidebar</span>(</a>
+<a class="sourceLine" id="cb4-7" data-line-number="7">    <span class="kw">sidebarMenu</span>(</a>
+<a class="sourceLine" id="cb4-8" data-line-number="8">      <span class="kw">menuItem</span>(<span class="st">&quot;Dashboard&quot;</span>, <span class="dt">tabName =</span> <span class="st">&quot;dashboard&quot;</span>, <span class="dt">icon =</span> <span class="kw">icon</span>(<span class="st">&quot;dashboard&quot;</span>)),</a>
+<a class="sourceLine" id="cb4-9" data-line-number="9">      <span class="kw">menuItem</span>(<span class="st">&quot;Widgets&quot;</span>, <span class="dt">icon =</span> <span class="kw">icon</span>(<span class="st">&quot;th&quot;</span>), <span class="dt">tabName =</span> <span class="st">&quot;widgets&quot;</span>),</a>
+<a class="sourceLine" id="cb4-10" data-line-number="10">      <span class="kw">menuItem</span>(<span class="st">&quot;Charts&quot;</span>, <span class="dt">icon =</span> <span class="kw">icon</span>(<span class="st">&quot;bar-chart-o&quot;</span>), <span class="dt">startExpanded =</span> <span class="ot">TRUE</span>,</a>
+<a class="sourceLine" id="cb4-11" data-line-number="11">        <span class="kw">menuSubItem</span>(<span class="st">&quot;Sub-item 1&quot;</span>, <span class="dt">tabName =</span> <span class="st">&quot;subitem1&quot;</span>),</a>
+<a class="sourceLine" id="cb4-12" data-line-number="12">        <span class="kw">menuSubItem</span>(<span class="st">&quot;Sub-item 2&quot;</span>, <span class="dt">tabName =</span> <span class="st">&quot;subitem2&quot;</span>)</a>
+<a class="sourceLine" id="cb4-13" data-line-number="13">      )</a>
+<a class="sourceLine" id="cb4-14" data-line-number="14">    ),</a>
+<a class="sourceLine" id="cb4-15" data-line-number="15">    <span class="kw">textOutput</span>(<span class="st">&quot;res&quot;</span>)</a>
+<a class="sourceLine" id="cb4-16" data-line-number="16">  ),</a>
+<a class="sourceLine" id="cb4-17" data-line-number="17">  <span class="kw">dashboardBody</span>(</a>
+<a class="sourceLine" id="cb4-18" data-line-number="18">    <span class="kw">tabItems</span>(</a>
+<a class="sourceLine" id="cb4-19" data-line-number="19">      <span class="kw">tabItem</span>(<span class="st">&quot;dashboard&quot;</span>, <span class="st">&quot;Dashboard tab content&quot;</span>),</a>
+<a class="sourceLine" id="cb4-20" data-line-number="20">      <span class="kw">tabItem</span>(<span class="st">&quot;widgets&quot;</span>, <span class="st">&quot;Widgets tab content&quot;</span>),</a>
+<a class="sourceLine" id="cb4-21" data-line-number="21">      <span class="kw">tabItem</span>(<span class="st">&quot;subitem1&quot;</span>, <span class="st">&quot;Sub-item 1 tab content&quot;</span>),</a>
+<a class="sourceLine" id="cb4-22" data-line-number="22">      <span class="kw">tabItem</span>(<span class="st">&quot;subitem2&quot;</span>, <span class="st">&quot;Sub-item 2 tab content&quot;</span>) </a>
+<a class="sourceLine" id="cb4-23" data-line-number="23">    )</a>
+<a class="sourceLine" id="cb4-24" data-line-number="24">  )</a>
+<a class="sourceLine" id="cb4-25" data-line-number="25">)</a>
+<a class="sourceLine" id="cb4-26" data-line-number="26"></a>
+<a class="sourceLine" id="cb4-27" data-line-number="27">server &lt;-<span class="st"> </span><span class="cf">function</span>(input, output, session) {</a>
+<a class="sourceLine" id="cb4-28" data-line-number="28">  output<span class="op">$</span>res &lt;-<span class="st"> </span><span class="kw">renderText</span>({</a>
+<a class="sourceLine" id="cb4-29" data-line-number="29">    <span class="kw">req</span>(input<span class="op">$</span>sidebarItemExpanded)</a>
+<a class="sourceLine" id="cb4-30" data-line-number="30">    <span class="kw">paste</span>(<span class="st">&quot;Expanded menuItem:&quot;</span>, input<span class="op">$</span>sidebarItemExpanded)</a>
+<a class="sourceLine" id="cb4-31" data-line-number="31">  })</a>
+<a class="sourceLine" id="cb4-32" data-line-number="32">}</a>
+<a class="sourceLine" id="cb4-33" data-line-number="33"></a>
+<a class="sourceLine" id="cb4-34" data-line-number="34"><span class="kw">shinyApp</span>(ui, server)</a></code></pre></div>
+</details>
 <div id="the-small-print-1" class="section level3">
 <h3>The small print</h3>
 <ul>
@@ -293,137 +324,144 @@ server &lt;-<span class="st"> </span>function(input, output, session) {
 <h2>Know whether the whole sidebar is expanded or collapsed</h2>
 <p>Similarly, as of shinydashboard 0.6, there is also an automatic way to access whether the whole sidebar is expanded or collapsed at the moment. Use <code>input$sidebarCollapsed</code> to know if the sidebar is collapsed (<code>TRUE</code>) or expanded (<code>FALSE</code>). While this may seem less interesting than the former two inputs, it is mostly useful for bookmarking (i.e. the bookmarked URL will capture whether the sidebar is collapsed or expanded and, on restore, it will have the same value and look).</p>
 <p>Here’s an example app:</p>
-<p><details> <summary>app.R</summary></p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(shiny)
-<span class="kw">library</span>(shinydashboard)
-
-ui &lt;-<span class="st"> </span><span class="kw">dashboardPage</span>(
-  <span class="kw">dashboardHeader</span>(), 
-  <span class="kw">dashboardSidebar</span>(),
-  <span class="kw">dashboardBody</span>(
-    <span class="kw">textOutput</span>(<span class="st">&quot;res&quot;</span>)
-  )
-)
-
-server &lt;-<span class="st"> </span>function(input, output, session) {
-  output$res &lt;-<span class="st"> </span><span class="kw">renderText</span>({
-    if (input$sidebarCollapsed) {
-      <span class="st">&quot;Sidebar is collapsed&quot;</span>
-    } else {
-      <span class="st">&quot;Sidebar is expanded&quot;</span>
-    }
-  })
-}
-
-<span class="kw">shinyApp</span>(ui, server)</code></pre></div>
-<p></details></p>
+<details>
+<p><summary>app.R</summary></p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb5-1" data-line-number="1"><span class="kw">library</span>(shiny)</a>
+<a class="sourceLine" id="cb5-2" data-line-number="2"><span class="kw">library</span>(shinydashboard)</a>
+<a class="sourceLine" id="cb5-3" data-line-number="3"></a>
+<a class="sourceLine" id="cb5-4" data-line-number="4">ui &lt;-<span class="st"> </span><span class="kw">dashboardPage</span>(</a>
+<a class="sourceLine" id="cb5-5" data-line-number="5">  <span class="kw">dashboardHeader</span>(), </a>
+<a class="sourceLine" id="cb5-6" data-line-number="6">  <span class="kw">dashboardSidebar</span>(),</a>
+<a class="sourceLine" id="cb5-7" data-line-number="7">  <span class="kw">dashboardBody</span>(</a>
+<a class="sourceLine" id="cb5-8" data-line-number="8">    <span class="kw">textOutput</span>(<span class="st">&quot;res&quot;</span>)</a>
+<a class="sourceLine" id="cb5-9" data-line-number="9">  )</a>
+<a class="sourceLine" id="cb5-10" data-line-number="10">)</a>
+<a class="sourceLine" id="cb5-11" data-line-number="11"></a>
+<a class="sourceLine" id="cb5-12" data-line-number="12">server &lt;-<span class="st"> </span><span class="cf">function</span>(input, output, session) {</a>
+<a class="sourceLine" id="cb5-13" data-line-number="13">  output<span class="op">$</span>res &lt;-<span class="st"> </span><span class="kw">renderText</span>({</a>
+<a class="sourceLine" id="cb5-14" data-line-number="14">    <span class="cf">if</span> (input<span class="op">$</span>sidebarCollapsed) {</a>
+<a class="sourceLine" id="cb5-15" data-line-number="15">      <span class="st">&quot;Sidebar is collapsed&quot;</span></a>
+<a class="sourceLine" id="cb5-16" data-line-number="16">    } <span class="cf">else</span> {</a>
+<a class="sourceLine" id="cb5-17" data-line-number="17">      <span class="st">&quot;Sidebar is expanded&quot;</span></a>
+<a class="sourceLine" id="cb5-18" data-line-number="18">    }</a>
+<a class="sourceLine" id="cb5-19" data-line-number="19">  })</a>
+<a class="sourceLine" id="cb5-20" data-line-number="20">}</a>
+<a class="sourceLine" id="cb5-21" data-line-number="21"></a>
+<a class="sourceLine" id="cb5-22" data-line-number="22"><span class="kw">shinyApp</span>(ui, server)</a></code></pre></div>
+</details>
 </div>
 </div>
 <div id="bookmarking" class="section level1">
 <h1>Bookmarking</h1>
-<p>As alluded in the previous sections, the features added in shinydashboard 0.6 allow it to integrate a lot better with <a href="https://shiny.rstudio.com/articles/bookmarking-state.html">bookmarkable state</a>, since the state of the sidebar will be automatically bookmarked. For example, the app below does not specify any explicit inputs (like <code>textInput</code> or <code>sliderInput</code>), but the state of the sidebar is automatically bookmarked (you can see this in the URL once you click “Bookmark…”). The app below combines all three inputs described before. You can use it to experiment with:</p>
+<p>To <a href="https://shiny.rstudio.com/articles/bookmarking-state.html">bookmark</a> which sidebar item is selected, the <code>sidebarMenu()</code> needs to have an <code>id</code>. For example, the app below does not specify any explicit inputs (like <code>textInput</code> or <code>sliderInput</code>), but the state of the sidebar is automatically bookmarked (you can see this in the URL once you click “Bookmark…”). The app below combines all three inputs described before. You can use it to experiment with:</p>
 <ul>
 <li>changing the selected <code>menuItem()</code> / <code>menuSubItem()</code> (and see the value of <code>input$tabs</code> also change);</li>
 <li>expanding and collapsing the “Charts” <code>menuItem()</code> (and see the value of <code>input$sidebarItemExpanded</code> also change);</li>
 <li>collapsing and expanding the whole sidebar, using the toggle button in the app header (and see the value of <code>input$sidebarCollapsed</code> also change).</li>
 </ul>
-<p><details> <summary>app.R</summary></p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(shiny)
-<span class="kw">library</span>(shinydashboard)
-
-ui &lt;-<span class="st"> </span>function(req) {
-  <span class="kw">dashboardPage</span>(
-    <span class="kw">dashboardHeader</span>(),
-    <span class="kw">dashboardSidebar</span>(
-      <span class="kw">sidebarMenu</span>(<span class="dt">id =</span> <span class="st">&quot;tabs&quot;</span>,
-        <span class="kw">menuItem</span>(<span class="st">&quot;Dashboard&quot;</span>, <span class="dt">tabName =</span> <span class="st">&quot;dashboard&quot;</span>, <span class="dt">icon =</span> <span class="kw">icon</span>(<span class="st">&quot;dashboard&quot;</span>)),
-        <span class="kw">menuItem</span>(<span class="st">&quot;Widgets&quot;</span>, <span class="dt">icon =</span> <span class="kw">icon</span>(<span class="st">&quot;th&quot;</span>), <span class="dt">tabName =</span> <span class="st">&quot;widgets&quot;</span>),
-        <span class="kw">menuItem</span>(<span class="st">&quot;Charts&quot;</span>, <span class="dt">icon =</span> <span class="kw">icon</span>(<span class="st">&quot;bar-chart-o&quot;</span>),
-          <span class="kw">menuSubItem</span>(<span class="st">&quot;Sub-item 1&quot;</span>, <span class="dt">tabName =</span> <span class="st">&quot;subitem1&quot;</span>),
-          <span class="kw">menuSubItem</span>(<span class="st">&quot;Sub-item 2&quot;</span>, <span class="dt">tabName =</span> <span class="st">&quot;subitem2&quot;</span>)
-        )
-      )
-    ),
-    <span class="kw">dashboardBody</span>(
-      <span class="kw">bookmarkButton</span>()
-    )
-  )
-}
-
-server &lt;-<span class="st"> </span>function(input, output, session) {}
-
-<span class="kw">shinyApp</span>(ui, server, <span class="dt">enableBookmarking =</span> <span class="st">&quot;url&quot;</span>)</code></pre></div>
-<p></details></p>
+<details>
+<p><summary>app.R</summary></p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb6-1" data-line-number="1"><span class="kw">library</span>(shiny)</a>
+<a class="sourceLine" id="cb6-2" data-line-number="2"><span class="kw">library</span>(shinydashboard)</a>
+<a class="sourceLine" id="cb6-3" data-line-number="3"></a>
+<a class="sourceLine" id="cb6-4" data-line-number="4">ui &lt;-<span class="st"> </span><span class="cf">function</span>(req) {</a>
+<a class="sourceLine" id="cb6-5" data-line-number="5">  <span class="kw">dashboardPage</span>(</a>
+<a class="sourceLine" id="cb6-6" data-line-number="6">    <span class="kw">dashboardHeader</span>(),</a>
+<a class="sourceLine" id="cb6-7" data-line-number="7">    <span class="kw">dashboardSidebar</span>(</a>
+<a class="sourceLine" id="cb6-8" data-line-number="8">      <span class="kw">sidebarMenu</span>(<span class="dt">id =</span> <span class="st">&quot;tabs&quot;</span>,</a>
+<a class="sourceLine" id="cb6-9" data-line-number="9">        <span class="kw">menuItem</span>(<span class="st">&quot;Dashboard&quot;</span>, <span class="dt">tabName =</span> <span class="st">&quot;dashboard&quot;</span>, <span class="dt">icon =</span> <span class="kw">icon</span>(<span class="st">&quot;dashboard&quot;</span>)),</a>
+<a class="sourceLine" id="cb6-10" data-line-number="10">        <span class="kw">menuItem</span>(<span class="st">&quot;Widgets&quot;</span>, <span class="dt">icon =</span> <span class="kw">icon</span>(<span class="st">&quot;th&quot;</span>), <span class="dt">tabName =</span> <span class="st">&quot;widgets&quot;</span>),</a>
+<a class="sourceLine" id="cb6-11" data-line-number="11">        <span class="kw">menuItem</span>(<span class="st">&quot;Charts&quot;</span>, <span class="dt">icon =</span> <span class="kw">icon</span>(<span class="st">&quot;bar-chart-o&quot;</span>),</a>
+<a class="sourceLine" id="cb6-12" data-line-number="12">          <span class="kw">menuSubItem</span>(<span class="st">&quot;Sub-item 1&quot;</span>, <span class="dt">tabName =</span> <span class="st">&quot;subitem1&quot;</span>),</a>
+<a class="sourceLine" id="cb6-13" data-line-number="13">          <span class="kw">menuSubItem</span>(<span class="st">&quot;Sub-item 2&quot;</span>, <span class="dt">tabName =</span> <span class="st">&quot;subitem2&quot;</span>)</a>
+<a class="sourceLine" id="cb6-14" data-line-number="14">        )</a>
+<a class="sourceLine" id="cb6-15" data-line-number="15">      )</a>
+<a class="sourceLine" id="cb6-16" data-line-number="16">    ),</a>
+<a class="sourceLine" id="cb6-17" data-line-number="17">    <span class="kw">dashboardBody</span>(</a>
+<a class="sourceLine" id="cb6-18" data-line-number="18">      <span class="kw">bookmarkButton</span>()</a>
+<a class="sourceLine" id="cb6-19" data-line-number="19">    )</a>
+<a class="sourceLine" id="cb6-20" data-line-number="20">  )</a>
+<a class="sourceLine" id="cb6-21" data-line-number="21">}</a>
+<a class="sourceLine" id="cb6-22" data-line-number="22"></a>
+<a class="sourceLine" id="cb6-23" data-line-number="23">server &lt;-<span class="st"> </span><span class="cf">function</span>(input, output, session) {}</a>
+<a class="sourceLine" id="cb6-24" data-line-number="24"></a>
+<a class="sourceLine" id="cb6-25" data-line-number="25"><span class="kw">shinyApp</span>(ui, server, <span class="dt">enableBookmarking =</span> <span class="st">&quot;url&quot;</span>)</a></code></pre></div>
+</details>
+</div>
+<div id="testing-with-shinytest" class="section level1">
+<h1>Testing with shinytest</h1>
+<p>For shinytest to be able to record and replay which menu item is selected, the <code>sidebarMenu()</code> must have an <code>id</code>, and the <code>menuItem</code>s and <code>menuSubItem</code>s must have have <code>tabName</code>s.</p>
 </div>
 <div id="a-note-about-dropdownmenus" class="section level1">
 <h1>A note about <strong>dropdownMenu</strong>s</h1>
 <p>Another shinydashboard-specific component that is not seen in vanilla Shiny apps is the <code>dropdownMenu()</code>, one or more of which can be placed in the dashboard header. Like a <code>sidebarMenu()</code>, a <code>dropdownMenu()</code> can be either rendered statically in the UI, or dynamically in ther server function. However, while it’s possible to update dynamic dropdown menus (by re-rendering them if, for example, the data changes), it’s not possible to treat them as inputs. For example, in this app, we can dynamically add items to a <code>dropdownMenu</code> via a modal window:</p>
-<p><details> <summary>app.R</summary></p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(shiny)
-<span class="kw">library</span>(shinydashboard)
-
-ui &lt;-<span class="st"> </span><span class="kw">dashboardPage</span>(
-  <span class="kw">dashboardHeader</span>(
-    <span class="kw">dropdownMenuOutput</span>(<span class="st">&quot;menu&quot;</span>)
-  ),
-  <span class="kw">dashboardSidebar</span>(
-    <span class="kw">helpText</span>(<span class="st">&quot;Add another item to the dropdown menu by clicking &quot;</span>,
-             <span class="st">&quot;on the button below&quot;</span>),
-    <span class="kw">actionButton</span>(<span class="st">&quot;addItem&quot;</span>, <span class="st">&quot;Add another item&quot;</span>)
-  ),
-  <span class="kw">dashboardBody</span>()
-)
-
-server &lt;-<span class="st"> </span>function(input, output, session) {
-  tasks &lt;-<span class="st">  </span><span class="kw">reactiveValues</span>(
-      <span class="dt">code =</span> <span class="kw">list</span>(<span class="dt">id =</span> <span class="st">&quot;code&quot;</span>, <span class="dt">value =</span> <span class="dv">15</span>, <span class="dt">color =</span> <span class="st">&quot;aqua&quot;</span>,
-                  <span class="dt">text =</span> <span class="st">&quot;Refactor code&quot;</span>),
-      <span class="dt">layout =</span> <span class="kw">list</span>(<span class="dt">id =</span> <span class="st">&quot;layout&quot;</span>, <span class="dt">value =</span> <span class="dv">40</span>, <span class="dt">color =</span> <span class="st">&quot;green&quot;</span>,
-                    <span class="dt">text =</span> <span class="st">&quot;Design new layout&quot;</span>),
-      <span class="dt">docs =</span> <span class="kw">list</span>(<span class="dt">id =</span> <span class="st">&quot;docs&quot;</span>, <span class="dt">value =</span> <span class="dv">25</span>, <span class="dt">color =</span> <span class="st">&quot;red&quot;</span>,
-                  <span class="dt">text =</span> <span class="st">&quot;Write documentation&quot;</span>)
-    )
-
-  <span class="co"># actually render the dropdownMenu</span>
-  output$menu &lt;-<span class="st"> </span><span class="kw">renderMenu</span>({
-    items &lt;-<span class="st"> </span><span class="kw">lapply</span>(tasks, function(el) {
-      <span class="kw">taskItem</span>(<span class="dt">value =</span> el$value, <span class="dt">color =</span> el$color, <span class="dt">text =</span> el$text)
-    })
-    <span class="kw">dropdownMenu</span>(
-      <span class="dt">type =</span> <span class="st">&quot;tasks&quot;</span>, <span class="dt">badgeStatus =</span> <span class="st">&quot;danger&quot;</span>,
-      <span class="dt">.list =</span> items
-    )
-  })
-
-  <span class="kw">observeEvent</span>(input$addItem, {
-    <span class="kw">showModal</span>(<span class="kw">modalDialog</span>(<span class="dt">title =</span> <span class="st">&quot;Add new task&quot;</span>,
-      <span class="kw">textInput</span>(<span class="kw">paste0</span>(<span class="st">&quot;id&quot;</span>, input$addItem), <span class="st">&quot;Task ID&quot;</span>),
-      <span class="kw">numericInput</span>(<span class="kw">paste0</span>(<span class="st">&quot;val&quot;</span>, input$addItem), <span class="st">&quot;Task value&quot;</span>, <span class="dv">0</span>),
-      <span class="kw">selectInput</span>(<span class="kw">paste0</span>(<span class="st">&quot;col&quot;</span>, input$addItem), <span class="st">&quot;Task color&quot;</span>,
-        <span class="dt">choices =</span> <span class="kw">c</span>(<span class="st">&quot;red&quot;</span>, <span class="st">&quot;yellow&quot;</span>, <span class="st">&quot;aqua&quot;</span>, <span class="st">&quot;blue&quot;</span>,
-          <span class="st">&quot;light-blue&quot;</span>, <span class="st">&quot;green&quot;</span>, <span class="st">&quot;navy&quot;</span>, <span class="st">&quot;teal&quot;</span>,
-          <span class="st">&quot;olive&quot;</span>, <span class="st">&quot;lime&quot;</span>, <span class="st">&quot;orange&quot;</span>, <span class="st">&quot;fuchsia&quot;</span>,
-          <span class="st">&quot;purple&quot;</span>, <span class="st">&quot;maroon&quot;</span>, <span class="st">&quot;black&quot;</span>)
-      ),
-      <span class="kw">textInput</span>(<span class="kw">paste0</span>(<span class="st">&quot;text&quot;</span>, input$addItem), <span class="st">&quot;Task text&quot;</span>),
-      <span class="kw">actionButton</span>(<span class="kw">paste0</span>(<span class="st">&quot;go&quot;</span>, input$addItem), <span class="st">&quot;Add item&quot;</span>),
-      <span class="dt">easyClose =</span> <span class="ot">TRUE</span>, <span class="dt">footer =</span> <span class="ot">NULL</span>
-    ))
-
-    <span class="kw">observeEvent</span>(input[[<span class="kw">paste0</span>(<span class="st">&quot;go&quot;</span>, input$addItem)]], {
-      tasks[[<span class="kw">paste0</span>(<span class="st">&quot;id&quot;</span>, input$addItem)]] &lt;-<span class="st"> </span><span class="kw">list</span>(
-        <span class="dt">id =</span> input[[<span class="kw">paste0</span>(<span class="st">&quot;id&quot;</span>, input$addItem)]],
-        <span class="dt">value =</span> input[[<span class="kw">paste0</span>(<span class="st">&quot;val&quot;</span>, input$addItem)]],
-        <span class="dt">color =</span> input[[<span class="kw">paste0</span>(<span class="st">&quot;col&quot;</span>, input$addItem)]],
-        <span class="dt">text =</span> input[[<span class="kw">paste0</span>(<span class="st">&quot;text&quot;</span>, input$addItem)]]
-      )
-      <span class="kw">removeModal</span>()
-    })
-  })
-}
-
-<span class="kw">shinyApp</span>(ui, server)</code></pre></div>
-<p></details></p>
+<details>
+<p><summary>app.R</summary></p>
+<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb7-1" data-line-number="1"><span class="kw">library</span>(shiny)</a>
+<a class="sourceLine" id="cb7-2" data-line-number="2"><span class="kw">library</span>(shinydashboard)</a>
+<a class="sourceLine" id="cb7-3" data-line-number="3"></a>
+<a class="sourceLine" id="cb7-4" data-line-number="4">ui &lt;-<span class="st"> </span><span class="kw">dashboardPage</span>(</a>
+<a class="sourceLine" id="cb7-5" data-line-number="5">  <span class="kw">dashboardHeader</span>(</a>
+<a class="sourceLine" id="cb7-6" data-line-number="6">    <span class="kw">dropdownMenuOutput</span>(<span class="st">&quot;menu&quot;</span>)</a>
+<a class="sourceLine" id="cb7-7" data-line-number="7">  ),</a>
+<a class="sourceLine" id="cb7-8" data-line-number="8">  <span class="kw">dashboardSidebar</span>(</a>
+<a class="sourceLine" id="cb7-9" data-line-number="9">    <span class="kw">helpText</span>(<span class="st">&quot;Add another item to the dropdown menu by clicking &quot;</span>,</a>
+<a class="sourceLine" id="cb7-10" data-line-number="10">             <span class="st">&quot;on the button below&quot;</span>),</a>
+<a class="sourceLine" id="cb7-11" data-line-number="11">    <span class="kw">actionButton</span>(<span class="st">&quot;addItem&quot;</span>, <span class="st">&quot;Add another item&quot;</span>)</a>
+<a class="sourceLine" id="cb7-12" data-line-number="12">  ),</a>
+<a class="sourceLine" id="cb7-13" data-line-number="13">  <span class="kw">dashboardBody</span>()</a>
+<a class="sourceLine" id="cb7-14" data-line-number="14">)</a>
+<a class="sourceLine" id="cb7-15" data-line-number="15"></a>
+<a class="sourceLine" id="cb7-16" data-line-number="16">server &lt;-<span class="st"> </span><span class="cf">function</span>(input, output, session) {</a>
+<a class="sourceLine" id="cb7-17" data-line-number="17">  tasks &lt;-<span class="st">  </span><span class="kw">reactiveValues</span>(</a>
+<a class="sourceLine" id="cb7-18" data-line-number="18">      <span class="dt">code =</span> <span class="kw">list</span>(<span class="dt">id =</span> <span class="st">&quot;code&quot;</span>, <span class="dt">value =</span> <span class="dv">15</span>, <span class="dt">color =</span> <span class="st">&quot;aqua&quot;</span>,</a>
+<a class="sourceLine" id="cb7-19" data-line-number="19">                  <span class="dt">text =</span> <span class="st">&quot;Refactor code&quot;</span>),</a>
+<a class="sourceLine" id="cb7-20" data-line-number="20">      <span class="dt">layout =</span> <span class="kw">list</span>(<span class="dt">id =</span> <span class="st">&quot;layout&quot;</span>, <span class="dt">value =</span> <span class="dv">40</span>, <span class="dt">color =</span> <span class="st">&quot;green&quot;</span>,</a>
+<a class="sourceLine" id="cb7-21" data-line-number="21">                    <span class="dt">text =</span> <span class="st">&quot;Design new layout&quot;</span>),</a>
+<a class="sourceLine" id="cb7-22" data-line-number="22">      <span class="dt">docs =</span> <span class="kw">list</span>(<span class="dt">id =</span> <span class="st">&quot;docs&quot;</span>, <span class="dt">value =</span> <span class="dv">25</span>, <span class="dt">color =</span> <span class="st">&quot;red&quot;</span>,</a>
+<a class="sourceLine" id="cb7-23" data-line-number="23">                  <span class="dt">text =</span> <span class="st">&quot;Write documentation&quot;</span>)</a>
+<a class="sourceLine" id="cb7-24" data-line-number="24">    )</a>
+<a class="sourceLine" id="cb7-25" data-line-number="25"></a>
+<a class="sourceLine" id="cb7-26" data-line-number="26">  <span class="co"># actually render the dropdownMenu</span></a>
+<a class="sourceLine" id="cb7-27" data-line-number="27">  output<span class="op">$</span>menu &lt;-<span class="st"> </span><span class="kw">renderMenu</span>({</a>
+<a class="sourceLine" id="cb7-28" data-line-number="28">    items &lt;-<span class="st"> </span><span class="kw">lapply</span>(tasks, <span class="cf">function</span>(el) {</a>
+<a class="sourceLine" id="cb7-29" data-line-number="29">      <span class="kw">taskItem</span>(<span class="dt">value =</span> el<span class="op">$</span>value, <span class="dt">color =</span> el<span class="op">$</span>color, <span class="dt">text =</span> el<span class="op">$</span>text)</a>
+<a class="sourceLine" id="cb7-30" data-line-number="30">    })</a>
+<a class="sourceLine" id="cb7-31" data-line-number="31">    <span class="kw">dropdownMenu</span>(</a>
+<a class="sourceLine" id="cb7-32" data-line-number="32">      <span class="dt">type =</span> <span class="st">&quot;tasks&quot;</span>, <span class="dt">badgeStatus =</span> <span class="st">&quot;danger&quot;</span>,</a>
+<a class="sourceLine" id="cb7-33" data-line-number="33">      <span class="dt">.list =</span> items</a>
+<a class="sourceLine" id="cb7-34" data-line-number="34">    )</a>
+<a class="sourceLine" id="cb7-35" data-line-number="35">  })</a>
+<a class="sourceLine" id="cb7-36" data-line-number="36"></a>
+<a class="sourceLine" id="cb7-37" data-line-number="37">  <span class="kw">observeEvent</span>(input<span class="op">$</span>addItem, {</a>
+<a class="sourceLine" id="cb7-38" data-line-number="38">    <span class="kw">showModal</span>(<span class="kw">modalDialog</span>(<span class="dt">title =</span> <span class="st">&quot;Add new task&quot;</span>,</a>
+<a class="sourceLine" id="cb7-39" data-line-number="39">      <span class="kw">textInput</span>(<span class="kw">paste0</span>(<span class="st">&quot;id&quot;</span>, input<span class="op">$</span>addItem), <span class="st">&quot;Task ID&quot;</span>),</a>
+<a class="sourceLine" id="cb7-40" data-line-number="40">      <span class="kw">numericInput</span>(<span class="kw">paste0</span>(<span class="st">&quot;val&quot;</span>, input<span class="op">$</span>addItem), <span class="st">&quot;Task value&quot;</span>, <span class="dv">0</span>),</a>
+<a class="sourceLine" id="cb7-41" data-line-number="41">      <span class="kw">selectInput</span>(<span class="kw">paste0</span>(<span class="st">&quot;col&quot;</span>, input<span class="op">$</span>addItem), <span class="st">&quot;Task color&quot;</span>,</a>
+<a class="sourceLine" id="cb7-42" data-line-number="42">        <span class="dt">choices =</span> <span class="kw">c</span>(<span class="st">&quot;red&quot;</span>, <span class="st">&quot;yellow&quot;</span>, <span class="st">&quot;aqua&quot;</span>, <span class="st">&quot;blue&quot;</span>,</a>
+<a class="sourceLine" id="cb7-43" data-line-number="43">          <span class="st">&quot;light-blue&quot;</span>, <span class="st">&quot;green&quot;</span>, <span class="st">&quot;navy&quot;</span>, <span class="st">&quot;teal&quot;</span>,</a>
+<a class="sourceLine" id="cb7-44" data-line-number="44">          <span class="st">&quot;olive&quot;</span>, <span class="st">&quot;lime&quot;</span>, <span class="st">&quot;orange&quot;</span>, <span class="st">&quot;fuchsia&quot;</span>,</a>
+<a class="sourceLine" id="cb7-45" data-line-number="45">          <span class="st">&quot;purple&quot;</span>, <span class="st">&quot;maroon&quot;</span>, <span class="st">&quot;black&quot;</span>)</a>
+<a class="sourceLine" id="cb7-46" data-line-number="46">      ),</a>
+<a class="sourceLine" id="cb7-47" data-line-number="47">      <span class="kw">textInput</span>(<span class="kw">paste0</span>(<span class="st">&quot;text&quot;</span>, input<span class="op">$</span>addItem), <span class="st">&quot;Task text&quot;</span>),</a>
+<a class="sourceLine" id="cb7-48" data-line-number="48">      <span class="kw">actionButton</span>(<span class="kw">paste0</span>(<span class="st">&quot;go&quot;</span>, input<span class="op">$</span>addItem), <span class="st">&quot;Add item&quot;</span>),</a>
+<a class="sourceLine" id="cb7-49" data-line-number="49">      <span class="dt">easyClose =</span> <span class="ot">TRUE</span>, <span class="dt">footer =</span> <span class="ot">NULL</span></a>
+<a class="sourceLine" id="cb7-50" data-line-number="50">    ))</a>
+<a class="sourceLine" id="cb7-51" data-line-number="51"></a>
+<a class="sourceLine" id="cb7-52" data-line-number="52">    <span class="kw">observeEvent</span>(input[[<span class="kw">paste0</span>(<span class="st">&quot;go&quot;</span>, input<span class="op">$</span>addItem)]], {</a>
+<a class="sourceLine" id="cb7-53" data-line-number="53">      tasks[[<span class="kw">paste0</span>(<span class="st">&quot;id&quot;</span>, input<span class="op">$</span>addItem)]] &lt;-<span class="st"> </span><span class="kw">list</span>(</a>
+<a class="sourceLine" id="cb7-54" data-line-number="54">        <span class="dt">id =</span> input[[<span class="kw">paste0</span>(<span class="st">&quot;id&quot;</span>, input<span class="op">$</span>addItem)]],</a>
+<a class="sourceLine" id="cb7-55" data-line-number="55">        <span class="dt">value =</span> input[[<span class="kw">paste0</span>(<span class="st">&quot;val&quot;</span>, input<span class="op">$</span>addItem)]],</a>
+<a class="sourceLine" id="cb7-56" data-line-number="56">        <span class="dt">color =</span> input[[<span class="kw">paste0</span>(<span class="st">&quot;col&quot;</span>, input<span class="op">$</span>addItem)]],</a>
+<a class="sourceLine" id="cb7-57" data-line-number="57">        <span class="dt">text =</span> input[[<span class="kw">paste0</span>(<span class="st">&quot;text&quot;</span>, input<span class="op">$</span>addItem)]]</a>
+<a class="sourceLine" id="cb7-58" data-line-number="58">      )</a>
+<a class="sourceLine" id="cb7-59" data-line-number="59">      <span class="kw">removeModal</span>()</a>
+<a class="sourceLine" id="cb7-60" data-line-number="60">    })</a>
+<a class="sourceLine" id="cb7-61" data-line-number="61">  })</a>
+<a class="sourceLine" id="cb7-62" data-line-number="62">}</a>
+<a class="sourceLine" id="cb7-63" data-line-number="63"></a>
+<a class="sourceLine" id="cb7-64" data-line-number="64"><span class="kw">shinyApp</span>(ui, server)</a></code></pre></div>
+</details>
 <p>However, there is no current way to see if the user clicked on one of the items in a dropdown menu. This is something that is not originally supported in <a href="https://almsaeedstudio.com/preview">AdminLTE</a>. While we may add this functionality in the future, for now, we can only keep track of things that have a Shiny input binding. (To be more specific, if you write your own custom Javascript, you can get around this limitation, but it’s not always trivial and it’s not natively supported by shinydashboard.)</p>
 </div>
 
