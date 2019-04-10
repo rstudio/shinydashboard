@@ -29,9 +29,9 @@ In addition to all the normal Shiny inputs and outputs that can be present in a 
 
 Let's get into the details. The three sidebar-related inputs allow you to:
 
-## Know which **menuItem()** or **menuSubItem()** is currently selected
+## Know which tab is currently visible
 
-You can find the currently-selected `menuItem()` or `menuSubItem()`, provided that the `sidebarMenu()` has an `id` (and the `menuItem()`/`menuSubItem()` has a `tabName`). In particular, if you pass in `id = "tabs"` to your `sidebarMenu()`, then you can know which sidebar item is selected by accessing the variable `input$tabs`. The value associated with `input$tabs` is given by the `tabName` argument of the currently selected `menuItem()` (or `menuSubItem()`).
+If you want to know which tab is currently visible, you need to know which menu item is active. To do this, the `sidebarMenu()` must have an `id`, and the `menuItem()`/`menuSubItem()` must have a `tabName`. In particular, if you pass in `id = "tabs"` to your `sidebarMenu()`, then you can know which sidebar item is selected by accessing the variable `input$tabs`. The value associated with `input$tabs` is given by the `tabName` argument of the currently selected `menuItem()` (or `menuSubItem()`).
 
 The screenshot below shows an app that indicates which `menuItem()` is selected:
 
@@ -259,7 +259,7 @@ shinyApp(ui, server)
 
 # Bookmarking
 
-As alluded in the previous sections, the features added in shinydashboard 0.6 allow it to integrate a lot better with [bookmarkable state](https://shiny.rstudio.com/articles/bookmarking-state.html), since the state of the sidebar will be automatically bookmarked. For example, the app below does not specify any explicit inputs (like `textInput` or `sliderInput`), but the state of the sidebar is automatically bookmarked (you can see this in the URL once you click "Bookmark..."). The app below combines all three inputs described before. You can use it to experiment with:
+To [bookmark](https://shiny.rstudio.com/articles/bookmarking-state.html) which sidebar item is selected, the `sidebarMenu()` needs to have an `id`. For example, the app below does not specify any explicit inputs (like `textInput` or `sliderInput`), but the state of the sidebar is automatically bookmarked (you can see this in the URL once you click "Bookmark..."). The app below combines all three inputs described before. You can use it to experiment with:
 
  - changing the selected `menuItem()` / `menuSubItem()` (and see the value of `input$tabs` also change);
  - expanding and collapsing the "Charts" `menuItem()` (and see the value of `input$sidebarItemExpanded` also change);
@@ -298,6 +298,12 @@ shinyApp(ui, server, enableBookmarking = "url")
 
 </details>
  
+
+# Testing with shinytest
+
+For shinytest to be able to record and replay which menu item is selected, the `sidebarMenu()` must have an `id`, and the `menuItem`s and `menuSubItem`s must have have `tabName`s.
+
+
 # A note about **dropdownMenu**s
 
 Another shinydashboard-specific component that is not seen in vanilla Shiny apps is the `dropdownMenu()`, one or more of which can be placed in the dashboard header. Like a `sidebarMenu()`, a `dropdownMenu()` can be either rendered statically in the UI, or dynamically in ther server function. However, while it's possible to update dynamic dropdown menus (by re-rendering them if, for example, the data changes), it's not possible to treat them as inputs. For example, in this app, we can dynamically add items to a `dropdownMenu` via a modal window:
