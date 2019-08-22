@@ -15,10 +15,10 @@ module.exports = function(grunt) {
         destdirjs + "shinydashboard.js.map",
         destdirjs + "shinydashboard.min.js",
         destdirjs + "shinydashboard.min.js.map",
-        destdirjs + "AdminLTE/app.js",
-        destdirjs + "AdminLTE/app.js.map",
-        destdirjs + "AdminLTE/app.min.js",
-        destdirjs + "AdminLTE/app.min.js.map",
+        destdirjs + "AdminLTE/adminlte.js",
+        destdirjs + "AdminLTE/adminlte.js.map",
+        destdirjs + "AdminLTE/adminlte.min.js",
+        destdirjs + "AdminLTE/adminlte.min.js.map",
         destdircss + "AdminLTE/AdminLTE.min.css",
         destdircss + "AdminLTE/_all-skins.min.css",
       ]
@@ -47,9 +47,9 @@ module.exports = function(grunt) {
       },
       adminlte: {
         src: [
-          srcdirjs + 'AdminLTE/app.js'
+          srcdirjs + 'AdminLTE/adminlte.js'
         ],
-        dest: destdirjs + 'AdminLTE/app.js'
+        dest: destdirjs + 'AdminLTE/adminlte.js'
       }
     },
 
@@ -71,8 +71,8 @@ module.exports = function(grunt) {
         options: {
           sourceMap: true
         },
-        src: srcdirjs + 'AdminLTE/app.js',
-        dest: destdirjs + 'AdminLTE/app.min.js'
+        src: srcdirjs + 'AdminLTE/adminlte.js',
+        dest: destdirjs + 'AdminLTE/adminlte.min.js'
       }
     },
 

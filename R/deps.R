@@ -12,11 +12,11 @@ appendDependencies <- function(x, value) {
 # Add dashboard dependencies to a tag object
 addDeps <- function(x) {
   if (getOption("shiny.minified", TRUE)) {
-    adminLTE_js <- "app.min.js"
+    adminLTE_js <- "adminlte.min.js"
     shinydashboard_js <- "shinydashboard.min.js"
     adminLTE_css <- c("AdminLTE.min.css", "_all-skins.min.css")
   } else {
-    adminLTE_js <- "app.js"
+    adminLTE_js <- "adminlte.js"
     shinydashboard_js <- "shinydashboard.js"
     adminLTE_css <- c("AdminLTE.css", "_all-skins.css")
   }
