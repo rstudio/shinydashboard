@@ -6,7 +6,7 @@
 \usage{
 infoBox(title, value = NULL, subtitle = NULL,
   icon = shiny::icon("bar-chart"), color = "aqua", width = 4,
-  href = NULL, fill = FALSE)
+  href = NULL, fill = FALSE, id = NULL)
 }
 \arguments{
 \item{title}{Title text.}
@@ -33,6 +33,8 @@ content, and the \code{color} argument for the background of the icon. If
 \code{TRUE}, use the \code{color} argument for the background of the
 content; the icon will use the same color with a slightly darkened
 background.}
+
+\item{id}{An optional id to uniquely identify the box}
 }
 \description{
 An info box displays a large icon on the left side, and a title, value
@@ -43,6 +45,6 @@ boxes are meant to be placed in the main body of a dashboard.
 \code{\link{box}} for usage examples.
 
 Other boxes: \code{\link{box}}, \code{\link{tabBox}},
-  \code{\link{valueBox}}
+  \code{\link{updateBoxValue}}, \code{\link{valueBox}}
 }
 \concept{boxes}

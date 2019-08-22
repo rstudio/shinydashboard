@@ -41,6 +41,7 @@ module.exports = function(grunt) {
           srcdirjs + 'input_binding_tabItem.js',
           srcdirjs + 'input_binding_sidebarCollapsed.js',
           srcdirjs + 'input_binding_sidebarmenuExpanded.js',
+          srcdirjs + 'message_handler.js',
           srcdirjs + '_end.js'
         ],
         dest: destdirjs + 'shinydashboard.js'
