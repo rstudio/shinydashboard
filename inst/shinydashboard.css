@@ -16,6 +16,10 @@
 
 .navbar-nav > .messages-menu > .dropdown-menu > li .menu > li > a > .glyphicon,
 .navbar-nav > .messages-menu > .dropdown-menu > li .menu > li > a > .fa,
+.navbar-nav > .messages-menu > .dropdown-menu > li .menu > li > a > .fab,
+.navbar-nav > .messages-menu > .dropdown-menu > li .menu > li > a > .fas,
+.navbar-nav > .messages-menu > .dropdown-menu > li .menu > li > a > .far,
+.navbar-nav > .messages-menu > .dropdown-menu > li .menu > li > a > .fal,
 .navbar-nav > .messages-menu > .dropdown-menu > li .menu > li > a > .ion {
   float: left;
   font-size: 30px;
