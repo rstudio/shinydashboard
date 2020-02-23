@@ -10,11 +10,11 @@ sidebarMenu(..., id = NULL, .list = NULL)
 
 menuItem(text, ..., icon = NULL, badgeLabel = NULL, badgeColor = "green",
   tabName = NULL, href = NULL, newtab = TRUE, selected = NULL,
-  expandedName = as.character(gsub("[[:space:]]", "", text)),
+  id = NULL, expandedName = as.character(gsub("[[:space:]]", "", text)),
   startExpanded = FALSE)
 
 menuSubItem(text, tabName = NULL, href = NULL, newtab = TRUE,
-  icon = shiny::icon("angle-double-right"), selected = NULL)
+  icon = shiny::icon("angle-double-right"), selected = NULL, id = NULL)
 }
 \arguments{
 \item{...}{For menu items, this may consist of \code{\link{menuSubItem}}s.}

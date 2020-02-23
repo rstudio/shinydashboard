@@ -16,20 +16,23 @@ sidebar <- dashboardSidebar(
     menuItem(
       "Dashboard",
       tabName = "dashboard",
-      icon = icon("dashboard")
+      icon = icon("dashboard"),
+      id = "dashboardmenuitem"
     ),
     menuItem(
       "Widgets",
       icon = icon("th"),
       tabName = "widgets",
       badgeLabel = "new",
-      badgeColor = "green"
+      badgeColor = "green",
+      id = "widgetsmenuitem"
     ),
     menuItem(
       "Charts",
       icon = icon("bar-chart-o"),
-      menuSubItem("Sub-item 1", tabName = "subitem1"),
-      menuSubItem("Sub-item 2", tabName = "subitem2")
+      menuSubItem("Sub-item 1", tabName = "subitem1", id = "subitem1menuitem"),
+      menuSubItem("Sub-item 2", tabName = "subitem2", id = "subitem2menuitem"),
+      id = "chartsmenuitem"
     )
   )
 )

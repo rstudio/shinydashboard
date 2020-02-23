@@ -364,7 +364,7 @@ sidebarMenu <- function(..., id = NULL, .list = NULL) {
 #' @rdname sidebarMenu
 #' @export
 menuItem <- function(text, ..., icon = NULL, badgeLabel = NULL, badgeColor = "green",
-                     tabName = NULL, href = NULL, newtab = TRUE, selected = NULL,
+                     tabName = NULL, href = NULL, newtab = TRUE, selected = NULL, id = NULL,
                      expandedName = as.character(gsub("[[:space:]]", "", text)),
                      startExpanded = FALSE) {
   subItems <- list(...)
@@ -407,7 +407,7 @@ menuItem <- function(text, ..., icon = NULL, badgeLabel = NULL, badgeColor = "gr
   # If no subitems, return a pretty simple tag object
   if (length(subItems) == 0) {
     return(
-      tags$li(
+      tags$li(id = id,
         a(href = href,
           `data-toggle` = if (isTabItem) "tab",
           `data-value` = if (!is.null(tabName)) tabName,
@@ -433,7 +433,7 @@ menuItem <- function(text, ..., icon = NULL, badgeLabel = NULL, badgeColor = "gr
   # this menuItem's `expandedName``
   isExpanded <- nzchar(dataExpanded) && (dataExpanded == expandedName)
 
-  tags$li(class = "treeview",
+  tags$li(class = "treeview", id = id,
     a(href = href,
       icon,
       span(text),
@@ -453,7 +453,7 @@ menuItem <- function(text, ..., icon = NULL, badgeLabel = NULL, badgeColor = "gr
 #' @rdname sidebarMenu
 #' @export
 menuSubItem <- function(text, tabName = NULL, href = NULL, newtab = TRUE,
-  icon = shiny::icon("angle-double-right"), selected = NULL)
+  icon = shiny::icon("angle-double-right"), selected = NULL, id = NULL)
 {
 
   if (!is.null(href) && !is.null(tabName)) {
@@ -476,7 +476,7 @@ menuSubItem <- function(text, tabName = NULL, href = NULL, newtab = TRUE,
   }
 
 
-  tags$li(
+  tags$li( id = id,
     a(href = href,
       `data-toggle` = if (isTabItem) "tab",
       `data-value` = if (!is.null(tabName)) tabName,

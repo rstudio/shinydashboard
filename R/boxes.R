@@ -11,13 +11,14 @@
 #' @param color A color for the box. Valid colors are listed in
 #'   \link{validColors}.
 #' @param href An optional URL to link to.
+#' @param id An optional id for the element
 #'
 #' @family boxes
 #' @seealso \code{\link{box}} for usage examples.
 #'
 #' @export
 valueBox <- function(value, subtitle, icon = NULL, color = "aqua", width = 4,
-  href = NULL)
+  href = NULL, id = NULL)
 {
   validateColor(color)
   if (!is.null(icon)) tagAssert(icon, type = "i")
@@ -34,6 +35,7 @@ valueBox <- function(value, subtitle, icon = NULL, color = "aqua", width = 4,
     boxContent <- a(href = href, boxContent)
 
   div(class = if (!is.null(width)) paste0("col-sm-", width),
+      id = id,
     boxContent
   )
 }
@@ -58,6 +60,7 @@ valueBox <- function(value, subtitle, icon = NULL, color = "aqua", width = 4,
 #'   content; the icon will use the same color with a slightly darkened
 #'   background.
 #' @param href An optional URL to link to.
+#' @param id An optional id for the element
 #'
 #' @family boxes
 #' @seealso \code{\link{box}} for usage examples.
@@ -65,7 +68,7 @@ valueBox <- function(value, subtitle, icon = NULL, color = "aqua", width = 4,
 #' @export
 infoBox <- function(title, value = NULL, subtitle = NULL,
   icon = shiny::icon("bar-chart"), color = "aqua", width = 4, href = NULL,
-  fill = FALSE) {
+  fill = FALSE, id = NULL) {
 
   validateColor(color)
   tagAssert(icon, type = "i")
@@ -91,6 +94,7 @@ infoBox <- function(title, value = NULL, subtitle = NULL,
     boxContent <- a(href = href, boxContent)
 
   div(class = if (!is.null(width)) paste0("col-sm-", width),
+      id = id,
     boxContent
   )
 }
@@ -119,6 +123,7 @@ infoBox <- function(title, value = NULL, subtitle = NULL,
 #'   the user to collapse the box.
 #' @param collapsed If TRUE, start collapsed. This must be used with
 #'   \code{collapsible=TRUE}.
+#' @param id An optional id for the element
 #' @param ... Contents of the box.
 #'
 #' @family boxes
@@ -250,7 +255,7 @@ infoBox <- function(title, value = NULL, subtitle = NULL,
 #' @export
 box <- function(..., title = NULL, footer = NULL, status = NULL,
                 solidHeader = FALSE, background = NULL, width = 6,
-                height = NULL, collapsible = FALSE, collapsed = FALSE) {
+                height = NULL, collapsible = FALSE, collapsed = FALSE, id = NULL) {
 
   boxClass <- "box"
   if (solidHeader || !is.null(background)) {
@@ -301,6 +306,7 @@ box <- function(..., title = NULL, footer = NULL, status = NULL,
   }
 
   div(class = if (!is.null(width)) paste0("col-sm-", width),
+      id = id,
     div(class = boxClass,
       style = if (!is.null(style)) style,
       headerTag,
