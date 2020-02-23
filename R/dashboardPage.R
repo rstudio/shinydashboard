@@ -7,8 +7,10 @@
 #' @param body A body created by \code{dashboardBody}.
 #' @param title A title to display in the browser's title bar. If no value is
 #'   provided, it will try to extract the title from the \code{dashboardHeader}.
-#' @param skin A color theme. One of \code{"blue"}, \code{"black"},
-#'   \code{"purple"}, \code{"green"}, \code{"red"}, or \code{"yellow"}.
+#' @param skin A color theme. One of \code{"blue"},  \code{"blue-light"},
+#'  \code{"black"}, \code{"black-light"},   \code{"purple"}, \code{"purple-light"},
+#' \code{"green"},  \code{"green-light"} , \code{"red"},  \code{"red-light"},
+#'  \code{"yellow"}, or \code{"yellow-light"}.
 #'
 #' @seealso \code{\link{dashboardHeader}}, \code{\link{dashboardSidebar}},
 #'   \code{\link{dashboardBody}}.
@@ -29,7 +31,8 @@
 #' }
 #' @export
 dashboardPage <- function(header, sidebar, body, title = NULL,
-  skin = c("blue", "black", "purple", "green", "red", "yellow")) {
+  skin = c("blue", "blue-light","black","black-light", "purple","purple-light", "green","green-light",
+           "red","red-light", "yellow","yellow-light")) {
 
   tagAssert(header, type = "header", class = "main-header")
   tagAssert(sidebar, type = "aside", class = "main-sidebar")
