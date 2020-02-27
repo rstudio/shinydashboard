@@ -1,23 +1,25 @@
 # A dashboard body with a row of infoBoxes and valueBoxes, and two rows of other boxes
 
 library(shiny)
+library(shinydashboard)
+
 body <- dashboardBody(
 
-  # infoBoxes
+  # infoBoxes -> first row
   fluidRow(
     infoBox(
-      "Orders", uiOutput("orderNum2"), "Subtitle", icon = icon("credit-card")
+      "Orders", uiOutput("orderNum2"), subtitle = "Test", icon = icon("credit-card"),
+      fill = TRUE, progressValue = uiOutput("progressBarValue")
     ),
     infoBox(
-      "Approval Rating", "60%", icon = icon("line-chart"), color = "green",
-      fill = TRUE
+      "Approval Rating", "60%", icon = icon("line-chart"), color = "green", fill = TRUE
     ),
     infoBox(
       "Progress", uiOutput("progress2"), icon = icon("users"), color = "purple"
     )
   ),
 
-  # valueBoxes
+  # valueBoxes -> second row
   fluidRow(
     valueBox(
       uiOutput("orderNum"), "New Orders", icon = icon("credit-card"),
@@ -88,6 +90,10 @@ server <- function(input, output) {
 
   output$progress2 <- renderUI({
     paste0(input$progress, "%")
+  })
+
+  output$progressBarValue <- renderUI({
+    div(class = "progress-bar", style = paste0("width: ", input$progress, "%; height: 2px;"))
   })
 
   output$status <- renderText({
