@@ -11,13 +11,14 @@
 #' @param color A color for the box. Valid colors are listed in
 #'   \link{validColors}.
 #' @param href An optional URL to link to.
+#' @param ... Passed to a() if href used
 #'
 #' @family boxes
 #' @seealso \code{\link{box}} for usage examples.
 #'
 #' @export
 valueBox <- function(value, subtitle, icon = NULL, color = "aqua", width = 4,
-  href = NULL)
+  href = NULL, ...)
 {
   validateColor(color)
   if (!is.null(icon)) tagAssert(icon, type = "i")
@@ -31,7 +32,7 @@ valueBox <- function(value, subtitle, icon = NULL, color = "aqua", width = 4,
   )
 
   if (!is.null(href))
-    boxContent <- a(href = href, boxContent)
+    boxContent <- a(href = href, boxContent, ...)
 
   div(class = if (!is.null(width)) paste0("col-sm-", width),
     boxContent
@@ -58,6 +59,7 @@ valueBox <- function(value, subtitle, icon = NULL, color = "aqua", width = 4,
 #'   content; the icon will use the same color with a slightly darkened
 #'   background.
 #' @param href An optional URL to link to.
+#' @param ... Passed to a() if href used
 #'
 #' @family boxes
 #' @seealso \code{\link{box}} for usage examples.
@@ -65,7 +67,7 @@ valueBox <- function(value, subtitle, icon = NULL, color = "aqua", width = 4,
 #' @export
 infoBox <- function(title, value = NULL, subtitle = NULL,
   icon = shiny::icon("bar-chart"), color = "aqua", width = 4, href = NULL,
-  fill = FALSE) {
+  fill = FALSE, ...) {
 
   validateColor(color)
   tagAssert(icon, type = "i")
@@ -88,7 +90,7 @@ infoBox <- function(title, value = NULL, subtitle = NULL,
   )
 
   if (!is.null(href))
-    boxContent <- a(href = href, boxContent)
+    boxContent <- a(href = href, boxContent, ...)
 
   div(class = if (!is.null(width)) paste0("col-sm-", width),
     boxContent
