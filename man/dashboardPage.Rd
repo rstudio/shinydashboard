@@ -4,8 +4,8 @@
 \alias{dashboardPage}
 \title{Dashboard page}
 \usage{
-dashboardPage(header, sidebar, body, title = NULL, skin = c("blue", "black",
-  "purple", "green", "red", "yellow"))
+dashboardPage(header, sidebar, body, title = NULL, skin = c("blue",
+  "black", "purple", "green", "red", "yellow"))
 }
 \arguments{
 \item{header}{A header created by \code{dashboardHeader}.}

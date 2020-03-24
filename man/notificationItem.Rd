@@ -4,8 +4,8 @@
 \alias{notificationItem}
 \title{Create a notification item to place in a dropdown notification menu}
 \usage{
-notificationItem(text, icon = shiny::icon("warning"), status = "success",
-  href = NULL)
+notificationItem(text, icon = shiny::icon("warning"),
+  status = "success", href = NULL)
 }
 \arguments{
 \item{text}{The notification text.}
