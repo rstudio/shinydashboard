@@ -4,7 +4,8 @@
 \alias{dashboardSidebar}
 \title{Create a dashboard sidebar.}
 \usage{
-dashboardSidebar(..., disable = FALSE, width = NULL, collapsed = FALSE)
+dashboardSidebar(..., disable = FALSE, width = NULL, collapsed = FALSE,
+  mini = FALSE)
 }
 \arguments{
 \item{...}{Items to put in the sidebar.}
@@ -16,6 +17,10 @@ specifies the width in pixels, or a string that specifies the width in CSS
 units.}
 
 \item{collapsed}{If \code{TRUE}, the sidebar will be collapsed on app startup.}
+
+\item{mini}{If \code{TRUE}, when collapsing the sidebar a thin ribon will
+remain alowing the user to navigate using a minified version of the
+menues in the sidebar.}
 }
 \description{
 A dashboard sidebar typically contains a \code{\link{sidebarMenu}}, although
