@@ -318,6 +318,7 @@ box <- function(..., title = NULL, footer = NULL, status = NULL,
 #' @param side Which side of the box the tabs should be on (\code{"left"} or
 #'   \code{"right"}). When \code{side="right"}, the order of tabs will be
 #'   reversed.
+#' @param footer Optional footer text.
 #'
 #' @family boxes
 #'
@@ -367,7 +368,7 @@ box <- function(..., title = NULL, footer = NULL, status = NULL,
 #' )
 #' }
 #' @export
-tabBox <- function(..., id = NULL, selected = NULL, title = NULL,
+tabBox <- function(..., id = NULL, selected = NULL, title = NULL, footer = NULL,
                    width = 6, height = NULL, side = c("left", "right"))
 {
   side <- match.arg(side)
@@ -399,6 +400,14 @@ tabBox <- function(..., id = NULL, selected = NULL, title = NULL,
 
     content$children[[1]] <- htmltools::tagAppendChild(content$children[[1]],
       tags$li(class = paste("header", titleClass), title)
+    )
+  }
+
+  # Add footer
+  if (!is.null(footer)) {
+    content <- htmltools::tagAppendChild(
+      content,
+      div(class = "box-footer", footer)
     )
   }
 

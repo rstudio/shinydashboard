@@ -5,7 +5,7 @@
 \title{Create a tabbed box}
 \usage{
 tabBox(..., id = NULL, selected = NULL, title = NULL, width = 6,
-  height = NULL, side = c("left", "right"))
+  footer = NULL, height = NULL, side = c("left", "right"))
 }
 \arguments{
 \item{...}{\code{\link{tabPanel}} elements to include in the tabset}
@@ -20,6 +20,8 @@ of the tab that should be selected by default. If \code{NULL}, the first
 tab will be selected.}
 
 \item{title}{Title for the tabBox.}
+
+\item{footer}{Optional footer text.}
 
 \item{width}{The width of the box, using the Bootstrap grid system. This is
 used for row-based layouts. The overall width of a region is 12, so the
