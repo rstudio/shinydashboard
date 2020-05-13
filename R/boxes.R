@@ -119,6 +119,8 @@ infoBox <- function(title, value = NULL, subtitle = NULL,
 #'   the user to collapse the box.
 #' @param collapsed If TRUE, start collapsed. This must be used with
 #'   \code{collapsible=TRUE}.
+#' @param scroll If TRUE and height is specified the box includes a scroll bar and
+#' will allow vertical scroll if contents exceeds height of box
 #' @param ... Contents of the box.
 #'
 #' @family boxes
@@ -250,7 +252,8 @@ infoBox <- function(title, value = NULL, subtitle = NULL,
 #' @export
 box <- function(..., title = NULL, footer = NULL, status = NULL,
                 solidHeader = FALSE, background = NULL, width = 6,
-                height = NULL, collapsible = FALSE, collapsed = FALSE) {
+                height = NULL, collapsible = FALSE, collapsed = FALSE,
+                scroll = FALSE) {
 
   boxClass <- "box"
   if (solidHeader || !is.null(background)) {
@@ -267,10 +270,17 @@ box <- function(..., title = NULL, footer = NULL, status = NULL,
     validateColor(background)
     boxClass <- paste0(boxClass, " bg-", background)
   }
+  if (scroll & !is.null(height)){
+    boxClass <- paste(boxClass, "scroll-box")
+  }
 
   style <- NULL
   if (!is.null(height)) {
-    style <- paste0("height: ", validateCssUnit(height))
+    style <- paste0("height: ", validateCssUnit(height), ";")
+
+    if (scroll){
+      style <- paste0(style, "overflow-y: scroll;")
+    }
   }
 
   titleTag <- NULL
