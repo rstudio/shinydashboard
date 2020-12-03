@@ -19,44 +19,78 @@
 <script src="libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
 <script src="libs/bootstrap-3.3.5/shim/respond.min.js"></script>
 <script src="libs/navigation-1.1/tabsets.js"></script>
+<link href="libs/anchor-sections-1.0/anchor-sections.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.0/anchor-sections.js"></script>
 
 
 <style type="text/css">code{white-space: pre;}</style>
 <style type="text/css">
-div.sourceCode { overflow-x: auto; }
-table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
-  margin: 0; padding: 0; vertical-align: baseline; border: none; }
-table.sourceCode { width: 100%; line-height: 100%; }
-td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; background-color: #dddddd; }
-td.sourceCode { padding-left: 5px; }
-code > span.kw { font-weight: bold; } /* Keyword */
-code > span.dt { color: #800000; } /* DataType */
-code > span.dv { color: #0000ff; } /* DecVal */
-code > span.bn { color: #0000ff; } /* BaseN */
-code > span.fl { color: #800080; } /* Float */
-code > span.ch { color: #ff00ff; } /* Char */
-code > span.st { color: #dd0000; } /* String */
-code > span.co { color: #808080; font-style: italic; } /* Comment */
-code > span.al { color: #00ff00; font-weight: bold; } /* Alert */
-code > span.fu { color: #000080; } /* Function */
-code > span.er { color: #ff0000; font-weight: bold; } /* Error */
-code > span.wa { color: #ff0000; font-weight: bold; } /* Warning */
-code > span.cn { color: #000000; } /* Constant */
-code > span.sc { color: #ff00ff; } /* SpecialChar */
-code > span.vs { color: #dd0000; } /* VerbatimString */
-code > span.ss { color: #dd0000; } /* SpecialString */
-code > span.im { } /* Import */
-code > span.va { } /* Variable */
-code > span.cf { } /* ControlFlow */
-code > span.op { } /* Operator */
-code > span.bu { } /* BuiltIn */
-code > span.ex { } /* Extension */
-code > span.pp { font-weight: bold; } /* Preprocessor */
-code > span.at { } /* Attribute */
-code > span.do { color: #808080; font-style: italic; } /* Documentation */
-code > span.an { color: #808080; font-weight: bold; font-style: italic; } /* Annotation */
-code > span.cv { color: #808080; font-weight: bold; font-style: italic; } /* CommentVar */
-code > span.in { color: #808080; font-weight: bold; font-style: italic; } /* Information */
+a.sourceLine { display: inline-block; line-height: 1.25; }
+a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
+a.sourceLine:empty { height: 1.2em; position: absolute; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+a.sourceLine { text-indent: -1em; padding-left: 1em; }
+}
+pre.numberSource a.sourceLine
+  { position: relative; }
+pre.numberSource a.sourceLine:empty
+  { position: absolute; }
+pre.numberSource a.sourceLine::before
+  { content: attr(data-line-number);
+    position: absolute; left: -5em; text-align: right; vertical-align: baseline;
+    border: none; pointer-events: all;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    background-color: #ffffff;
+    color: #a0a0a0;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #a0a0a0;  padding-left: 4px; }
+div.sourceCode
+  { color: #1f1c1b; background-color: #ffffff; }
+@media screen {
+a.sourceLine::before { text-decoration: underline; }
+}
+code span. { color: #1f1c1b; } /* Normal */
+code span.al { color: #bf0303; background-color: #f7e6e6; font-weight: bold; } /* Alert */
+code span.an { color: #ca60ca; } /* Annotation */
+code span.at { color: #0057ae; } /* Attribute */
+code span.bn { color: #b08000; } /* BaseN */
+code span.bu { color: #644a9b; font-weight: bold; } /* BuiltIn */
+code span.cf { color: #1f1c1b; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #924c9d; } /* Char */
+code span.cn { color: #aa5500; } /* Constant */
+code span.co { color: #898887; } /* Comment */
+code span.cv { color: #0095ff; } /* CommentVar */
+code span.do { color: #607880; } /* Documentation */
+code span.dt { color: #0057ae; } /* DataType */
+code span.dv { color: #b08000; } /* DecVal */
+code span.er { color: #bf0303; text-decoration: underline; } /* Error */
+code span.ex { color: #0095ff; font-weight: bold; } /* Extension */
+code span.fl { color: #b08000; } /* Float */
+code span.fu { color: #644a9b; } /* Function */
+code span.im { color: #ff5500; } /* Import */
+code span.in { color: #b08000; } /* Information */
+code span.kw { color: #1f1c1b; font-weight: bold; } /* Keyword */
+code span.op { color: #1f1c1b; } /* Operator */
+code span.ot { color: #006e28; } /* Other */
+code span.pp { color: #006e28; } /* Preprocessor */
+code span.re { color: #0057ae; background-color: #e0e9f8; } /* RegionMarker */
+code span.sc { color: #3daee9; } /* SpecialChar */
+code span.ss { color: #ff5500; } /* SpecialString */
+code span.st { color: #bf0303; } /* String */
+code span.va { color: #0057ae; } /* Variable */
+code span.vs { color: #bf0303; } /* VerbatimString */
+code span.wa { color: #bf0303; } /* Warning */
 </style>
 <style type="text/css">
   pre:not([class]) {
@@ -174,32 +208,32 @@ code {
 <img src="images/ssp-logout-custom.png" alt="Custom Shiny Server Pro logout panel" />
 <p class="caption">Custom Shiny Server Pro logout panel</p>
 </div>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(shinydashboard)
-
-ui &lt;-<span class="st"> </span><span class="kw">dashboardPage</span>(
-  <span class="kw">dashboardHeader</span>(),
-  <span class="kw">dashboardSidebar</span>(
-    <span class="co"># Custom CSS to hide the default logout panel</span>
-    tags$<span class="kw">head</span>(tags$<span class="kw">style</span>(<span class="kw">HTML</span>(<span class="st">&#39;.shiny-server-account { display: none; }&#39;</span>))),
-
-    <span class="co"># The dynamically-generated user panel</span>
-    <span class="kw">uiOutput</span>(<span class="st">&quot;userpanel&quot;</span>)
-  ),
-  <span class="kw">dashboardBody</span>()
-)
-
-server &lt;-<span class="st"> </span>function(input, output, session) {
-  output$userpanel &lt;-<span class="st"> </span><span class="kw">renderUI</span>({
-    <span class="co"># session$user is non-NULL only in authenticated sessions</span>
-    if (!<span class="kw">is.null</span>(session$user)) {
-      <span class="kw">sidebarUserPanel</span>(
-        <span class="kw">span</span>(<span class="st">&quot;Logged in as &quot;</span>, session$user),
-        <span class="dt">subtitle =</span> <span class="kw">a</span>(<span class="kw">icon</span>(<span class="st">&quot;sign-out&quot;</span>), <span class="st">&quot;Logout&quot;</span>, <span class="dt">href=</span><span class="st">&quot;__logout__&quot;</span>))
-    }
-  })
-}
-
-<span class="kw">shinyApp</span>(ui, server)</code></pre></div>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" data-line-number="1"><span class="kw">library</span>(shinydashboard)</a>
+<a class="sourceLine" id="cb1-2" data-line-number="2"></a>
+<a class="sourceLine" id="cb1-3" data-line-number="3">ui &lt;-<span class="st"> </span><span class="kw">dashboardPage</span>(</a>
+<a class="sourceLine" id="cb1-4" data-line-number="4">  <span class="kw">dashboardHeader</span>(),</a>
+<a class="sourceLine" id="cb1-5" data-line-number="5">  <span class="kw">dashboardSidebar</span>(</a>
+<a class="sourceLine" id="cb1-6" data-line-number="6">    <span class="co"># Custom CSS to hide the default logout panel</span></a>
+<a class="sourceLine" id="cb1-7" data-line-number="7">    tags<span class="op">$</span><span class="kw">head</span>(tags<span class="op">$</span><span class="kw">style</span>(<span class="kw">HTML</span>(<span class="st">&#39;.shiny-server-account { display: none; }&#39;</span>))),</a>
+<a class="sourceLine" id="cb1-8" data-line-number="8"></a>
+<a class="sourceLine" id="cb1-9" data-line-number="9">    <span class="co"># The dynamically-generated user panel</span></a>
+<a class="sourceLine" id="cb1-10" data-line-number="10">    <span class="kw">uiOutput</span>(<span class="st">&quot;userpanel&quot;</span>)</a>
+<a class="sourceLine" id="cb1-11" data-line-number="11">  ),</a>
+<a class="sourceLine" id="cb1-12" data-line-number="12">  <span class="kw">dashboardBody</span>()</a>
+<a class="sourceLine" id="cb1-13" data-line-number="13">)</a>
+<a class="sourceLine" id="cb1-14" data-line-number="14"></a>
+<a class="sourceLine" id="cb1-15" data-line-number="15">server &lt;-<span class="st"> </span><span class="cf">function</span>(input, output, session) {</a>
+<a class="sourceLine" id="cb1-16" data-line-number="16">  output<span class="op">$</span>userpanel &lt;-<span class="st"> </span><span class="kw">renderUI</span>({</a>
+<a class="sourceLine" id="cb1-17" data-line-number="17">    <span class="co"># session$user is non-NULL only in authenticated sessions</span></a>
+<a class="sourceLine" id="cb1-18" data-line-number="18">    <span class="cf">if</span> (<span class="op">!</span><span class="kw">is.null</span>(session<span class="op">$</span>user)) {</a>
+<a class="sourceLine" id="cb1-19" data-line-number="19">      <span class="kw">sidebarUserPanel</span>(</a>
+<a class="sourceLine" id="cb1-20" data-line-number="20">        <span class="kw">span</span>(<span class="st">&quot;Logged in as &quot;</span>, session<span class="op">$</span>user),</a>
+<a class="sourceLine" id="cb1-21" data-line-number="21">        <span class="dt">subtitle =</span> <span class="kw">a</span>(<span class="kw">icon</span>(<span class="st">&quot;sign-out&quot;</span>), <span class="st">&quot;Logout&quot;</span>, <span class="dt">href=</span><span class="st">&quot;__logout__&quot;</span>))</a>
+<a class="sourceLine" id="cb1-22" data-line-number="22">    }</a>
+<a class="sourceLine" id="cb1-23" data-line-number="23">  })</a>
+<a class="sourceLine" id="cb1-24" data-line-number="24">}</a>
+<a class="sourceLine" id="cb1-25" data-line-number="25"></a>
+<a class="sourceLine" id="cb1-26" data-line-number="26"><span class="kw">shinyApp</span>(ui, server)</a></code></pre></div>
 </div>
 <div id="css" class="section level2">
 <h2>CSS</h2>
@@ -209,37 +243,37 @@ server &lt;-<span class="st"> </span>function(input, output, session) {
 <p class="caption">Custom font</p>
 </div>
 <p>To do this, first create a file named <code>www/custom.css</code> with the following:</p>
-<div class="sourceCode"><pre class="sourceCode css"><code class="sourceCode css"><span class="fl">.main-header</span> <span class="fl">.logo</span> <span class="kw">{</span>
-  <span class="kw">font-family:</span> <span class="st">&quot;Georgia&quot;</span>, Times, <span class="st">&quot;Times New Roman&quot;</span>, <span class="dt">serif</span><span class="kw">;</span>
-  <span class="kw">font-weight:</span> <span class="dt">bold</span><span class="kw">;</span>
-  <span class="kw">font-size:</span> <span class="dt">24px</span><span class="kw">;</span>
-<span class="kw">}</span></code></pre></div>
+<div class="sourceCode" id="cb2"><pre class="sourceCode css"><code class="sourceCode css"><a class="sourceLine" id="cb2-1" data-line-number="1"><span class="fu">.main-header</span> <span class="fu">.logo</span> {</a>
+<a class="sourceLine" id="cb2-2" data-line-number="2">  <span class="kw">font-family</span>: <span class="st">&quot;Georgia&quot;</span>, Times, <span class="st">&quot;Times New Roman&quot;</span>, <span class="dv">serif</span>;</a>
+<a class="sourceLine" id="cb2-3" data-line-number="3">  <span class="kw">font-weight</span>: <span class="dv">bold</span>;</a>
+<a class="sourceLine" id="cb2-4" data-line-number="4">  <span class="kw">font-size</span>: <span class="dv">24px</span>;</a>
+<a class="sourceLine" id="cb2-5" data-line-number="5">}</a></code></pre></div>
 <p>Then refer to that CSS file from the UI of your app:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">## ui.R ##
-<span class="kw">dashboardPage</span>(
-  <span class="kw">dashboardHeader</span>(<span class="dt">title =</span> <span class="st">&quot;Custom font&quot;</span>),
-  <span class="kw">dashboardSidebar</span>(),
-  <span class="kw">dashboardBody</span>(
-    tags$<span class="kw">head</span>(
-      tags$<span class="kw">link</span>(<span class="dt">rel =</span> <span class="st">&quot;stylesheet&quot;</span>, <span class="dt">type =</span> <span class="st">&quot;text/css&quot;</span>, <span class="dt">href =</span> <span class="st">&quot;custom.css&quot;</span>)
-    )
-  )
-)</code></pre></div>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb3-1" data-line-number="1">## ui.R ##</a>
+<a class="sourceLine" id="cb3-2" data-line-number="2"><span class="kw">dashboardPage</span>(</a>
+<a class="sourceLine" id="cb3-3" data-line-number="3">  <span class="kw">dashboardHeader</span>(<span class="dt">title =</span> <span class="st">&quot;Custom font&quot;</span>),</a>
+<a class="sourceLine" id="cb3-4" data-line-number="4">  <span class="kw">dashboardSidebar</span>(),</a>
+<a class="sourceLine" id="cb3-5" data-line-number="5">  <span class="kw">dashboardBody</span>(</a>
+<a class="sourceLine" id="cb3-6" data-line-number="6">    tags<span class="op">$</span><span class="kw">head</span>(</a>
+<a class="sourceLine" id="cb3-7" data-line-number="7">      tags<span class="op">$</span><span class="kw">link</span>(<span class="dt">rel =</span> <span class="st">&quot;stylesheet&quot;</span>, <span class="dt">type =</span> <span class="st">&quot;text/css&quot;</span>, <span class="dt">href =</span> <span class="st">&quot;custom.css&quot;</span>)</a>
+<a class="sourceLine" id="cb3-8" data-line-number="8">    )</a>
+<a class="sourceLine" id="cb3-9" data-line-number="9">  )</a>
+<a class="sourceLine" id="cb3-10" data-line-number="10">)</a></code></pre></div>
 <p>A second way to include CSS is to put it directly in the UI code for your app:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">## ui.R ##
-<span class="kw">dashboardPage</span>(
-  <span class="kw">dashboardHeader</span>(<span class="dt">title =</span> <span class="st">&quot;Custom font&quot;</span>),
-  <span class="kw">dashboardSidebar</span>(),
-  <span class="kw">dashboardBody</span>(
-    tags$<span class="kw">head</span>(tags$<span class="kw">style</span>(<span class="kw">HTML</span>(<span class="st">&#39;</span>
-<span class="st">      .main-header .logo {</span>
-<span class="st">        font-family: &quot;Georgia&quot;, Times, &quot;Times New Roman&quot;, serif;</span>
-<span class="st">        font-weight: bold;</span>
-<span class="st">        font-size: 24px;</span>
-<span class="st">      }</span>
-<span class="st">    &#39;</span>)))
-  )
-)</code></pre></div>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb4-1" data-line-number="1">## ui.R ##</a>
+<a class="sourceLine" id="cb4-2" data-line-number="2"><span class="kw">dashboardPage</span>(</a>
+<a class="sourceLine" id="cb4-3" data-line-number="3">  <span class="kw">dashboardHeader</span>(<span class="dt">title =</span> <span class="st">&quot;Custom font&quot;</span>),</a>
+<a class="sourceLine" id="cb4-4" data-line-number="4">  <span class="kw">dashboardSidebar</span>(),</a>
+<a class="sourceLine" id="cb4-5" data-line-number="5">  <span class="kw">dashboardBody</span>(</a>
+<a class="sourceLine" id="cb4-6" data-line-number="6">    tags<span class="op">$</span><span class="kw">head</span>(tags<span class="op">$</span><span class="kw">style</span>(<span class="kw">HTML</span>(<span class="st">&#39;</span></a>
+<a class="sourceLine" id="cb4-7" data-line-number="7"><span class="st">      .main-header .logo {</span></a>
+<a class="sourceLine" id="cb4-8" data-line-number="8"><span class="st">        font-family: &quot;Georgia&quot;, Times, &quot;Times New Roman&quot;, serif;</span></a>
+<a class="sourceLine" id="cb4-9" data-line-number="9"><span class="st">        font-weight: bold;</span></a>
+<a class="sourceLine" id="cb4-10" data-line-number="10"><span class="st">        font-size: 24px;</span></a>
+<a class="sourceLine" id="cb4-11" data-line-number="11"><span class="st">      }</span></a>
+<a class="sourceLine" id="cb4-12" data-line-number="12"><span class="st">    &#39;</span>)))</a>
+<a class="sourceLine" id="cb4-13" data-line-number="13">  )</a>
+<a class="sourceLine" id="cb4-14" data-line-number="14">)</a></code></pre></div>
 <p>There other ways to add custom CSS to a Shiny application. See Shiny’s <a href="http://shiny.rstudio.com/articles/css.html">CSS article</a> for more information.</p>
 </div>
 <div id="long-titles" class="section level2">
@@ -249,28 +283,28 @@ server &lt;-<span class="st"> </span>function(input, output, session) {
 <img src="images/long-title.png" alt="Long title" />
 <p class="caption">Long title</p>
 </div>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">shinyApp</span>(
-  <span class="dt">ui =</span> <span class="kw">dashboardPage</span>(
-    <span class="kw">dashboardHeader</span>(
-      <span class="dt">title =</span> <span class="st">&quot;Example of a long title that needs more space&quot;</span>,
-      <span class="dt">titleWidth =</span> <span class="dv">450</span>
-    ),
-    <span class="kw">dashboardSidebar</span>(),
-    <span class="kw">dashboardBody</span>(
-      <span class="co"># Also add some custom CSS to make the title background area the same</span>
-      <span class="co"># color as the rest of the header.</span>
-      tags$<span class="kw">head</span>(tags$<span class="kw">style</span>(<span class="kw">HTML</span>(<span class="st">&#39;</span>
-<span class="st">        .skin-blue .main-header .logo {</span>
-<span class="st">          background-color: #3c8dbc;</span>
-<span class="st">        }</span>
-<span class="st">        .skin-blue .main-header .logo:hover {</span>
-<span class="st">          background-color: #3c8dbc;</span>
-<span class="st">        }</span>
-<span class="st">      &#39;</span>)))
-    )
-  ),
-  <span class="dt">server =</span> function(input, output) { }
-)</code></pre></div>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb5-1" data-line-number="1"><span class="kw">shinyApp</span>(</a>
+<a class="sourceLine" id="cb5-2" data-line-number="2">  <span class="dt">ui =</span> <span class="kw">dashboardPage</span>(</a>
+<a class="sourceLine" id="cb5-3" data-line-number="3">    <span class="kw">dashboardHeader</span>(</a>
+<a class="sourceLine" id="cb5-4" data-line-number="4">      <span class="dt">title =</span> <span class="st">&quot;Example of a long title that needs more space&quot;</span>,</a>
+<a class="sourceLine" id="cb5-5" data-line-number="5">      <span class="dt">titleWidth =</span> <span class="dv">450</span></a>
+<a class="sourceLine" id="cb5-6" data-line-number="6">    ),</a>
+<a class="sourceLine" id="cb5-7" data-line-number="7">    <span class="kw">dashboardSidebar</span>(),</a>
+<a class="sourceLine" id="cb5-8" data-line-number="8">    <span class="kw">dashboardBody</span>(</a>
+<a class="sourceLine" id="cb5-9" data-line-number="9">      <span class="co"># Also add some custom CSS to make the title background area the same</span></a>
+<a class="sourceLine" id="cb5-10" data-line-number="10">      <span class="co"># color as the rest of the header.</span></a>
+<a class="sourceLine" id="cb5-11" data-line-number="11">      tags<span class="op">$</span><span class="kw">head</span>(tags<span class="op">$</span><span class="kw">style</span>(<span class="kw">HTML</span>(<span class="st">&#39;</span></a>
+<a class="sourceLine" id="cb5-12" data-line-number="12"><span class="st">        .skin-blue .main-header .logo {</span></a>
+<a class="sourceLine" id="cb5-13" data-line-number="13"><span class="st">          background-color: #3c8dbc;</span></a>
+<a class="sourceLine" id="cb5-14" data-line-number="14"><span class="st">        }</span></a>
+<a class="sourceLine" id="cb5-15" data-line-number="15"><span class="st">        .skin-blue .main-header .logo:hover {</span></a>
+<a class="sourceLine" id="cb5-16" data-line-number="16"><span class="st">          background-color: #3c8dbc;</span></a>
+<a class="sourceLine" id="cb5-17" data-line-number="17"><span class="st">        }</span></a>
+<a class="sourceLine" id="cb5-18" data-line-number="18"><span class="st">      &#39;</span>)))</a>
+<a class="sourceLine" id="cb5-19" data-line-number="19">    )</a>
+<a class="sourceLine" id="cb5-20" data-line-number="20">  ),</a>
+<a class="sourceLine" id="cb5-21" data-line-number="21">  <span class="dt">server =</span> <span class="cf">function</span>(input, output) { }</a>
+<a class="sourceLine" id="cb5-22" data-line-number="22">)</a></code></pre></div>
 </div>
 <div id="sidebar-width" class="section level2">
 <h2>Sidebar width</h2>
@@ -279,38 +313,38 @@ server &lt;-<span class="st"> </span>function(input, output, session) {
 <img src="images/sidebar-width.png" alt="Sidebar width" />
 <p class="caption">Sidebar width</p>
 </div>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">shinyApp</span>(
-  <span class="dt">ui =</span> <span class="kw">dashboardPage</span>(
-    <span class="kw">dashboardHeader</span>(
-      <span class="dt">title =</span> <span class="st">&quot;Title and sidebar 350 pixels wide&quot;</span>,
-      <span class="dt">titleWidth =</span> <span class="dv">350</span>
-    ),
-    <span class="kw">dashboardSidebar</span>(
-      <span class="dt">width =</span> <span class="dv">350</span>,
-      <span class="kw">sidebarMenu</span>(
-        <span class="kw">menuItem</span>(<span class="st">&quot;Menu Item&quot;</span>)
-      )
-    ),
-    <span class="kw">dashboardBody</span>()
-  ),
-  <span class="dt">server =</span> function(input, output) { }
-)</code></pre></div>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb6-1" data-line-number="1"><span class="kw">shinyApp</span>(</a>
+<a class="sourceLine" id="cb6-2" data-line-number="2">  <span class="dt">ui =</span> <span class="kw">dashboardPage</span>(</a>
+<a class="sourceLine" id="cb6-3" data-line-number="3">    <span class="kw">dashboardHeader</span>(</a>
+<a class="sourceLine" id="cb6-4" data-line-number="4">      <span class="dt">title =</span> <span class="st">&quot;Title and sidebar 350 pixels wide&quot;</span>,</a>
+<a class="sourceLine" id="cb6-5" data-line-number="5">      <span class="dt">titleWidth =</span> <span class="dv">350</span></a>
+<a class="sourceLine" id="cb6-6" data-line-number="6">    ),</a>
+<a class="sourceLine" id="cb6-7" data-line-number="7">    <span class="kw">dashboardSidebar</span>(</a>
+<a class="sourceLine" id="cb6-8" data-line-number="8">      <span class="dt">width =</span> <span class="dv">350</span>,</a>
+<a class="sourceLine" id="cb6-9" data-line-number="9">      <span class="kw">sidebarMenu</span>(</a>
+<a class="sourceLine" id="cb6-10" data-line-number="10">        <span class="kw">menuItem</span>(<span class="st">&quot;Menu Item&quot;</span>)</a>
+<a class="sourceLine" id="cb6-11" data-line-number="11">      )</a>
+<a class="sourceLine" id="cb6-12" data-line-number="12">    ),</a>
+<a class="sourceLine" id="cb6-13" data-line-number="13">    <span class="kw">dashboardBody</span>()</a>
+<a class="sourceLine" id="cb6-14" data-line-number="14">  ),</a>
+<a class="sourceLine" id="cb6-15" data-line-number="15">  <span class="dt">server =</span> <span class="cf">function</span>(input, output) { }</a>
+<a class="sourceLine" id="cb6-16" data-line-number="16">)</a></code></pre></div>
 </div>
 <div id="icons" class="section level2">
 <h2>Icons</h2>
 <p>Icons are used liberally in shinydashboard. The icons used in Shiny and shinydashboard are really just characters from special font sets, and they’re created with Shiny’s <code>icon()</code> function.</p>
 <p>To create a calendar icon, you’d call:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">icon</span>(<span class="st">&quot;calendar&quot;</span>)</code></pre></div>
+<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb7-1" data-line-number="1"><span class="kw">icon</span>(<span class="st">&quot;calendar&quot;</span>)</a></code></pre></div>
 <p>This simply generates HTML like this, which the browser knows what to do with:</p>
-<div class="sourceCode"><pre class="sourceCode html"><code class="sourceCode html"><span class="kw">&lt;i</span><span class="ot"> class=</span><span class="st">&quot;fa fa-calendar&quot;</span><span class="kw">&gt;&lt;/i&gt;</span></code></pre></div>
+<div class="sourceCode" id="cb8"><pre class="sourceCode html"><code class="sourceCode html"><a class="sourceLine" id="cb8-1" data-line-number="1"><span class="kw">&lt;i</span><span class="ot"> class=</span><span class="st">&quot;fa fa-calendar&quot;</span><span class="kw">&gt;&lt;/i&gt;</span></a></code></pre></div>
 <p>The icons are from Font-Awesome and Glyphicons. You can see lists of all available icons here:</p>
 <ul>
-<li><a href="http://fontawesome.io/icons/" class="uri">http://fontawesome.io/icons/</a></li>
-<li><a href="http://getbootstrap.com/components/#glyphicons" class="uri">http://getbootstrap.com/components/#glyphicons</a></li>
+<li><a href="https://fontawesome.io/icons/" class="uri">https://fontawesome.io/icons/</a></li>
+<li><a href="https://getbootstrap.com/docs/3.4/components/#glyphicons" class="uri">https://getbootstrap.com/docs/3.4/components/#glyphicons</a></li>
 </ul>
 <p>By default, the <code>icon()</code> function uses icons from Font-Awesome. To use Glyphicons, use <code>lib=&quot;glyphicon&quot;</code>)</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="st">&quot;Calendar from Font-Awesome:&quot;</span>, <span class="kw">icon</span>(<span class="st">&quot;calendar&quot;</span>),
-<span class="st">&quot;Cog from Glyphicons:&quot;</span>, <span class="kw">icon</span>(<span class="st">&quot;cog&quot;</span>, <span class="dt">lib =</span> <span class="st">&quot;glyphicon&quot;</span>)</code></pre></div>
+<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb9-1" data-line-number="1"><span class="st">&quot;Calendar from Font-Awesome:&quot;</span>, <span class="kw">icon</span>(<span class="st">&quot;calendar&quot;</span>),</a>
+<a class="sourceLine" id="cb9-2" data-line-number="2"><span class="st">&quot;Cog from Glyphicons:&quot;</span>, <span class="kw">icon</span>(<span class="st">&quot;cog&quot;</span>, <span class="dt">lib =</span> <span class="st">&quot;glyphicon&quot;</span>)</a></code></pre></div>
 <div class="figure">
 <img src="images/icons.png" alt="Icons" />
 <p class="caption">Icons</p>
