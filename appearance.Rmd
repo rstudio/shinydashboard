@@ -274,8 +274,8 @@ This simply generates HTML like this, which the browser knows what to do with:
 
 The icons are from Font-Awesome and Glyphicons. You can see lists of all available icons here:
 
-* http://fontawesome.io/icons/
-* http://getbootstrap.com/components/#glyphicons
+* https://fontawesome.io/icons/
+* https://getbootstrap.com/docs/3.4/components/#glyphicons
 
 
 By default, the `icon()` function uses icons from Font-Awesome. To use Glyphicons, use `lib="glyphicon"`)
