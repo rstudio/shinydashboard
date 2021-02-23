@@ -1,0 +1,59 @@
+/*!
+ *   AdminLTE v2.3.8
+ *   Author: Almsaeed Studio
+ *	 Website: Almsaeed Studio <http://almsaeedstudio.com>
+ *   License: Open source - MIT
+ *           Please visit http://opensource.org/licenses/MIT for more information
+!*/
+//google fonts
+@import url(https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic);
+//Bootstrap Variables & Mixins
+//The core bootstrap code have not been modified. These files
+//are included only for reference.
+@import (reference) "../bootstrap-less/mixins.scss";
+@import (reference) "../bootstrap-less/variables.scss";
+//MISC
+//----
+@import "core.scss";
+@import "variables.scss";
+@import "mixins.scss";
+//COMPONENTS
+//-----------
+@import "header.scss";
+@import "sidebar.scss";
+@import "sidebar-mini.scss";
+@import "control-sidebar.scss";
+@import "dropdown.scss";
+@import "forms.scss";
+@import "progress-bars.scss";
+@import "small-box.scss";
+@import "boxes.scss";
+@import "info-box.scss";
+@import "timeline.scss";
+@import "buttons.scss";
+@import "callout.scss";
+@import "alerts.scss";
+@import "navs.scss";
+@import "products.scss";
+@import "table.scss";
+@import "labels.scss";
+@import "direct-chat.scss";
+@import "users-list.scss";
+@import "carousel.scss";
+@import "modal.scss";
+@import "social-widgets.scss";
+//PAGES
+//------
+@import "mailbox.scss";
+@import "lockscreen.scss";
+@import "login_and_register.scss";
+@import "404_500_errors.scss";
+@import "invoice.scss";
+@import "profile";
+//Plugins
+//--------
+@import "plugins.scss";
+//Miscellaneous
+//-------------
+@import "miscellaneous.scss";
+@import "print.scss";
