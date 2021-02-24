@@ -8,21 +8,21 @@
 }
 
 .label-danger {
-  &:extend(.bg-red);
+  @extend .bg-red;
 }
 
 .label-info {
-  &:extend(.bg-aqua);
+  @extend .bg-aqua;
 }
 
 .label-warning {
-  &:extend(.bg-yellow);
+  @extend .bg-yellow;
 }
 
 .label-primary {
-  &:extend(.bg-light-blue);
+  @extend .bg-light-blue;
 }
 
 .label-success {
-  &:extend(.bg-green);
+  @extend .bg-green;
 }

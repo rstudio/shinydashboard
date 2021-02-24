@@ -2,7 +2,7 @@
 //===============
 
 //Changes the color and the hovering properties of the navbar
-.navbar-variant($color; $font-color: rgba(255, 255, 255, 0.8); $hover-color: #f6f6f6; $hover-bg: rgba(0, 0, 0, 0.1)) {
+@mixin navbar-variant($color, $font-color: rgba(255, 255, 255, 0.8), $hover-color: #f6f6f6, $hover-bg: rgba(0, 0, 0, 0.1)) {
   background-color: $color;
   //Navbar links
   .nav > li > a {
@@ -69,7 +69,7 @@
 }
 
 //border radius creator
-@mixin border-radius($radius) {
+@mixin border-radius-all($radius) {
   border-radius: $radius;
 }
 
@@ -107,7 +107,7 @@ $bottom-right
   $stop 100%);
   background: -o-linear-gradient($stop,
   $start);
-  filter: e(%("progid:DXImageTransform.Microsoft.gradient(startColorstr='%d', endColorstr='%d', GradientType=0)",$stop,$start));
+  //filter: e(%("progid:DXImageTransform.Microsoft.gradient(startColorstr='%d', endColorstr='%d', GradientType=0)",$stop,$start));
 }
 
 //Added 2.1.0

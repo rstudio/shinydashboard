@@ -15,7 +15,7 @@
 /* NAV PILLS */
 .nav-pills {
   > li > a {
-    @include border-radius(0);
+    @include border-radius-all(0);
     border-top: 3px solid transparent;
     color: #444;
     > .fa,
@@ -37,7 +37,7 @@
 /* NAV STACKED */
 .nav-stacked {
   > li > a {
-    @include border-radius(0);
+    @include border-radius-all(0);
     border-top: 0;
     border-left: 3px solid transparent;
     color: #444;
@@ -74,7 +74,7 @@
       margin-bottom: -2px;
       > a {
         color: #444;
-        @include border-radius(0);
+        @include border-radius-all(0);
         &.text-muted {
           color: #999;
         }
@@ -220,7 +220,7 @@
   }
   &.pagination-flat {
     > li > a {
-      @include border-radius(0) !important;
+      border-radius: 0 !important;
     }
   }
 }

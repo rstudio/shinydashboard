@@ -4,7 +4,7 @@
  */
 
 .alert {
-  @include border-radius(3px);
+  @include border-radius-all(3px);
   h4 {
     font-weight: 600;
   }
@@ -26,22 +26,22 @@
 
 //Alert Variants
 .alert-success {
-  &:extend(.bg-green);
+  @extend .bg-green;
   border-color: darken($green, 5%);
 }
 
 .alert-danger,
 .alert-error {
-  &:extend(.bg-red);
+  @extend .bg-red;
   border-color: darken($red, 5%);
 }
 
 .alert-warning {
-  &:extend(.bg-yellow);
+  @extend .bg-yellow;
   border-color: darken($yellow, 5%);
 }
 
 .alert-info {
-  &:extend(.bg-aqua);
+  @extend .bg-aqua;
   border-color: darken($aqua, 5%);
 }

@@ -19,7 +19,7 @@
     background: #ddd;
     left: 31px;
     margin: 0;
-    @include border-radius(2px);
+    @include border-radius-all(2px);
   }
 
   > li {
@@ -31,7 +31,7 @@
     // The content
     > .timeline-item {
       @include box-shadow($box-boxshadow);
-      @include border-radius($box-border-radius);
+      @include border-radius-all($box-border-radius);
       margin-top: 0;
       background: #fff;
       color: #444;
@@ -91,7 +91,7 @@
       display: inline-block;
       background-color: #fff;
 
-      @include border-radius(4px);
+      @include border-radius-all(4px);
     }
   }
 }

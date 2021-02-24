@@ -8,7 +8,7 @@
 .progress > .progress-bar {
   @include box-shadow(none);
   &, .progress-bar {
-    @include border-radius($progress-bar-border-radius);
+    @include border-radius-all($progress-bar-border-radius);
   }
 }
 
@@ -17,7 +17,7 @@
 .progress-sm {
   height: 10px;
   &, .progress-bar {
-    @include border-radius($progress-bar-sm-border-radius);
+    @include border-radius-all($progress-bar-sm-border-radius);
   }
 }
 
@@ -25,7 +25,7 @@
 .progress-xs {
   height: 7px;
   &, .progress-bar {
-    @include border-radius($progress-bar-xs-border-radius);
+    @include border-radius-all($progress-bar-xs-border-radius);
   }
 }
 
@@ -33,7 +33,7 @@
 .progress-xxs {
   height: 3px;
   &, .progress-bar {
-    @include border-radius($progress-bar-xs-border-radius);
+    @include border-radius-all($progress-bar-xs-border-radius);
   }
 }
 

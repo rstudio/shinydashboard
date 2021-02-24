@@ -4,7 +4,7 @@
  */
 
 .small-box {
-  @include border-radius(2px);
+  @include border-radius-all(2px);
   position: relative;
   display: block;
   margin-bottom: 20px;

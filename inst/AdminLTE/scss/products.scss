@@ -7,7 +7,7 @@
   margin: 0;
   padding: 0;
   > .item {
-    @include border-radius($box-border-radius);
+    @include border-radius-all($box-border-radius);
     @include box-shadow($box-boxshadow);
     @include clearfix();
     padding: 10px 0;
@@ -37,7 +37,7 @@
 
 .product-list-in-box > .item {
   @include box-shadow(none);
-  @include border-radius(0);
+  @include border-radius-all(0);
   border-bottom: 1px solid $box-border-color;
   &:last-of-type {
     border-bottom-width: 0;

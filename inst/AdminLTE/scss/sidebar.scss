@@ -17,7 +17,7 @@
   //Using disposable variable to join statements with a comma
   $transition-rule: $transition-speed $transition-fn,
   width $transition-speed $transition-fn;
-  @mixin transition-transform($transition-rule),
+  @include transition-transform($transition-rule);
   @media (max-width: $screen-header-collapse) {
     padding-top: 100px;
   }

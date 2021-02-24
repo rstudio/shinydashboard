@@ -161,7 +161,7 @@
     position: absolute;
     top: 15px;
     right: 10px;
-    @include border-radius(2px);
+    @include border-radius-all(2px);
     > li > a {
       color: #444;
       text-decoration: none;

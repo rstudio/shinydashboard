@@ -1,0 +1,49 @@
+diff --git a/srcjs/AdminLTE/app.js b/srcjs/AdminLTE/app.js
+index 8759426..7fbcf57 100644
+--- a/srcjs/AdminLTE/app.js
++++ b/srcjs/AdminLTE/app.js
+@@ -7,7 +7,7 @@
+  * @Author  Almsaeed Studio
+  * @Support <http://www.almsaeedstudio.com>
+  * @Email   <abdullah@almsaeedstudio.com>
+- * @version 2.3.8
++ * @version 2.3.11
+  * @license MIT <http://opensource.org/licenses/MIT>
+  */
+ 
+@@ -424,6 +424,12 @@ function _init() {
+           //Get the parent li
+           var parent_li = $this.parent("li");
+ 
++          // shiny-mod (see README-shiny-mods.md)
++          var shinyOutput = checkElement.find('.shiny-bound-output');
++          if (shinyOutput.length !== 0 && shinyOutput.first().html().length === 0) {
++            shinyOutput.first().html('<br/>');
++          }
++
+           //Open the target menu and add the menu-open class
+           checkElement.slideDown(animationSpeed, function () {
+             //Add the class active to the parent li
+@@ -582,12 +588,22 @@ function _init() {
+         //Hide the content
+         box_content.slideUp(_this.animationSpeed, function () {
+           box.addClass("collapsed-box");
++          box.trigger("hidden.bs.collapse");
+         });
+       } else {
+         //Convert plus into minus
+         element.children(":first")
+           .removeClass(_this.icons.open)
+           .addClass(_this.icons.collapse);
++
++        // Technically, it should be 'show' which is triggered here, and
++        // 'shown' which is triggered later. However, this works better because
++        // of the slow expansion transition -- the box would fully expand, and
++        // only then trigger 'shown', which then results in an update of the
++        // content. This would allow users to see the old content during the
++        // expansion.
++        box.trigger("shown.bs.collapse");
++
+         //Show the content
+         box_content.slideDown(_this.animationSpeed, function () {
+           box.removeClass("collapsed-box");

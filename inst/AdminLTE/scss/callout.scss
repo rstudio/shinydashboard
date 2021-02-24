@@ -5,7 +5,7 @@
 
 // Base styles (regardless of theme)
 .callout {
-  @include border-radius(3px);
+  @include border-radius-all(3px);
   margin: 0 0 20px 0;
   padding: 15px 30px 15px 15px;
   border-left: 5px solid #eee;
@@ -30,19 +30,19 @@
 
   // Themes for different contexts
   &.callout-danger {
-    &:extend(.bg-red);
+    @extend .bg-red;
     border-color: darken($red, 10%);
   }
   &.callout-warning {
-    &:extend(.bg-yellow);
+    @extend .bg-yellow;
     border-color: darken($yellow, 10%);
   }
   &.callout-info {
-    &:extend(.bg-aqua);
+    @extend .bg-aqua;
     border-color: darken($aqua, 10%);
   }
   &.callout-success {
-    &:extend(.bg-green);
+    @extend .bg-green;
     border-color: darken($green, 10%);
   }
 }

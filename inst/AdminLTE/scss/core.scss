@@ -47,12 +47,12 @@ body {
   //Using disposable variable to join statements with a comma
   $transition-rule: $transition-speed $transition-fn,
   margin $transition-speed $transition-fn;
-  @mixin transition-transform($transition-rule),
-  margin-left: $sidebar-width,
-  z-index: 820,
+  @include transition-transform($transition-rule);
+  margin-left: $sidebar-width;
+  z-index: 820;
   //Top nav layout
   .layout-top-nav & {
-    margin-left: 0,
+    margin-left: 0;
   }
   @media (max-width: $screen-xs-max) {
     margin-left: 0;

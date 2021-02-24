@@ -1,0 +1,1029 @@
+diff --git a/inst/AdminLTE/scss/AdminLTE.scss b/inst/AdminLTE/scss/AdminLTE.scss
+index 5d45455..1ec20ba 100644
+--- a/inst/AdminLTE/scss/AdminLTE.scss
++++ b/inst/AdminLTE/scss/AdminLTE.scss
+@@ -1,3 +1,66 @@
++@font-face {
++  font-family: 'Source Sans Pro';
++  font-style: normal;
++  font-weight: 300;
++  src:
++    local('Source Sans Pro Light'),
++    local('SourceSansPro-Light'),
++    url('fonts/Source_Sans_Pro_300.ttf') format('truetype');
++}
++@font-face {
++  font-family: 'Source Sans Pro';
++  font-style: normal;
++  font-weight: 400;
++  src:
++    local('Source Sans Pro'),
++    local('SourceSansPro-Regular'),
++    url('fonts/Source_Sans_Pro_400.ttf') format('truetype');
++}
++@font-face {
++  font-family: 'Source Sans Pro';
++  font-style: normal;
++  font-weight: 600;
++  src:
++    local('Source Sans Pro Semibold'),
++    local('SourceSansPro-Semibold'),
++    url('fonts/Source_Sans_Pro_600.ttf') format('truetype');
++}
++@font-face {
++  font-family: 'Source Sans Pro';
++  font-style: normal;
++  font-weight: 700;
++  src:
++    local('Source Sans Pro Bold'),
++    local('SourceSansPro-Bold'),
++    url('fonts/Source_Sans_Pro_700.ttf') format('truetype');
++}
++@font-face {
++  font-family: 'Source Sans Pro';
++  font-style: italic;
++  font-weight: 300;
++  src:
++    local('Source Sans Pro Light Italic'),
++    local('SourceSansPro-LightIt'),
++    url('fonts/Source_Sans_Pro_300italic.ttf') format('truetype');
++}
++@font-face {
++  font-family: 'Source Sans Pro';
++  font-style: italic;
++  font-weight: 400;
++  src:
++    local('Source Sans Pro Italic'),
++    local('SourceSansPro-It'),
++    url('fonts/Source_Sans_Pro_400italic.ttf') format('truetype');
++}
++@font-face {
++  font-family: 'Source Sans Pro';
++  font-style: italic;
++  font-weight: 600;
++  src:
++    local('Source Sans Pro Semibold Italic'),
++    local('SourceSansPro-SemiboldIt'),
++    url('fonts/Source_Sans_Pro_600italic.ttf') format('truetype');
++}
+ /*!
+  *   AdminLTE v2.3.8
+  *   Author: Almsaeed Studio
+@@ -5,18 +68,11 @@
+  *   License: Open source - MIT
+  *           Please visit http://opensource.org/licenses/MIT for more information
+ !*/
+-//google fonts
+-@import url(https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic);
+-//Bootstrap Variables & Mixins
+-//The core bootstrap code have not been modified. These files
+-//are included only for reference.
+-@import (reference) "../bootstrap-less/mixins.scss";
+-@import (reference) "../bootstrap-less/variables.scss";
+ //MISC
+ //----
+-@import "core.scss";
+ @import "variables.scss";
+ @import "mixins.scss";
++@import "core.scss";
+ //COMPONENTS
+ //-----------
+ @import "header.scss";
+diff --git a/inst/AdminLTE/scss/alerts.scss b/inst/AdminLTE/scss/alerts.scss
+index 1fff5db..e7cfd4c 100644
+--- a/inst/AdminLTE/scss/alerts.scss
++++ b/inst/AdminLTE/scss/alerts.scss
+@@ -4,7 +4,7 @@
+  */
+ 
+ .alert {
+-  @include border-radius(3px);
++  @include border-radius-all(3px);
+   h4 {
+     font-weight: 600;
+   }
+@@ -26,22 +26,22 @@
+ 
+ //Alert Variants
+ .alert-success {
+-  &:extend(.bg-green);
++  @extend .bg-green;
+   border-color: darken($green, 5%);
+ }
+ 
+ .alert-danger,
+ .alert-error {
+-  &:extend(.bg-red);
++  @extend .bg-red;
+   border-color: darken($red, 5%);
+ }
+ 
+ .alert-warning {
+-  &:extend(.bg-yellow);
++  @extend .bg-yellow;
+   border-color: darken($yellow, 5%);
+ }
+ 
+ .alert-info {
+-  &:extend(.bg-aqua);
++  @extend .bg-aqua;
+   border-color: darken($aqua, 5%);
+ }
+diff --git a/inst/AdminLTE/scss/boxes.scss b/inst/AdminLTE/scss/boxes.scss
+index 6f88311..4225e0d 100644
+--- a/inst/AdminLTE/scss/boxes.scss
++++ b/inst/AdminLTE/scss/boxes.scss
+@@ -4,7 +4,7 @@
+  */
+ .box {
+   position: relative;
+-  @include border-radius($box-border-radius);
++  @include border-radius-all($box-border-radius);
+   background: #ffffff;
+   border-top: 3px solid $box-default-border-top-color;
+   margin-bottom: 20px;
+@@ -148,7 +148,7 @@
+   .overlay {
+     z-index: 50;
+     background: rgba(255, 255, 255, 0.7);
+-    @include border-radius($box-border-radius);
++    @include border-radius-all($box-border-radius);
+     > .fa {
+       position: absolute;
+       top: 50%;
+@@ -240,47 +240,47 @@
+ 
+ //Box Body
+ .box-body {
+-  @mixin border-radius(0, 0, $box-border-radius, $box-border-radius),
+-  padding: $box-padding,
++  @include border-radius(0, 0, $box-border-radius, $box-border-radius);
++  padding: $box-padding;
+   .no-header & {
+-    .border-top-radius($box-border-radius),
++    @include border-top-radius($box-border-radius);
+   }
+   // Tables within the box body
+   > .table {
+-    margin-bottom: 0,
++    margin-bottom: 0;
+   }
+ 
+   // Calendar within the box body
+   .fc {
+-    margin-top: 5px,
++    margin-top: 5px;
+   }
+ 
+   .full-width-chart {
+-    margin: -19px,
++    margin: -19px;
+   }
+   &.no-padding .full-width-chart {
+-    margin: -9px,
++    margin: -9px;
+   }
+ 
+   .box-pane {
+-    .border-radius(0, 0, $box-border-radius, 0),
++    @include border-radius(0, 0, $box-border-radius, 0);
+   }
+   .box-pane-right {
+-    .border-radius(0, 0, 0, $box-border-radius),
++    @include border-radius(0, 0, 0, $box-border-radius);
+   }
+ }
+ 
+ //Box footer
+ .box-footer {
+-  .border-radius(0, 0, $box-border-radius, $box-border-radius),
+-  border-top: 1px solid $box-border-color,
+-  padding: $box-padding,
+-  background-color: $box-footer-bg,
++  @include border-radius(0, 0, $box-border-radius, $box-border-radius);
++  border-top: 1px solid $box-border-color;
++  padding: $box-padding;
++  background-color: $box-footer-bg;
+ }
+ 
+ .chart-legend {
+-  &:extend(.list-unstyled),
+-  margin: 10px 0,
++  @extend .list-unstyled;
++  margin: 10px 0;
+   > li {
+     @media (max-width: $screen-sm-max) {
+       float: left;
+@@ -303,7 +303,7 @@
+       padding-top: 0;
+     }
+     img {
+-      &:extend(.img-sm);
++      @extend .img-sm;
+       float: left;
+     }
+   }
+@@ -334,7 +334,7 @@
+   overflow: auto;
+   // Todo list element
+   > li {
+-    @include border-radius(2px);
++    @include border-radius-all(2px);
+     padding: 10px;
+     background: #f4f4f4;
+     margin-bottom: 2px;
+@@ -428,7 +428,7 @@
+       width: 40px;
+       height: 40px;
+       border: 2px solid transparent;
+-      @include border-radius(50%);
++      @include border-radius-all(50%);
+     }
+ 
+     > .online {
+@@ -450,7 +450,7 @@
+ 
+     // The attachment
+     > .attachment {
+-      @include border-radius($attachment-border-radius);
++      @include border-radius-all($attachment-border-radius);
+       background: #f4f4f4;
+       margin-left: 65px;
+       margin-right: 15px;
+diff --git a/inst/AdminLTE/scss/buttons.scss b/inst/AdminLTE/scss/buttons.scss
+index e05e8a6..98d2a46 100644
+--- a/inst/AdminLTE/scss/buttons.scss
++++ b/inst/AdminLTE/scss/buttons.scss
+@@ -4,7 +4,7 @@
+  */
+ 
+ .btn {
+-  @include border-radius($btn-border-radius);
++  @include border-radius-all($btn-border-radius);
+   @include box-shadow($btn-boxshadow);
+   border: 1px solid transparent;
+ 
+@@ -14,7 +14,7 @@
+ 
+   // Flat buttons
+   &.btn-flat {
+-    @include border-radius(0);
++    @include border-radius-all(0);
+     -webkit-box-shadow: none;
+     -moz-box-shadow: none;
+     box-shadow: none;
+@@ -128,7 +128,7 @@
+ 
+ // Application buttons
+ .btn-app {
+-  @include border-radius(3px);
++  @include border-radius-all(3px);
+   position: relative;
+   padding: 15px 5px;
+   margin: 0 0 10px 10px;
+diff --git a/inst/AdminLTE/scss/callout.scss b/inst/AdminLTE/scss/callout.scss
+index 87f4a27..bd26657 100644
+--- a/inst/AdminLTE/scss/callout.scss
++++ b/inst/AdminLTE/scss/callout.scss
+@@ -5,7 +5,7 @@
+ 
+ // Base styles (regardless of theme)
+ .callout {
+-  @include border-radius(3px);
++  @include border-radius-all(3px);
+   margin: 0 0 20px 0;
+   padding: 15px 30px 15px 15px;
+   border-left: 5px solid #eee;
+@@ -30,19 +30,19 @@
+ 
+   // Themes for different contexts
+   &.callout-danger {
+-    &:extend(.bg-red);
++    @extend .bg-red;
+     border-color: darken($red, 10%);
+   }
+   &.callout-warning {
+-    &:extend(.bg-yellow);
++    @extend .bg-yellow;
+     border-color: darken($yellow, 10%);
+   }
+   &.callout-info {
+-    &:extend(.bg-aqua);
++    @extend .bg-aqua;
+     border-color: darken($aqua, 10%);
+   }
+   &.callout-success {
+-    &:extend(.bg-green);
++    @extend .bg-green;
+     border-color: darken($green, 10%);
+   }
+ }
+diff --git a/inst/AdminLTE/scss/control-sidebar.scss b/inst/AdminLTE/scss/control-sidebar.scss
+index 7d34ed4..0097fab 100644
+--- a/inst/AdminLTE/scss/control-sidebar.scss
++++ b/inst/AdminLTE/scss/control-sidebar.scss
+@@ -15,14 +15,14 @@
+   top: 0;
+   right: -$control-sidebar-width;
+   width: $control-sidebar-width;
+-  @mixin transition(right $transition-speed ease-in-out),
++  @include transition(right $transition-speed ease-in-out);
+ }
+ 
+ //The sidebar
+ .control-sidebar {
+-  position: absolute,
+-  padding-top: $navbar-height,
+-  z-index: 1010,
++  position: absolute;
++  padding-top: $navbar-height;
++  z-index: 1010;
+   //Fix position after header collapse
+   @media (max-width: $screen-sm) {
+     padding-top: $navbar-height + 50;
+@@ -66,7 +66,7 @@
+       }
+     }
+     > a {
+-      @include border-radius(0);
++      @include border-radius-all(0);
+ 
+       //Hover and active states
+       &,
+diff --git a/inst/AdminLTE/scss/core.scss b/inst/AdminLTE/scss/core.scss
+index ae40119..347c0c4 100644
+--- a/inst/AdminLTE/scss/core.scss
++++ b/inst/AdminLTE/scss/core.scss
+@@ -47,12 +47,12 @@ body {
+   //Using disposable variable to join statements with a comma
+   $transition-rule: $transition-speed $transition-fn,
+   margin $transition-speed $transition-fn;
+-  @mixin transition-transform($transition-rule),
+-  margin-left: $sidebar-width,
+-  z-index: 820,
++  @include transition-transform($transition-rule);
++  margin-left: $sidebar-width;
++  z-index: 820;
+   //Top nav layout
+   .layout-top-nav & {
+-    margin-left: 0,
++    margin-left: 0;
+   }
+   @media (max-width: $screen-xs-max) {
+     margin-left: 0;
+diff --git a/inst/AdminLTE/scss/direct-chat.scss b/inst/AdminLTE/scss/direct-chat.scss
+index 3d72146..c121eeb 100644
+--- a/inst/AdminLTE/scss/direct-chat.scss
++++ b/inst/AdminLTE/scss/direct-chat.scss
+@@ -39,7 +39,7 @@
+ }
+ 
+ .direct-chat-text {
+-  @include border-radius(5px);
++  @include border-radius-all(5px);
+   position: relative;
+   padding: 5px 10px;
+   background: $direct-chat-default-msg-bg;
+@@ -83,7 +83,7 @@
+ }
+ 
+ .direct-chat-img {
+-  @include border-radius(50%);
++  @include border-radius-all(50%);
+   float: left;
+   width: 40px;
+   height: 40px;
+@@ -127,7 +127,7 @@
+ 
+ //Contacts list -- for displaying contacts in direct chat contacts pane
+ .contacts-list {
+-  &:extend(.list-unstyled);
++  @extend .list-unstyled;
+   > li {
+     @include clearfix();
+     border-bottom: 1px solid rgba(0, 0, 0, 0.2);
+@@ -140,7 +140,7 @@
+ }
+ 
+ .contacts-list-img {
+-  @include border-radius(50%);
++  @include border-radius-all(50%);
+   width: 40px;
+   float: left;
+ }
+diff --git a/inst/AdminLTE/scss/dropdown.scss b/inst/AdminLTE/scss/dropdown.scss
+index ee2eba1..8c2c8db 100644
+--- a/inst/AdminLTE/scss/dropdown.scss
++++ b/inst/AdminLTE/scss/dropdown.scss
+@@ -41,22 +41,22 @@
+   }
+   //Define header class
+   > .dropdown-menu > li.header {
+-    @mixin border-radius(4px, 4px, 0, 0),
+-    background-color: #ffffff,
+-    padding: 7px 10px,
+-    border-bottom: 1px solid #f4f4f4,
+-    color: #444444,
+-    font-size: 14px,
++    @include border-radius(4px, 4px, 0, 0);
++    background-color: #ffffff;
++    padding: 7px 10px;
++    border-bottom: 1px solid #f4f4f4;
++    color: #444444;
++    font-size: 14px;
+   }
+ 
+   //Define footer class
+   > .dropdown-menu > li.footer > a {
+-    .border-radius(0, 0, 4px, 4px),
+-    font-size: 12px,
+-    background-color: #fff,
+-    padding: 7px 10px,
+-    border-bottom: 1px solid #eeeeee,
+-    color: #444 !important,
++    @include border-radius(0, 0, 4px, 4px);
++    font-size: 12px;
++    background-color: #fff;
++    padding: 7px 10px;
++    border-bottom: 1px solid #eeeeee;
++    color: #444 !important;
+     @media (max-width: $screen-sm-max) {
+       background: #fff !important;
+       color: #444 !important;
+@@ -220,9 +220,9 @@
+       padding: 15px;
+       border-bottom: 1px solid #f4f4f4;
+       border-top: 1px solid #dddddd;
+-      @mixin clearfix(),
++      @include clearfix();
+       a {
+-        color: #444 !important,
++        color: #444 !important;
+         @media (max-width: $screen-sm-max) {
+           background: #fff !important;
+           color: #444 !important;
+@@ -234,7 +234,7 @@
+     > .user-footer {
+       background-color: #f9f9f9;
+       padding: 10px;
+-      @mixin clearfix(),
++      @include clearfix();
+       .btn-default {
+         color: #666666,
+         &:hover {
+@@ -295,7 +295,7 @@
+   }
+ }
+ 
+-$-webkit-keyframes flipInX {
++@-webkit-keyframes flipInX {
+   0% {
+     -webkit-transform: perspective(400px) rotate3d(1, 0, 0, 90deg);
+     -webkit-transition-timing-function: ease-in;
+diff --git a/inst/AdminLTE/scss/forms.scss b/inst/AdminLTE/scss/forms.scss
+index a49b97a..d592cde 100644
+--- a/inst/AdminLTE/scss/forms.scss
++++ b/inst/AdminLTE/scss/forms.scss
+@@ -3,7 +3,7 @@
+  * ---------------
+  */
+ .form-control {
+-  @include border-radius($input-radius);
++  @include border-radius-all($input-radius);
+   box-shadow: none;
+   border-color: $gray-lte;
+   &:focus {
+@@ -71,7 +71,7 @@
+ /* Input group */
+ .input-group {
+   .input-group-addon {
+-    @include border-radius($input-radius);
++    @include border-radius-all($input-radius);
+     border-color: $gray-lte;
+     background-color: #fff;
+   }
+@@ -81,7 +81,7 @@
+ .btn-group-vertical {
+   .btn {
+     &.btn-flat:first-of-type, &.btn-flat:last-of-type {
+-      @include border-radius(0);
++      @include border-radius-all(0);
+     }
+   }
+ }
+diff --git a/inst/AdminLTE/scss/header.scss b/inst/AdminLTE/scss/header.scss
+index 181b308..8795dff 100644
+--- a/inst/AdminLTE/scss/header.scss
++++ b/inst/AdminLTE/scss/header.scss
+@@ -161,7 +161,7 @@
+     position: absolute;
+     top: 15px;
+     right: 10px;
+-    @include border-radius(2px);
++    @include border-radius-all(2px);
+     > li > a {
+       color: #444;
+       text-decoration: none;
+diff --git a/inst/AdminLTE/scss/info-box.scss b/inst/AdminLTE/scss/info-box.scss
+index 18473d8..59fbab1 100644
+--- a/inst/AdminLTE/scss/info-box.scss
++++ b/inst/AdminLTE/scss/info-box.scss
+@@ -8,7 +8,7 @@
+   background: #fff;
+   width: 100%;
+   box-shadow: $box-boxshadow;
+-  @include border-radius(2px);
++  @include border-radius-all(2px);
+   margin-bottom: 15px;
+   small {
+     font-size: 14px;
+@@ -19,7 +19,7 @@
+     height: 2px;
+     &,
+     & .progress-bar {
+-      @include border-radius(0);
++      @include border-radius-all(0);
+     }
+     .progress-bar {
+       background: #fff;
+@@ -28,7 +28,7 @@
+ }
+ 
+ .info-box-icon {
+-  .border-radius(2px; 0; 2px; 0);
++  @include border-radius(2px, 0, 2px, 0);
+   display: block;
+   float: left;
+   height: 90px;
+diff --git a/inst/AdminLTE/scss/labels.scss b/inst/AdminLTE/scss/labels.scss
+index d3099c3..ff45895 100644
+--- a/inst/AdminLTE/scss/labels.scss
++++ b/inst/AdminLTE/scss/labels.scss
+@@ -8,21 +8,21 @@
+ }
+ 
+ .label-danger {
+-  &:extend(.bg-red);
++  @extend .bg-red;
+ }
+ 
+ .label-info {
+-  &:extend(.bg-aqua);
++  @extend .bg-aqua;
+ }
+ 
+ .label-warning {
+-  &:extend(.bg-yellow);
++  @extend .bg-yellow;
+ }
+ 
+ .label-primary {
+-  &:extend(.bg-light-blue);
++  @extend .bg-light-blue;
+ }
+ 
+ .label-success {
+-  &:extend(.bg-green);
++  @extend .bg-green;
+ }
+diff --git a/inst/AdminLTE/scss/lockscreen.scss b/inst/AdminLTE/scss/lockscreen.scss
+index 741169b..5f45698 100644
+--- a/inst/AdminLTE/scss/lockscreen.scss
++++ b/inst/AdminLTE/scss/lockscreen.scss
+@@ -31,7 +31,7 @@
+ 
+ /* Will contain the image and the sign in form */
+ .lockscreen-item {
+-  @include border-radius(4px);
++  @include border-radius-all(4px);
+   padding: 0;
+   background: #fff;
+   position: relative;
+@@ -41,7 +41,7 @@
+ 
+ /* User image */
+ .lockscreen-image {
+-  @include border-radius(50%);
++  @include border-radius-all(50%);
+   position: absolute;
+   left: -10px;
+   top: -25px;
+@@ -49,7 +49,7 @@
+   padding: 5px;
+   z-index: 10;
+   > img {
+-    @include border-radius(50%);
++    @include border-radius-all(50%);
+     width: 70px;
+     height: 70px;
+   }
+diff --git a/inst/AdminLTE/scss/mailbox.scss b/inst/AdminLTE/scss/mailbox.scss
+index 94bf907..77094ee 100644
+--- a/inst/AdminLTE/scss/mailbox.scss
++++ b/inst/AdminLTE/scss/mailbox.scss
+@@ -38,7 +38,7 @@
+ }
+ 
+ .mailbox-attachments {
+-  &:extend(.list-unstyled);
++  @extend .list-unstyled;
+   li {
+     float: left;
+     width: 200px;
+diff --git a/inst/AdminLTE/scss/miscellaneous.scss b/inst/AdminLTE/scss/miscellaneous.scss
+index 9f6ab19..0da1064 100644
+--- a/inst/AdminLTE/scss/miscellaneous.scss
++++ b/inst/AdminLTE/scss/miscellaneous.scss
+@@ -346,7 +346,7 @@
+ 
+ // Remove border radius
+ .flat {
+-  @include border-radius(0) !important;
++  border-radius: 0 !important;
+ }
+ 
+ .text-bold {
+@@ -368,52 +368,52 @@
+ 
+ // Gradient Background colors
+ .bg-teal-gradient {
+-  .gradient($teal; $teal; lighten($teal, 16%)) !important;
++  @include gradient($teal, $teal, lighten($teal, 16%));
+   color: #fff;
+ }
+ 
+ .bg-light-blue-gradient {
+-  .gradient($light-blue; $light-blue; lighten($light-blue, 12%)) !important;
++  @include gradient($light-blue, $light-blue, lighten($light-blue, 12%));
+   color: #fff;
+ }
+ 
+ .bg-blue-gradient {
+-  .gradient($blue; $blue; lighten($blue, 7%)) !important;
++  @include gradient($blue, $blue, lighten($blue, 7%));
+   color: #fff;
+ }
+ 
+ .bg-aqua-gradient {
+-  .gradient($aqua; $aqua; lighten($aqua, 7%)) !important;
++  @include gradient($aqua, $aqua, lighten($aqua, 7%));
+   color: #fff;
+ }
+ 
+ .bg-yellow-gradient {
+-  .gradient($yellow; $yellow; lighten($yellow, 16%)) !important;
++  @include gradient($yellow, $yellow, lighten($yellow, 16%));
+   color: #fff;
+ }
+ 
+ .bg-purple-gradient {
+-  .gradient($purple; $purple; lighten($purple, 16%)) !important;
++  @include gradient($purple, $purple, lighten($purple, 16%));
+   color: #fff;
+ }
+ 
+ .bg-green-gradient {
+-  .gradient($green; $green; lighten($green, 7%)) !important;
++  @include gradient($green, $green, lighten($green, 7%));
+   color: #fff;
+ }
+ 
+ .bg-red-gradient {
+-  .gradient($red; $red; lighten($red, 10%)) !important;
++  @include gradient($red, $red, lighten($red, 10%));
+   color: #fff;
+ }
+ 
+ .bg-black-gradient {
+-  .gradient($black; $black; lighten($black, 10%)) !important;
++  @include gradient($black, $black, lighten($black, 10%));
+   color: #fff;
+ }
+ 
+ .bg-maroon-gradient {
+-  .gradient($maroon; $maroon; lighten($maroon, 10%)) !important;
++  @include gradient($maroon, $maroon, lighten($maroon, 10%));
+   color: #fff;
+ }
+ 
+@@ -487,7 +487,7 @@
+   }
+   &.user-block-sm {
+     img {
+-      &:extend(.img-sm);
++      @extend .img-sm;
+     }
+     .username,
+     .description,
+diff --git a/inst/AdminLTE/scss/mixins.scss b/inst/AdminLTE/scss/mixins.scss
+index ef99a9e..f836018 100644
+--- a/inst/AdminLTE/scss/mixins.scss
++++ b/inst/AdminLTE/scss/mixins.scss
+@@ -2,7 +2,7 @@
+ //===============
+ 
+ //Changes the color and the hovering properties of the navbar
+-.navbar-variant($color; $font-color: rgba(255, 255, 255, 0.8); $hover-color: #f6f6f6; $hover-bg: rgba(0, 0, 0, 0.1)) {
++@mixin navbar-variant($color, $font-color: rgba(255, 255, 255, 0.8), $hover-color: #f6f6f6, $hover-bg: rgba(0, 0, 0, 0.1)) {
+   background-color: $color;
+   //Navbar links
+   .nav > li > a {
+@@ -69,7 +69,7 @@
+ }
+ 
+ //border radius creator
+-@mixin border-radius($radius) {
++@mixin border-radius-all($radius) {
+   border-radius: $radius;
+ }
+ 
+@@ -107,7 +107,7 @@ $bottom-right
+   $stop 100%);
+   background: -o-linear-gradient($stop,
+   $start);
+-  filter: e(%("progid:DXImageTransform.Microsoft.gradient(startColorstr='%d', endColorstr='%d', GradientType=0)",$stop,$start));
++  //filter: e(%("progid:DXImageTransform.Microsoft.gradient(startColorstr='%d', endColorstr='%d', GradientType=0)",$stop,$start));
+ }
+ 
+ //Added 2.1.0
+diff --git a/inst/AdminLTE/scss/modal.scss b/inst/AdminLTE/scss/modal.scss
+index 6066b74..4138c93 100644
+--- a/inst/AdminLTE/scss/modal.scss
++++ b/inst/AdminLTE/scss/modal.scss
+@@ -7,7 +7,7 @@
+ }
+ 
+ .modal-content {
+-  @include border-radius(0);
++  @include border-radius-all(0);
+   @include box-shadow(0 2px 3px rgba(0, 0, 0, .125));
+   border: 0;
+   @media (min-width: $screen-sm-min) {
+@@ -26,55 +26,55 @@
+ //Modal variants
+ .modal-primary {
+   .modal-body {
+-    &:extend(.bg-light-blue);
++    @extend .bg-light-blue;
+   }
+   .modal-header,
+   .modal-footer {
+-    &:extend(.bg-light-blue-active);
++    @extend .bg-light-blue-active;
+     border-color: darken($light-blue, 10%);
+   }
+ }
+ 
+ .modal-warning {
+   .modal-body {
+-    &:extend(.bg-yellow);
++    @extend .bg-yellow;
+   }
+   .modal-header,
+   .modal-footer {
+-    &:extend(.bg-yellow-active);
++    @extend .bg-yellow-active;
+     border-color: darken($yellow, 10%);
+   }
+ }
+ 
+ .modal-info {
+   .modal-body {
+-    &:extend(.bg-aqua);
++    @extend .bg-aqua;
+   }
+   .modal-header,
+   .modal-footer {
+-    &:extend(.bg-aqua-active);
++    @extend .bg-aqua-active;
+     border-color: darken($aqua, 10%);
+   }
+ }
+ 
+ .modal-success {
+   .modal-body {
+-    &:extend(.bg-green);
++    @extend .bg-green;
+   }
+   .modal-header,
+   .modal-footer {
+-    &:extend(.bg-green-active);
++    @extend .bg-green-active;
+     border-color: darken($green, 10%);
+   }
+ }
+ 
+ .modal-danger {
+   .modal-body {
+-    &:extend(.bg-red);
++    @extend .bg-red;
+   }
+   .modal-header,
+   .modal-footer {
+-    &:extend(.bg-red-active);
++    @extend .bg-red-active;
+     border-color: darken($red, 10%);
+   }
+ }
+diff --git a/inst/AdminLTE/scss/navs.scss b/inst/AdminLTE/scss/navs.scss
+index 4d4888d..c5669bb 100644
+--- a/inst/AdminLTE/scss/navs.scss
++++ b/inst/AdminLTE/scss/navs.scss
+@@ -15,7 +15,7 @@
+ /* NAV PILLS */
+ .nav-pills {
+   > li > a {
+-    @include border-radius(0);
++    @include border-radius-all(0);
+     border-top: 3px solid transparent;
+     color: #444;
+     > .fa,
+@@ -37,7 +37,7 @@
+ /* NAV STACKED */
+ .nav-stacked {
+   > li > a {
+-    @include border-radius(0);
++    @include border-radius-all(0);
+     border-top: 0;
+     border-left: 3px solid transparent;
+     color: #444;
+@@ -74,7 +74,7 @@
+       margin-bottom: -2px;
+       > a {
+         color: #444;
+-        @include border-radius(0);
++        @include border-radius-all(0);
+         &.text-muted {
+           color: #999;
+         }
+@@ -220,7 +220,7 @@
+   }
+   &.pagination-flat {
+     > li > a {
+-      @include border-radius(0) !important;
++      border-radius: 0 !important;
+     }
+   }
+ }
+diff --git a/inst/AdminLTE/scss/print.scss b/inst/AdminLTE/scss/print.scss
+index feb6c4c..82bb3f4 100644
+--- a/inst/AdminLTE/scss/print.scss
++++ b/inst/AdminLTE/scss/print.scss
+@@ -13,7 +13,7 @@
+   .left-side,
+   .main-header,
+   .content-header {
+-    &:extend(.no-print);
++    @extend .no-print;
+   }
+ 
+   //This is the only element that should appear, so let's remove the margins
+@@ -22,7 +22,7 @@
+   .main-footer {
+     margin-left: 0 !important;
+     min-height: 0 !important;
+-    @include translate(0, 0) !important;
++    @include translate(0, 0);
+   }
+ 
+   .fixed .content-wrapper,
+diff --git a/inst/AdminLTE/scss/products.scss b/inst/AdminLTE/scss/products.scss
+index 333f477..8f575f9 100644
+--- a/inst/AdminLTE/scss/products.scss
++++ b/inst/AdminLTE/scss/products.scss
+@@ -7,7 +7,7 @@
+   margin: 0;
+   padding: 0;
+   > .item {
+-    @include border-radius($box-border-radius);
++    @include border-radius-all($box-border-radius);
+     @include box-shadow($box-boxshadow);
+     @include clearfix();
+     padding: 10px 0;
+@@ -37,7 +37,7 @@
+ 
+ .product-list-in-box > .item {
+   @include box-shadow(none);
+-  @include border-radius(0);
++  @include border-radius-all(0);
+   border-bottom: 1px solid $box-border-color;
+   &:last-of-type {
+     border-bottom-width: 0;
+diff --git a/inst/AdminLTE/scss/progress-bars.scss b/inst/AdminLTE/scss/progress-bars.scss
+index a3ee91b..c499738 100644
+--- a/inst/AdminLTE/scss/progress-bars.scss
++++ b/inst/AdminLTE/scss/progress-bars.scss
+@@ -8,7 +8,7 @@
+ .progress > .progress-bar {
+   @include box-shadow(none);
+   &, .progress-bar {
+-    @include border-radius($progress-bar-border-radius);
++    @include border-radius-all($progress-bar-border-radius);
+   }
+ }
+ 
+@@ -17,7 +17,7 @@
+ .progress-sm {
+   height: 10px;
+   &, .progress-bar {
+-    @include border-radius($progress-bar-sm-border-radius);
++    @include border-radius-all($progress-bar-sm-border-radius);
+   }
+ }
+ 
+@@ -25,7 +25,7 @@
+ .progress-xs {
+   height: 7px;
+   &, .progress-bar {
+-    @include border-radius($progress-bar-xs-border-radius);
++    @include border-radius-all($progress-bar-xs-border-radius);
+   }
+ }
+ 
+@@ -33,7 +33,7 @@
+ .progress-xxs {
+   height: 3px;
+   &, .progress-bar {
+-    @include border-radius($progress-bar-xs-border-radius);
++    @include border-radius-all($progress-bar-xs-border-radius);
+   }
+ }
+ 
+diff --git a/inst/AdminLTE/scss/sidebar.scss b/inst/AdminLTE/scss/sidebar.scss
+index 52da791..9164818 100644
+--- a/inst/AdminLTE/scss/sidebar.scss
++++ b/inst/AdminLTE/scss/sidebar.scss
+@@ -17,7 +17,7 @@
+   //Using disposable variable to join statements with a comma
+   $transition-rule: $transition-speed $transition-fn,
+   width $transition-speed $transition-fn;
+-  @mixin transition-transform($transition-rule),
++  @include transition-transform($transition-rule);
+   @media (max-width: $screen-header-collapse) {
+     padding-top: 100px;
+   }
+diff --git a/inst/AdminLTE/scss/small-box.scss b/inst/AdminLTE/scss/small-box.scss
+index fd12b13..53c6745 100644
+--- a/inst/AdminLTE/scss/small-box.scss
++++ b/inst/AdminLTE/scss/small-box.scss
+@@ -4,7 +4,7 @@
+  */
+ 
+ .small-box {
+-  @include border-radius(2px);
++  @include border-radius-all(2px);
+   position: relative;
+   display: block;
+   margin-bottom: 20px;
+diff --git a/inst/AdminLTE/scss/timeline.scss b/inst/AdminLTE/scss/timeline.scss
+index 3237912..f307038 100644
+--- a/inst/AdminLTE/scss/timeline.scss
++++ b/inst/AdminLTE/scss/timeline.scss
+@@ -19,7 +19,7 @@
+     background: #ddd;
+     left: 31px;
+     margin: 0;
+-    @include border-radius(2px);
++    @include border-radius-all(2px);
+   }
+ 
+   > li {
+@@ -31,7 +31,7 @@
+     // The content
+     > .timeline-item {
+       @include box-shadow($box-boxshadow);
+-      @include border-radius($box-border-radius);
++      @include border-radius-all($box-border-radius);
+       margin-top: 0;
+       background: #fff;
+       color: #444;
+@@ -91,7 +91,7 @@
+       display: inline-block;
+       background-color: #fff;
+ 
+-      @include border-radius(4px);
++      @include border-radius-all(4px);
+     }
+   }
+ }
+diff --git a/inst/AdminLTE/scss/users-list.scss b/inst/AdminLTE/scss/users-list.scss
+index 02bc108..fe29a5e 100644
+--- a/inst/AdminLTE/scss/users-list.scss
++++ b/inst/AdminLTE/scss/users-list.scss
+@@ -3,14 +3,14 @@
+  * ---------------------
+  */
+ .users-list {
+-  &:extend(.list-unstyled);
++  @extend .list-unstyled;
+   > li {
+     width: 25%;
+     float: left;
+     padding: 10px;
+     text-align: center;
+     img {
+-      @include border-radius(50%);
++      @include border-radius-all(50%);
+       max-width: 100%;
+       height: auto;
+     }

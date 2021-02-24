@@ -3,14 +3,14 @@
  * ---------------------
  */
 .users-list {
-  &:extend(.list-unstyled);
+  @extend .list-unstyled;
   > li {
     width: 25%;
     float: left;
     padding: 10px;
     text-align: center;
     img {
-      @include border-radius(50%);
+      @include border-radius-all(50%);
       max-width: 100%;
       height: auto;
     }

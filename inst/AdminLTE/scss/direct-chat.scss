@@ -39,7 +39,7 @@
 }
 
 .direct-chat-text {
-  @include border-radius(5px);
+  @include border-radius-all(5px);
   position: relative;
   padding: 5px 10px;
   background: $direct-chat-default-msg-bg;
@@ -83,7 +83,7 @@
 }
 
 .direct-chat-img {
-  @include border-radius(50%);
+  @include border-radius-all(50%);
   float: left;
   width: 40px;
   height: 40px;
@@ -127,7 +127,7 @@
 
 //Contacts list -- for displaying contacts in direct chat contacts pane
 .contacts-list {
-  &:extend(.list-unstyled);
+  @extend .list-unstyled;
   > li {
     @include clearfix();
     border-bottom: 1px solid rgba(0, 0, 0, 0.2);
@@ -140,7 +140,7 @@
 }
 
 .contacts-list-img {
-  @include border-radius(50%);
+  @include border-radius-all(50%);
   width: 40px;
   float: left;
 }

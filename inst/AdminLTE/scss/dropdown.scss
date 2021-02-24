@@ -41,22 +41,22 @@
   }
   //Define header class
   > .dropdown-menu > li.header {
-    @mixin border-radius(4px, 4px, 0, 0),
-    background-color: #ffffff,
-    padding: 7px 10px,
-    border-bottom: 1px solid #f4f4f4,
-    color: #444444,
-    font-size: 14px,
+    @include border-radius(4px, 4px, 0, 0);
+    background-color: #ffffff;
+    padding: 7px 10px;
+    border-bottom: 1px solid #f4f4f4;
+    color: #444444;
+    font-size: 14px;
   }
 
   //Define footer class
   > .dropdown-menu > li.footer > a {
-    .border-radius(0, 0, 4px, 4px),
-    font-size: 12px,
-    background-color: #fff,
-    padding: 7px 10px,
-    border-bottom: 1px solid #eeeeee,
-    color: #444 !important,
+    @include border-radius(0, 0, 4px, 4px);
+    font-size: 12px;
+    background-color: #fff;
+    padding: 7px 10px;
+    border-bottom: 1px solid #eeeeee;
+    color: #444 !important;
     @media (max-width: $screen-sm-max) {
       background: #fff !important;
       color: #444 !important;
@@ -220,9 +220,9 @@
       padding: 15px;
       border-bottom: 1px solid #f4f4f4;
       border-top: 1px solid #dddddd;
-      @mixin clearfix(),
+      @include clearfix();
       a {
-        color: #444 !important,
+        color: #444 !important;
         @media (max-width: $screen-sm-max) {
           background: #fff !important;
           color: #444 !important;
@@ -234,7 +234,7 @@
     > .user-footer {
       background-color: #f9f9f9;
       padding: 10px;
-      @mixin clearfix(),
+      @include clearfix();
       .btn-default {
         color: #666666,
         &:hover {
@@ -295,7 +295,7 @@
   }
 }
 
-$-webkit-keyframes flipInX {
+@-webkit-keyframes flipInX {
   0% {
     -webkit-transform: perspective(400px) rotate3d(1, 0, 0, 90deg);
     -webkit-transition-timing-function: ease-in;

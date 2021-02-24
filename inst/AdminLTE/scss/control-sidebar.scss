@@ -15,14 +15,14 @@
   top: 0;
   right: -$control-sidebar-width;
   width: $control-sidebar-width;
-  @mixin transition(right $transition-speed ease-in-out),
+  @include transition(right $transition-speed ease-in-out);
 }
 
 //The sidebar
 .control-sidebar {
-  position: absolute,
-  padding-top: $navbar-height,
-  z-index: 1010,
+  position: absolute;
+  padding-top: $navbar-height;
+  z-index: 1010;
   //Fix position after header collapse
   @media (max-width: $screen-sm) {
     padding-top: $navbar-height + 50;
@@ -66,7 +66,7 @@
       }
     }
     > a {
-      @include border-radius(0);
+      @include border-radius-all(0);
 
       //Hover and active states
       &,

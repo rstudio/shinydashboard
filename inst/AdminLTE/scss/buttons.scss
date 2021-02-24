@@ -4,7 +4,7 @@
  */
 
 .btn {
-  @include border-radius($btn-border-radius);
+  @include border-radius-all($btn-border-radius);
   @include box-shadow($btn-boxshadow);
   border: 1px solid transparent;
 
@@ -14,7 +14,7 @@
 
   // Flat buttons
   &.btn-flat {
-    @include border-radius(0);
+    @include border-radius-all(0);
     -webkit-box-shadow: none;
     -moz-box-shadow: none;
     box-shadow: none;
@@ -128,7 +128,7 @@
 
 // Application buttons
 .btn-app {
-  @include border-radius(3px);
+  @include border-radius-all(3px);
   position: relative;
   padding: 15px 5px;
   margin: 0 0 10px 10px;

@@ -346,7 +346,7 @@
 
 // Remove border radius
 .flat {
-  @include border-radius(0) !important;
+  border-radius: 0 !important;
 }
 
 .text-bold {
@@ -368,52 +368,52 @@
 
 // Gradient Background colors
 .bg-teal-gradient {
-  .gradient($teal; $teal; lighten($teal, 16%)) !important;
+  @include gradient($teal, $teal, lighten($teal, 16%));
   color: #fff;
 }
 
 .bg-light-blue-gradient {
-  .gradient($light-blue; $light-blue; lighten($light-blue, 12%)) !important;
+  @include gradient($light-blue, $light-blue, lighten($light-blue, 12%));
   color: #fff;
 }
 
 .bg-blue-gradient {
-  .gradient($blue; $blue; lighten($blue, 7%)) !important;
+  @include gradient($blue, $blue, lighten($blue, 7%));
   color: #fff;
 }
 
 .bg-aqua-gradient {
-  .gradient($aqua; $aqua; lighten($aqua, 7%)) !important;
+  @include gradient($aqua, $aqua, lighten($aqua, 7%));
   color: #fff;
 }
 
 .bg-yellow-gradient {
-  .gradient($yellow; $yellow; lighten($yellow, 16%)) !important;
+  @include gradient($yellow, $yellow, lighten($yellow, 16%));
   color: #fff;
 }
 
 .bg-purple-gradient {
-  .gradient($purple; $purple; lighten($purple, 16%)) !important;
+  @include gradient($purple, $purple, lighten($purple, 16%));
   color: #fff;
 }
 
 .bg-green-gradient {
-  .gradient($green; $green; lighten($green, 7%)) !important;
+  @include gradient($green, $green, lighten($green, 7%));
   color: #fff;
 }
 
 .bg-red-gradient {
-  .gradient($red; $red; lighten($red, 10%)) !important;
+  @include gradient($red, $red, lighten($red, 10%));
   color: #fff;
 }
 
 .bg-black-gradient {
-  .gradient($black; $black; lighten($black, 10%)) !important;
+  @include gradient($black, $black, lighten($black, 10%));
   color: #fff;
 }
 
 .bg-maroon-gradient {
-  .gradient($maroon; $maroon; lighten($maroon, 10%)) !important;
+  @include gradient($maroon, $maroon, lighten($maroon, 10%));
   color: #fff;
 }
 
@@ -487,7 +487,7 @@
   }
   &.user-block-sm {
     img {
-      &:extend(.img-sm);
+      @extend .img-sm;
     }
     .username,
     .description,
