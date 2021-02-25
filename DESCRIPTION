@@ -16,8 +16,12 @@ Depends:
 License: GPL (>= 2) | file LICENSE
 Imports:
     utils,
+    rlang,
     shiny (>= 1.0.0),
     htmltools (>= 0.2.6),
     promises
+Suggests: 
+    bslib,
+    sass
 BugReports: https://github.com/rstudio/shinydashboard
 RoxygenNote: 6.0.1.9000

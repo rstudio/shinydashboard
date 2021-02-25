@@ -16,6 +16,7 @@ $.extend(tabItemInputBinding, {
   },
   setValue: function(el, value) {
     var self = this;
+    // TODO: bs4 update?
     var anchors = $(el).parent('ul.sidebar-menu').find('li:not(.treeview)').children('a');
     anchors.each(function() { // eslint-disable-line consistent-return
       if (self._getTabName($(this)) === value) {

@@ -1,0 +1,31 @@
+diff --git a/inst/AdminLTE-3.0.5/scss/mixins/_backgrounds.scss b/inst/AdminLTE-3.0.5/scss/mixins/_backgrounds.scss
+index b88fa9c..d95d76b 100644
+--- a/inst/AdminLTE-3.0.5/scss/mixins/_backgrounds.scss
++++ b/inst/AdminLTE-3.0.5/scss/mixins/_backgrounds.scss
+@@ -33,7 +33,7 @@
+ // Background Gradient Variant
+ @mixin background-gradient-variant($name, $color) {
+   .bg-gradient-#{$name} {
+-    @include bg-gradient-variant('&', $color);
++    @include bg-gradient-variant('&', $color, true);
+     color: color-contrast($color);
+ 
+     &.btn {
+@@ -46,7 +46,7 @@
+       }
+ 
+       &:hover {
+-        @include bg-gradient-variant('&', darken($color, 7.5%));
++        @include bg-gradient-variant('&', darken($color, 7.5%), true);
+         border-color: darken($color, 10%);
+         color: darken(color-contrast($color), 7.5%);
+       }
+@@ -55,7 +55,7 @@
+       &:not(:disabled):not(.disabled).active,
+       &:active,
+       &.active {
+-        @include bg-gradient-variant('&', darken($color, 10%));
++        @include bg-gradient-variant('&', darken($color, 10%), true);
+         border-color: darken($color, 12.5%);
+         color: color-contrast(darken($color, 10%));
+       }

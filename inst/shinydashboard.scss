@@ -1,0 +1,88 @@
+$black: $gray-base !default;
+$white: white !default; //bslib sets this variable, even in BS3 mode
+
+/* A replacement for .small-box .icon, where the icon is smaller and doesn't
+   change size when moused over. */
+.small-box .icon-large {
+  position: absolute;
+  top: auto;
+  bottom: 5px;
+  right: 5px;
+  font-size: 70px; // TODO: themable?
+  color: rgba($black, 0.15);
+}
+
+/* So that selectize dropdowns are visible if they go off the bottom. */
+.content {
+  overflow: visible;
+}
+
+.navbar-nav > .messages-menu > .dropdown-menu > li .menu > li > a > .glyphicon,
+.navbar-nav > .messages-menu > .dropdown-menu > li .menu > li > a > .fa,
+.navbar-nav > .messages-menu > .dropdown-menu > li .menu > li > a > .fab,
+.navbar-nav > .messages-menu > .dropdown-menu > li .menu > li > a > .fas,
+.navbar-nav > .messages-menu > .dropdown-menu > li .menu > li > a > .far,
+.navbar-nav > .messages-menu > .dropdown-menu > li .menu > li > a > .fal,
+.navbar-nav > .messages-menu > .dropdown-menu > li .menu > li > a > .ion {
+  float: left;
+  font-size: 30px; // TODO: themable?
+  width: 50px;
+  text-align: center;
+  margin-right: 5px;
+  color: $black;
+}
+
+/* Sidebar user panel needs a minimum height when there's no image. */
+section.sidebar .user-panel {
+  min-height: 65px;
+}
+
+/* Inputs in the sidebar */
+section.sidebar .shiny-input-container {
+  /* Proper spacing around inputs. */
+  padding: 12px 15px 0px 15px;
+  /* Wrap content (important for inline inputs). */
+  white-space: normal;
+}
+
+/* Make action buttons/links look good on the sidebar panel */
+section.sidebar .shiny-bound-input.action-button,
+section.sidebar .shiny-bound-input.action-link {
+  margin: 6px 5px 6px 15px;
+  display: block;
+}
+
+/* Shiny inputs in boxes should span full width. */
+div.box-body .shiny-input-container {
+  width: auto;
+}
+
+/* Sidebar is dark, so make text light by default. */
+.sidebar {
+  color: $white;
+}
+/* Slider min and max in sidebar. */
+.sidebar .irs-min, .sidebar .irs-max {
+  color: mix($white, $black, 66%);
+}
+
+/* Don't highlight text when info box is in <a> tag */
+a > .info-box {
+  color: mix($white, $black, 20%);
+}
+
+/*  Shiny Server Pro logout panel needs to be raised above menu bar */
+.shiny-server-account {
+  z-index: 2000;
+}
+
+/* fontAwesome is the FA4 family name; 'Font Awesome 5 Free' is the FA 5 name.
+ * This rule makes the sidebar-toggle 'bars' icon appear properly both in
+ * Shiny <= 1.1 (FA4) and Shiny 1.2+ (FA5).
+ * The font-weight value is for FA5, as multiple styles are mapped
+ * to different weights.
+ */
+.main-header .sidebar-toggle {
+  font-family: fontAwesome, 'Font Awesome 5 Free';
+  font-weight: 900;
+}

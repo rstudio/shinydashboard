@@ -124,6 +124,16 @@ dashboardSidebar <- function(..., disable = FALSE, width = NULL, collapsed = FAL
   if (disable) dataValue <- TRUE # this is a workaround to fix #209
   dataValueString <- if (dataValue) "true" else "false"
 
+
+  items <- list(...)
+  tagFunctionVersion(
+    three = bs3_sidebar,
+    default = bs4_sidebar,
+    args = list(items, custom_css, dataValueString, disable)
+  )
+}
+
+bs3_sidebar <- function(items, custom_css, dataValueString, disable) {
   # The expanded/collapsed state of the sidebar is actually set by adding a
   # class to the body (not to the sidebar). However, it makes sense for the
   # `collapsed` argument to belong in this function. So this information is
@@ -136,10 +146,26 @@ dashboardSidebar <- function(..., disable = FALSE, width = NULL, collapsed = FAL
       id = "sidebarItemExpanded",
       class = "sidebar",
       `data-disable` = if (disable) 1 else NULL,
-      list(...)
+      items
     )
   )
 }
+
+bs4_sidebar <- function(items, custom_css, dataValueString, disable) {
+  tags$aside(
+    id = "sidebarCollapsed",
+    class = "main-sidebar sidebar-dark-primary",
+    `data-collapsed` = dataValueString, custom_css,
+    div(
+      id = "sidebarItemExpanded",
+      class = "sidebar",
+      `data-disable` = if (disable) 1 else NULL,
+      items
+    )
+  )
+}
+
+
 
 #' A panel displaying user information in a sidebar
 #'
@@ -187,7 +213,15 @@ sidebarUserPanel <- function(name, subtitle = NULL, image = NULL) {
 #' @export
 sidebarSearchForm <- function(textId, buttonId, label = "Search...",
                               icon = shiny::icon("search")) {
-  tags$form(class = "sidebar-form",
+  tagFunctionVersion(
+    three = bs3_search_form,
+    default = bs4_search_form,
+    args = list(textId, buttonId, label, icon)
+  )
+}
+
+bs3_search_form <- function(textId, buttonId, label, icon) {
+  tags$form(class = "sidebar-form my-1",
     div(class = "input-group",
       tags$input(id = textId, type = "text", class = "form-control",
         placeholder = label, style = "margin: 5px;"
@@ -195,6 +229,28 @@ sidebarSearchForm <- function(textId, buttonId, label = "Search...",
       span(class = "input-group-btn",
         tags$button(id = buttonId, type = "button",
           class = "btn btn-flat action-button",
+          icon
+        )
+      )
+    )
+  )
+}
+
+bs4_search_form <- function(textId, buttonId, label, icon) {
+  tags$form(
+    class = "sidebar-form",
+    div(
+      class = "input-group",
+      tags$input(
+        id = textId, type = "search",
+        class = "form-control form-control-sidebar",
+        placeholder = label
+      ),
+      span(
+        class = "input-group-append",
+        tags$button(
+          id = buttonId, type = "submit",
+          class = "btn btn-sidebar action-button",
           icon
         )
       )
@@ -268,9 +324,8 @@ sidebarSearchForm <- function(textId, buttonId, label = "Search...",
 sidebarMenu <- function(..., id = NULL, .list = NULL) {
   items <- c(list(...), .list)
 
-  # Restore a selected tab from bookmarked state. Bookmarking was added in Shiny
-  # 0.14.
-  if (utils::packageVersion("shiny") >= "0.14" && !is.null(id)) {
+  # Restore a selected tab from bookmarked state.
+  if (!is.null(id)) {
     selectedTabName <- shiny::restoreInput(id = id, default = NULL)
     if (!is.null(selectedTabName)) {
       # Find the menuItem or menuSubItem with a `tabname` that matches
@@ -355,11 +410,30 @@ sidebarMenu <- function(..., id = NULL, .list = NULL) {
       class = "sidebarMenuSelectedTabItem", `data-value` = selectedTabName %OR% "null")
   }
 
-  # Use do.call so that we don't add an extra list layer to the children of the
-  # ul tag. This makes it a little easier to traverse the tree to search for
-  # selected items to restore.
-  do.call(tags$ul, c(class = "sidebar-menu", items))
+  tagFunctionVersion(
+    three = bs3_sidebar_menu,
+    default = bs4_sidebar_menu,
+    args = list(items = items)
+  )
 }
+
+bs3_sidebar_menu <- function(items) {
+  tags$ul(class = "sidebar-menu", !!!items)
+}
+
+bs4_sidebar_menu <- function(items) {
+  tags$nav(
+    class = "mt-2",
+    tags$ul(
+      class = "nav nav-pills nav-sidebar flex-column",
+      class = "sidebar-menu", # Important for shinydashboard's JS
+      "data-widget" = "treeview",
+      !!!items
+    )
+  )
+}
+
+
 
 #' @rdname sidebarMenu
 #' @export
@@ -408,7 +482,8 @@ menuItem <- function(text, ..., icon = NULL, badgeLabel = NULL, badgeColor = "gr
   if (length(subItems) == 0) {
     return(
       tags$li(
-        a(href = href,
+        class = "nav-item",
+        a(href = href, class = "nav-link",
           `data-toggle` = if (isTabItem) "tab",
           `data-value` = if (!is.null(tabName)) tabName,
           `data-start-selected` = if (isTRUE(selected)) 1 else NULL,
@@ -433,22 +508,47 @@ menuItem <- function(text, ..., icon = NULL, badgeLabel = NULL, badgeColor = "gr
   # this menuItem's `expandedName``
   isExpanded <- nzchar(dataExpanded) && (dataExpanded == expandedName)
 
+  tagFunctionVersion(
+    three = bs3_menu_item,
+    default = bs4_menu_item,
+    args = list(subItems, text, href, icon, isExpanded, expandedName)
+  )
+}
+
+bs3_menu_item <- function(subItems, text, href, icon, isExpanded, expandedName) {
   tags$li(class = "treeview",
-    a(href = href,
-      icon,
-      span(text),
-      shiny::icon("angle-left", class = "pull-right")
+          a(href = href,
+            icon,
+            span(text),
+            shiny::icon("angle-left", class = "pull-right") # TODO: add BS4 class?
+          ),
+          # Use do.call so that we don't add an extra list layer to the children of the
+          # ul tag. This makes it a little easier to traverse the tree to search for
+          # selected items to restore.
+          do.call(tags$ul, c(
+            class = paste0("treeview-menu", if (isExpanded) " menu-open" else ""),
+            style = paste0("display: ",     if (isExpanded) "block;" else "none;"),
+            `data-expanded` = expandedName,
+            subItems))
+  )
+}
+
+bs4_menu_item <- function(subItems, text, href, icon, isExpanded, expandedName) {
+  tags$li(
+    class = "nav-item has-treeview",
+    a(
+      href = href, icon, span(text), class = "nav-link",
+      shiny::icon("angle-left", class = "float-right")
     ),
-    # Use do.call so that we don't add an extra list layer to the children of the
-    # ul tag. This makes it a little easier to traverse the tree to search for
-    # selected items to restore.
     do.call(tags$ul, c(
+      class = "nav nav-treeview",
       class = paste0("treeview-menu", if (isExpanded) " menu-open" else ""),
       style = paste0("display: ",     if (isExpanded) "block;" else "none;"),
       `data-expanded` = expandedName,
       subItems))
   )
 }
+
 
 #' @rdname sidebarMenu
 #' @export
@@ -477,7 +577,8 @@ menuSubItem <- function(text, tabName = NULL, href = NULL, newtab = TRUE,
 
 
   tags$li(
-    a(href = href,
+    class = "nav-item",
+    a(href = href, class = "nav-link",
       `data-toggle` = if (isTabItem) "tab",
       `data-value` = if (!is.null(tabName)) tabName,
       `data-start-selected` = if (isTRUE(selected)) 1 else NULL,

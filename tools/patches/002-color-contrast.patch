@@ -1,0 +1,497 @@
+diff --git a/inst/AdminLTE-3.0.5/scss/_alerts.scss b/inst/AdminLTE-3.0.5/scss/_alerts.scss
+index 8bf52b0..78a96e5 100644
+--- a/inst/AdminLTE-3.0.5/scss/_alerts.scss
++++ b/inst/AdminLTE-3.0.5/scss/_alerts.scss
+@@ -25,7 +25,7 @@
+ //Alert Variants
+ @each $color, $value in $theme-colors {
+   .alert-#{$color} {
+-    color: color-yiq($value);
++    color: color-contrast($value);
+     background: $value;
+     border-color: darken($value, 5%);
+   }
+diff --git a/inst/AdminLTE-3.0.5/scss/_colors.scss b/inst/AdminLTE-3.0.5/scss/_colors.scss
+index 1cd515f..9cfc647 100644
+--- a/inst/AdminLTE-3.0.5/scss/_colors.scss
++++ b/inst/AdminLTE-3.0.5/scss/_colors.scss
+@@ -14,22 +14,22 @@
+ 
+ .bg-gray {
+   background-color: $gray-500;
+-  color: color-yiq($gray-500);
++  color: color-contrast($gray-500);
+ }
+ 
+ .bg-gray-light {
+   background-color: lighten($gray-200, 3%);
+-  color: color-yiq(lighten($gray-200, 3%)) !important;
++  color: color-contrast(lighten($gray-200, 3%)) !important;
+ }
+ 
+ .bg-black {
+   background-color: $black;
+-  color: color-yiq($black) !important;
++  color: color-contrast($black) !important;
+ }
+ 
+ .bg-white {
+   background-color: $white;
+-  color: color-yiq($white) !important;
++  color: color-contrast($white) !important;
+ }
+ 
+ // Gradient Background colors (theme colors)
+@@ -85,7 +85,7 @@ a.text-muted:hover {
+ [class*="accent-"] {
+   @each $name, $color in $theme-colors {
+     a.btn-#{$name} {
+-      color: color-yiq($color);
++      color: color-contrast($color);
+     }
+   }
+ }
+diff --git a/inst/AdminLTE-3.0.5/scss/_direct-chat.scss b/inst/AdminLTE-3.0.5/scss/_direct-chat.scss
+index 5329b3d..e08b533 100644
+--- a/inst/AdminLTE-3.0.5/scss/_direct-chat.scss
++++ b/inst/AdminLTE-3.0.5/scss/_direct-chat.scss
+@@ -18,13 +18,13 @@
+ 
+   &.timestamp-light {
+     .direct-chat-timestamp {
+-      color: lighten(color-yiq($yiq-text-light), 10%);
++      color: lighten(color-contrast($yiq-text-light), 10%);
+     }
+   }
+ 
+   &.timestamp-dark {
+     .direct-chat-timestamp {
+-      color: darken(color-yiq($yiq-text-dark), 20%);
++      color: darken(color-contrast($yiq-text-dark), 20%);
+     }
+   }
+ }
+diff --git a/inst/AdminLTE-3.0.5/scss/_forms.scss b/inst/AdminLTE-3.0.5/scss/_forms.scss
+index ed55f05..c0f1820 100644
+--- a/inst/AdminLTE-3.0.5/scss/_forms.scss
++++ b/inst/AdminLTE-3.0.5/scss/_forms.scss
+@@ -112,7 +112,7 @@ label:not(.form-check-label):not(.custom-file-label) {
+   @include border-radius($form-feedback-tooltip-border-radius);
+   @include font-size($form-feedback-tooltip-font-size);
+   background-color: rgba(theme-color('warning'), $form-feedback-tooltip-opacity);
+-  color: color-yiq(theme-color('warning'));
++  color: color-contrast(theme-color('warning'));
+   display: none;
+   line-height: $form-feedback-tooltip-line-height;
+   margin-top: .1rem;
+diff --git a/inst/AdminLTE-3.0.5/scss/_info-box.scss b/inst/AdminLTE-3.0.5/scss/_info-box.scss
+index 6366dbe..791cd45 100644
+--- a/inst/AdminLTE-3.0.5/scss/_info-box.scss
++++ b/inst/AdminLTE-3.0.5/scss/_info-box.scss
+@@ -68,10 +68,10 @@
+     .info-box {
+       .bg-#{$name},
+       .bg-gradient-#{$name} {
+-        color: color-yiq($color);
++        color: color-contrast($color);
+ 
+         .progress-bar {
+-          background-color: color-yiq($color);
++          background-color: color-contrast($color);
+         }
+       }
+     }
+diff --git a/inst/AdminLTE-3.0.5/scss/_main-sidebar.scss b/inst/AdminLTE-3.0.5/scss/_main-sidebar.scss
+index 6469160..56b004c 100644
+--- a/inst/AdminLTE-3.0.5/scss/_main-sidebar.scss
++++ b/inst/AdminLTE-3.0.5/scss/_main-sidebar.scss
+@@ -880,7 +880,7 @@
+   .btn-sidebar {
+     background: lighten($sidebar-dark-bg, 5%);
+     border: 1px solid lighten($sidebar-dark-bg, 15%);
+-    color: lighten(color-yiq(lighten($sidebar-dark-bg, 5%)), 15%);
++    color: lighten(color-contrast(lighten($sidebar-dark-bg, 5%)), 15%);
+   }
+ 
+   .form-control-sidebar:focus,
+@@ -902,7 +902,7 @@
+   .btn-sidebar {
+     background: darken($sidebar-light-bg, 5%);
+     border: 1px solid darken($sidebar-light-bg, 15%);
+-    color: color-yiq(darken($sidebar-light-bg, 5%));
++    color: color-contrast(darken($sidebar-light-bg, 5%));
+   }
+ 
+   .form-control-sidebar:focus,
+diff --git a/inst/AdminLTE-3.0.5/scss/mixins/_accent.scss b/inst/AdminLTE-3.0.5/scss/mixins/_accent.scss
+index b2807ec..c90b96c 100644
+--- a/inst/AdminLTE-3.0.5/scss/mixins/_accent.scss
++++ b/inst/AdminLTE-3.0.5/scss/mixins/_accent.scss
+@@ -23,7 +23,7 @@
+       &:active,
+       &.active {
+         background: $color;
+-        color: color-yiq($color);
++        color: color-contrast($color);
+       }
+     }
+ 
+@@ -34,7 +34,7 @@
+       }
+ 
+       &::after {
+-        $newColor: color-yiq($color);
++        $newColor: color-contrast($color);
+         background-image: str-replace($custom-checkbox-indicator-icon-checked, str-replace(#{$custom-control-indicator-checked-color}, '#', '%23'), str-replace(#{$newColor}, '#', '%23'));
+       }
+     }
+diff --git a/inst/AdminLTE-3.0.5/scss/mixins/_backgrounds.scss b/inst/AdminLTE-3.0.5/scss/mixins/_backgrounds.scss
+index 5cc0353..b88fa9c 100644
+--- a/inst/AdminLTE-3.0.5/scss/mixins/_backgrounds.scss
++++ b/inst/AdminLTE-3.0.5/scss/mixins/_backgrounds.scss
+@@ -9,13 +9,13 @@
+ 
+     &,
+     > a {
+-      color: color-yiq($color) !important;
++      color: color-contrast($color) !important;
+     }
+ 
+     &.btn {
+       &:hover {
+         border-color: darken($color, 10%);
+-        color: darken(color-yiq($color), 7.5%);
++        color: darken(color-contrast($color), 7.5%);
+       }
+ 
+       &:not(:disabled):not(.disabled):active,
+@@ -24,7 +24,7 @@
+       &.active {
+         background-color: darken($color, 10%) !important;
+         border-color: darken($color, 12.5%);
+-        color: color-yiq(darken($color, 10%));
++        color: color-contrast(darken($color, 10%));
+       }
+     }
+   }
+@@ -34,7 +34,7 @@
+ @mixin background-gradient-variant($name, $color) {
+   .bg-gradient-#{$name} {
+     @include bg-gradient-variant('&', $color);
+-    color: color-yiq($color);
++    color: color-contrast($color);
+ 
+     &.btn {
+       &.disabled,
+@@ -48,7 +48,7 @@
+       &:hover {
+         @include bg-gradient-variant('&', darken($color, 7.5%));
+         border-color: darken($color, 10%);
+-        color: darken(color-yiq($color), 7.5%);
++        color: darken(color-contrast($color), 7.5%);
+       }
+ 
+       &:not(:disabled):not(.disabled):active,
+@@ -57,7 +57,7 @@
+       &.active {
+         @include bg-gradient-variant('&', darken($color, 10%));
+         border-color: darken($color, 12.5%);
+-        color: color-yiq(darken($color, 10%));
++        color: color-contrast(darken($color, 10%));
+       }
+     }
+   }
+diff --git a/inst/AdminLTE-3.0.5/scss/mixins/_cards.scss b/inst/AdminLTE-3.0.5/scss/mixins/_cards.scss
+index c118b98..4c8947c 100644
+--- a/inst/AdminLTE-3.0.5/scss/mixins/_cards.scss
++++ b/inst/AdminLTE-3.0.5/scss/mixins/_cards.scss
+@@ -10,11 +10,11 @@
+ 
+         &,
+         a {
+-          color: color-yiq($color);
++          color: color-contrast($color);
+         }
+ 
+         a.active {
+-          color: color-yiq($white);
++          color: color-contrast($white);
+         }
+       }
+     }
+@@ -42,10 +42,10 @@
+   .bg-gradient-#{$name},
+   .card-#{$name}:not(.card-outline) {
+     .btn-tool {
+-      color: rgba(color-yiq($color), 0.8);
++      color: rgba(color-contrast($color), 0.8);
+ 
+       &:hover {
+-        color: color-yiq($color);
++        color: color-contrast($color);
+       }
+     }
+   }
+@@ -64,17 +64,17 @@
+       table td.minute:hover,
+       table td.second:hover {
+         background: darken($color, 8%);
+-        color: color-yiq($color);
++        color: color-contrast($color);
+       }
+ 
+       table td.today::before {
+-        border-bottom-color: color-yiq($color);
++        border-bottom-color: color-contrast($color);
+       }
+ 
+       table td.active,
+       table td.active:hover {
+         background: lighten($color, 10%);
+-        color: color-yiq($color);
++        color: color-contrast($color);
+       }
+     }
+   }
+diff --git a/inst/AdminLTE-3.0.5/scss/mixins/_direct-chat.scss b/inst/AdminLTE-3.0.5/scss/mixins/_direct-chat.scss
+index 6e01002..4687b33 100644
+--- a/inst/AdminLTE-3.0.5/scss/mixins/_direct-chat.scss
++++ b/inst/AdminLTE-3.0.5/scss/mixins/_direct-chat.scss
+@@ -7,7 +7,7 @@
+   .right > .direct-chat-text {
+     background: $bg-color;
+     border-color: $bg-color;
+-    color: color-yiq($bg-color);
++    color: color-contrast($bg-color);
+ 
+     &::after,
+     &::before {
+diff --git a/inst/AdminLTE-3.0.5/scss/mixins/_sidebar.scss b/inst/AdminLTE-3.0.5/scss/mixins/_sidebar.scss
+index acc6a47..d750f31 100644
+--- a/inst/AdminLTE-3.0.5/scss/mixins/_sidebar.scss
++++ b/inst/AdminLTE-3.0.5/scss/mixins/_sidebar.scss
+@@ -7,7 +7,7 @@
+   .nav-sidebar > .nav-item {
+     & > .nav-link.active {
+       background-color: $color;
+-      color: color-yiq($color);
++      color: color-contrast($color);
+     }
+   }
+ 
+diff --git a/inst/AdminLTE-3.0.5/scss/mixins/_toasts.scss b/inst/AdminLTE-3.0.5/scss/mixins/_toasts.scss
+index f198eb2..f9919dc 100644
+--- a/inst/AdminLTE-3.0.5/scss/mixins/_toasts.scss
++++ b/inst/AdminLTE-3.0.5/scss/mixins/_toasts.scss
+@@ -6,17 +6,17 @@
+ @mixin toast-variant($name, $color) {
+   &.bg-#{$name} {
+     background: rgba($color, .9) !important;
+-    @if (color-yiq($color) == $yiq-text-light) {
++    @if (color-contrast($color) == $yiq-text-light) {
+ 
+       .close {
+-        color: color-yiq($color);
++        color: color-contrast($color);
+         text-shadow: 0 1px 0 #000;
+       }
+     }
+ 
+     .toast-header {
+       background: rgba($color, .85);
+-      color: color-yiq($color);
++      color: color-contrast($color);
+     }
+   }
+ }
+diff --git a/inst/AdminLTE-3.0.5/scss/plugins/_bootstrap-switch.scss b/inst/AdminLTE-3.0.5/scss/plugins/_bootstrap-switch.scss
+index 9219c7c..44ea7e9 100644
+--- a/inst/AdminLTE-3.0.5/scss/plugins/_bootstrap-switch.scss
++++ b/inst/AdminLTE-3.0.5/scss/plugins/_bootstrap-switch.scss
+@@ -57,20 +57,20 @@ $bootstrap-switch-handle-border-radius: .1rem;
+ 
+     &.bootstrap-switch-default {
+       background: $gray-200;
+-      color: color-yiq($gray-200);
++      color: color-contrast($gray-200);
+     }
+ 
+     @each $name, $color in $theme-colors {
+       &.bootstrap-switch-#{$name} {
+         background: $color;
+-        color: color-yiq($color);
++        color: color-contrast($color);
+       }
+     }
+ 
+     @each $name, $color in $colors {
+       &.bootstrap-switch-#{$name} {
+         background: $color;
+-        color: color-yiq($color);
++        color: color-contrast($color);
+       }
+     }
+   }
+diff --git a/inst/AdminLTE-3.0.5/scss/plugins/_mixins.scss b/inst/AdminLTE-3.0.5/scss/plugins/_mixins.scss
+index 5e5b625..b47622a 100644
+--- a/inst/AdminLTE-3.0.5/scss/plugins/_mixins.scss
++++ b/inst/AdminLTE-3.0.5/scss/plugins/_mixins.scss
+@@ -32,13 +32,13 @@
+ 
+       .select2-results__option--highlighted {
+         background-color: $color;
+-        color: color-yiq($color);
++        color: color-contrast($color);
+ 
+         &[aria-selected] {
+           &,
+           &:hover {
+             background-color: darken($color, 3%);
+-            color: color-yiq(darken($color, 3%));
++            color: color-contrast(darken($color, 3%));
+           }
+         }
+       }
+@@ -53,14 +53,14 @@
+           .select2-selection__choice {
+             background-color: $color;
+             border-color: darken($color, 5%);
+-            color: color-yiq($color);
++            color: color-contrast($color);
+           }
+ 
+           .select2-selection__choice__remove {
+-            color: rgba(color-yiq($color), 0.7);
++            color: rgba(color-contrast($color), 0.7);
+ 
+             &:hover {
+-              color: color-yiq($color);
++              color: color-contrast($color);
+             }
+           }
+         }
+diff --git a/inst/AdminLTE-3.0.5/scss/plugins/_pace.scss b/inst/AdminLTE-3.0.5/scss/plugins/_pace.scss
+index 843dc58..cb14113 100644
+--- a/inst/AdminLTE-3.0.5/scss/plugins/_pace.scss
++++ b/inst/AdminLTE-3.0.5/scss/plugins/_pace.scss
+@@ -26,14 +26,14 @@
+ 
+   .pace-barber-shop-#{$name} {
+     .pace {
+-      background: color-yiq($color);
++      background: color-contrast($color);
+ 
+       .pace-progress {
+         background: $color;
+       }
+ 
+       .pace-activity {
+-        background-image: linear-gradient(45deg, rgba(color-yiq($color), 0.2) 25%, transparent 25%, transparent 50%, rgba(color-yiq($color), 0.2) 50%, rgba(color-yiq($color), 0.2) 75%, transparent 75%, transparent);
++        background-image: linear-gradient(45deg, rgba(color-contrast($color), 0.2) 25%, transparent 25%, transparent 50%, rgba(color-contrast($color), 0.2) 50%, rgba(color-contrast($color), 0.2) 75%, transparent 75%, transparent);
+       }
+     }
+   }
+@@ -61,7 +61,7 @@
+ 
+       &::before {
+         background: $color;
+-        color: color-yiq($color);
++        color: color-contrast($color);
+         font-size: .8rem;
+         line-height: .7rem;
+         padding-top: 17%;
+@@ -82,7 +82,7 @@
+     .pace {
+       .pace-progress {
+         background: rgba($color, .8);
+-        color: color-yiq($color);
++        color: color-contrast($color);
+       }
+     }
+   }
+@@ -101,7 +101,7 @@
+ 
+   .pace-center-simple-#{$name} {
+     .pace {
+-      background: color-yiq($color);
++      background: color-contrast($color);
+       border-color: $color;
+ 
+       .pace-progress {
+@@ -124,7 +124,7 @@
+ 
+       .pace-activity::after,
+       .pace-activity::before {
+-        border: 5px solid color-yiq($color);
++        border: 5px solid color-contrast($color);
+       }
+ 
+ 
+@@ -170,11 +170,11 @@
+       .pace-progress {
+         background: $color;
+         color: $color;
+-        box-shadow: 120px 0 color-yiq($color), 240px 0 color-yiq($color);
++        box-shadow: 120px 0 color-contrast($color), 240px 0 color-contrast($color);
+       }
+ 
+       .pace-activity {
+-        box-shadow: inset 0 0 0 2px $color, inset 0 0 0 7px color-yiq($color);
++        box-shadow: inset 0 0 0 2px $color, inset 0 0 0 7px color-contrast($color);
+       }
+     }
+   }
+@@ -183,11 +183,11 @@
+     .pace {
+       .pace-progress {
+         background-color: $color;
+-        box-shadow: inset -1px 0 $color, inset 0 -1px $color, inset 0 2px rgba(color-yiq($color), 0.5), inset 0 6px rgba(color-yiq($color), .3);
++        box-shadow: inset -1px 0 $color, inset 0 -1px $color, inset 0 2px rgba(color-contrast($color), 0.5), inset 0 6px rgba(color-contrast($color), .3);
+       }
+ 
+       .pace-activity {
+-        background-image: radial-gradient(rgba(color-yiq($color), .65) 0%, rgba(color-yiq($color), .15) 100%);
++        background-image: radial-gradient(rgba(color-contrast($color), .65) 0%, rgba(color-contrast($color), .15) 100%);
+         height: 12px;
+       }
+     }
+diff --git a/inst/AdminLTE-3.0.5/scss/plugins/_select2.scss b/inst/AdminLTE-3.0.5/scss/plugins/_select2.scss
+index 66aca6f..7afd2f8 100644
+--- a/inst/AdminLTE-3.0.5/scss/plugins/_select2.scss
++++ b/inst/AdminLTE-3.0.5/scss/plugins/_select2.scss
+@@ -92,7 +92,7 @@
+ 
+       &,
+       &:hover {
+-        color: color-yiq($color);
++        color: color-contrast($color);
+       }
+     }
+   }
+@@ -100,7 +100,7 @@
+   .select2-results__option--highlighted {
+     $color: $primary;
+     background-color: $color;
+-    color: color-yiq($color);
++    color: color-contrast($color);
+ 
+     &[aria-selected] {
+       $color: darken($color, 3%);
+@@ -108,7 +108,7 @@
+       &,
+       &:hover {
+         background-color: $color;
+-        color: color-yiq($color);
++        color: color-contrast($color);
+       }
+     }
+   }
+@@ -148,7 +148,7 @@
+       .select2-selection__choice {
+         background-color: $primary;
+         border-color: darken($primary, 5%);
+-        color: color-yiq($primary);
++        color: color-contrast($primary);
+         padding: 0 10px;
+         margin-top: .31rem;
+       }

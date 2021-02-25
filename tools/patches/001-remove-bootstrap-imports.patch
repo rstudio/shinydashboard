@@ -1,0 +1,16 @@
+diff --git a/inst/AdminLTE-3.0.5/scss/AdminLTE.scss b/inst/AdminLTE-3.0.5/scss/AdminLTE.scss
+index 5d1f6a6..94d29fa 100644
+--- a/inst/AdminLTE-3.0.5/scss/AdminLTE.scss
++++ b/inst/AdminLTE-3.0.5/scss/AdminLTE.scss
+@@ -4,11 +4,6 @@
+  *   Website: AdminLTE.io <http://adminlte.io>
+  *   License: Open source - MIT <http://opensource.org/licenses/MIT>
+  */
+-// Bootstrap
+-// ---------------------------------------------------
+-@import '~bootstrap/scss/functions';
+-@import 'bootstrap-variables';
+-@import '~bootstrap/scss/bootstrap';
+ 
+ // Variables and Mixins
+ // ---------------------------------------------------

@@ -20,7 +20,9 @@ var deactivateOtherTabs = function() {
     ".sidebar-menu li.treeview > a");
 
   // If any other items are active, deactivate them
-  $tablinks.not($(this)).parent("li").removeClass("active");
+  var otherTabs = $tablinks.not($(this));
+  otherTabs.removeClass("active"); // BS4 puts active on a.nav-link
+  otherTabs.parent("li").removeClass("active"); // BS3
 
   // Trigger event for the tabItemInputBinding
   var $obj = $('.sidebarMenuSelectedTabItem');
@@ -31,8 +33,11 @@ var deactivateOtherTabs = function() {
   }
 };
 
-$(document).on('shown.bs.tab', '.sidebar-menu a[data-toggle="tab"]',
+$(document).ready(function() {
+  $(document).on('shown.bs.tab', '.sidebar-menu a[data-toggle="tab"]',
                deactivateOtherTabs);
+});
+
 
 // When document is ready, if there is a sidebar menu with no activated tabs,
 // activate the one specified by `data-start-selected`, or if that's not
@@ -206,6 +211,7 @@ $.extend(tabItemInputBinding, {
   },
   setValue: function(el, value) {
     var self = this;
+    // TODO: bs4 update?
     var anchors = $(el).parent('ul.sidebar-menu').find('li:not(.treeview)').children('a');
     anchors.each(function() { // eslint-disable-line consistent-return
       if (self._getTabName($(this)) === value) {

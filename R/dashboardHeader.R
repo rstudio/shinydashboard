@@ -89,9 +89,16 @@
 dashboardHeader <- function(..., title = NULL, titleWidth = NULL, disable = FALSE, .list = NULL) {
   items <- c(list(...), .list)
   lapply(items, tagAssert, type = "li", class = "dropdown")
-
   titleWidth <- validateCssUnit(titleWidth)
 
+  tagFunctionVersion(
+    three = bs3_header,
+    default = bs4_header, # hopefully this works for BS5, too
+    args = list(items, title, titleWidth, disable)
+  )
+}
+
+bs3_header <- function(items, title, titleWidth, disable) {
   # Set up custom CSS for custom width.
   custom_css <- NULL
   if (!is.null(titleWidth)) {
@@ -133,6 +140,30 @@ dashboardHeader <- function(..., title = NULL, titleWidth = NULL, disable = FALS
   )
 }
 
+bs4_header <- function(items, title, titleWidth, disable) {
+  # TODO: do we need the custom css? disable option!
+  tags$nav(
+    # navbar-inverse is here because admintle defines it's own navbar-dark which doesn't know about bslib's $navbar-bg
+    class = "main-header navbar navbar-expand navbar-inverse",
+    tags$ul(
+      class = "navbar-nav",
+      tags$li(
+        class = "nav-item",
+        tags$a(
+          class = "nav-link",
+          `data-widget` = "pushmenu",
+          href = "#",
+          shiny::icon("bars")
+        )
+      )
+    ),
+    tags$ul(
+      class = "navbar-nav ml-auto",
+      items
+    )
+  )
+}
+
 
 #' Create a dropdown menu to place in a dashboard header
 #'
@@ -168,7 +199,7 @@ dropdownMenu <- function(...,
   .list = NULL)
 {
   type <- match.arg(type)
-  if (!is.null(badgeStatus)) validateStatus(badgeStatus)
+  if (!is.null(badgeStatus)) validateStatus(badgeStatus) # TODO: validation needs to be different?
   items <- c(list(...), .list)
 
   # Make sure the items are li tags
@@ -185,20 +216,23 @@ dropdownMenu <- function(...,
   }
 
   numItems <- length(items)
-  if (is.null(badgeStatus)) {
-    badge <- NULL
-  } else {
-    badge <- span(class = paste0("label label-", badgeStatus), numItems)
-  }
-
   if (is.null(headerText)) {
     headerText <- paste("You have", numItems, type)
   }
 
+  tagFunctionVersion(
+    three = bs3_dropdown_menu,
+    default = bs4_dropdown_menu, # hopefully this works for BS5, too
+    args = list(items, icon, badgeStatus, numItems, headerText, dropdownClass)
+  )
+}
+
+
+bs3_dropdown_menu <- function(items, icon, badgeStatus, numItems, headerText, dropdownClass) {
   tags$li(class = dropdownClass,
     a(href = "#", class = "dropdown-toggle", `data-toggle` = "dropdown",
       icon,
-      badge
+      if (!is.null(badgeStatus)) span(class = paste0("label label-", badgeStatus), numItems)
     ),
     tags$ul(class = "dropdown-menu",
       tags$li(class = "header", headerText),
@@ -211,9 +245,29 @@ dropdownMenu <- function(...,
       # tags$li(class = "footer", a(href="#", "View all"))
     )
   )
-
 }
 
+bs4_dropdown_menu <- function(items, icon, badgeStatus, numItems, headerText, dropdownClass) {
+  items <- lapply(items, function(x) {
+    tagList(x, div(class = "dropdown-divider"))
+  })
+
+  tags$li(
+    class = dropdownClass,
+    class = "nav-item",
+    a(
+      href = "#", class = "nav-link",
+      `data-toggle` = "dropdown", icon,
+      if (!is.null(badgeStatus)) span(class = paste0("badge badge-", badgeStatus, " navbar-badge"), numItems)
+    ),
+    tags$ul(
+      class = "dropdown-menu dropdown-menu-lg dropdown-menu-right",
+      tags$span(class = "dropdown-item dropdown-header", headerText),
+      div(class = "dropdown-divider"),
+      items
+    )
+  )
+}
 
 
 #' Create a message item to place in a dropdown message menu
@@ -236,6 +290,14 @@ messageItem <- function(from, message, icon = shiny::icon("user"), time = NULL,
   tagAssert(icon, type = "i")
   if (is.null(href)) href <- "#"
 
+  tagFunctionVersion(
+    three = bs3_message_item,
+    default = bs4_message_item, # hopefully this works for BS5, too
+    args = list(from, message, icon, time, href)
+  )
+}
+
+bs3_message_item <- function(from, message, icon, time, href) {
   tags$li(
     a(href = href,
       icon,
@@ -244,6 +306,27 @@ messageItem <- function(from, message, icon = shiny::icon("user"), time = NULL,
         if (!is.null(time)) tags$small(shiny::icon("clock-o"), time)
       ),
       p(message)
+    )
+  )
+}
+
+bs4_message_item <- function(from, message, icon, time, href) {
+  a(
+    href = href,
+    class = "dropdown-item",
+    div(
+      class = "media",
+      icon,
+      div(
+        class = "media-body",
+        h3(class = "dropdown-item-title", from),
+        p(class = "text-sm", message),
+        p(
+          class = "text-sm text-muted",
+          shiny::icon("clock-o", class = "mr-1"),
+          time
+        )
+      )
     )
   )
 }
@@ -268,11 +351,21 @@ notificationItem <- function(text, icon = shiny::icon("warning"),
   if (is.null(href)) href <- "#"
 
   # Add the status as another HTML class to the icon
-  icon <- tagAppendAttributes(icon, class = paste0("text-", status))
+  icon <- tagAppendAttributes(icon, class = paste0("text-", status), class = "mr-2")
 
-  tags$li(
-    a(href = href, icon, text)
+  tagFunctionVersion(
+    three = bs3_notification,
+    default = bs4_notification, # hopefully this works for BS5, too
+    args = list(text, icon, href)
   )
+}
+
+bs3_notification <- function(text, icon, href) {
+  tags$li(a(href = href, icon, text))
+}
+
+bs4_notification <- function(text, icon, href) {
+  a(class = "dropdown-item", href = href, icon, text)
 }
 
 
@@ -291,24 +384,54 @@ taskItem <- function(text, value = 0, color = "aqua", href = NULL) {
   validateColor(color)
   if (is.null(href)) href <- "#"
 
+  tagFunctionVersion(
+    three = bs3_task_item,
+    default = bs4_task_item, # hopefully this works for BS5, too
+    args = list(text, value, color, href)
+  )
+}
+
+
+bs3_task_item <- function(text, value, color, href) {
   tags$li(
     a(href = href,
       h3(text,
-        tags$small(class = "pull-right", paste0(value, "%"))
+         tags$small(class = "pull-right", paste0(value, "%"))
       ),
       div(class = "progress xs",
-        div(
-          class = paste0("progress-bar progress-bar-", color),
-          style = paste0("width: ", value, "%"),
-          role = "progressbar",
-          `aria-valuenow` = value,
-          `aria-valuemin` = "0",
-          `aria-valuemax` = "100",
-          span(class = "sr-only", paste0(value, "% complete"))
-        )
+          div(
+            class = paste0("progress-bar progress-bar-", color),
+            style = paste0("width: ", value, "%"),
+            role = "progressbar",
+            `aria-valuenow` = value,
+            `aria-valuemin` = "0",
+            `aria-valuemax` = "100",
+            span(class = "sr-only", paste0(value, "% complete"))
+          )
       )
     )
   )
 }
 
+bs4_task_item <- function(text, value, color, href) {
+    a(
+      href = href,
+      class = "dropdown-item",
+      div(
+        style = "display:flex; justify-content: space-between",
+        div(text), div(class = "text-sm text-muted", paste0(value, "%"))
+      ),
+      div(class = "progress xs",
+          div(
+            class = paste0("progress-bar bg-", color),
+            style = paste0("width: ", value, "%"),
+            role = "progressbar",
+            `aria-valuenow` = value,
+            `aria-valuemin` = "0",
+            `aria-valuemax` = "100",
+            span(class = "sr-only", paste0(value, "% complete"))
+          )
+      )
+    )
+}
 

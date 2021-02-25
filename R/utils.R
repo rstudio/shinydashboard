@@ -8,6 +8,10 @@
 #'   contents.
 #' @keywords internal
 tagAssert <- function(tag, type = NULL, class = NULL, allowUI = TRUE) {
+  if (inherits(tag, "shiny.tag.function")) {
+    return() # TODO: can we do lazy assertion?
+  }
+
   if (!inherits(tag, "shiny.tag")) {
     print(tag)
     stop("Expected an object with class 'shiny.tag'.")
@@ -219,3 +223,5 @@ findAttribute <- function(x, attr, val) {
 
   return(FALSE) # found no attribute called `attr`
 }
+
+
