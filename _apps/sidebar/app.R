@@ -28,7 +28,7 @@ body <- dashboardBody(
 ui <- dashboardPage(
   dashboardHeader(title = "My Dashboard"),
   sidebar,
-  dashboardBody()
+  body
 )
 
 server <- function(input, output) { }
