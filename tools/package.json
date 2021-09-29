@@ -1,12 +1,13 @@
 {
+  "private": true,
   "devDependencies": {
     "grunt": "^1.0.3",
     "grunt-contrib-concat": "^1.0.1",
-    "grunt-contrib-cssmin": "^2.0.0",
-    "grunt-contrib-jshint": "^1.1.0",
-    "grunt-contrib-uglify": "^2.1.0",
+    "grunt-contrib-cssmin": "^4.0.0",
+    "grunt-contrib-jshint": "^3.0.0",
+    "grunt-contrib-uglify": "^5.0.1",
     "grunt-contrib-watch": "^1.0.0",
-    "grunt-eslint": "^21.1.0",
+    "grunt-eslint": "^23.0.0",
     "grunt-newer": "^1.2.0"
   }
 }
