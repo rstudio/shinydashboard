@@ -1,4 +1,4 @@
-shinydashboard 0.7.1.1
+shinydashboard 0.7.2
 ====================
 
 ### Bug fixes
