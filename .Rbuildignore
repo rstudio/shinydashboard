@@ -5,3 +5,4 @@
 ^tests-manual$
 ^\.travis\.yml$
 ^appveyor\.yml$
+^\.github$

@@ -1,3 +1,10 @@
+shinydashboard 0.7.2
+====================
+
+### Bug fixes
+
+* Fixed [#369](https://github.com/rstudio/shinydashboard/issues/369): `renderMenu()` now works correctly with shiny 1.7.0 (and higher). ([#370](https://github.com/rstudio/shinydashboard/pull/370))
+
 shinydashboard 0.7.1
 ====================
 
