@@ -8,10 +8,10 @@
 \usage{
 sidebarMenu(..., id = NULL, .list = NULL)
 
-menuItem(text, ..., icon = NULL, badgeLabel = NULL, badgeColor = "green",
-  tabName = NULL, href = NULL, newtab = TRUE, selected = NULL,
-  expandedName = as.character(gsub("[[:space:]]", "", text)),
-  startExpanded = FALSE)
+menuItem(text, ..., icon = NULL, badgeLabel = NULL,
+  badgeColor = "green", tabName = NULL, href = NULL, newtab = TRUE,
+  selected = NULL, expandedName = as.character(gsub("[[:space:]]", "",
+  text)), startExpanded = FALSE)
 
 menuSubItem(text, tabName = NULL, href = NULL, newtab = TRUE,
   icon = shiny::icon("angle-double-right"), selected = NULL)

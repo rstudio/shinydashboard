@@ -115,7 +115,8 @@ dashboardHeader <- function(..., title = NULL, titleWidth = NULL, disable = FALS
   tags$header(class = "main-header",
     custom_css,
     style = if (disable) "display: none;",
-    span(class = "logo", title),
+    # hide logo on small screen devices only if title is NULL
+    span(class = if (is.null(title)) "logo hidden-xs" else "logo", title),
     tags$nav(class = "navbar navbar-static-top", role = "navigation",
       # Embed hidden icon so that we get the font-awesome dependency
       span(shiny::icon("bars"), style = "display:none;"),
