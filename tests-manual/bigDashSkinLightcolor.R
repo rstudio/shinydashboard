@@ -4,7 +4,7 @@ library(shiny)
 library(shinydashboard)
 
 header <- dashboardHeader(
-  title = "Dashboard Demo",
+  title = "Dashboard Light",
 
   # Dropdown menu for messages
   dropdownMenu(
@@ -93,7 +93,8 @@ sidebar <- dashboardSidebar(
       menuSubItem("Sub-item 2", tabName = "subitem2")
     )
   ),
-  sidebarMenuOutput("menu") 
+  sidebarMenuOutput("menu")
+  
 )
 
 body <- dashboardBody(tabItems(
@@ -308,6 +309,6 @@ server <- function(input, output) {
 
 ui <- dashboardPage(header,
                     sidebar,
-                    body)
+                    body,skin = "blue-light")
 
 shinyApp(ui, server)
