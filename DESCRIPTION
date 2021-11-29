@@ -21,3 +21,4 @@ Imports:
     promises
 BugReports: https://github.com/rstudio/shinydashboard
 RoxygenNote: 6.0.1.9000
+
