@@ -4,9 +4,16 @@
 \alias{infoBox}
 \title{Create an info box for the main body of a dashboard.}
 \usage{
-infoBox(title, value = NULL, subtitle = NULL,
-  icon = shiny::icon("bar-chart"), color = "aqua", width = 4,
-  href = NULL, fill = FALSE)
+infoBox(
+  title,
+  value = NULL,
+  subtitle = NULL,
+  icon = shiny::icon("bar-chart"),
+  color = "aqua",
+  width = 4,
+  href = NULL,
+  fill = FALSE
+)
 }
 \arguments{
 \item{title}{Title text.}
@@ -42,7 +49,9 @@ boxes are meant to be placed in the main body of a dashboard.
 \seealso{
 \code{\link{box}} for usage examples.
 
-Other boxes: \code{\link{box}}, \code{\link{tabBox}},
-  \code{\link{valueBox}}
+Other boxes: 
+\code{\link{box}()},
+\code{\link{tabBox}()},
+\code{\link{valueBox}()}
 }
 \concept{boxes}

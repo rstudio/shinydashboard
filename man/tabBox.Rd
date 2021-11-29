@@ -4,16 +4,23 @@
 \alias{tabBox}
 \title{Create a tabbed box}
 \usage{
-tabBox(..., id = NULL, selected = NULL, title = NULL, width = 6,
-  height = NULL, side = c("left", "right"))
+tabBox(
+  ...,
+  id = NULL,
+  selected = NULL,
+  title = NULL,
+  width = 6,
+  height = NULL,
+  side = c("left", "right")
+)
 }
 \arguments{
-\item{...}{\code{\link{tabPanel}} elements to include in the tabset}
+\item{...}{\code{\link[shiny:tabPanel]{tabPanel()}} elements to include in the tabset}
 
-\item{id}{If provided, you can use \code{input$}\emph{\code{id}} in your
+\item{id}{If provided, you can use \verb{input$}\emph{\code{id}} in your
 server logic to determine which of the current tabs is active. The value
 will correspond to the \code{value} argument that is passed to
-\code{\link{tabPanel}}.}
+\code{\link[shiny:tabPanel]{tabPanel()}}.}
 
 \item{selected}{The \code{value} (or, if none was supplied, the \code{title})
 of the tab that should be selected by default. If \code{NULL}, the first
@@ -84,7 +91,9 @@ shinyApp(
 }
 }
 \seealso{
-Other boxes: \code{\link{box}}, \code{\link{infoBox}},
-  \code{\link{valueBox}}
+Other boxes: 
+\code{\link{box}()},
+\code{\link{infoBox}()},
+\code{\link{valueBox}()}
 }
 \concept{boxes}

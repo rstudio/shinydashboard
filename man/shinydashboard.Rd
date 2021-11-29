@@ -3,8 +3,4 @@
 \docType{package}
 \name{shinydashboard}
 \alias{shinydashboard}
-\alias{shinydashboard-package}
 \title{shinydashboard}
-\description{
-shinydashboard
-}

@@ -8,13 +8,28 @@
 \usage{
 sidebarMenu(..., id = NULL, .list = NULL)
 
-menuItem(text, ..., icon = NULL, badgeLabel = NULL, badgeColor = "green",
-  tabName = NULL, href = NULL, newtab = TRUE, selected = NULL,
+menuItem(
+  text,
+  ...,
+  icon = NULL,
+  badgeLabel = NULL,
+  badgeColor = "green",
+  tabName = NULL,
+  href = NULL,
+  newtab = TRUE,
+  selected = NULL,
   expandedName = as.character(gsub("[[:space:]]", "", text)),
-  startExpanded = FALSE)
+  startExpanded = FALSE
+)
 
-menuSubItem(text, tabName = NULL, href = NULL, newtab = TRUE,
-  icon = shiny::icon("angle-double-right"), selected = NULL)
+menuSubItem(
+  text,
+  tabName = NULL,
+  href = NULL,
+  newtab = TRUE,
+  icon = shiny::icon("angle-double-right"),
+  selected = NULL
+)
 }
 \arguments{
 \item{...}{For menu items, this may consist of \code{\link{menuSubItem}}s.}
@@ -90,7 +105,8 @@ colored oval containing text.
   dynamically-generated sidebar menus, see \code{\link{renderMenu}} and
   \code{\link{sidebarMenuOutput}}.
 
-Other sidebar items: \code{\link{sidebarSearchForm}},
-  \code{\link{sidebarUserPanel}}
+Other sidebar items: 
+\code{\link{sidebarSearchForm}()},
+\code{\link{sidebarUserPanel}()}
 }
 \concept{sidebar items}

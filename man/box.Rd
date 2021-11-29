@@ -4,9 +4,18 @@
 \alias{box}
 \title{Create a box for the main body of a dashboard}
 \usage{
-box(..., title = NULL, footer = NULL, status = NULL,
-  solidHeader = FALSE, background = NULL, width = 6, height = NULL,
-  collapsible = FALSE, collapsed = FALSE)
+box(
+  ...,
+  title = NULL,
+  footer = NULL,
+  status = NULL,
+  solidHeader = FALSE,
+  background = NULL,
+  width = 6,
+  height = NULL,
+  collapsible = FALSE,
+  collapsed = FALSE
+)
 }
 \arguments{
 \item{...}{Contents of the box.}
@@ -168,7 +177,9 @@ shinyApp(
 }
 }
 \seealso{
-Other boxes: \code{\link{infoBox}}, \code{\link{tabBox}},
-  \code{\link{valueBox}}
+Other boxes: 
+\code{\link{infoBox}()},
+\code{\link{tabBox}()},
+\code{\link{valueBox}()}
 }
 \concept{boxes}
