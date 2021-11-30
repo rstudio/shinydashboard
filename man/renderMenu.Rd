@@ -4,20 +4,24 @@
 \alias{renderMenu}
 \title{Create dynamic menu output (server side)}
 \usage{
-renderMenu(expr, env = parent.frame(), quoted = FALSE,
-  outputArgs = list())
+renderMenu(expr, env = parent.frame(), quoted = FALSE, outputArgs = list())
 }
 \arguments{
-\item{expr}{An expression that returns a Shiny tag object, \code{\link{HTML}},
+\item{expr}{An expression that returns a Shiny tag object, \code{\link[shiny:reexports]{HTML()}},
 or a list of such objects.}
 
-\item{env}{The environment in which to evaluate \code{expr}.}
+\item{env}{The parent environment for the reactive expression. By default,
+this is the calling environment, the same as when defining an ordinary
+non-reactive expression. If \code{expr} is a quosure and \code{quoted} is \code{TRUE},
+then \code{env} is ignored.}
 
-\item{quoted}{Is \code{expr} a quoted expression (with \code{quote()})? This
-is useful if you want to save an expression in a variable.}
+\item{quoted}{If it is \code{TRUE}, then the \code{\link[=quote]{quote()}}ed value of \code{expr}
+will be used when \code{expr} is evaluated. If \code{expr} is a quosure and you
+would like to use its expression as a value for \code{expr}, then you must set
+\code{quoted} to \code{TRUE}.}
 
 \item{outputArgs}{A list of arguments to be passed through to the implicit
-call to \code{\link{uiOutput}} when \code{renderUI} is used in an
+call to \code{\link[shiny:htmlOutput]{uiOutput()}} when \code{renderUI} is used in an
 interactive R Markdown document.}
 }
 \description{
@@ -98,8 +102,10 @@ shinyApp(ui, server)
 \code{\link{menuOutput}} for the corresponding client side function
   and examples.
 
-Other menu outputs: \code{\link{dropdownMenuOutput}},
-  \code{\link{menuItemOutput}}, \code{\link{menuOutput}},
-  \code{\link{sidebarMenuOutput}}
+Other menu outputs: 
+\code{\link{dropdownMenuOutput}()},
+\code{\link{menuItemOutput}()},
+\code{\link{menuOutput}()},
+\code{\link{sidebarMenuOutput}()}
 }
 \concept{menu outputs}

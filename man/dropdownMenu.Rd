@@ -4,8 +4,14 @@
 \alias{dropdownMenu}
 \title{Create a dropdown menu to place in a dashboard header}
 \usage{
-dropdownMenu(..., type = c("messages", "notifications", "tasks"),
-  badgeStatus = "primary", icon = NULL, headerText = NULL, .list = NULL)
+dropdownMenu(
+  ...,
+  type = c("messages", "notifications", "tasks"),
+  badgeStatus = "primary",
+  icon = NULL,
+  headerText = NULL,
+  .list = NULL
+)
 }
 \arguments{
 \item{...}{Items to put in the menu. Typically, message menus should contain

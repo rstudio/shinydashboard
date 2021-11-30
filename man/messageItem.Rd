@@ -4,8 +4,13 @@
 \alias{messageItem}
 \title{Create a message item to place in a dropdown message menu}
 \usage{
-messageItem(from, message, icon = shiny::icon("user"), time = NULL,
-  href = NULL)
+messageItem(
+  from,
+  message,
+  icon = shiny::icon("user"),
+  time = NULL,
+  href = NULL
+)
 }
 \arguments{
 \item{from}{Who the message is from.}
@@ -27,7 +32,8 @@ Create a message item to place in a dropdown message menu
 \seealso{
 \code{\link{dashboardHeader}} for example usage.
 
-Other menu items: \code{\link{notificationItem}},
-  \code{\link{taskItem}}
+Other menu items: 
+\code{\link{notificationItem}()},
+\code{\link{taskItem}()}
 }
 \concept{menu items}
