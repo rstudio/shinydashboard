@@ -1,6 +1,3 @@
-#' shinydashboard
-#'
-#' @name shinydashboard
 #' @import htmltools
-#' @docType package
-NULL
+#' @keywords internal
+"_PACKAGE"
