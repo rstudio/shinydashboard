@@ -21,3 +21,4 @@ Imports:
     promises
 BugReports: https://github.com/rstudio/shinydashboard
 RoxygenNote: 7.1.2
+Encoding: UTF-8
