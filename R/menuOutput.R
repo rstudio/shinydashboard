@@ -151,7 +151,7 @@ renderMenu <- function(expr, env = parent.frame(), quoted = FALSE, outputArgs = 
 
 # R CMD check thinks that shiny::renderUI has an undeclared global variable
 # called "func".
-globalVariables("func")
+utils::globalVariables("func")
 
 #' Create a dropdown menu output (server side; deprecated)
 #'
