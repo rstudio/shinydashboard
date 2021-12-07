@@ -60,12 +60,15 @@ dashboardPage <- function(header, sidebar, body, title = NULL,
   # if the sidebar has the attribute `data-collapsed = "true"`, it means that
   # the user set the `collapsed` argument of `dashboardSidebar` to TRUE
   collapsed <- findAttribute(sidebar, "data-collapsed", "true")
+  mini <- findAttribute(sidebar, "data-mini", "true")
 
   addDeps(
     tags$body(
       # the "sidebar-collapse" class on the body means that the sidebar should
       # the collapsed (AdminLTE code)
-      class = paste0("skin-", skin, if (collapsed) " sidebar-collapse"),
+      class = paste0("skin-", skin
+        ,if (collapsed) " sidebar-collapse"
+        ,if (mini) " sidebar-mini"),
       style = "min-height: 611px;",
       shiny::bootstrapPage(content, title = title)
     )

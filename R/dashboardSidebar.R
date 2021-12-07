@@ -9,6 +9,9 @@
 #'   specifies the width in pixels, or a string that specifies the width in CSS
 #'   units.
 #' @param collapsed If \code{TRUE}, the sidebar will be collapsed on app startup.
+#' @param mini If \code{TRUE}, when collapsing the sidebar a thin ribon will
+#'   remain alowing the user to navigate using a minified version of the
+#'   menues in the sidebar.
 #'
 #' @seealso \code{\link{sidebarMenu}}
 #'
@@ -60,7 +63,7 @@
 #' )
 #' }
 #' @export
-dashboardSidebar <- function(..., disable = FALSE, width = NULL, collapsed = FALSE) {
+dashboardSidebar <- function(..., disable = FALSE, width = NULL, collapsed = FALSE, mini = FALSE) {
   width <- validateCssUnit(width)
 
   # Set up custom CSS for custom width
@@ -120,18 +123,24 @@ dashboardSidebar <- function(..., disable = FALSE, width = NULL, collapsed = FAL
   # If we're restoring a bookmarked app, this holds the value of whether or not the
   # sidebar was collapsed. If this is not the case, the default is whatever the user
   # specified in the `collapsed` argument.
-  dataValue <- shiny::restoreInput(id = "sidebarCollapsed", default = collapsed)
-  if (disable) dataValue <- TRUE # this is a workaround to fix #209
-  dataValueString <- if (dataValue) "true" else "false"
+  dataCollapsedValue <- shiny::restoreInput(id = "sidebarCollapsed", default = collapsed)
+  if (disable) dataCollapsedValue <- TRUE # this is a workaround to fix #209
+  dataCollapsedValueString <- if (dataCollapsedValue) "true" else "false"
+  dataMiniValue <- shiny::restoreInput(id = "sidebarMini", default = mini)
+  dataMiniValueString <- if (dataMiniValue) "true" else "false"
 
   # The expanded/collapsed state of the sidebar is actually set by adding a
   # class to the body (not to the sidebar). However, it makes sense for the
   # `collapsed` argument to belong in this function. So this information is
   # just passed through (as the `data-collapsed` attribute) to the
-  # `dashboardPage()` function
+  # `dashboardPage()` function.  A similar argument applies to the `mini`
+  # parameter.
   tags$aside(
     id = "sidebarCollapsed",
-    class = "main-sidebar", `data-collapsed` = dataValueString, custom_css,
+    class = "main-sidebar",
+    `data-collapsed` = dataCollapsedValueString,
+    `data-mini` = dataMiniValueString,
+    custom_css,
     tags$section(
       id = "sidebarItemExpanded",
       class = "sidebar",
