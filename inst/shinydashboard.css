@@ -83,3 +83,9 @@ a > .info-box {
   font-family: fontAwesome, 'Font Awesome 5 Free';
   font-weight: 900;
 }
+
+.btn-primary {color: #fff;}
+.btn-success {color: #fff;}
+.btn-info {color: #fff;}
+.btn-danger {color: #fff;}
+.btn-warning {color: #1f2d3d;}
