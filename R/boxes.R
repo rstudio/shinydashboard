@@ -17,24 +17,24 @@
 #'
 #' @export
 valueBox <- function(value, subtitle, icon = NULL, color = "aqua", width = 4,
-  href = NULL)
+                     href = NULL)
 {
   validateColor(color)
   if (!is.null(icon)) tagAssert(icon, type = "i")
 
   boxContent <- div(class = paste0("small-box bg-", color),
-    div(class = "inner",
-      h3(value),
-      p(subtitle)
-    ),
-    if (!is.null(icon)) div(class = "icon-large", icon)
+                    div(class = "inner",
+                        h3(value),
+                        p(subtitle)
+                    ),
+                    if (!is.null(icon)) div(class = "icon-large", icon)
   )
 
   if (!is.null(href))
     boxContent <- a(href = href, boxContent)
 
   div(class = if (!is.null(width)) paste0("col-sm-", width),
-    boxContent
+      boxContent
   )
 }
 
@@ -64,8 +64,8 @@ valueBox <- function(value, subtitle, icon = NULL, color = "aqua", width = 4,
 #'
 #' @export
 infoBox <- function(title, value = NULL, subtitle = NULL,
-  icon = shiny::icon("bar-chart"), color = "aqua", width = 4, href = NULL,
-  fill = FALSE) {
+                    icon = shiny::icon("bar-chart"), color = "aqua", width = 4, href = NULL,
+                    fill = FALSE) {
 
   validateColor(color)
   tagAssert(icon, type = "i")
@@ -81,9 +81,9 @@ infoBox <- function(title, value = NULL, subtitle = NULL,
       icon
     ),
     div(class = "info-box-content",
-      span(class = "info-box-text", title),
-      if (!is.null(value)) span(class = "info-box-number", value),
-      if (!is.null(subtitle)) p(subtitle)
+        span(class = "info-box-text", title),
+        if (!is.null(value)) span(class = "info-box-number", value),
+        if (!is.null(subtitle)) p(subtitle)
     )
   )
 
@@ -91,7 +91,7 @@ infoBox <- function(title, value = NULL, subtitle = NULL,
     boxContent <- a(href = href, boxContent)
 
   div(class = if (!is.null(width)) paste0("col-sm-", width),
-    boxContent
+      boxContent
   )
 }
 
@@ -100,6 +100,7 @@ infoBox <- function(title, value = NULL, subtitle = NULL,
 #'
 #' Boxes can be used to hold content in the main body of a dashboard.
 #'
+#' @param id Optional id that will be used to access the box.
 #' @param title Optional title.
 #' @param footer Optional footer text.
 #' @param status The status of the item This determines the item's background
@@ -248,7 +249,7 @@ infoBox <- function(title, value = NULL, subtitle = NULL,
 #' )
 #' }
 #' @export
-box <- function(..., title = NULL, footer = NULL, status = NULL,
+box <- function(..., id = NULL, title = NULL, footer = NULL, status = NULL,
                 solidHeader = FALSE, background = NULL, width = 6,
                 height = NULL, collapsible = FALSE, collapsed = FALSE) {
 
@@ -285,28 +286,29 @@ box <- function(..., title = NULL, footer = NULL, status = NULL,
     collapseIcon <- if (collapsed) "plus" else "minus"
 
     collapseTag <- div(class = "box-tools pull-right",
-      tags$button(class = paste0("btn btn-box-tool"),
-        `data-widget` = "collapse",
-        shiny::icon(collapseIcon)
-      )
+                       tags$button(class = paste0("btn btn-box-tool"),
+                                   `data-widget` = "collapse",
+                                   shiny::icon(collapseIcon)
+                       )
     )
   }
 
   headerTag <- NULL
   if (!is.null(titleTag) || !is.null(collapseTag)) {
     headerTag <- div(class = "box-header",
-      titleTag,
-      collapseTag
+                     titleTag,
+                     collapseTag
     )
   }
 
   div(class = if (!is.null(width)) paste0("col-sm-", width),
-    div(class = boxClass,
-      style = if (!is.null(style)) style,
-      headerTag,
-      div(class = "box-body", ...),
-      if (!is.null(footer)) div(class = "box-footer", footer)
-    )
+      div(id = id,
+          class = boxClass,
+          style = if (!is.null(style)) style,
+          headerTag,
+          div(class = "box-body", ...),
+          if (!is.null(footer)) div(class = "box-footer", footer)
+      )
   )
 }
 
@@ -379,14 +381,14 @@ tabBox <- function(..., id = NULL, selected = NULL, title = NULL,
   # Set height
   if (!is.null(height)) {
     content <- tagAppendAttributes(content,
-      style = paste0("height: ", validateCssUnit(height))
+                                   style = paste0("height: ", validateCssUnit(height))
     )
   }
 
   # Move tabs to right side if needed
   if (side == "right") {
     content$children[[1]] <- tagAppendAttributes(content$children[[1]],
-      class = "pull-right"
+                                                 class = "pull-right"
     )
   }
 
@@ -398,7 +400,7 @@ tabBox <- function(..., id = NULL, selected = NULL, title = NULL,
       titleClass <- "pull-left"
 
     content$children[[1]] <- htmltools::tagAppendChild(content$children[[1]],
-      tags$li(class = paste("header", titleClass), title)
+                                                       tags$li(class = paste("header", titleClass), title)
     )
   }
 
