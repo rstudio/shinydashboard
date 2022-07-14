@@ -302,8 +302,7 @@ box <- function(..., id = NULL, title = NULL, footer = NULL, status = NULL,
   }
 
   div(class = if (!is.null(width)) paste0("col-sm-", width),
-      div(id = id,
-          class = boxClass,
+      div(class = boxClass,
           style = if (!is.null(style)) style,
           headerTag,
           div(class = "box-body", ...),
