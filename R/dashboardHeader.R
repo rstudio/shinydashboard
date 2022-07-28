@@ -180,7 +180,7 @@ dropdownMenu <- function(...,
     icon <- switch(type,
       messages = shiny::icon("envelope"),
       notifications = shiny::icon("warning"),
-      tasks = shiny::icon("tasks")
+      tasks = shiny::icon("list-check")
     )
   }
 

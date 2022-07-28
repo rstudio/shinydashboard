@@ -51,7 +51,7 @@ tabItem <- function(tabName = NULL, ...) {
 #'     sidebarMenu(
 #'       id = "tabs",
 #'       menuItem("Dashboard", tabName = "dashboard", icon = icon("dashboard")),
-#'       menuItem("Widgets", tabName = "widgets", icon = icon("th"))
+#'       menuItem("Widgets", tabName = "widgets", icon = icon("table-cells"))
 #'     ),
 #'     actionButton('switchtab', 'Switch tab')
 #'   ),

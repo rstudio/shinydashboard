@@ -79,7 +79,7 @@ sidebar <- dashboardSidebar(
     ),
     menuItem(
       "Widgets",
-      icon = icon("th"),
+      icon = icon("table-cells"),
       tabName = "widgets",
       badgeLabel = "new",
       badgeColor = "green"
