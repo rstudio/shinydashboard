@@ -9,7 +9,7 @@ body <- dashboardBody(
       "Orders", uiOutput("orderNum2"), "Subtitle", icon = icon("credit-card")
     ),
     infoBox(
-      "Approval Rating", "60%", icon = icon("line-chart"), color = "green",
+      "Approval Rating", "60%", icon = icon("chart-line"), color = "green",
       fill = TRUE
     ),
     infoBox(
@@ -25,7 +25,7 @@ body <- dashboardBody(
     ),
     valueBox(
       tagList("60", tags$sup(style="font-size: 20px", "%")),
-      "Approval Rating", icon = icon("line-chart"), color = "green"
+      "Approval Rating", icon = icon("chart-line"), color = "green"
     ),
     valueBox(
       htmlOutput("progress"), "Progress", icon = icon("users"), color = "purple"
@@ -134,7 +134,7 @@ header <- dashboardHeader(
                notificationItem(icon = icon("users"), status = "info",
                                 "5 new members joined today"
                ),
-               notificationItem(icon = icon("warning"), status = "danger",
+               notificationItem(icon = icon("triangle-exclamation"), status = "danger",
                                 "Resource usage near limit."
                ),
                notificationItem(icon = icon("shopping-cart", lib = "glyphicon"),

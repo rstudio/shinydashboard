@@ -27,10 +27,10 @@
 #'   sidebarMenu(
 #'     # Setting id makes input$tabs give the tabName of currently-selected tab
 #'     id = "tabs",
-#'     menuItem("Dashboard", tabName = "dashboard", icon = icon("dashboard")),
+#'     menuItem("Dashboard", tabName = "dashboard", icon = icon("gauge")),
 #'     menuItem("Widgets", icon = icon("table-cells"), tabName = "widgets", badgeLabel = "new",
 #'              badgeColor = "green"),
-#'     menuItem("Charts", icon = icon("bar-chart-o"),
+#'     menuItem("Charts", icon = icon("chart-bar"),
 #'       menuSubItem("Sub-item 1", tabName = "subitem1"),
 #'       menuSubItem("Sub-item 2", tabName = "subitem2")
 #'     )

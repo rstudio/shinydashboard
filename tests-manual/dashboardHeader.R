@@ -26,7 +26,7 @@ header <- dashboardHeader(
                notificationItem(icon = icon("users"), status = "info",
                                 "5 new members joined today"
                ),
-               notificationItem(icon = icon("warning"), status = "danger",
+               notificationItem(icon = icon("triangle-exclamation"), status = "danger",
                                 "Resource usage near limit."
                ),
                notificationItem(icon = icon("shopping-cart", lib = "glyphicon"),

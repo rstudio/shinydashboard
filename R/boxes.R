@@ -64,7 +64,7 @@ valueBox <- function(value, subtitle, icon = NULL, color = "aqua", width = 4,
 #'
 #' @export
 infoBox <- function(title, value = NULL, subtitle = NULL,
-  icon = shiny::icon("bar-chart"), color = "aqua", width = 4, href = NULL,
+  icon = shiny::icon("chart-column"), color = "aqua", width = 4, href = NULL,
   fill = FALSE) {
 
   validateColor(color)
@@ -137,7 +137,7 @@ infoBox <- function(title, value = NULL, subtitle = NULL,
 #'       "Orders", uiOutput("orderNum2"), "Subtitle", icon = icon("credit-card")
 #'     ),
 #'     infoBox(
-#'       "Approval Rating", "60%", icon = icon("line-chart"), color = "green",
+#'       "Approval Rating", "60%", icon = icon("chart-line"), color = "green",
 #'       fill = TRUE
 #'     ),
 #'     infoBox(
@@ -153,7 +153,7 @@ infoBox <- function(title, value = NULL, subtitle = NULL,
 #'     ),
 #'     valueBox(
 #'       tagList("60", tags$sup(style="font-size: 20px", "%")),
-#'        "Approval Rating", icon = icon("line-chart"), color = "green"
+#'        "Approval Rating", icon = icon("chart-line"), color = "green"
 #'     ),
 #'     valueBox(
 #'       htmlOutput("progress"), "Progress", icon = icon("users"), color = "purple"

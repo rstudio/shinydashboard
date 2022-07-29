@@ -16,7 +16,7 @@ sidebar <- dashboardSidebar(
     menuItem(
       "Dashboard",
       tabName = "dashboard",
-      icon = icon("dashboard")
+      icon = icon("gauge")
     ),
     menuItem(
       "Widgets",
@@ -27,7 +27,7 @@ sidebar <- dashboardSidebar(
     ),
     menuItem(
       "Charts",
-      icon = icon("bar-chart-o"),
+      icon = icon("chart-column"),
       menuSubItem("Sub-item 1", tabName = "subitem1"),
       menuSubItem("Sub-item 2", tabName = "subitem2")
     )
