@@ -48,7 +48,7 @@
 #'     notificationItem(icon = icon("users"), status = "info",
 #'       "5 new members joined today"
 #'     ),
-#'     notificationItem(icon = icon("warning"), status = "danger",
+#'     notificationItem(icon = icon("triangle-exclamation"), status = "danger",
 #'       "Resource usage near limit."
 #'     ),
 #'     notificationItem(icon = icon("shopping-cart", lib = "glyphicon"),
@@ -179,8 +179,8 @@ dropdownMenu <- function(...,
   if (is.null(icon)) {
     icon <- switch(type,
       messages = shiny::icon("envelope"),
-      notifications = shiny::icon("warning"),
-      tasks = shiny::icon("tasks")
+      notifications = shiny::icon("triangle-exclamation"),
+      tasks = shiny::icon("list-check")
     )
   }
 
@@ -241,7 +241,7 @@ messageItem <- function(from, message, icon = shiny::icon("user"), time = NULL,
       icon,
       h4(
         from,
-        if (!is.null(time)) tags$small(shiny::icon("clock-o"), time)
+        if (!is.null(time)) tags$small(shiny::icon("clock"), time)
       ),
       p(message)
     )
@@ -260,7 +260,7 @@ messageItem <- function(from, message, icon = shiny::icon("user"), time = NULL,
 #' @family menu items
 #' @seealso \code{\link{dashboardHeader}} for example usage.
 #' @export
-notificationItem <- function(text, icon = shiny::icon("warning"),
+notificationItem <- function(text, icon = shiny::icon("triangle-exclamation"),
   status = "success", href = NULL)
 {
   tagAssert(icon, type = "i")

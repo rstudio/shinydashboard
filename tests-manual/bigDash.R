@@ -31,7 +31,7 @@ header <- dashboardHeader(
       "5 new members joined today"
     ),
     notificationItem(
-      icon = icon("warning"),
+      icon = icon("triangle-exclamation"),
       status = "danger",
       "Resource usage near limit."
     ),
@@ -75,18 +75,18 @@ sidebar <- dashboardSidebar(
     menuItem(
       "Dashboard",
       tabName = "dashboard",
-      icon = icon("dashboard")
+      icon = icon("gauge")
     ),
     menuItem(
       "Widgets",
-      icon = icon("th"),
+      icon = icon("table-cells"),
       tabName = "widgets",
       badgeLabel = "new",
       badgeColor = "green"
     ),
     menuItem(
       "Charts",
-      icon = icon("bar-chart-o"),
+      icon = icon("chart-bar"),
       menuSubItem("Sub-item 1", tabName = "subitem1"),
       menuSubItem("Sub-item 2", tabName = "subitem2")
     )
@@ -124,7 +124,7 @@ body <- dashboardBody(tabItems(
     infoBox(
       "Approval Rating",
       "60%",
-      icon = icon("line-chart"),
+      icon = icon("chart-line"),
       color = "green",
       fill = TRUE
     ),
@@ -147,7 +147,7 @@ body <- dashboardBody(tabItems(
     valueBox(
       tagList("60", tags$sup(style = "font-size: 20px", "%")),
       "Approval Rating",
-      icon = icon("line-chart"),
+      icon = icon("chart-line"),
       color = "green"
     ),
     valueBox(
@@ -251,7 +251,7 @@ server <- function(input, output) {
   histdata <- rnorm(500)
 
   output$menu <- renderMenu({
-    sidebarMenu(menuItem("Menu item", icon = icon("calendar")))
+    sidebarMenu(menuItem("Menu item", icon = icon("calendar-days")))
   })
 
   output$plot1 <- renderPlot({

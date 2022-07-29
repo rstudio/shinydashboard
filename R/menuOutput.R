@@ -88,7 +88,7 @@ menuItemOutput <- function(outputId) {
 #' server <- function(input, output) {
 #'   output$menu <- renderMenu({
 #'     sidebarMenu(
-#'       menuItem("Menu item", icon = icon("calendar"))
+#'       menuItem("Menu item", icon = icon("calendar-days"))
 #'     )
 #'   })
 #' }

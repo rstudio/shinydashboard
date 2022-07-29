@@ -7,7 +7,7 @@ ui <- dashboardPage(
   dashboardHeader(),
   dashboardSidebar(
     sidebarMenu(
-      menuItem("Inputs", icon = icon("bar-chart-o"), tabName = "tabOne"
+      menuItem("Inputs", icon = icon("chart-column"), tabName = "tabOne"
       )
     )
   ),

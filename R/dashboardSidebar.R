@@ -27,10 +27,10 @@
 #'   sidebarMenu(
 #'     # Setting id makes input$tabs give the tabName of currently-selected tab
 #'     id = "tabs",
-#'     menuItem("Dashboard", tabName = "dashboard", icon = icon("dashboard")),
-#'     menuItem("Widgets", icon = icon("th"), tabName = "widgets", badgeLabel = "new",
+#'     menuItem("Dashboard", tabName = "dashboard", icon = icon("gauge")),
+#'     menuItem("Widgets", icon = icon("table-cells"), tabName = "widgets", badgeLabel = "new",
 #'              badgeColor = "green"),
-#'     menuItem("Charts", icon = icon("bar-chart-o"),
+#'     menuItem("Charts", icon = icon("chart-bar"),
 #'       menuSubItem("Sub-item 1", tabName = "subitem1"),
 #'       menuSubItem("Sub-item 2", tabName = "subitem2")
 #'     )
@@ -186,7 +186,7 @@ sidebarUserPanel <- function(name, subtitle = NULL, image = NULL) {
 #'
 #' @export
 sidebarSearchForm <- function(textId, buttonId, label = "Search...",
-                              icon = shiny::icon("search")) {
+                              icon = shiny::icon("magnifying-glass")) {
   tags$form(class = "sidebar-form",
     div(class = "input-group",
       tags$input(id = textId, type = "text", class = "form-control",
@@ -453,7 +453,7 @@ menuItem <- function(text, ..., icon = NULL, badgeLabel = NULL, badgeColor = "gr
 #' @rdname sidebarMenu
 #' @export
 menuSubItem <- function(text, tabName = NULL, href = NULL, newtab = TRUE,
-  icon = shiny::icon("angle-double-right"), selected = NULL)
+  icon = shiny::icon("angles-right"), selected = NULL)
 {
 
   if (!is.null(href) && !is.null(tabName)) {
