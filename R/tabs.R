@@ -31,6 +31,7 @@ tabItem <- function(tabName = NULL, ...) {
     role = "tabpanel",
     class = "tab-pane",
     id = paste0("shiny-tab-", tabName),
+    `data-value` = tabName,
     ...
   )
 }
