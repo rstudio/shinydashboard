@@ -6,6 +6,7 @@
 \usage{
 box(
   ...,
+  id = NULL,
   title = NULL,
   footer = NULL,
   status = NULL,
@@ -19,6 +20,8 @@ box(
 }
 \arguments{
 \item{...}{Contents of the box.}
+
+\item{id}{Optional id that will be used to access the box.}
 
 \item{title}{Optional title.}
 

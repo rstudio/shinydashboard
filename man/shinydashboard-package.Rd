@@ -26,6 +26,8 @@ Authors:
 
 Other contributors:
 \itemize{
+  \item Garrick Aden-Buie \email{garrick@adenbuie.com} [contributor]
+  \item Mauricio Vargas Sepulveda \email{mavargas11@uc.cl} [contributor]
   \item  RStudio [copyright holder]
   \item  Almasaeed Studio (AdminLTE theme for Bootstrap) [contributor, copyright holder]
   \item  Adobe Systems Incorporated (Source Sans Pro font) [contributor, copyright holder]

@@ -9,7 +9,8 @@ dashboardPage(
   sidebar,
   body,
   title = NULL,
-  skin = c("blue", "black", "purple", "green", "red", "yellow")
+  skin = c("blue", "black", "purple", "green", "red", "yellow"),
+  theme = NULL
 )
 }
 \arguments{
@@ -24,6 +25,10 @@ provided, it will try to extract the title from the \code{dashboardHeader}.}
 
 \item{skin}{A color theme. One of \code{"blue"}, \code{"black"},
 \code{"purple"}, \code{"green"}, \code{"red"}, or \code{"yellow"}.}
+
+\item{theme}{CSS files to be used in place of the shinydashboard AdminLTE
+theme. Typically, this will be \code{c("AdminLTE.css", "_all-skins.css")}.
+CSS files should be placed in \code{www/}.}
 }
 \description{
 This creates a dashboard page for use in a Shiny app.

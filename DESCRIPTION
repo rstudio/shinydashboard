@@ -4,6 +4,8 @@ Version: 0.7.2
 Authors@R: c(
     person("Winston", "Chang", role = c("aut", "cre"), email = "winston@rstudio.com"),
     person("Barbara", "Borges Ribeiro", role = "aut", email = "barbara@rstudio.com"),
+    person("Garrick", "Aden-Buie", role = "ctb", email = "garrick@adenbuie.com"),
+    person("Mauricio", "Vargas Sepulveda", role = "ctb", email = "mavargas11@uc.cl"),
     person(family = "RStudio", role = "cph"),
     person(family = "Almasaeed Studio", role = c("ctb", "cph"), comment = "AdminLTE theme for Bootstrap"),
     person(family = "Adobe Systems Incorporated", role = c("ctb", "cph"), comment = "Source Sans Pro font")
@@ -20,5 +22,5 @@ Imports:
     htmltools (>= 0.2.6),
     promises
 BugReports: https://github.com/rstudio/shinydashboard
-RoxygenNote: 7.1.2
+RoxygenNote: 7.2.0
 Encoding: UTF-8

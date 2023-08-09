@@ -9,6 +9,9 @@
 #'   provided, it will try to extract the title from the \code{dashboardHeader}.
 #' @param skin A color theme. One of \code{"blue"}, \code{"black"},
 #'   \code{"purple"}, \code{"green"}, \code{"red"}, or \code{"yellow"}.
+#' @param theme CSS files to be used in place of the shinydashboard AdminLTE
+#'   theme. Typically, this will be \code{c("AdminLTE.css", "_all-skins.css")}.
+#'   CSS files should be placed in \code{www/}.
 #'
 #' @seealso \code{\link{dashboardHeader}}, \code{\link{dashboardSidebar}},
 #'   \code{\link{dashboardBody}}.
@@ -29,7 +32,9 @@
 #' }
 #' @export
 dashboardPage <- function(header, sidebar, body, title = NULL,
-  skin = c("blue", "black", "purple", "green", "red", "yellow")) {
+  skin = c("blue", "black", "purple", "green", "red", "yellow"),
+  theme = NULL
+  ) {
 
   tagAssert(header, type = "header", class = "main-header")
   tagAssert(sidebar, type = "aside", class = "main-sidebar")
@@ -51,7 +56,16 @@ dashboardPage <- function(header, sidebar, body, title = NULL,
 
   title <- title %OR% extractTitle(header)
 
+  theme <- if (!is.null(theme)) {
+    tagList(
+      lapply(theme, function(css) {
+        tags$head(tags$link(rel="stylesheet", type="text/css", href = css))
+      })
+    )
+  }
+
   content <- div(class = "wrapper",
+    if (!is.null(theme)) theme,
     header,
     sidebar,
     body
@@ -67,7 +81,8 @@ dashboardPage <- function(header, sidebar, body, title = NULL,
       # the collapsed (AdminLTE code)
       class = paste0("skin-", skin, if (collapsed) " sidebar-collapse"),
       style = "min-height: 611px;",
-      shiny::bootstrapPage(content, title = title)
+      shiny::bootstrapPage(content, title = title),
+      include_adminLTE_css = is.null(theme)
     )
   )
 }
