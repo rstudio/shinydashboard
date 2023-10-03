@@ -20,5 +20,5 @@ Imports:
     htmltools (>= 0.2.6),
     promises
 BugReports: https://github.com/rstudio/shinydashboard
-RoxygenNote: 7.1.2
+RoxygenNote: 7.2.3
 Encoding: UTF-8
