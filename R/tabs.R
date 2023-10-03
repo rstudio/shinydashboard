@@ -40,7 +40,7 @@ tabItem <- function(tabName = NULL, ...) {
 #' This function controls the active tab of \code{\link{tabItems}} from the
 #' server. It behaves just like \code{\link[shiny]{updateTabsetPanel}}.
 #'
-#' @inheritParams shiny::updateTabsetPanel
+#' @inheritDotParams shiny::updateTabsetPanel
 #' @examples
 #' ## Only run this example in interactive R sessions
 #' if (interactive()) {
@@ -80,4 +80,6 @@ tabItem <- function(tabName = NULL, ...) {
 #' shinyApp(ui, server)
 #' }
 #' @export
-updateTabItems <- shiny::updateTabsetPanel
+updateTabItems <- function(...) {
+  shiny::updateTabsetPanel(...)
+}
