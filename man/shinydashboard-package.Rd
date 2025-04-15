@@ -26,7 +26,7 @@ Authors:
 
 Other contributors:
 \itemize{
-  \item  RStudio [copyright holder]
+  \item  Posit Software, PBC [copyright holder]
   \item  Almasaeed Studio (AdminLTE theme for Bootstrap) [contributor, copyright holder]
   \item  Adobe Systems Incorporated (Source Sans Pro font) [contributor, copyright holder]
 }
