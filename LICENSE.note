@@ -12,9 +12,9 @@
     ----------------------------------------------------------------------
 
     Component: Source Sans Pro Font (located in inst/AdminLTE/fonts/)
-    Source: https://www.google.com/fonts/attribution (or original source)
+    Source: https://github.com/adobe-fonts/source-sans-pro
     License: SIL Open Font License (OFL) Version 1.1
-    Copyright: (See font files/OFL.txt for details - e.g., Adobe Systems Incorporated)
+    Copyright: (c) 2010-2024 Adobe
 
     Full license text available in inst/AdminLTE/fonts/LICENSE.txt
 
