@@ -2,9 +2,9 @@ Package: shinydashboard
 Title: Create Dashboards with 'Shiny'
 Version: 0.7.2
 Authors@R: c(
-    person("Winston", "Chang", role = c("aut", "cre"), email = "winston@rstudio.com"),
-    person("Barbara", "Borges Ribeiro", role = "aut", email = "barbara@rstudio.com"),
-    person(family = "RStudio", role = "cph"),
+    person("Winston", "Chang", role = c("aut", "cre"), email = "winston@posit.co"),
+    person("Barbara", "Borges Ribeiro", role = "aut", email = "barbara@posit.co"),
+    person(family = "Posit", role = "cph"),
     person(family = "Almasaeed Studio", role = c("ctb", "cph"), comment = "AdminLTE theme for Bootstrap"),
     person(family = "Adobe Systems Incorporated", role = c("ctb", "cph"), comment = "Source Sans Pro font")
     )
