@@ -1,5 +1,9 @@
 # shinydashboard (development version)
 
+### Bug fixes
+
+* Fixed [#397](https://github.com/rstudio/shinydashboard/issues/397): `updateTabItems()` is now a run-time alias of `shiny::updateTabsetPanel()`. ([#398](https://github.com/rstudio/shinydashboard/pull/398))
+
 shinydashboard 0.7.2
 ====================
 
