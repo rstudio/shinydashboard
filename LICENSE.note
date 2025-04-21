@@ -1,0 +1,21 @@
+    This package includes bundled software components covered by the following licenses:
+
+    ----------------------------------------------------------------------
+
+    Component: AdminLTE (located in inst/AdminLTE/)
+    Source: https://github.com/almasaeed2010/AdminLTE
+    License: MIT License
+    Copyright: (c) 2013 almasaeed2010
+
+    Full license text available in inst/AdminLTE/LICENSE.txt
+
+    ----------------------------------------------------------------------
+
+    Component: Source Sans Pro Font (located in inst/AdminLTE/fonts/)
+    Source: https://github.com/adobe-fonts/source-sans-pro
+    License: SIL Open Font License (OFL) Version 1.1
+    Copyright: (c) 2010-2024 Adobe
+
+    Full license text available in inst/AdminLTE/fonts/LICENSE.txt
+
+    ----------------------------------------------------------------------
