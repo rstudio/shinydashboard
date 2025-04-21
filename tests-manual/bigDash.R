@@ -10,15 +10,17 @@ header <- dashboardHeader(
   dropdownMenu(
     type = "messages",
     badgeStatus = "success",
-    messageItem("Support Team",
-                "This is the content of a message.",
-                time = "5 mins"),
-    messageItem("Support Team",
-                "This is the content of another message.",
-                time = "2 hours"),
-    messageItem("New User",
-                "Can I get some help?",
-                time = "Today")
+    messageItem(
+      "Support Team",
+      "This is the content of a message.",
+      time = "5 mins"
+    ),
+    messageItem(
+      "Support Team",
+      "This is the content of another message.",
+      time = "2 hours"
+    ),
+    messageItem("New User", "Can I get some help?", time = "Today")
   ),
 
   # Dropdown menu for notifications
@@ -51,14 +53,10 @@ header <- dashboardHeader(
   dropdownMenu(
     type = "tasks",
     badgeStatus = "danger",
-    taskItem(value = 20, color = "aqua",
-             "Refactor code"),
-    taskItem(value = 40, color = "green",
-             "Design new layout"),
-    taskItem(value = 60, color = "yellow",
-             "Another task"),
-    taskItem(value = 80, color = "red",
-             "Write documentation")
+    taskItem(value = 20, color = "aqua", "Refactor code"),
+    taskItem(value = 40, color = "green", "Design new layout"),
+    taskItem(value = 60, color = "yellow", "Another task"),
+    taskItem(value = 80, color = "red", "Write documentation")
   )
 )
 sidebar <- dashboardSidebar(
@@ -94,24 +92,27 @@ sidebar <- dashboardSidebar(
   sidebarMenuOutput("menu")
 )
 
-body <- dashboardBody(tabItems(
-  tabItem("dashboard",
-          div(p(
-            "Dashboard tab content"
-          ))),
-  tabItem("widgets",
-          "Widgets tab content"),
-  tabItem("subitem1",
-          "Sub-item 1 tab content"),
-  tabItem("subitem2",
-          "Sub-item 2 tab content")),
+body <- dashboardBody(
+  tabItems(
+    tabItem(
+      "dashboard",
+      div(p(
+        "Dashboard tab content"
+      ))
+    ),
+    tabItem("widgets", "Widgets tab content"),
+    tabItem("subitem1", "Sub-item 1 tab content"),
+    tabItem("subitem2", "Sub-item 2 tab content")
+  ),
 
   # Boxes need to be put in a row (or column)
-  fluidRow(box(plotOutput("plot1", height = 250)),
-           box(
-             title = "Controls",
-             sliderInput("slider", "Number of observations:", 1, 100, 50)
-           )),
+  fluidRow(
+    box(plotOutput("plot1", height = 250)),
+    box(
+      title = "Controls",
+      sliderInput("slider", "Number of observations:", 1, 100, 50)
+    )
+  ),
 
   # infoBoxes
   fluidRow(
@@ -220,12 +221,14 @@ body <- dashboardBody(tabItems(
     tabBox(
       title = "First tabBox",
       # The id lets us use input$tabset1 on the server to find the current tab
-      id = "tabset1", height = "250px",
+      id = "tabset1",
+      height = "250px",
       tabPanel("Tab1", "First tab content"),
       tabPanel("Tab2", "Tab content 2")
     ),
     tabBox(
-      side = "right", height = "250px",
+      side = "right",
+      height = "250px",
       selected = "Tab3",
       tabPanel("Tab1", "Tab content 1"),
       tabPanel("Tab2", "Tab content 2"),
@@ -236,14 +239,14 @@ body <- dashboardBody(tabItems(
     tabBox(
       # Title can include an icon
       title = tagList(shiny::icon("gear"), "tabBox status"),
-      tabPanel("Tab1",
-               "Currently selected tab from first box:",
-               verbatimTextOutput("tabset1Selected")
+      tabPanel(
+        "Tab1",
+        "Currently selected tab from first box:",
+        verbatimTextOutput("tabset1Selected")
       ),
       tabPanel("Tab2", "Tab content 2")
     )
   )
-
 )
 
 server <- function(input, output) {
@@ -286,13 +289,9 @@ server <- function(input, output) {
   })
 
   output$status2 <- renderUI({
-    iconName <- switch(input$progress,
-                       "100" = "ok",
-                       "0" = "remove",
-                       "road")
+    iconName <- switch(input$progress, "100" = "ok", "0" = "remove", "road")
     p("Current status is: ", icon(iconName, lib = "glyphicon"))
   })
-
 
   output$plot <- renderPlot({
     hist(rnorm(input$orders))
@@ -304,8 +303,6 @@ server <- function(input, output) {
   })
 }
 
-ui <- dashboardPage(header,
-                    sidebar,
-                    body)
+ui <- dashboardPage(header, sidebar, body)
 
 shinyApp(ui, server)

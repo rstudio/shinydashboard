@@ -28,9 +28,13 @@
 #' )
 #' }
 #' @export
-dashboardPage <- function(header, sidebar, body, title = NULL,
-  skin = c("blue", "black", "purple", "green", "red", "yellow")) {
-
+dashboardPage <- function(
+  header,
+  sidebar,
+  body,
+  title = NULL,
+  skin = c("blue", "black", "purple", "green", "red", "yellow")
+) {
   tagAssert(header, type = "header", class = "main-header")
   tagAssert(sidebar, type = "aside", class = "main-sidebar")
   tagAssert(body, type = "div", class = "content-wrapper")
@@ -38,11 +42,12 @@ dashboardPage <- function(header, sidebar, body, title = NULL,
 
   extractTitle <- function(header) {
     x <- header$children[[2]]
-    if (x$name == "span" &&
+    if (
+      x$name == "span" &&
         !is.null(x$attribs$class) &&
         x$attribs$class == "logo" &&
-        length(x$children) != 0)
-    {
+        length(x$children) != 0
+    ) {
       x$children[[1]]
     } else {
       ""
@@ -51,11 +56,7 @@ dashboardPage <- function(header, sidebar, body, title = NULL,
 
   title <- title %OR% extractTitle(header)
 
-  content <- div(class = "wrapper",
-    header,
-    sidebar,
-    body
-  )
+  content <- div(class = "wrapper", header, sidebar, body)
 
   # if the sidebar has the attribute `data-collapsed = "true"`, it means that
   # the user set the `collapsed` argument of `dashboardSidebar` to TRUE

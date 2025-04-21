@@ -6,20 +6,23 @@ library(shinydashboard)
 library(shiny)
 library(threejs)
 
-options(shiny.launch.browser=F, shiny.minified=F, shiny.port = 4601)
+options(shiny.launch.browser = F, shiny.minified = F, shiny.port = 4601)
 
 ui <- function(request) {
   dashboardPage(
     dashboardHeader(title = "Testing sidebar bookmarkability"),
     dashboardSidebar(
       uiOutput("sidebarControls"),
-      sidebarMenu(id = "smenu",
+      sidebarMenu(
+        id = "smenu",
         menuItem(strong("Frontpage"), tabName = "front"),
-        menuItem("Models",
+        menuItem(
+          "Models",
           menuSubItem("Linear model", "models1"),
           menuSubItem("Logistic regression", "models2")
         ),
-        menuItem("Plots",
+        menuItem(
+          "Plots",
           helpText("This is help text"),
           menuSubItem("Scatterplot", "plots1"),
           menuSubItem("3D graph", "plots2")
@@ -29,29 +32,27 @@ ui <- function(request) {
     ),
     dashboardBody(
       tabItems(
-        tabItem("front",
+        tabItem(
+          "front",
           h3("Click through the different tabs to see different content")
         ),
-        tabItem("models1",
+        tabItem(
+          "models1",
           h3("Here's a linear model"),
           verbatimTextOutput("models1")
         ),
-        tabItem("models2",
+        tabItem(
+          "models2",
           h3("Here's a logistic regression"),
           verbatimTextOutput("models2")
         ),
-        tabItem("plots1",
-          h3("Here's a 2D plot"),
-          plotOutput("plots1")
-        ),
-        tabItem("plots2",
+        tabItem("plots1", h3("Here's a 2D plot"), plotOutput("plots1")),
+        tabItem(
+          "plots2",
           h3("Here's a 3D plot"),
           scatterplotThreeOutput('plots2')
         ),
-        tabItem("tables",
-          h3("Here's a table"),
-          tableOutput("tbl")
-        )
+        tabItem("tables", h3("Here's a table"), tableOutput("tbl"))
       )
     )
   )
@@ -108,7 +109,6 @@ server <- function(input, output, session) {
   onBookmarked(function(url) {
     updateQueryString(url)
   })
-
 }
 
 enableBookmarking("url")

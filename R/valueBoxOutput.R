@@ -77,7 +77,9 @@ renderValueBox <- function(expr, env = parent.frame(), quoted = FALSE) {
     if (is.promising(vbox)) {
       vbox %...T>%
         tagAssert(type = "div") %...>%
-        { .$children[[1]] }
+        {
+          .$children[[1]]
+        }
     } else {
       tagAssert(vbox, type = "div")
 

@@ -141,7 +141,12 @@ menuItemOutput <- function(outputId) {
 #'
 #' shinyApp(ui, server)
 #' }
-renderMenu <- function(expr, env = parent.frame(), quoted = FALSE, outputArgs = list()) {
+renderMenu <- function(
+  expr,
+  env = parent.frame(),
+  quoted = FALSE,
+  outputArgs = list()
+) {
   if (!quoted) {
     expr <- substitute(expr)
     quoted <- TRUE
@@ -161,5 +166,5 @@ utils::globalVariables("func")
 #' @export
 renderDropdownMenu <- function(expr, env = parent.frame(), quoted = FALSE) {
   .Deprecated("renderMenu")
-   shiny::renderUI(expr, env, quoted, func = FALSE)
+  shiny::renderUI(expr, env, quoted, func = FALSE)
 }

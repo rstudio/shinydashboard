@@ -60,7 +60,12 @@
 #' )
 #' }
 #' @export
-dashboardSidebar <- function(..., disable = FALSE, width = NULL, collapsed = FALSE) {
+dashboardSidebar <- function(
+  ...,
+  disable = FALSE,
+  width = NULL,
+  collapsed = FALSE
+) {
   width <- validateCssUnit(width)
 
   # Set up custom CSS for custom width
@@ -71,7 +76,11 @@ dashboardSidebar <- function(..., disable = FALSE, width = NULL, collapsed = FAL
     # that instead making changes to the global settings, we've put them in a
     # media query (min-width: 768px), so that it won't override other media
     # queries (like max-width: 767px) that work for narrower screens.
-    custom_css <- tags$head(tags$style(HTML(gsub("_WIDTH_", width, fixed = TRUE, '
+    custom_css <- tags$head(tags$style(HTML(gsub(
+      "_WIDTH_",
+      width,
+      fixed = TRUE,
+      '
       .main-sidebar, .left-side {
         width: _WIDTH_;
       }
@@ -114,7 +123,8 @@ dashboardSidebar <- function(..., disable = FALSE, width = NULL, collapsed = FAL
           transform: translate(-_WIDTH_, 0);
         }
       }
-    '))))
+    '
+    ))))
   }
 
   # If we're restoring a bookmarked app, this holds the value of whether or not the
@@ -131,7 +141,9 @@ dashboardSidebar <- function(..., disable = FALSE, width = NULL, collapsed = FAL
   # `dashboardPage()` function
   tags$aside(
     id = "sidebarCollapsed",
-    class = "main-sidebar", `data-collapsed` = dataValueString, custom_css,
+    class = "main-sidebar",
+    `data-collapsed` = dataValueString,
+    custom_css,
     tags$section(
       id = "sidebarItemExpanded",
       class = "sidebar",
@@ -155,13 +167,16 @@ dashboardSidebar <- function(..., disable = FALSE, width = NULL, collapsed = FAL
 #'
 #' @export
 sidebarUserPanel <- function(name, subtitle = NULL, image = NULL) {
-  div(class = "user-panel",
+  div(
+    class = "user-panel",
     if (!is.null(image)) {
-      div(class = "pull-left image",
+      div(
+        class = "pull-left image",
         img(src = image, class = "img-circle", alt = "User Image")
       )
     },
-    div(class = "pull-left info",
+    div(
+      class = "pull-left info",
       # If no image, move text to the left: by overriding default left:55px
       style = if (is.null(image)) "left: 4px",
       p(name),
@@ -185,15 +200,28 @@ sidebarUserPanel <- function(name, subtitle = NULL, image = NULL) {
 #' @seealso [dashboardSidebar()] for example usage.
 #'
 #' @export
-sidebarSearchForm <- function(textId, buttonId, label = "Search...",
-                              icon = shiny::icon("search")) {
-  tags$form(class = "sidebar-form",
-    div(class = "input-group",
-      tags$input(id = textId, type = "text", class = "form-control",
-        placeholder = label, style = "margin: 5px;"
+sidebarSearchForm <- function(
+  textId,
+  buttonId,
+  label = "Search...",
+  icon = shiny::icon("search")
+) {
+  tags$form(
+    class = "sidebar-form",
+    div(
+      class = "input-group",
+      tags$input(
+        id = textId,
+        type = "text",
+        class = "form-control",
+        placeholder = label,
+        style = "margin: 5px;"
       ),
-      span(class = "input-group-btn",
-        tags$button(id = buttonId, type = "button",
+      span(
+        class = "input-group-btn",
+        tags$button(
+          id = buttonId,
+          type = "button",
           class = "btn btn-flat action-button",
           icon
         )
@@ -280,20 +308,17 @@ sidebarMenu <- function(..., id = NULL, .list = NULL) {
       # Given a menuItem and a logical value for `selected`, set the
       # data-start-selected attribute to the appropriate value (1 or 0).
       selectItem <- function(item, selected) {
-
         # in the cases that the children of menuItems are NOT menuSubItems
         if (is.atomic(item) || length(item$children) == 0) {
           return(item)
         }
 
-        if (selected) value <- 1
-        else          value <- NULL
+        if (selected) value <- 1 else value <- NULL
 
         # Try to find the child <a data-toggle="tab"> tag and then set
         # data-start-selected="1". The []<- assignment is to preserve
         # attributes.
         item$children[] <- lapply(item$children, function(child) {
-
           # Find the appropriate <a> child
           if (tagMatches(child, name = "a", `data-toggle` = "tab")) {
             child$attribs[["data-start-selected"]] <- value
@@ -329,16 +354,17 @@ sidebarMenu <- function(..., id = NULL, .list = NULL) {
         if (tagMatches(item, name = "li", class = "treeview")) {
           # Search in menuSubItems
           item$children[] <- lapply(item$children[], function(subItem) {
-
             if (tagMatches(subItem, name = "ul", class = "treeview-menu")) {
-              subItem$children[] <- lapply(subItem$children, function(subSubItem) {
-                selected <- itemHasTabName(subSubItem, selectedTabName)
-                selectItem(subSubItem, selected)
-              })
+              subItem$children[] <- lapply(
+                subItem$children,
+                function(subSubItem) {
+                  selected <- itemHasTabName(subSubItem, selectedTabName)
+                  selectItem(subSubItem, selected)
+                }
+              )
             }
             subItem
           })
-
         } else {
           # Regular menuItems
           selected <- itemHasTabName(item, selectedTabName)
@@ -351,8 +377,11 @@ sidebarMenu <- function(..., id = NULL, .list = NULL) {
     # This is a 0 height div, whose only purpose is to hold the tabName of the currently
     # selected menuItem in its `data-value` attribute. This is the DOM element that is
     # bound to tabItemInputBinding in the JS side.
-    items[[length(items) + 1]] <- div(id = id,
-      class = "sidebarMenuSelectedTabItem", `data-value` = selectedTabName %OR% "null")
+    items[[length(items) + 1]] <- div(
+      id = id,
+      class = "sidebarMenuSelectedTabItem",
+      `data-value` = selectedTabName %OR% "null"
+    )
   }
 
   # Use do.call so that we don't add an extra list layer to the children of the
@@ -363,14 +392,23 @@ sidebarMenu <- function(..., id = NULL, .list = NULL) {
 
 #' @rdname sidebarMenu
 #' @export
-menuItem <- function(text, ..., icon = NULL, badgeLabel = NULL, badgeColor = "green",
-                     tabName = NULL, href = NULL, newtab = TRUE, selected = NULL,
-                     expandedName = as.character(gsub("[[:space:]]", "", text)),
-                     startExpanded = FALSE) {
+menuItem <- function(
+  text,
+  ...,
+  icon = NULL,
+  badgeLabel = NULL,
+  badgeColor = "green",
+  tabName = NULL,
+  href = NULL,
+  newtab = TRUE,
+  selected = NULL,
+  expandedName = as.character(gsub("[[:space:]]", "", text)),
+  startExpanded = FALSE
+) {
   subItems <- list(...)
 
   if (!is.null(icon)) tagAssert(icon, type = "i")
-  if (!is.null(href) + !is.null(tabName) + (length(subItems) > 0) != 1 ) {
+  if (!is.null(href) + !is.null(tabName) + (length(subItems) > 0) != 1) {
     stop("Must have either href, tabName, or sub-items (contained in ...).")
   }
 
@@ -390,8 +428,7 @@ menuItem <- function(text, ..., icon = NULL, badgeLabel = NULL, badgeColor = "gr
     href <- "#"
   } else {
     # If supplied href, set up <a> tag's target
-    if (newtab)
-      target <- "_blank"
+    if (newtab) target <- "_blank"
   }
 
   # Generate badge if needed
@@ -408,7 +445,8 @@ menuItem <- function(text, ..., icon = NULL, badgeLabel = NULL, badgeColor = "gr
   if (length(subItems) == 0) {
     return(
       tags$li(
-        a(href = href,
+        a(
+          href = href,
           `data-toggle` = if (isTabItem) "tab",
           `data-value` = if (!is.null(tabName)) tabName,
           `data-start-selected` = if (isTRUE(selected)) 1 else NULL,
@@ -427,14 +465,17 @@ menuItem <- function(text, ..., icon = NULL, badgeLabel = NULL, badgeColor = "gr
   # is NULL. However, we want to this input to get passed on (and not dropped), so we
   # do `%OR% ""` to assure this.
   default <- if (startExpanded) expandedName else ""
-  dataExpanded <- shiny::restoreInput(id = "sidebarItemExpanded", default) %OR% ""
+  dataExpanded <- shiny::restoreInput(id = "sidebarItemExpanded", default) %OR%
+    ""
 
   # If `dataExpanded` is not the empty string, we need to check that it is eqaul to the
   # this menuItem's `expandedName``
   isExpanded <- nzchar(dataExpanded) && (dataExpanded == expandedName)
 
-  tags$li(class = "treeview",
-    a(href = href,
+  tags$li(
+    class = "treeview",
+    a(
+      href = href,
       icon,
       span(text),
       shiny::icon("angle-left", class = "pull-right")
@@ -442,20 +483,28 @@ menuItem <- function(text, ..., icon = NULL, badgeLabel = NULL, badgeColor = "gr
     # Use do.call so that we don't add an extra list layer to the children of the
     # ul tag. This makes it a little easier to traverse the tree to search for
     # selected items to restore.
-    do.call(tags$ul, c(
-      class = paste0("treeview-menu", if (isExpanded) " menu-open" else ""),
-      style = paste0("display: ",     if (isExpanded) "block;" else "none;"),
-      `data-expanded` = expandedName,
-      subItems))
+    do.call(
+      tags$ul,
+      c(
+        class = paste0("treeview-menu", if (isExpanded) " menu-open" else ""),
+        style = paste0("display: ", if (isExpanded) "block;" else "none;"),
+        `data-expanded` = expandedName,
+        subItems
+      )
+    )
   )
 }
 
 #' @rdname sidebarMenu
 #' @export
-menuSubItem <- function(text, tabName = NULL, href = NULL, newtab = TRUE,
-  icon = shiny::icon("angle-double-right"), selected = NULL)
-{
-
+menuSubItem <- function(
+  text,
+  tabName = NULL,
+  href = NULL,
+  newtab = TRUE,
+  icon = shiny::icon("angle-double-right"),
+  selected = NULL
+) {
   if (!is.null(href) && !is.null(tabName)) {
     stop("Can't specify both href and tabName")
   }
@@ -471,13 +520,12 @@ menuSubItem <- function(text, tabName = NULL, href = NULL, newtab = TRUE,
     href <- "#"
   } else {
     # If supplied href, set up <a> tag's target
-    if (newtab)
-      target <- "_blank"
+    if (newtab) target <- "_blank"
   }
 
-
   tags$li(
-    a(href = href,
+    a(
+      href = href,
       `data-toggle` = if (isTabItem) "tab",
       `data-value` = if (!is.null(tabName)) tabName,
       `data-start-selected` = if (isTRUE(selected)) 1 else NULL,

@@ -22,8 +22,7 @@ tabItems <- function(...) {
 #'   [tabItems()]. See [sidebarMenu()] for a usage example.
 #' @export
 tabItem <- function(tabName = NULL, ...) {
-  if (is.null(tabName))
-    stop("Need tabName")
+  if (is.null(tabName)) stop("Need tabName")
 
   validateTabName(tabName)
 

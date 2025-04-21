@@ -1,7 +1,6 @@
 # Add an html dependency, without overwriting existing ones
 appendDependencies <- function(x, value) {
-  if (inherits(value, "html_dependency"))
-    value <- list(value)
+  if (inherits(value, "html_dependency")) value <- list(value)
 
   old <- attr(x, "html_dependencies", TRUE)
 
@@ -22,12 +21,15 @@ addDeps <- function(x) {
   }
 
   dashboardDeps <- list(
-    htmlDependency("AdminLTE", "2.0.6",
+    htmlDependency(
+      "AdminLTE",
+      "2.0.6",
       c(file = system.file("AdminLTE", package = "shinydashboard")),
       script = adminLTE_js,
       stylesheet = adminLTE_css
     ),
-    htmlDependency("shinydashboard",
+    htmlDependency(
+      "shinydashboard",
       as.character(utils::packageVersion("shinydashboard")),
       c(file = system.file(package = "shinydashboard")),
       script = shinydashboard_js,

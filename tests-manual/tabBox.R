@@ -7,12 +7,14 @@ body <- dashboardBody(
     tabBox(
       title = "First tabBox",
       # The id lets us use input$tabset1 on the server to find the current tab
-      id = "tabset1", height = "250px",
+      id = "tabset1",
+      height = "250px",
       tabPanel("Tab1", "First tab content"),
       tabPanel("Tab2", "Tab content 2")
     ),
     tabBox(
-      side = "right", height = "250px",
+      side = "right",
+      height = "250px",
       selected = "Tab3",
       tabPanel("Tab1", "Tab content 1"),
       tabPanel("Tab2", "Tab content 2"),
@@ -23,9 +25,10 @@ body <- dashboardBody(
     tabBox(
       # Title can include an icon
       title = tagList(shiny::icon("gear"), "tabBox status"),
-      tabPanel("Tab1",
-               "Currently selected tab from first box:",
-               verbatimTextOutput("tabset1Selected")
+      tabPanel(
+        "Tab1",
+        "Currently selected tab from first box:",
+        verbatimTextOutput("tabset1Selected")
       ),
       tabPanel("Tab2", "Tab content 2")
     )
@@ -33,7 +36,11 @@ body <- dashboardBody(
 )
 
 shinyApp(
-  ui = dashboardPage(dashboardHeader(title = "tabBoxes"), dashboardSidebar(), body),
+  ui = dashboardPage(
+    dashboardHeader(title = "tabBoxes"),
+    dashboardSidebar(),
+    body
+  ),
   server = function(input, output) {
     # The currently selected tab from the first box
     output$tabset1Selected <- renderText({

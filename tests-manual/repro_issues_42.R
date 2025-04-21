@@ -7,30 +7,31 @@ ui <- dashboardPage(
   dashboardHeader(),
   dashboardSidebar(
     sidebarMenu(
-      menuItem("Inputs", icon = icon("bar-chart-o"), tabName = "tabOne"
-      )
+      menuItem("Inputs", icon = icon("bar-chart-o"), tabName = "tabOne")
     )
   ),
   dashboardBody(
     tabItems(
-      tabItem("tabOne",
-              box(title = "Test Box One",
-                  status = "success",
-                  solidHeader = TRUE,
-                  collapsible = TRUE,
-                  collapsed = TRUE,
-                  plotOutput("plot", height = 250),
-                  verbatimTextOutput("boxOneText")
-              ),
-              box(
-                actionButton("go", "Go")
-              )
+      tabItem(
+        "tabOne",
+        box(
+          title = "Test Box One",
+          status = "success",
+          solidHeader = TRUE,
+          collapsible = TRUE,
+          collapsed = TRUE,
+          plotOutput("plot", height = 250),
+          verbatimTextOutput("boxOneText")
+        ),
+        box(
+          actionButton("go", "Go")
+        )
       )
     )
   )
 )
 
-server <-  function(input, output) {
+server <- function(input, output) {
   output$plot <- renderPlot({
     cat(paste("plotting", input$go, "\n"))
     plot(rnorm(1 + input$go), rnorm(1 + input$go))
