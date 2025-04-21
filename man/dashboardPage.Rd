@@ -13,14 +13,14 @@ dashboardPage(
 )
 }
 \arguments{
-\item{header}{A header created by \code{dashboardHeader}.}
+\item{header}{A header created by \code{\link[=dashboardHeader]{dashboardHeader()}}.}
 
-\item{sidebar}{A sidebar created by \code{dashboardSidebar}.}
+\item{sidebar}{A sidebar created by \code{\link[=dashboardSidebar]{dashboardSidebar()}}.}
 
-\item{body}{A body created by \code{dashboardBody}.}
+\item{body}{A body created by \code{\link[=dashboardBody]{dashboardBody()}}.}
 
 \item{title}{A title to display in the browser's title bar. If no value is
-provided, it will try to extract the title from the \code{dashboardHeader}.}
+provided, it will try to extract the title from the \code{\link[=dashboardHeader]{dashboardHeader()}}.}
 
 \item{skin}{A color theme. One of \code{"blue"}, \code{"black"},
 \code{"purple"}, \code{"green"}, \code{"red"}, or \code{"yellow"}.}
@@ -45,6 +45,6 @@ shinyApp(
 }
 }
 \seealso{
-\code{\link{dashboardHeader}}, \code{\link{dashboardSidebar}},
-  \code{\link{dashboardBody}}.
+\code{\link[=dashboardHeader]{dashboardHeader()}}, \code{\link[=dashboardSidebar]{dashboardSidebar()}},
+\code{\link[=dashboardBody]{dashboardBody()}}.
 }

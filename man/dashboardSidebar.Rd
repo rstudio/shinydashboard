@@ -18,8 +18,8 @@ units.}
 \item{collapsed}{If \code{TRUE}, the sidebar will be collapsed on app startup.}
 }
 \description{
-A dashboard sidebar typically contains a \code{\link{sidebarMenu}}, although
-it may also contain a \code{\link{sidebarSearchForm}}, or other Shiny inputs.
+A dashboard sidebar typically contains a \code{\link[=sidebarMenu]{sidebarMenu()}}, although
+it may also contain a \code{\link[=sidebarSearchForm]{sidebarSearchForm()}}, or other Shiny inputs.
 }
 \examples{
 ## Only run this example in interactive R sessions
@@ -70,5 +70,5 @@ shinyApp(
 }
 }
 \seealso{
-\code{\link{sidebarMenu}}
+\code{\link[=sidebarMenu]{sidebarMenu()}}
 }

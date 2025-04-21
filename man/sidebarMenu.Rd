@@ -32,7 +32,7 @@ menuSubItem(
 )
 }
 \arguments{
-\item{...}{For menu items, this may consist of \code{\link{menuSubItem}}s.}
+\item{...}{For menu items, this may consist of \code{\link[=menuSubItem]{menuSubItem()}}s.}
 
 \item{id}{For \code{sidebarMenu}, if \code{id} is present, this id will be
 used for a Shiny input value, and it will report which tab is selected. For
@@ -46,7 +46,7 @@ with programmatically generated items.}
 
 \item{text}{Text to show for the menu item.}
 
-\item{icon}{An icon tag, created by \code{\link[shiny]{icon}}. If
+\item{icon}{An icon tag, created by \code{\link[shiny:icon]{shiny::icon()}}. If
 \code{NULL}, don't display an icon.}
 
 \item{badgeLabel}{A label for an optional badge. Usually a number or a short
@@ -89,7 +89,7 @@ a value for \code{href}, then the item will simply be a link to that value.
 If a \code{menuItem} has a non-NULL \code{tabName}, then the \code{menuItem}
 will behave like a tab -- in other words, clicking on the \code{menuItem}
 will bring a corresponding \code{tabItem} to the front, similar to a
-\code{\link[shiny]{tabPanel}}. One important difference between a
+\code{\link[shiny:tabPanel]{shiny::tabPanel()}}. One important difference between a
 \code{menuItem} and a \code{tabPanel} is that, for a \code{menuItem}, you
 must also supply a corresponding \code{tabItem} with the same value for
 \code{tabName}, whereas for a \code{tabPanel}, no \code{tabName} is needed.
@@ -101,9 +101,9 @@ Menu items (but not sub-items) also may have an optional badge. A badge is a
 colored oval containing text.
 }
 \seealso{
-\code{\link{dashboardSidebar}} for example usage. For
-  dynamically-generated sidebar menus, see \code{\link{renderMenu}} and
-  \code{\link{sidebarMenuOutput}}.
+\code{\link[=dashboardSidebar]{dashboardSidebar()}} for example usage. For
+dynamically-generated sidebar menus, see \code{\link[=renderMenu]{renderMenu()}} and
+\code{\link[=sidebarMenuOutput]{sidebarMenuOutput()}}.
 
 Other sidebar items: 
 \code{\link{sidebarSearchForm}()},

@@ -1,18 +1,18 @@
 #' Create a dynamic menu output for shinydashboard (client side)
 #'
 #' This can be used as a placeholder for dynamically-generated
-#' \code{\link{dropdownMenu}}, \code{\link{notificationItem}},
-#' \code{\link{messageItem}}, \code{\link{taskItem}} \code{\link{sidebarMenu}},
-#' or \code{\link{menuItem}}. If called directly, you must make sure to supply
+#' [dropdownMenu()], [notificationItem()],
+#' [messageItem()], [taskItem()] [sidebarMenu()],
+#' or [menuItem()]. If called directly, you must make sure to supply
 #' the correct type of tag. It is simpler to use the wrapper functions if
-#' present; for example, \code{\link{dropdownMenuOutput}} and
-#' \code{\link{sidebarMenuOutput}}.
+#' present; for example, [dropdownMenuOutput()] and
+#' [sidebarMenuOutput()].
 #'
 #' @param outputId Output variable name.
-#' @param tag A tag function, like \code{tags$li} or \code{tags$ul}.
+#' @param tag A tag function, like `tags$li` or `tags$ul`.
 #'
 #' @family menu outputs
-#' @seealso \code{\link{renderMenu}} for the corresponding server side function
+#' @seealso [renderMenu()] for the corresponding server side function
 #'   and examples.
 menuOutput <- function(outputId, tag = tags$li) {
   tag(id = outputId, class = "shinydashboard-menu-output")
@@ -25,8 +25,8 @@ menuOutput <- function(outputId, tag = tags$li) {
 #'
 #' @inheritParams menuOutput
 #' @family menu outputs
-#' @seealso \code{\link{renderMenu}} for the corresponding server-side function
-#'   and examples, and \code{\link{dropdownMenu}} for the corresponding function
+#' @seealso [renderMenu()] for the corresponding server-side function
+#'   and examples, and [dropdownMenu()] for the corresponding function
 #'   for generating static menus.
 #' @export
 dropdownMenuOutput <- function(outputId) {
@@ -40,8 +40,8 @@ dropdownMenuOutput <- function(outputId) {
 #'
 #' @inheritParams menuOutput
 #' @family menu outputs
-#' @seealso \code{\link{renderMenu}} for the corresponding server-side function
-#'   and examples, and \code{\link{sidebarMenu}} for the corresponding function
+#' @seealso [renderMenu()] for the corresponding server-side function
+#'   and examples, and [sidebarMenu()] for the corresponding function
 #'   for generating static sidebar menus.
 #' @export
 sidebarMenuOutput <- function(outputId) {
@@ -54,8 +54,8 @@ sidebarMenuOutput <- function(outputId) {
 #'
 #' @inheritParams menuOutput
 #' @family menu outputs
-#' @seealso \code{\link{renderMenu}} for the corresponding server-side function
-#'   and examples, and \code{\link{menuItem}} for the corresponding function
+#' @seealso [renderMenu()] for the corresponding server-side function
+#'   and examples, and [menuItem()] for the corresponding function
 #'   for generating static sidebar menus.
 #' @export
 menuItemOutput <- function(outputId) {
@@ -67,7 +67,7 @@ menuItemOutput <- function(outputId) {
 #'
 #' @inheritParams shiny::renderUI
 #'
-#' @seealso \code{\link{menuOutput}} for the corresponding client side function
+#' @seealso [menuOutput()] for the corresponding client side function
 #'   and examples.
 #' @family menu outputs
 #' @export

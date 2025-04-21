@@ -13,9 +13,9 @@ menuItemOutput(outputId)
 This is the UI-side function for creating a dynamic sidebar menu item.
 }
 \seealso{
-\code{\link{renderMenu}} for the corresponding server-side function
-  and examples, and \code{\link{menuItem}} for the corresponding function
-  for generating static sidebar menus.
+\code{\link[=renderMenu]{renderMenu()}} for the corresponding server-side function
+and examples, and \code{\link[=menuItem]{menuItem()}} for the corresponding function
+for generating static sidebar menus.
 
 Other menu outputs: 
 \code{\link{dropdownMenuOutput}()},

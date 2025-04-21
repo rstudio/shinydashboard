@@ -6,17 +6,17 @@
 #' @param title An optional title to show in the header bar.. By default, this
 #'   will also be used as the title shown in the browser's title bar. If you
 #'   want that to be different from the text in the dashboard header bar, set
-#'   the \code{title} in \code{\link{dashboardPage}}.
+#'   the `title` in [dashboardPage()].
 #' @param titleWidth The width of the title area. This must either be a number
 #'   which specifies the width in pixels, or a string that specifies the width
 #'   in CSS units.
-#' @param disable If \code{TRUE}, don't display the header bar.
-#' @param ... Items to put in the header. Should be \code{\link{dropdownMenu}}s.
+#' @param disable If `TRUE`, don't display the header bar.
+#' @param ... Items to put in the header. Should be [dropdownMenu()]s.
 #' @param .list An optional list containing items to put in the header. Same as
-#'   the \code{...} arguments, but in list format. This can be useful when
+#'   the `...` arguments, but in list format. This can be useful when
 #'   working with programmatically generated items.
 #'
-#' @seealso \code{\link{dropdownMenu}}
+#' @seealso [dropdownMenu()]
 #'
 #' @examples
 #' ## Only run this example in interactive R sessions
@@ -140,26 +140,26 @@ dashboardHeader <- function(..., title = NULL, titleWidth = NULL, disable = FALS
 #'   "tasks".
 #' @param badgeStatus The status of the badge which displays the number of items
 #'   in the menu. This determines the badge's color. Valid statuses are listed
-#'   in \link{validStatuses}. A value of \code{NULL} means to not display a
+#'   in [validStatuses]. A value of `NULL` means to not display a
 #'   badge.
 #' @param ... Items to put in the menu. Typically, message menus should contain
-#'   \code{\link{messageItem}}s, notification menus should contain
-#'   \code{\link{notificationItem}}s, and task menus should contain
-#'   \code{\link{taskItem}}s.
+#'   [messageItem()]s, notification menus should contain
+#'   [notificationItem()]s, and task menus should contain
+#'   [taskItem()]s.
 #' @param icon An icon to display in the header. By default, the icon is
-#'   automatically selected depending on \code{type}, but it can be overriden
+#'   automatically selected depending on `type`, but it can be overriden
 #'   with this argument.
 #' @param headerText An optional text argument used for the header of the
 #'   dropdown menu (this is only visible when the menu is expanded). If none is
-#'   provided by the user, the default is "You have \code{x} messages," where
-#'   \code{x} is the number of items in the menu (if the \code{type} is
+#'   provided by the user, the default is "You have `x` messages," where
+#'   `x` is the number of items in the menu (if the `type` is
 #'   specified to be "notifications" or "tasks," the default text shows "You
-#'   have \code{x} notifications" or  "You have \code{x} tasks," respectively).
+#'   have `x` notifications" or  "You have `x` tasks," respectively).
 #' @param .list An optional list containing items to put in the menu Same as the
-#'   \code{...} arguments, but in list format. This can be useful when working
+#'   `...` arguments, but in list format. This can be useful when working
 #'   with programmatically generated items.
 #'
-#' @seealso \code{\link{dashboardHeader}} for example usage.
+#' @seealso [dashboardHeader()] for example usage.
 #'
 #' @export
 dropdownMenu <- function(...,
@@ -220,7 +220,7 @@ dropdownMenu <- function(...,
 #'
 #' @param from Who the message is from.
 #' @param message Text of the message.
-#' @param icon An icon tag, created by \code{\link[shiny]{icon}}.
+#' @param icon An icon tag, created by [shiny::icon()].
 #' @param time String representing the time the message was sent. Any string may
 #'   be used. For example, it could be a relative date/time like "5 minutes",
 #'   "today", or "12:30pm yesterday", or an absolute time, like "2014-12-01 13:45".
@@ -228,7 +228,7 @@ dropdownMenu <- function(...,
 #' @param href An optional URL to link to.
 #'
 #' @family menu items
-#' @seealso \code{\link{dashboardHeader}} for example usage.
+#' @seealso [dashboardHeader()] for example usage.
 #' @export
 messageItem <- function(from, message, icon = shiny::icon("user"), time = NULL,
   href = NULL)
@@ -252,13 +252,13 @@ messageItem <- function(from, message, icon = shiny::icon("user"), time = NULL,
 #' Create a notification item to place in a dropdown notification menu
 #'
 #' @param text The notification text.
-#' @param icon An icon tag, created by \code{\link[shiny]{icon}}.
+#' @param icon An icon tag, created by [shiny::icon()].
 #' @param status The status of the item This determines the item's background
-#'   color. Valid statuses are listed in \link{validStatuses}.
+#'   color. Valid statuses are listed in [validStatuses].
 #' @param href An optional URL to link to.
 #'
 #' @family menu items
-#' @seealso \code{\link{dashboardHeader}} for example usage.
+#' @seealso [dashboardHeader()] for example usage.
 #' @export
 notificationItem <- function(text, icon = shiny::icon("warning"),
   status = "success", href = NULL)
@@ -281,11 +281,11 @@ notificationItem <- function(text, icon = shiny::icon("warning"),
 #' @param text The task text.
 #' @param value A percent value to use for the bar.
 #' @param color A color for the bar. Valid colors are listed in
-#'   \link{validColors}.
+#'   [validColors].
 #' @param href An optional URL to link to.
 #'
 #' @family menu items
-#' @seealso \code{\link{dashboardHeader}} for example usage.
+#' @seealso [dashboardHeader()] for example usage.
 #' @export
 taskItem <- function(text, value = 0, color = "aqua", href = NULL) {
   validateColor(color)

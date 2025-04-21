@@ -13,7 +13,8 @@ Authors@R: c(
 Description: Create dashboards with 'Shiny'. This package provides a theme
     on top of 'Shiny', making it easy to create attractive dashboards.
 License: MIT + file LICENSE
-URL: https://rstudio.github.io/shinydashboard/, https://github.com/rstudio/shinydashboard
+URL: https://rstudio.github.io/shinydashboard/,
+    https://github.com/rstudio/shinydashboard
 BugReports: https://github.com/rstudio/shinydashboard/issues
 Depends:
     R (>= 3.0)
@@ -23,4 +24,5 @@ Imports:
     shiny (>= 1.0.0),
     utils
 Encoding: UTF-8
+Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.3.2

@@ -2,16 +2,16 @@
 #'
 #' This creates a dashboard page for use in a Shiny app.
 #'
-#' @param header A header created by \code{dashboardHeader}.
-#' @param sidebar A sidebar created by \code{dashboardSidebar}.
-#' @param body A body created by \code{dashboardBody}.
+#' @param header A header created by [dashboardHeader()].
+#' @param sidebar A sidebar created by [dashboardSidebar()].
+#' @param body A body created by [dashboardBody()].
 #' @param title A title to display in the browser's title bar. If no value is
-#'   provided, it will try to extract the title from the \code{dashboardHeader}.
-#' @param skin A color theme. One of \code{"blue"}, \code{"black"},
-#'   \code{"purple"}, \code{"green"}, \code{"red"}, or \code{"yellow"}.
+#'   provided, it will try to extract the title from the [dashboardHeader()].
+#' @param skin A color theme. One of `"blue"`, `"black"`,
+#'   `"purple"`, `"green"`, `"red"`, or `"yellow"`.
 #'
-#' @seealso \code{\link{dashboardHeader}}, \code{\link{dashboardSidebar}},
-#'   \code{\link{dashboardBody}}.
+#' @seealso [dashboardHeader()], [dashboardSidebar()],
+#'   [dashboardBody()].
 #' @examples
 #' ## Only run this example in interactive R sessions
 #' if (interactive()) {

@@ -99,8 +99,8 @@ shinyApp(ui, server)
 }
 }
 \seealso{
-\code{\link{menuOutput}} for the corresponding client side function
-  and examples.
+\code{\link[=menuOutput]{menuOutput()}} for the corresponding client side function
+and examples.
 
 Other menu outputs: 
 \code{\link{dropdownMenuOutput}()},

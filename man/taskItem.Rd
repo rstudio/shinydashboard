@@ -20,7 +20,7 @@ taskItem(text, value = 0, color = "aqua", href = NULL)
 Create a task item to place in a dropdown task menu
 }
 \seealso{
-\code{\link{dashboardHeader}} for example usage.
+\code{\link[=dashboardHeader]{dashboardHeader()}} for example usage.
 
 Other menu items: 
 \code{\link{messageItem}()},

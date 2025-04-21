@@ -19,7 +19,7 @@ the application.}
 A panel displaying user information in a sidebar
 }
 \seealso{
-\code{\link{dashboardSidebar}} for example usage.
+\code{\link[=dashboardSidebar]{dashboardSidebar()}} for example usage.
 
 Other sidebar items: 
 \code{\link{sidebarMenu}()},

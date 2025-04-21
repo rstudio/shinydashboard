@@ -15,17 +15,17 @@ sidebarSearchForm(
 \item{textId}{Shiny input ID for the text input box.}
 
 \item{buttonId}{Shiny input ID for the search button (which functions like an
-\code{\link[shiny]{actionButton}}).}
+\code{\link[shiny:actionButton]{shiny::actionButton()}}).}
 
 \item{label}{Text label to display inside the search box.}
 
-\item{icon}{An icon tag, created by \code{\link[shiny]{icon}}.}
+\item{icon}{An icon tag, created by \code{\link[shiny:icon]{shiny::icon()}}.}
 }
 \description{
 A search form consists of a text input field and a search button.
 }
 \seealso{
-\code{\link{dashboardSidebar}} for example usage.
+\code{\link[=dashboardSidebar]{dashboardSidebar()}} for example usage.
 
 Other sidebar items: 
 \code{\link{sidebarMenu}()},

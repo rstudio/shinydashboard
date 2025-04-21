@@ -1,16 +1,16 @@
 #' Create a dashboard sidebar.
 #'
-#' A dashboard sidebar typically contains a \code{\link{sidebarMenu}}, although
-#' it may also contain a \code{\link{sidebarSearchForm}}, or other Shiny inputs.
+#' A dashboard sidebar typically contains a [sidebarMenu()], although
+#' it may also contain a [sidebarSearchForm()], or other Shiny inputs.
 #'
 #' @param ... Items to put in the sidebar.
-#' @param disable If \code{TRUE}, the sidebar will be disabled.
+#' @param disable If `TRUE`, the sidebar will be disabled.
 #' @param width The width of the sidebar. This must either be a number which
 #'   specifies the width in pixels, or a string that specifies the width in CSS
 #'   units.
-#' @param collapsed If \code{TRUE}, the sidebar will be collapsed on app startup.
+#' @param collapsed If `TRUE`, the sidebar will be collapsed on app startup.
 #'
-#' @seealso \code{\link{sidebarMenu}}
+#' @seealso [sidebarMenu()]
 #'
 #' @examples
 #' ## Only run this example in interactive R sessions
@@ -151,7 +151,7 @@ dashboardSidebar <- function(..., disable = FALSE, width = NULL, collapsed = FAL
 #'
 #' @family sidebar items
 #'
-#' @seealso \code{\link{dashboardSidebar}} for example usage.
+#' @seealso [dashboardSidebar()] for example usage.
 #'
 #' @export
 sidebarUserPanel <- function(name, subtitle = NULL, image = NULL) {
@@ -176,13 +176,13 @@ sidebarUserPanel <- function(name, subtitle = NULL, image = NULL) {
 #'
 #' @param textId Shiny input ID for the text input box.
 #' @param buttonId Shiny input ID for the search button (which functions like an
-#'   \code{\link[shiny]{actionButton}}).
+#'   [shiny::actionButton()]).
 #' @param label Text label to display inside the search box.
-#' @param icon An icon tag, created by \code{\link[shiny]{icon}}.
+#' @param icon An icon tag, created by [shiny::icon()].
 #'
 #' @family sidebar items
 #'
-#' @seealso \code{\link{dashboardSidebar}} for example usage.
+#' @seealso [dashboardSidebar()] for example usage.
 #'
 #' @export
 sidebarSearchForm <- function(textId, buttonId, label = "Search...",
@@ -204,65 +204,65 @@ sidebarSearchForm <- function(textId, buttonId, label = "Search...",
 
 #' Create a dashboard sidebar menu and menu items.
 #'
-#' A \code{dashboardSidebar} can contain a \code{sidebarMenu}. A
-#' \code{sidebarMenu} contains \code{menuItem}s, and they can in turn contain
-#' \code{menuSubItem}s.
+#' A `dashboardSidebar` can contain a `sidebarMenu`. A
+#' `sidebarMenu` contains `menuItem`s, and they can in turn contain
+#' `menuSubItem`s.
 #'
 #' Menu items (and similarly, sub-items) should have a value for either
-#' \code{href} or \code{tabName}; otherwise the item would do nothing. If it has
-#' a value for \code{href}, then the item will simply be a link to that value.
+#' `href` or `tabName`; otherwise the item would do nothing. If it has
+#' a value for `href`, then the item will simply be a link to that value.
 #'
-#' If a \code{menuItem} has a non-NULL \code{tabName}, then the \code{menuItem}
-#' will behave like a tab -- in other words, clicking on the \code{menuItem}
-#' will bring a corresponding \code{tabItem} to the front, similar to a
-#' \code{\link[shiny]{tabPanel}}. One important difference between a
-#' \code{menuItem} and a \code{tabPanel} is that, for a \code{menuItem}, you
-#' must also supply a corresponding \code{tabItem} with the same value for
-#' \code{tabName}, whereas for a \code{tabPanel}, no \code{tabName} is needed.
-#' (This is because the structure of a \code{tabPanel} is such that the tab name
+#' If a `menuItem` has a non-NULL `tabName`, then the `menuItem`
+#' will behave like a tab -- in other words, clicking on the `menuItem`
+#' will bring a corresponding `tabItem` to the front, similar to a
+#' [shiny::tabPanel()]. One important difference between a
+#' `menuItem` and a `tabPanel` is that, for a `menuItem`, you
+#' must also supply a corresponding `tabItem` with the same value for
+#' `tabName`, whereas for a `tabPanel`, no `tabName` is needed.
+#' (This is because the structure of a `tabPanel` is such that the tab name
 #' can be automatically generated.) Sub-items are also able to activate
-#' \code{tabItem}s.
+#' `tabItem`s.
 #'
 #' Menu items (but not sub-items) also may have an optional badge. A badge is a
 #' colored oval containing text.
 #'
 #' @param text Text to show for the menu item.
-#' @param id For \code{sidebarMenu}, if \code{id} is present, this id will be
+#' @param id For `sidebarMenu`, if `id` is present, this id will be
 #'   used for a Shiny input value, and it will report which tab is selected. For
-#'   example, if \code{id="tabs"}, then \code{input$tabs} will be the
-#'   \code{tabName} of the currently-selected tab. If you want to be able to
-#'   bookmark and restore the selected tab, an \code{id} is required.
-#' @param icon An icon tag, created by \code{\link[shiny]{icon}}. If
-#'   \code{NULL}, don't display an icon.
+#'   example, if `id="tabs"`, then `input$tabs` will be the
+#'   `tabName` of the currently-selected tab. If you want to be able to
+#'   bookmark and restore the selected tab, an `id` is required.
+#' @param icon An icon tag, created by [shiny::icon()]. If
+#'   `NULL`, don't display an icon.
 #' @param badgeLabel A label for an optional badge. Usually a number or a short
 #'   word like "new".
 #' @param badgeColor A color for the badge. Valid colors are listed in
-#'   \link{validColors}.
-#' @param href An link address. Not compatible with \code{tabName}.
+#'   [validColors].
+#' @param href An link address. Not compatible with `tabName`.
 #' @param tabName The name of a tab that this menu item will activate. Not
-#'   compatible with \code{href}.
-#' @param newtab If \code{href} is supplied, should the link open in a new
+#'   compatible with `href`.
+#' @param newtab If `href` is supplied, should the link open in a new
 #'   browser tab?
-#' @param selected If \code{TRUE}, this \code{menuItem} or \code{menuSubItem}
-#'   will start selected. If no item have \code{selected=TRUE}, then the first
-#'   \code{menuItem} will start selected.
-#' @param expandedName A unique name given to each \code{menuItem} that serves
+#' @param selected If `TRUE`, this `menuItem` or `menuSubItem`
+#'   will start selected. If no item have `selected=TRUE`, then the first
+#'   `menuItem` will start selected.
+#' @param expandedName A unique name given to each `menuItem` that serves
 #'   to indicate which one (if any) is currently expanded. (This is only applicable
-#'   to \code{menuItem}s that have children and it is mostly only useful for
+#'   to `menuItem`s that have children and it is mostly only useful for
 #'   bookmarking state.)
-#' @param startExpanded Should this \code{menuItem} be expanded on app startup?
-#'   (This is only applicable to \code{menuItem}s that have children, and only
+#' @param startExpanded Should this `menuItem` be expanded on app startup?
+#'   (This is only applicable to `menuItem`s that have children, and only
 #'   one of these can be expanded at any given time).
-#' @param ... For menu items, this may consist of \code{\link{menuSubItem}}s.
+#' @param ... For menu items, this may consist of [menuSubItem()]s.
 #' @param .list An optional list containing items to put in the menu Same as the
-#'   \code{...} arguments, but in list format. This can be useful when working
+#'   `...` arguments, but in list format. This can be useful when working
 #'   with programmatically generated items.
 #'
 #' @family sidebar items
 #'
-#' @seealso \code{\link{dashboardSidebar}} for example usage. For
-#'   dynamically-generated sidebar menus, see \code{\link{renderMenu}} and
-#'   \code{\link{sidebarMenuOutput}}.
+#' @seealso [dashboardSidebar()] for example usage. For
+#'   dynamically-generated sidebar menus, see [renderMenu()] and
+#'   [sidebarMenuOutput()].
 #'
 #' @export
 sidebarMenu <- function(..., id = NULL, .list = NULL) {
