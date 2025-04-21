@@ -20,11 +20,6 @@ sidebar <- dashboardSidebar(
   textInput("text", "Text input")
 )
 
-body <- dashboardBody(
-
-
-)
-
 ui <- dashboardPage(
   dashboardHeader(title = "My Dashboard"),
   sidebar,
