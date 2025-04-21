@@ -17,11 +17,11 @@ Useful links:
 
 }
 \author{
-\strong{Maintainer}: Winston Chang \email{winston@rstudio.com}
+\strong{Maintainer}: Winston Chang \email{winston@posit.co}
 
 Authors:
 \itemize{
-  \item Barbara Borges Ribeiro \email{barbara@rstudio.com}
+  \item Barbara Borges Ribeiro
 }
 
 Other contributors:
