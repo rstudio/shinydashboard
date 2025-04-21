@@ -5,7 +5,9 @@ body <- dashboardBody(
     box(plotOutput("plot1", height = 250)),
 
     box(
-      "Box content here", br(), "More box content",
+      "Box content here",
+      br(),
+      "More box content",
       sliderInput("slider", "Slider input:", 1, 100, 50),
       textInput("text", "Text input:")
     )
@@ -13,11 +15,18 @@ body <- dashboardBody(
 
   # Title and status color
   fluidRow(
-    box(title = "Histogram", status = "primary", plotOutput("plot2", height = 250)),
+    box(
+      title = "Histogram",
+      status = "primary",
+      plotOutput("plot2", height = 250)
+    ),
 
     box(
-      title = "Inputs", status = "warning",
-      "Box content here", br(), "More box content",
+      title = "Inputs",
+      status = "warning",
+      "Box content here",
+      br(),
+      "More box content",
       sliderInput("slider", "Slider input:", 1, 100, 50),
       textInput("text", "Text input:")
     )
@@ -26,14 +35,20 @@ body <- dashboardBody(
   # Solid header, collapsible
   fluidRow(
     box(
-      title = "Histogram", status = "primary", solidHeader = TRUE,
+      title = "Histogram",
+      status = "primary",
+      solidHeader = TRUE,
       collapsible = TRUE,
       plotOutput("plot3", height = 250)
     ),
 
     box(
-      title = "Inputs", status = "warning", solidHeader = TRUE,
-      "Box content here", br(), "More box content",
+      title = "Inputs",
+      status = "warning",
+      solidHeader = TRUE,
+      "Box content here",
+      br(),
+      "More box content",
       sliderInput("slider", "Slider input:", 1, 100, 50),
       textInput("text", "Text input:")
     )
@@ -42,14 +57,18 @@ body <- dashboardBody(
   # Solid header, no color
   fluidRow(
     box(
-      title = "Histogram", solidHeader = TRUE,
+      title = "Histogram",
+      solidHeader = TRUE,
       collapsible = TRUE,
       plotOutput("plot4", height = 250)
     ),
 
     box(
-      title = "Inputs", solidHeader = TRUE,
-      "Box content here", br(), "More box content",
+      title = "Inputs",
+      solidHeader = TRUE,
+      "Box content here",
+      br(),
+      "More box content",
       sliderInput("slider", "Slider input:", 1, 100, 50),
       textInput("text", "Text input:")
     )
@@ -58,18 +77,22 @@ body <- dashboardBody(
   # Solid background, collapsible
   fluidRow(
     box(
-      title = "Histogram", background = "maroon", solidHeader = TRUE,
+      title = "Histogram",
+      background = "maroon",
+      solidHeader = TRUE,
       plotOutput("plot5", height = 250)
     ),
 
     box(
-      title = "Inputs", background = "black",
-      "Box content here", br(), "More box content",
+      title = "Inputs",
+      background = "black",
+      "Box content here",
+      br(),
+      "More box content",
       sliderInput("slider", "Slider input:", 1, 100, 50),
       textInput("text", "Text input:")
     )
   )
-
 )
 
 ui <- dashboardPage(

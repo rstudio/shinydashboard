@@ -28,25 +28,43 @@ body <- dashboardBody(
   # Boxes with solid headers
   fluidRow(
     box(
-      title = "Title 1", width = 4, solidHeader = TRUE, status = "primary",
+      title = "Title 1",
+      width = 4,
+      solidHeader = TRUE,
+      status = "primary",
       height = row2height,
       sliderInput("orders", "Orders", min = 1, max = 500, value = 120),
-      radioButtons("fill", "Fill", inline = TRUE,
+      radioButtons(
+        "fill",
+        "Fill",
+        inline = TRUE,
         c(None = "none", Blue = "blue", Black = "black", red = "red")
       )
     ),
     box(
       title = "Title 2",
-      width = 4, solidHeader = TRUE,
+      width = 4,
+      solidHeader = TRUE,
       height = row2height,
       p("Box content here")
     ),
     box(
       title = "Title 3",
-      width = 4, solidHeader = TRUE, status = "warning",
+      width = 4,
+      solidHeader = TRUE,
+      status = "warning",
       height = row2height,
-      selectInput("spread", "Spread",
-        choices = c("0%" = 0, "20%" = 20, "40%" = 40, "60%" = 60, "80%" = 80, "100%" = 100),
+      selectInput(
+        "spread",
+        "Spread",
+        choices = c(
+          "0%" = 0,
+          "20%" = 20,
+          "40%" = 40,
+          "60%" = 60,
+          "80%" = 80,
+          "100%" = 100
+        ),
         selected = "60"
       )
     )
@@ -74,7 +92,6 @@ body <- dashboardBody(
       background = "maroon",
       "A box with a solid maroon background"
     )
-
   )
 )
 
@@ -85,18 +102,19 @@ ui <- dashboardPage(
 )
 
 server <- function(input, output) {
-
   set.seed(122)
   histdata <- rnorm(500)
 
   output$plot1 <- renderPlot({
-    if (is.null(input$orders) || is.null(input$fill))
+    if (is.null(input$orders) || is.null(input$fill)) {
       return()
+    }
 
     data <- histdata[seq(1, input$orders)]
     color <- input$fill
-    if (color == "none")
+    if (color == "none") {
       color <- NULL
+    }
     hist(data, col = color)
   })
 

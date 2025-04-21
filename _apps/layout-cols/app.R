@@ -2,7 +2,8 @@ library(shinydashboard)
 
 body <- dashboardBody(
   fluidRow(
-    column(width = 4,
+    column(
+      width = 4,
       box(
         title = "Box title",
         status = "primary",
@@ -10,10 +11,15 @@ body <- dashboardBody(
         plotOutput("plot1", height = 240)
       ),
       box(
-        title = "Title 1", solidHeader = TRUE, status = "primary",
+        title = "Title 1",
+        solidHeader = TRUE,
+        status = "primary",
         width = NULL,
         sliderInput("orders", "Orders", min = 1, max = 500, value = 120),
-        radioButtons("fill", "Fill", inline = TRUE,
+        radioButtons(
+          "fill",
+          "Fill",
+          inline = TRUE,
           c(None = "none", Blue = "blue", Black = "black", red = "red")
         )
       ),
@@ -24,7 +30,8 @@ body <- dashboardBody(
       )
     ),
 
-    column(width = 4,
+    column(
+      width = 4,
       box(
         status = "warning",
         width = NULL,
@@ -32,10 +39,20 @@ body <- dashboardBody(
       ),
       box(
         title = "Title 3",
-        solidHeader = TRUE, status = "warning",
+        solidHeader = TRUE,
+        status = "warning",
         width = NULL,
-        selectInput("spread", "Spread",
-          choices = c("0%" = 0, "20%" = 20, "40%" = 40, "60%" = 60, "80%" = 80, "100%" = 100),
+        selectInput(
+          "spread",
+          "Spread",
+          choices = c(
+            "0%" = 0,
+            "20%" = 20,
+            "40%" = 40,
+            "60%" = 60,
+            "80%" = 80,
+            "100%" = 100
+          ),
           selected = "60"
         )
       ),
@@ -47,7 +64,8 @@ body <- dashboardBody(
       )
     ),
 
-    column(width = 4,
+    column(
+      width = 4,
       box(
         title = "Title 2",
         solidHeader = TRUE,
@@ -71,18 +89,15 @@ ui <- dashboardPage(
 )
 
 server <- function(input, output) {
-
   set.seed(122)
   histdata <- rnorm(500)
 
   output$plot1 <- renderPlot({
-    if (is.null(input$orders) || is.null(input$fill))
-      return()
+    if (is.null(input$orders) || is.null(input$fill)) return()
 
     data <- histdata[seq(1, input$orders)]
     color <- input$fill
-    if (color == "none")
-      color <- NULL
+    if (color == "none") color <- NULL
     hist(data, col = color)
   })
 

@@ -1,11 +1,14 @@
 library(shinydashboard)
 
 ui <- bootstrapPage(
-  span(id = "content",
-    "Calendar from Font-Awesome:", icon("calendar"),
+  span(
+    id = "content",
+    "Calendar from Font-Awesome:",
+    icon("calendar"),
     br(),
     br(),
-    "Cog from Glyphicons:", icon("cog", lib = "glyphicon")
+    "Cog from Glyphicons:",
+    icon("cog", lib = "glyphicon")
   )
 )
 

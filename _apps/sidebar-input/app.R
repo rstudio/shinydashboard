@@ -10,7 +10,9 @@ ui <- dashboardPage(
 
       menuItem("Dashboard", tabName = "dashboard", icon = icon("dashboard")),
       menuItem("Widgets", icon = icon("th"), tabName = "widgets"),
-      menuItem("Charts", icon = icon("bar-chart-o"),
+      menuItem(
+        "Charts",
+        icon = icon("bar-chart-o"),
         menuSubItem("Sub-item 1", tabName = "subitem1"),
         menuSubItem("Sub-item 2", tabName = "subitem2")
       )

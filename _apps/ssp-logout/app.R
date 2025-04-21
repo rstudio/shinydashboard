@@ -3,14 +3,18 @@ library(shinydashboard)
 ui <- dashboardPage(
   dashboardHeader(
     title = "SSP logout",
-    dropdownMenu(type = "messages", badgeStatus = "success",
+    dropdownMenu(
+      type = "messages",
+      badgeStatus = "success",
       messageItem("Message 1", "Content of a message.")
     )
   ),
   dashboardSidebar(
-    tags$head(tags$style(HTML('
+    tags$head(tags$style(HTML(
+      '
       .shiny-server-account { display: none; }
-    '))),
+    '
+    ))),
     uiOutput("userpanel"),
     sidebarMenu(
       menuItem("Menu item 1", icon = shiny::icon("calendar"))
@@ -24,7 +28,8 @@ server <- function(input, output, session) {
     if (!is.null(session$user)) {
       sidebarUserPanel(
         span("Logged in as ", session$user),
-        subtitle = a(shiny::icon("sign-out"), "Logout", href="__logout__"))
+        subtitle = a(shiny::icon("sign-out"), "Logout", href = "__logout__")
+      )
     }
   })
 }

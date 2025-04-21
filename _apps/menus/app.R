@@ -1,5 +1,6 @@
 library(shinydashboard)
-messages <- dropdownMenu(type = "messages",
+messages <- dropdownMenu(
+  type = "messages",
   messageItem(
     from = "Sales Dept",
     message = "Sales are steady this month."
@@ -18,7 +19,9 @@ messages <- dropdownMenu(type = "messages",
   )
 )
 
-notifications <- dropdownMenu(type = "notifications", badgeStatus = "warning",
+notifications <- dropdownMenu(
+  type = "notifications",
+  badgeStatus = "warning",
   notificationItem(
     text = "5 new users today",
     icon("users")
@@ -35,19 +38,13 @@ notifications <- dropdownMenu(type = "notifications", badgeStatus = "warning",
   )
 )
 
-tasks <- dropdownMenu(type = "tasks", badgeStatus = "success",
-  taskItem(value = 90, color = "green",
-    "Documentation"
-  ),
-  taskItem(value = 17, color = "aqua",
-    "Project X"
-  ),
-  taskItem(value = 75, color = "yellow",
-    "Server deployment"
-  ),
-  taskItem(value = 80, color = "red",
-    "Overall project"
-  )
+tasks <- dropdownMenu(
+  type = "tasks",
+  badgeStatus = "success",
+  taskItem(value = 90, color = "green", "Documentation"),
+  taskItem(value = 17, color = "aqua", "Project X"),
+  taskItem(value = 75, color = "yellow", "Server deployment"),
+  taskItem(value = 80, color = "red", "Overall project")
 )
 
 

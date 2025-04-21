@@ -7,7 +7,10 @@ ui <- dashboardPage(
     sidebarMenu(
       menuItem("Dashboard", tabName = "dashboard", icon = icon("dashboard")),
       menuItem("Widgets", icon = icon("th"), tabName = "widgets"),
-      menuItem("Charts", icon = icon("bar-chart-o"), startExpanded = TRUE,
+      menuItem(
+        "Charts",
+        icon = icon("bar-chart-o"),
+        startExpanded = TRUE,
         menuSubItem("Sub-item 1", tabName = "subitem1"),
         menuSubItem("Sub-item 2", tabName = "subitem2")
       )
