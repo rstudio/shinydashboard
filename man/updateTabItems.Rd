@@ -4,18 +4,20 @@
 \alias{updateTabItems}
 \title{Change the selected tab on the client}
 \usage{
-updateTabItems(session = getDefaultReactiveDomain(), inputId, selected = NULL)
+updateTabItems(...)
 }
 \arguments{
-\item{session}{The \code{session} object passed to function given to
+\item{...}{
+  Arguments passed on to \code{\link[shiny:updateTabsetPanel]{shiny::updateTabsetPanel}}
+  \describe{
+    \item{\code{session}}{The \code{session} object passed to function given to
 \code{shinyServer}. Default is \code{getDefaultReactiveDomain()}.}
-
-\item{inputId}{The id of the \code{tabsetPanel}, \code{navlistPanel},
+    \item{\code{inputId}}{The id of the \code{tabsetPanel}, \code{navlistPanel},
 or \code{navbarPage} object.}
-
-\item{selected}{The \code{value} (or, if none was supplied, the \code{title})
+    \item{\code{selected}}{The \code{value} (or, if none was supplied, the \code{title})
 of the tab that should be selected by default. If \code{NULL}, the first
 tab will be selected.}
+  }}
 }
 \description{
 This function controls the active tab of \code{\link{tabItems}} from the
