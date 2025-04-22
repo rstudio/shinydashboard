@@ -1,6 +1,6 @@
 Package: shinydashboard
 Title: Create Dashboards with 'Shiny'
-Version: 0.7.3
+Version: 0.7.3.9000
 Authors@R: c(
     person("Winston", "Chang", , "winston@posit.co", role = c("aut", "cre")),
     person("Barbara", "Borges Ribeiro", role = "aut"),
