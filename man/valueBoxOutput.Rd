@@ -19,10 +19,10 @@ layouts, use \code{NULL} for the width; the width is set by the column that
 contains the box.}
 }
 \description{
-This is the UI-side function for creating a dynamic \code{\link{valueBox}} or
-\code{\link{infoBox}}.
+This is the UI-side function for creating a dynamic \code{\link[=valueBox]{valueBox()}} or
+\code{\link[=infoBox]{infoBox()}}.
 }
 \seealso{
-\code{\link{renderValueBox}} for the corresponding server-side
-  function and examples.
+\code{\link[=renderValueBox]{renderValueBox()}} for the corresponding server-side
+function and examples.
 }

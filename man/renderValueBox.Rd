@@ -25,7 +25,7 @@ would like to use its expression as a value for \code{expr}, then you must set
 }
 \description{
 This is the server-side function for creating a dynamic
-\code{\link{valueBox}} or \code{\link{infoBox}}.
+\code{\link[=valueBox]{valueBox()}} or \code{\link[=infoBox]{infoBox()}}.
 }
 \examples{
 ## Only run this example in interactive R sessions
@@ -65,5 +65,5 @@ shinyApp(ui, server)
 }
 }
 \seealso{
-\code{\link{valueBoxOutput}} for the corresponding UI-side function.
+\code{\link[=valueBoxOutput]{valueBoxOutput()}} for the corresponding UI-side function.
 }

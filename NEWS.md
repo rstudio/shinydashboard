@@ -1,18 +1,16 @@
-# shinydashboard (development version)
+# shinydashboard 0.7.3
 
 ### Bug fixes
 
-* Fixed [#397](https://github.com/rstudio/shinydashboard/issues/397): `updateTabItems()` is now a run-time alias of `shiny::updateTabsetPanel()`. ([#398](https://github.com/rstudio/shinydashboard/pull/398))
+* Fixed [#397](https://github.com/rstudio/shinydashboard/issues/397): `updateTabItems()` is now a run-time alias of `shiny::updateTabsetPanel()`. ([#398](https://github.com/rstudio/shinydashboard/pull/370))
 
-shinydashboard 0.7.2
-====================
+# shinydashboard 0.7.2
 
 ### Bug fixes
 
 * Fixed [#369](https://github.com/rstudio/shinydashboard/issues/369): `renderMenu()` did not work correctly when shinydashboard was built against shiny 1.6.0 (and older) but used with shiny 1.7.0 (and higher). ([#370](https://github.com/rstudio/shinydashboard/pull/370))
 
-shinydashboard 0.7.1
-====================
+# shinydashboard 0.7.1
 
 ## Full changelog
 
@@ -24,8 +22,7 @@ shinydashboard 0.7.1
 
 * Fixed [#297](https://github.com/rstudio/shinydashboard/issues/297): recent versions of Shiny caused the sidebar toggle icon to not render because FontAwesome was upgraded in Shiny. ([#299](https://github.com/rstudio/shinydashboard/pull/299))
 
-shinydashboard 0.7.0
-====================
+# shinydashboard 0.7.0
 
 ## Full changelog
 
@@ -43,8 +40,7 @@ shinydashboard 0.7.0
 
 * Fixed [#229](https://github.com/rstudio/shinydashboard/issues/229): only run `ensureActivatedTab()` after `renderMenu()` is called *_if_* the `el` in question has class `"sidebar-menu"`. Since this function is used for both `dropdownMenuOutput` and `sidebarMenuOutput`, we have to make sure that `ensureActivatedTab()` is only called if it's the latter case (otherwise, you get unexpected tab redirections when updating a dropdown menu). ([#233](https://github.com/rstudio/shinydashboard/pull/233))
 
-shinydashboard 0.6.1
-====================
+# shinydashboard 0.6.1
 
 This is a hotfix release of shinydashboard, meant to fix a few edge cases that have surfaced since the last release.
 
@@ -54,8 +50,7 @@ This is a hotfix release of shinydashboard, meant to fix a few edge cases that h
 
 * Fixed [#217](https://github.com/rstudio/shinydashboard/issues/217): correct `input$sidebarCollapsed` value for edge cases by attaching the change event to the end of the sidebar CSS transitions (instead of when the toggle button is clicked). Also make sure that `input$sidebarCollapsed` is set to `FALSE` when the app starts up with the sidebar already collapsed. ([#222](https://github.com/rstudio/shinydashboard/pull/222))
 
-shinydashboard 0.6.0
-====================
+# shinydashboard 0.6.0
 
 This release of shinydashboard was aimed at both fixing bugs and also bringing the package up to speed with users' requests and Shiny itself (especially fully bringing [bookmarkable state](https://shiny.rstudio.com/articles/bookmarking-state.html) to shinydashboard's sidebar). In addition to the changes listed below, we also added a [new "Behavior" section to the shinydashboard website](https://rstudio.github.io/shinydashboard/behavior.html) to explain this release's two biggest new features.
 
@@ -105,13 +100,11 @@ This release of shinydashboard was aimed at both fixing bugs and also bringing t
 
 * Updated to AdminLTE 2.3.11. ([#181](https://github.com/rstudio/shinydashboard/pull/181))
 
-shinydashboard 0.5.3
-=========================
+# shinydashboard 0.5.3
 
 * Fixed ([#160](https://github.com/rstudio/shinydashboard/issues/160): Using a dynamically-created `sidebarMenu` without an `id` argument would cause the app to not start, when used with Shiny 0.14.
 
-shinydashboard 0.5.2
-====================
+# shinydashboard 0.5.2
 
 * Added ability to bookmark and restore tabs, when used with Shiny 0.14 and above. ([#152](https://github.com/rstudio/shinydashboard/issues/152), [#157](https://github.com/rstudio/shinydashboard/pull/157))
 
@@ -119,8 +112,7 @@ shinydashboard 0.5.2
 
 * Updated to AdminLTE 2.3.2 (1ee281b).
 
-shinydashboard 0.5.1
-====================
+# shinydashboard 0.5.1
 
 * Logout panels from Shiny Server Pro were previously not visible, but now they are.
 
@@ -132,8 +124,7 @@ shinydashboard 0.5.1
 
 * `radioButtons` did not wrap, but now they do. (#60)
 
-shinydashboard 0.5.0
-====================
+# shinydashboard 0.5.0
 
 * Updated to AdminLTE 2.1.2 (406de4e). Please note that some CSS selectors have changed, so if you are using custom CSS, it may require modification. The documentation at http://rstudio.github.io/shinydashboard/appearance.html has some updated examples.
 

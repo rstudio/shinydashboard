@@ -43,8 +43,6 @@ sidebar <- dashboardSidebar(
   sidebarMenuOutput("menu")
 )
 
-ui <- dashboardPage(header,
-                    sidebar,
-                    body)
+ui <- dashboardPage(header, sidebar, body)
 
 shinyApp(ui, server)

@@ -10,9 +10,9 @@ dashboardBody(...)
 \item{...}{Items to put in the dashboard body.}
 }
 \description{
-The main body typically contains \code{\link{box}}es. Another common use
-pattern is for the main body to contain \code{\link{tabItems}}.
+The main body typically contains \code{\link[=box]{box()}}es. Another common use
+pattern is for the main body to contain \code{\link[=tabItems]{tabItems()}}.
 }
 \seealso{
-\code{\link{tabItems}}, \code{\link{box}}, \code{\link{valueBox}}.
+\code{\link[=tabItems]{tabItems()}}, \code{\link[=box]{box()}}, \code{\link[=valueBox]{valueBox()}}.
 }

@@ -8,12 +8,12 @@ tabItems(...)
 }
 \arguments{
 \item{...}{Items to put in the container. Each item should be a
-\code{\link{tabItem}}.}
+\code{\link[=tabItem]{tabItem()}}.}
 }
 \description{
 A container for tab items
 }
 \seealso{
-\code{\link{menuItem}}, \code{\link{menuSubItem}},
-  \code{\link{tabItem}}. See \code{\link{sidebarMenu}} for a usage example.
+\code{\link[=menuItem]{menuItem()}}, \code{\link[=menuSubItem]{menuSubItem()}},
+\code{\link[=tabItem]{tabItem()}}. See \code{\link[=sidebarMenu]{sidebarMenu()}} for a usage example.
 }

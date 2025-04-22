@@ -9,8 +9,11 @@ body <- dashboardBody(
 
 server <- function(input, output) {
   output$ui <- renderUI({
-    box(title = "Collapse me",
-        status = "warning", solidHeader = TRUE, collapsible = TRUE
+    box(
+      title = "Collapse me",
+      status = "warning",
+      solidHeader = TRUE,
+      collapsible = TRUE
     )
   })
 }

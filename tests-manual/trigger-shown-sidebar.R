@@ -5,16 +5,27 @@
 library(shiny)
 library(shinydashboard)
 
-options(shiny.launch.browser=F, shiny.minified=F, shiny.port = 9000)
+options(shiny.launch.browser = F, shiny.minified = F, shiny.port = 9000)
 
 ui <- function(req) {
   dashboardPage(
     dashboardHeader(),
     dashboardSidebar(
-      sidebarMenu(id = "smenu",
-        menuItem("Menu Item 1", tabName = "tab1", "text1", menuSubItem("name", tabName = "tabName")),
-        menuItem("Menu Item 2", tabName = "tab2", textOutput("text2"), startExpanded = FALSE,
-          expandedName = "expanded")
+      sidebarMenu(
+        id = "smenu",
+        menuItem(
+          "Menu Item 1",
+          tabName = "tab1",
+          "text1",
+          menuSubItem("name", tabName = "tabName")
+        ),
+        menuItem(
+          "Menu Item 2",
+          tabName = "tab2",
+          textOutput("text2"),
+          startExpanded = FALSE,
+          expandedName = "expanded"
+        )
       )
     ),
     dashboardBody(

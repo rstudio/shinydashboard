@@ -11,7 +11,7 @@ valueBox(value, subtitle, icon = NULL, color = "aqua", width = 4, href = NULL)
 
 \item{subtitle}{Subtitle text.}
 
-\item{icon}{An icon tag, created by \code{\link[shiny]{icon}}.}
+\item{icon}{An icon tag, created by \code{\link[shiny:icon]{shiny::icon()}}.}
 
 \item{color}{A color for the box. Valid colors are listed in
 \link{validColors}.}
@@ -30,7 +30,7 @@ subtitle beneath, and a large icon on the right side. Value boxes are meant
 to be placed in the main body of a dashboard.
 }
 \seealso{
-\code{\link{box}} for usage examples.
+\code{\link[=box]{box()}} for usage examples.
 
 Other boxes: 
 \code{\link{box}()},

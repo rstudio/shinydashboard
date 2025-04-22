@@ -1,16 +1,16 @@
 #' Create a dashboard sidebar.
 #'
-#' A dashboard sidebar typically contains a \code{\link{sidebarMenu}}, although
-#' it may also contain a \code{\link{sidebarSearchForm}}, or other Shiny inputs.
+#' A dashboard sidebar typically contains a [sidebarMenu()], although
+#' it may also contain a [sidebarSearchForm()], or other Shiny inputs.
 #'
 #' @param ... Items to put in the sidebar.
-#' @param disable If \code{TRUE}, the sidebar will be disabled.
+#' @param disable If `TRUE`, the sidebar will be disabled.
 #' @param width The width of the sidebar. This must either be a number which
 #'   specifies the width in pixels, or a string that specifies the width in CSS
 #'   units.
-#' @param collapsed If \code{TRUE}, the sidebar will be collapsed on app startup.
+#' @param collapsed If `TRUE`, the sidebar will be collapsed on app startup.
 #'
-#' @seealso \code{\link{sidebarMenu}}
+#' @seealso [sidebarMenu()]
 #'
 #' @examples
 #' ## Only run this example in interactive R sessions
@@ -60,7 +60,12 @@
 #' )
 #' }
 #' @export
-dashboardSidebar <- function(..., disable = FALSE, width = NULL, collapsed = FALSE) {
+dashboardSidebar <- function(
+  ...,
+  disable = FALSE,
+  width = NULL,
+  collapsed = FALSE
+) {
   width <- validateCssUnit(width)
 
   # Set up custom CSS for custom width
@@ -71,7 +76,11 @@ dashboardSidebar <- function(..., disable = FALSE, width = NULL, collapsed = FAL
     # that instead making changes to the global settings, we've put them in a
     # media query (min-width: 768px), so that it won't override other media
     # queries (like max-width: 767px) that work for narrower screens.
-    custom_css <- tags$head(tags$style(HTML(gsub("_WIDTH_", width, fixed = TRUE, '
+    custom_css <- tags$head(tags$style(HTML(gsub(
+      "_WIDTH_",
+      width,
+      fixed = TRUE,
+      '
       .main-sidebar, .left-side {
         width: _WIDTH_;
       }
@@ -114,7 +123,8 @@ dashboardSidebar <- function(..., disable = FALSE, width = NULL, collapsed = FAL
           transform: translate(-_WIDTH_, 0);
         }
       }
-    '))))
+    '
+    ))))
   }
 
   # If we're restoring a bookmarked app, this holds the value of whether or not the
@@ -131,7 +141,9 @@ dashboardSidebar <- function(..., disable = FALSE, width = NULL, collapsed = FAL
   # `dashboardPage()` function
   tags$aside(
     id = "sidebarCollapsed",
-    class = "main-sidebar", `data-collapsed` = dataValueString, custom_css,
+    class = "main-sidebar",
+    `data-collapsed` = dataValueString,
+    custom_css,
     tags$section(
       id = "sidebarItemExpanded",
       class = "sidebar",
@@ -151,17 +163,20 @@ dashboardSidebar <- function(..., disable = FALSE, width = NULL, collapsed = FAL
 #'
 #' @family sidebar items
 #'
-#' @seealso \code{\link{dashboardSidebar}} for example usage.
+#' @seealso [dashboardSidebar()] for example usage.
 #'
 #' @export
 sidebarUserPanel <- function(name, subtitle = NULL, image = NULL) {
-  div(class = "user-panel",
+  div(
+    class = "user-panel",
     if (!is.null(image)) {
-      div(class = "pull-left image",
+      div(
+        class = "pull-left image",
         img(src = image, class = "img-circle", alt = "User Image")
       )
     },
-    div(class = "pull-left info",
+    div(
+      class = "pull-left info",
       # If no image, move text to the left: by overriding default left:55px
       style = if (is.null(image)) "left: 4px",
       p(name),
@@ -176,24 +191,37 @@ sidebarUserPanel <- function(name, subtitle = NULL, image = NULL) {
 #'
 #' @param textId Shiny input ID for the text input box.
 #' @param buttonId Shiny input ID for the search button (which functions like an
-#'   \code{\link[shiny]{actionButton}}).
+#'   [shiny::actionButton()]).
 #' @param label Text label to display inside the search box.
-#' @param icon An icon tag, created by \code{\link[shiny]{icon}}.
+#' @param icon An icon tag, created by [shiny::icon()].
 #'
 #' @family sidebar items
 #'
-#' @seealso \code{\link{dashboardSidebar}} for example usage.
+#' @seealso [dashboardSidebar()] for example usage.
 #'
 #' @export
-sidebarSearchForm <- function(textId, buttonId, label = "Search...",
-                              icon = shiny::icon("search")) {
-  tags$form(class = "sidebar-form",
-    div(class = "input-group",
-      tags$input(id = textId, type = "text", class = "form-control",
-        placeholder = label, style = "margin: 5px;"
+sidebarSearchForm <- function(
+  textId,
+  buttonId,
+  label = "Search...",
+  icon = shiny::icon("search")
+) {
+  tags$form(
+    class = "sidebar-form",
+    div(
+      class = "input-group",
+      tags$input(
+        id = textId,
+        type = "text",
+        class = "form-control",
+        placeholder = label,
+        style = "margin: 5px;"
       ),
-      span(class = "input-group-btn",
-        tags$button(id = buttonId, type = "button",
+      span(
+        class = "input-group-btn",
+        tags$button(
+          id = buttonId,
+          type = "button",
           class = "btn btn-flat action-button",
           icon
         )
@@ -204,65 +232,65 @@ sidebarSearchForm <- function(textId, buttonId, label = "Search...",
 
 #' Create a dashboard sidebar menu and menu items.
 #'
-#' A \code{dashboardSidebar} can contain a \code{sidebarMenu}. A
-#' \code{sidebarMenu} contains \code{menuItem}s, and they can in turn contain
-#' \code{menuSubItem}s.
+#' A `dashboardSidebar` can contain a `sidebarMenu`. A
+#' `sidebarMenu` contains `menuItem`s, and they can in turn contain
+#' `menuSubItem`s.
 #'
 #' Menu items (and similarly, sub-items) should have a value for either
-#' \code{href} or \code{tabName}; otherwise the item would do nothing. If it has
-#' a value for \code{href}, then the item will simply be a link to that value.
+#' `href` or `tabName`; otherwise the item would do nothing. If it has
+#' a value for `href`, then the item will simply be a link to that value.
 #'
-#' If a \code{menuItem} has a non-NULL \code{tabName}, then the \code{menuItem}
-#' will behave like a tab -- in other words, clicking on the \code{menuItem}
-#' will bring a corresponding \code{tabItem} to the front, similar to a
-#' \code{\link[shiny]{tabPanel}}. One important difference between a
-#' \code{menuItem} and a \code{tabPanel} is that, for a \code{menuItem}, you
-#' must also supply a corresponding \code{tabItem} with the same value for
-#' \code{tabName}, whereas for a \code{tabPanel}, no \code{tabName} is needed.
-#' (This is because the structure of a \code{tabPanel} is such that the tab name
+#' If a `menuItem` has a non-NULL `tabName`, then the `menuItem`
+#' will behave like a tab -- in other words, clicking on the `menuItem`
+#' will bring a corresponding `tabItem` to the front, similar to a
+#' [shiny::tabPanel()]. One important difference between a
+#' `menuItem` and a `tabPanel` is that, for a `menuItem`, you
+#' must also supply a corresponding `tabItem` with the same value for
+#' `tabName`, whereas for a `tabPanel`, no `tabName` is needed.
+#' (This is because the structure of a `tabPanel` is such that the tab name
 #' can be automatically generated.) Sub-items are also able to activate
-#' \code{tabItem}s.
+#' `tabItem`s.
 #'
 #' Menu items (but not sub-items) also may have an optional badge. A badge is a
 #' colored oval containing text.
 #'
 #' @param text Text to show for the menu item.
-#' @param id For \code{sidebarMenu}, if \code{id} is present, this id will be
+#' @param id For `sidebarMenu`, if `id` is present, this id will be
 #'   used for a Shiny input value, and it will report which tab is selected. For
-#'   example, if \code{id="tabs"}, then \code{input$tabs} will be the
-#'   \code{tabName} of the currently-selected tab. If you want to be able to
-#'   bookmark and restore the selected tab, an \code{id} is required.
-#' @param icon An icon tag, created by \code{\link[shiny]{icon}}. If
-#'   \code{NULL}, don't display an icon.
+#'   example, if `id="tabs"`, then `input$tabs` will be the
+#'   `tabName` of the currently-selected tab. If you want to be able to
+#'   bookmark and restore the selected tab, an `id` is required.
+#' @param icon An icon tag, created by [shiny::icon()]. If
+#'   `NULL`, don't display an icon.
 #' @param badgeLabel A label for an optional badge. Usually a number or a short
 #'   word like "new".
 #' @param badgeColor A color for the badge. Valid colors are listed in
-#'   \link{validColors}.
-#' @param href An link address. Not compatible with \code{tabName}.
+#'   [validColors].
+#' @param href An link address. Not compatible with `tabName`.
 #' @param tabName The name of a tab that this menu item will activate. Not
-#'   compatible with \code{href}.
-#' @param newtab If \code{href} is supplied, should the link open in a new
+#'   compatible with `href`.
+#' @param newtab If `href` is supplied, should the link open in a new
 #'   browser tab?
-#' @param selected If \code{TRUE}, this \code{menuItem} or \code{menuSubItem}
-#'   will start selected. If no item have \code{selected=TRUE}, then the first
-#'   \code{menuItem} will start selected.
-#' @param expandedName A unique name given to each \code{menuItem} that serves
+#' @param selected If `TRUE`, this `menuItem` or `menuSubItem`
+#'   will start selected. If no item have `selected=TRUE`, then the first
+#'   `menuItem` will start selected.
+#' @param expandedName A unique name given to each `menuItem` that serves
 #'   to indicate which one (if any) is currently expanded. (This is only applicable
-#'   to \code{menuItem}s that have children and it is mostly only useful for
+#'   to `menuItem`s that have children and it is mostly only useful for
 #'   bookmarking state.)
-#' @param startExpanded Should this \code{menuItem} be expanded on app startup?
-#'   (This is only applicable to \code{menuItem}s that have children, and only
+#' @param startExpanded Should this `menuItem` be expanded on app startup?
+#'   (This is only applicable to `menuItem`s that have children, and only
 #'   one of these can be expanded at any given time).
-#' @param ... For menu items, this may consist of \code{\link{menuSubItem}}s.
+#' @param ... For menu items, this may consist of [menuSubItem()]s.
 #' @param .list An optional list containing items to put in the menu Same as the
-#'   \code{...} arguments, but in list format. This can be useful when working
+#'   `...` arguments, but in list format. This can be useful when working
 #'   with programmatically generated items.
 #'
 #' @family sidebar items
 #'
-#' @seealso \code{\link{dashboardSidebar}} for example usage. For
-#'   dynamically-generated sidebar menus, see \code{\link{renderMenu}} and
-#'   \code{\link{sidebarMenuOutput}}.
+#' @seealso [dashboardSidebar()] for example usage. For
+#'   dynamically-generated sidebar menus, see [renderMenu()] and
+#'   [sidebarMenuOutput()].
 #'
 #' @export
 sidebarMenu <- function(..., id = NULL, .list = NULL) {
@@ -280,20 +308,17 @@ sidebarMenu <- function(..., id = NULL, .list = NULL) {
       # Given a menuItem and a logical value for `selected`, set the
       # data-start-selected attribute to the appropriate value (1 or 0).
       selectItem <- function(item, selected) {
-
         # in the cases that the children of menuItems are NOT menuSubItems
         if (is.atomic(item) || length(item$children) == 0) {
           return(item)
         }
 
-        if (selected) value <- 1
-        else          value <- NULL
+        if (selected) value <- 1 else value <- NULL
 
         # Try to find the child <a data-toggle="tab"> tag and then set
         # data-start-selected="1". The []<- assignment is to preserve
         # attributes.
         item$children[] <- lapply(item$children, function(child) {
-
           # Find the appropriate <a> child
           if (tagMatches(child, name = "a", `data-toggle` = "tab")) {
             child$attribs[["data-start-selected"]] <- value
@@ -329,16 +354,17 @@ sidebarMenu <- function(..., id = NULL, .list = NULL) {
         if (tagMatches(item, name = "li", class = "treeview")) {
           # Search in menuSubItems
           item$children[] <- lapply(item$children[], function(subItem) {
-
             if (tagMatches(subItem, name = "ul", class = "treeview-menu")) {
-              subItem$children[] <- lapply(subItem$children, function(subSubItem) {
-                selected <- itemHasTabName(subSubItem, selectedTabName)
-                selectItem(subSubItem, selected)
-              })
+              subItem$children[] <- lapply(
+                subItem$children,
+                function(subSubItem) {
+                  selected <- itemHasTabName(subSubItem, selectedTabName)
+                  selectItem(subSubItem, selected)
+                }
+              )
             }
             subItem
           })
-
         } else {
           # Regular menuItems
           selected <- itemHasTabName(item, selectedTabName)
@@ -351,8 +377,11 @@ sidebarMenu <- function(..., id = NULL, .list = NULL) {
     # This is a 0 height div, whose only purpose is to hold the tabName of the currently
     # selected menuItem in its `data-value` attribute. This is the DOM element that is
     # bound to tabItemInputBinding in the JS side.
-    items[[length(items) + 1]] <- div(id = id,
-      class = "sidebarMenuSelectedTabItem", `data-value` = selectedTabName %OR% "null")
+    items[[length(items) + 1]] <- div(
+      id = id,
+      class = "sidebarMenuSelectedTabItem",
+      `data-value` = selectedTabName %OR% "null"
+    )
   }
 
   # Use do.call so that we don't add an extra list layer to the children of the
@@ -363,14 +392,23 @@ sidebarMenu <- function(..., id = NULL, .list = NULL) {
 
 #' @rdname sidebarMenu
 #' @export
-menuItem <- function(text, ..., icon = NULL, badgeLabel = NULL, badgeColor = "green",
-                     tabName = NULL, href = NULL, newtab = TRUE, selected = NULL,
-                     expandedName = as.character(gsub("[[:space:]]", "", text)),
-                     startExpanded = FALSE) {
+menuItem <- function(
+  text,
+  ...,
+  icon = NULL,
+  badgeLabel = NULL,
+  badgeColor = "green",
+  tabName = NULL,
+  href = NULL,
+  newtab = TRUE,
+  selected = NULL,
+  expandedName = as.character(gsub("[[:space:]]", "", text)),
+  startExpanded = FALSE
+) {
   subItems <- list(...)
 
   if (!is.null(icon)) tagAssert(icon, type = "i")
-  if (!is.null(href) + !is.null(tabName) + (length(subItems) > 0) != 1 ) {
+  if (!is.null(href) + !is.null(tabName) + (length(subItems) > 0) != 1) {
     stop("Must have either href, tabName, or sub-items (contained in ...).")
   }
 
@@ -390,8 +428,7 @@ menuItem <- function(text, ..., icon = NULL, badgeLabel = NULL, badgeColor = "gr
     href <- "#"
   } else {
     # If supplied href, set up <a> tag's target
-    if (newtab)
-      target <- "_blank"
+    if (newtab) target <- "_blank"
   }
 
   # Generate badge if needed
@@ -408,7 +445,8 @@ menuItem <- function(text, ..., icon = NULL, badgeLabel = NULL, badgeColor = "gr
   if (length(subItems) == 0) {
     return(
       tags$li(
-        a(href = href,
+        a(
+          href = href,
           `data-toggle` = if (isTabItem) "tab",
           `data-value` = if (!is.null(tabName)) tabName,
           `data-start-selected` = if (isTRUE(selected)) 1 else NULL,
@@ -427,14 +465,17 @@ menuItem <- function(text, ..., icon = NULL, badgeLabel = NULL, badgeColor = "gr
   # is NULL. However, we want to this input to get passed on (and not dropped), so we
   # do `%OR% ""` to assure this.
   default <- if (startExpanded) expandedName else ""
-  dataExpanded <- shiny::restoreInput(id = "sidebarItemExpanded", default) %OR% ""
+  dataExpanded <- shiny::restoreInput(id = "sidebarItemExpanded", default) %OR%
+    ""
 
   # If `dataExpanded` is not the empty string, we need to check that it is eqaul to the
   # this menuItem's `expandedName``
   isExpanded <- nzchar(dataExpanded) && (dataExpanded == expandedName)
 
-  tags$li(class = "treeview",
-    a(href = href,
+  tags$li(
+    class = "treeview",
+    a(
+      href = href,
       icon,
       span(text),
       shiny::icon("angle-left", class = "pull-right")
@@ -442,20 +483,28 @@ menuItem <- function(text, ..., icon = NULL, badgeLabel = NULL, badgeColor = "gr
     # Use do.call so that we don't add an extra list layer to the children of the
     # ul tag. This makes it a little easier to traverse the tree to search for
     # selected items to restore.
-    do.call(tags$ul, c(
-      class = paste0("treeview-menu", if (isExpanded) " menu-open" else ""),
-      style = paste0("display: ",     if (isExpanded) "block;" else "none;"),
-      `data-expanded` = expandedName,
-      subItems))
+    do.call(
+      tags$ul,
+      c(
+        class = paste0("treeview-menu", if (isExpanded) " menu-open" else ""),
+        style = paste0("display: ", if (isExpanded) "block;" else "none;"),
+        `data-expanded` = expandedName,
+        subItems
+      )
+    )
   )
 }
 
 #' @rdname sidebarMenu
 #' @export
-menuSubItem <- function(text, tabName = NULL, href = NULL, newtab = TRUE,
-  icon = shiny::icon("angle-double-right"), selected = NULL)
-{
-
+menuSubItem <- function(
+  text,
+  tabName = NULL,
+  href = NULL,
+  newtab = TRUE,
+  icon = shiny::icon("angle-double-right"),
+  selected = NULL
+) {
   if (!is.null(href) && !is.null(tabName)) {
     stop("Can't specify both href and tabName")
   }
@@ -471,13 +520,12 @@ menuSubItem <- function(text, tabName = NULL, href = NULL, newtab = TRUE,
     href <- "#"
   } else {
     # If supplied href, set up <a> tag's target
-    if (newtab)
-      target <- "_blank"
+    if (newtab) target <- "_blank"
   }
 
-
   tags$li(
-    a(href = href,
+    a(
+      href = href,
       `data-toggle` = if (isTabItem) "tab",
       `data-value` = if (!is.null(tabName)) tabName,
       `data-start-selected` = if (isTRUE(selected)) 1 else NULL,

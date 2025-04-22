@@ -17,7 +17,7 @@ messageItem(
 
 \item{message}{Text of the message.}
 
-\item{icon}{An icon tag, created by \code{\link[shiny]{icon}}.}
+\item{icon}{An icon tag, created by \code{\link[shiny:icon]{shiny::icon()}}.}
 
 \item{time}{String representing the time the message was sent. Any string may
 be used. For example, it could be a relative date/time like "5 minutes",
@@ -30,7 +30,7 @@ If NULL, no time will be displayed.}
 Create a message item to place in a dropdown message menu
 }
 \seealso{
-\code{\link{dashboardHeader}} for example usage.
+\code{\link[=dashboardHeader]{dashboardHeader()}} for example usage.
 
 Other menu items: 
 \code{\link{notificationItem}()},

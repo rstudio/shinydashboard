@@ -7,35 +7,35 @@
 #' @inheritParams box
 #' @param value The value to display in the box. Usually a number or short text.
 #' @param subtitle Subtitle text.
-#' @param icon An icon tag, created by \code{\link[shiny]{icon}}.
+#' @param icon An icon tag, created by [shiny::icon()].
 #' @param color A color for the box. Valid colors are listed in
-#'   \link{validColors}.
+#'   [validColors].
 #' @param href An optional URL to link to.
 #'
 #' @family boxes
-#' @seealso \code{\link{box}} for usage examples.
+#' @seealso [box()] for usage examples.
 #'
 #' @export
-valueBox <- function(value, subtitle, icon = NULL, color = "aqua", width = 4,
-  href = NULL)
-{
+valueBox <- function(
+  value,
+  subtitle,
+  icon = NULL,
+  color = "aqua",
+  width = 4,
+  href = NULL
+) {
   validateColor(color)
   if (!is.null(icon)) tagAssert(icon, type = "i")
 
-  boxContent <- div(class = paste0("small-box bg-", color),
-    div(class = "inner",
-      h3(value),
-      p(subtitle)
-    ),
+  boxContent <- div(
+    class = paste0("small-box bg-", color),
+    div(class = "inner", h3(value), p(subtitle)),
     if (!is.null(icon)) div(class = "icon-large", icon)
   )
 
-  if (!is.null(href))
-    boxContent <- a(href = href, boxContent)
+  if (!is.null(href)) boxContent <- a(href = href, boxContent)
 
-  div(class = if (!is.null(width)) paste0("col-sm-", width),
-    boxContent
-  )
+  div(class = if (!is.null(width)) paste0("col-sm-", width), boxContent)
 }
 
 
@@ -49,24 +49,30 @@ valueBox <- function(value, subtitle, icon = NULL, color = "aqua", width = 4,
 #' @param title Title text.
 #' @param value The value to display in the box. Usually a number or short text.
 #' @param subtitle Subtitle text (optional).
-#' @param icon An icon tag, created by \code{\link[shiny]{icon}}.
+#' @param icon An icon tag, created by [shiny::icon()].
 #' @param color A color for the box. Valid colors are listed in
-#'   \link{validColors}.
-#' @param fill If \code{FALSE} (the default), use a white background for the
-#'   content, and the \code{color} argument for the background of the icon. If
-#'   \code{TRUE}, use the \code{color} argument for the background of the
+#'   [validColors].
+#' @param fill If `FALSE` (the default), use a white background for the
+#'   content, and the `color` argument for the background of the icon. If
+#'   `TRUE`, use the `color` argument for the background of the
 #'   content; the icon will use the same color with a slightly darkened
 #'   background.
 #' @param href An optional URL to link to.
 #'
 #' @family boxes
-#' @seealso \code{\link{box}} for usage examples.
+#' @seealso [box()] for usage examples.
 #'
 #' @export
-infoBox <- function(title, value = NULL, subtitle = NULL,
-  icon = shiny::icon("bar-chart"), color = "aqua", width = 4, href = NULL,
-  fill = FALSE) {
-
+infoBox <- function(
+  title,
+  value = NULL,
+  subtitle = NULL,
+  icon = shiny::icon("bar-chart"),
+  color = "aqua",
+  width = 4,
+  href = NULL,
+  fill = FALSE
+) {
   validateColor(color)
   tagAssert(icon, type = "i")
 
@@ -80,19 +86,17 @@ infoBox <- function(title, value = NULL, subtitle = NULL,
       class = if (!fill) colorClass,
       icon
     ),
-    div(class = "info-box-content",
+    div(
+      class = "info-box-content",
       span(class = "info-box-text", title),
       if (!is.null(value)) span(class = "info-box-number", value),
       if (!is.null(subtitle)) p(subtitle)
     )
   )
 
-  if (!is.null(href))
-    boxContent <- a(href = href, boxContent)
+  if (!is.null(href)) boxContent <- a(href = href, boxContent)
 
-  div(class = if (!is.null(width)) paste0("col-sm-", width),
-    boxContent
-  )
+  div(class = if (!is.null(width)) paste0("col-sm-", width), boxContent)
 }
 
 
@@ -103,22 +107,22 @@ infoBox <- function(title, value = NULL, subtitle = NULL,
 #' @param title Optional title.
 #' @param footer Optional footer text.
 #' @param status The status of the item This determines the item's background
-#'   color. Valid statuses are listed in \link{validStatuses}.
+#'   color. Valid statuses are listed in [validStatuses].
 #' @param solidHeader Should the header be shown with a solid color background?
 #' @param background If NULL (the default), the background of the box will be
 #'   white. Otherwise, a color string. Valid colors are listed in
-#'   \link{validColors}.
+#'   [validColors].
 #' @param width The width of the box, using the Bootstrap grid system. This is
 #'   used for row-based layouts. The overall width of a region is 12, so the
 #'   default valueBox width of 4 occupies 1/3 of that width. For column-based
-#'   layouts, use \code{NULL} for the width; the width is set by the column that
+#'   layouts, use `NULL` for the width; the width is set by the column that
 #'   contains the box.
 #' @param height The height of a box, in pixels or other CSS unit. By default
 #'   the height scales automatically with the content.
 #' @param collapsible If TRUE, display a button in the upper right that allows
 #'   the user to collapse the box.
 #' @param collapsed If TRUE, start collapsed. This must be used with
-#'   \code{collapsible=TRUE}.
+#'   `collapsible=TRUE`.
 #' @param ... Contents of the box.
 #'
 #' @family boxes
@@ -248,10 +252,18 @@ infoBox <- function(title, value = NULL, subtitle = NULL,
 #' )
 #' }
 #' @export
-box <- function(..., title = NULL, footer = NULL, status = NULL,
-                solidHeader = FALSE, background = NULL, width = 6,
-                height = NULL, collapsible = FALSE, collapsed = FALSE) {
-
+box <- function(
+  ...,
+  title = NULL,
+  footer = NULL,
+  status = NULL,
+  solidHeader = FALSE,
+  background = NULL,
+  width = 6,
+  height = NULL,
+  collapsible = FALSE,
+  collapsed = FALSE
+) {
   boxClass <- "box"
   if (solidHeader || !is.null(background)) {
     boxClass <- paste(boxClass, "box-solid")
@@ -284,8 +296,10 @@ box <- function(..., title = NULL, footer = NULL, status = NULL,
 
     collapseIcon <- if (collapsed) "plus" else "minus"
 
-    collapseTag <- div(class = "box-tools pull-right",
-      tags$button(class = paste0("btn btn-box-tool"),
+    collapseTag <- div(
+      class = "box-tools pull-right",
+      tags$button(
+        class = paste0("btn btn-box-tool"),
         `data-widget` = "collapse",
         shiny::icon(collapseIcon)
       )
@@ -294,14 +308,13 @@ box <- function(..., title = NULL, footer = NULL, status = NULL,
 
   headerTag <- NULL
   if (!is.null(titleTag) || !is.null(collapseTag)) {
-    headerTag <- div(class = "box-header",
-      titleTag,
-      collapseTag
-    )
+    headerTag <- div(class = "box-header", titleTag, collapseTag)
   }
 
-  div(class = if (!is.null(width)) paste0("col-sm-", width),
-    div(class = boxClass,
+  div(
+    class = if (!is.null(width)) paste0("col-sm-", width),
+    div(
+      class = boxClass,
       style = if (!is.null(style)) style,
       headerTag,
       div(class = "box-body", ...),
@@ -315,8 +328,8 @@ box <- function(..., title = NULL, footer = NULL, status = NULL,
 #' @inheritParams shiny::tabsetPanel
 #' @inheritParams box
 #' @param title Title for the tabBox.
-#' @param side Which side of the box the tabs should be on (\code{"left"} or
-#'   \code{"right"}). When \code{side="right"}, the order of tabs will be
+#' @param side Which side of the box the tabs should be on (`"left"` or
+#'   `"right"`). When `side="right"`, the order of tabs will be
 #'   reversed.
 #'
 #' @family boxes
@@ -367,9 +380,15 @@ box <- function(..., title = NULL, footer = NULL, status = NULL,
 #' )
 #' }
 #' @export
-tabBox <- function(..., id = NULL, selected = NULL, title = NULL,
-                   width = 6, height = NULL, side = c("left", "right"))
-{
+tabBox <- function(
+  ...,
+  id = NULL,
+  selected = NULL,
+  title = NULL,
+  width = 6,
+  height = NULL,
+  side = c("left", "right")
+) {
   side <- match.arg(side)
 
   # The content is basically a tabsetPanel with some custom modifications
@@ -378,26 +397,27 @@ tabBox <- function(..., id = NULL, selected = NULL, title = NULL,
 
   # Set height
   if (!is.null(height)) {
-    content <- tagAppendAttributes(content,
+    content <- tagAppendAttributes(
+      content,
       style = paste0("height: ", validateCssUnit(height))
     )
   }
 
   # Move tabs to right side if needed
   if (side == "right") {
-    content$children[[1]] <- tagAppendAttributes(content$children[[1]],
+    content$children[[1]] <- tagAppendAttributes(
+      content$children[[1]],
       class = "pull-right"
     )
   }
 
   # Add title
   if (!is.null(title)) {
-    if (side == "left")
-      titleClass <- "pull-right"
-    else
+    if (side == "left") titleClass <- "pull-right" else
       titleClass <- "pull-left"
 
-    content$children[[1]] <- htmltools::tagAppendChild(content$children[[1]],
+    content$children[[1]] <- htmltools::tagAppendChild(
+      content$children[[1]],
       tags$li(class = paste("header", titleClass), title)
     )
   }

@@ -13,16 +13,16 @@ menuOutput(outputId, tag = tags$li)
 }
 \description{
 This can be used as a placeholder for dynamically-generated
-\code{\link{dropdownMenu}}, \code{\link{notificationItem}},
-\code{\link{messageItem}}, \code{\link{taskItem}} \code{\link{sidebarMenu}},
-or \code{\link{menuItem}}. If called directly, you must make sure to supply
+\code{\link[=dropdownMenu]{dropdownMenu()}}, \code{\link[=notificationItem]{notificationItem()}},
+\code{\link[=messageItem]{messageItem()}}, \code{\link[=taskItem]{taskItem()}} \code{\link[=sidebarMenu]{sidebarMenu()}},
+or \code{\link[=menuItem]{menuItem()}}. If called directly, you must make sure to supply
 the correct type of tag. It is simpler to use the wrapper functions if
-present; for example, \code{\link{dropdownMenuOutput}} and
-\code{\link{sidebarMenuOutput}}.
+present; for example, \code{\link[=dropdownMenuOutput]{dropdownMenuOutput()}} and
+\code{\link[=sidebarMenuOutput]{sidebarMenuOutput()}}.
 }
 \seealso{
-\code{\link{renderMenu}} for the corresponding server side function
-  and examples.
+\code{\link[=renderMenu]{renderMenu()}} for the corresponding server side function
+and examples.
 
 Other menu outputs: 
 \code{\link{dropdownMenuOutput}()},

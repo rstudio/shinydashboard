@@ -35,16 +35,15 @@ sidebar <- dashboardSidebar(
 )
 
 body <- dashboardBody(tabItems(
-  tabItem("dashboard",
-          div(p(
-            "Dashboard tab content"
-          ))),
-  tabItem("widgets",
-          "Widgets tab content"),
-  tabItem("subitem1",
-          "Sub-item 1 tab content"),
-  tabItem("subitem2",
-          "Sub-item 2 tab content")
+  tabItem(
+    "dashboard",
+    div(p(
+      "Dashboard tab content"
+    ))
+  ),
+  tabItem("widgets", "Widgets tab content"),
+  tabItem("subitem1", "Sub-item 1 tab content"),
+  tabItem("subitem2", "Sub-item 2 tab content")
 ))
 
 shinyApp(
@@ -52,4 +51,3 @@ shinyApp(
   server = function(input, output) {
   }
 )
-

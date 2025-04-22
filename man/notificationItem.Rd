@@ -14,7 +14,7 @@ notificationItem(
 \arguments{
 \item{text}{The notification text.}
 
-\item{icon}{An icon tag, created by \code{\link[shiny]{icon}}.}
+\item{icon}{An icon tag, created by \code{\link[shiny:icon]{shiny::icon()}}.}
 
 \item{status}{The status of the item This determines the item's background
 color. Valid statuses are listed in \link{validStatuses}.}
@@ -25,7 +25,7 @@ color. Valid statuses are listed in \link{validStatuses}.}
 Create a notification item to place in a dropdown notification menu
 }
 \seealso{
-\code{\link{dashboardHeader}} for example usage.
+\code{\link[=dashboardHeader]{dashboardHeader()}} for example usage.
 
 Other menu items: 
 \code{\link{messageItem}()},

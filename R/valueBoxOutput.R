@@ -3,12 +3,12 @@ utils::globalVariables(".")
 
 #' Create an info or value box output (client side)
 #'
-#' This is the UI-side function for creating a dynamic \code{\link{valueBox}} or
-#' \code{\link{infoBox}}.
+#' This is the UI-side function for creating a dynamic [valueBox()] or
+#' [infoBox()].
 #'
 #' @inheritParams valueBox
 #' @param outputId Output variable name.
-#' @seealso \code{\link{renderValueBox}} for the corresponding server-side
+#' @seealso [renderValueBox()] for the corresponding server-side
 #'   function and examples.
 #' @export
 valueBoxOutput <- function(outputId, width = 4) {
@@ -23,10 +23,10 @@ infoBoxOutput <- valueBoxOutput
 #' Create an info or value box output (server side)
 #'
 #' This is the server-side function for creating a dynamic
-#' \code{\link{valueBox}} or \code{\link{infoBox}}.
+#' [valueBox()] or [infoBox()].
 #'
 #' @inheritParams shiny::renderUI
-#' @seealso \code{\link{valueBoxOutput}} for the corresponding UI-side function.
+#' @seealso [valueBoxOutput()] for the corresponding UI-side function.
 #'
 #' @examples
 #' ## Only run this example in interactive R sessions
@@ -77,7 +77,9 @@ renderValueBox <- function(expr, env = parent.frame(), quoted = FALSE) {
     if (is.promising(vbox)) {
       vbox %...T>%
         tagAssert(type = "div") %...>%
-        { .$children[[1]] }
+        {
+          .$children[[1]]
+        }
     } else {
       tagAssert(vbox, type = "div")
 

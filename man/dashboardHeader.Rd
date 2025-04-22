@@ -13,12 +13,12 @@ dashboardHeader(
 )
 }
 \arguments{
-\item{...}{Items to put in the header. Should be \code{\link{dropdownMenu}}s.}
+\item{...}{Items to put in the header. Should be \code{\link[=dropdownMenu]{dropdownMenu()}}s.}
 
 \item{title}{An optional title to show in the header bar.. By default, this
 will also be used as the title shown in the browser's title bar. If you
 want that to be different from the text in the dashboard header bar, set
-the \code{title} in \code{\link{dashboardPage}}.}
+the \code{title} in \code{\link[=dashboardPage]{dashboardPage()}}.}
 
 \item{titleWidth}{The width of the title area. This must either be a number
 which specifies the width in pixels, or a string that specifies the width
@@ -103,5 +103,5 @@ shinyApp(
 }
 }
 \seealso{
-\code{\link{dropdownMenu}}
+\code{\link[=dropdownMenu]{dropdownMenu()}}
 }

@@ -20,8 +20,8 @@ tab will be selected.}
   }}
 }
 \description{
-This function controls the active tab of \code{\link{tabItems}} from the
-server. It behaves just like \code{\link[shiny]{updateTabsetPanel}}.
+This function controls the active tab of \code{\link[=tabItems]{tabItems()}} from the
+server. It behaves just like \code{\link[shiny:updateTabsetPanel]{shiny::updateTabsetPanel()}}.
 }
 \examples{
 ## Only run this example in interactive R sessions

@@ -10,21 +10,21 @@ listed below.
 }
 \details{
 \itemize{
-  \item \code{red}
-  \item \code{yellow}
-  \item \code{aqua}
-  \item \code{blue}
-  \item \code{light-blue}
-  \item \code{green}
-  \item \code{navy}
-  \item \code{teal}
-  \item \code{olive}
-  \item \code{lime}
-  \item \code{orange}
-  \item \code{fuchsia}
-  \item \code{purple}
-  \item \code{maroon}
-  \item \code{black}
+\item \code{red}
+\item \code{yellow}
+\item \code{aqua}
+\item \code{blue}
+\item \code{light-blue}
+\item \code{green}
+\item \code{navy}
+\item \code{teal}
+\item \code{olive}
+\item \code{lime}
+\item \code{orange}
+\item \code{fuchsia}
+\item \code{purple}
+\item \code{maroon}
+\item \code{black}
 }
 }
 \keyword{internal}

@@ -15,9 +15,9 @@ dropdownMenu(
 }
 \arguments{
 \item{...}{Items to put in the menu. Typically, message menus should contain
-\code{\link{messageItem}}s, notification menus should contain
-\code{\link{notificationItem}}s, and task menus should contain
-\code{\link{taskItem}}s.}
+\code{\link[=messageItem]{messageItem()}}s, notification menus should contain
+\code{\link[=notificationItem]{notificationItem()}}s, and task menus should contain
+\code{\link[=taskItem]{taskItem()}}s.}
 
 \item{type}{The type of menu. Should be one of "messages", "notifications",
 "tasks".}
@@ -46,5 +46,5 @@ with programmatically generated items.}
 Create a dropdown menu to place in a dashboard header
 }
 \seealso{
-\code{\link{dashboardHeader}} for example usage.
+\code{\link[=dashboardHeader]{dashboardHeader()}} for example usage.
 }
